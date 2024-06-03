@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
 // import { FormattedMessage } from "react-intl";
+import { handleLoginApi } from "../../services/userService";
 
 class Login extends Component {
 	constructor(props) {
@@ -12,6 +13,7 @@ class Login extends Component {
 			username: "",
 			password: "",
 			isShowPassword: false,
+			errMessage: "",
 		};
 	}
 	handleOnChangeUsername = (event) => {
@@ -26,14 +28,34 @@ class Login extends Component {
 		});
 	};
 
-	handleLogin = (e) => {
-		console.log("Login");
-		console.log(
-			"Username",
-			this.state.username,
-			"Password",
-			this.state.password
-		);
+	handleLogin = async () => {
+		this.setState({
+			errMessage: "",
+		});
+
+		try {
+			let data = await handleLoginApi(
+				this.state.username,
+				this.state.password
+			);
+			if (data && data.errCode !== 0) {
+				this.setState({
+					errMessage: data.errMessage,
+				});
+			}
+			if (data && data.errMessage === 0) {
+				// to do
+				console.log("Login success");
+			}
+		} catch (error) {
+			if (error.response) {
+				if (error.response.data) {
+					this.setState({
+						errMessage: error.response.data.message,
+					});
+				}
+			}
+		}
 	};
 
 	handleShowPassword = () => {
@@ -93,6 +115,9 @@ class Login extends Component {
 												: "fas fa-eye-slash"
 										}></i>
 								</span>
+							</div>
+							<div className="col-12" style={{ color: "red" }}>
+								{this.state.errMessage}
 							</div>
 							<div className="col-12">
 								<button
