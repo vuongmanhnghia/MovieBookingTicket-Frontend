@@ -6,15 +6,23 @@ import { getAllUsers } from "../../services/userService";
 class UserManage extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			arrUsers: [],
+		};
 	}
 
 	async componentDidMount() {
 		let response = await getAllUsers("ALL");
-		console.log("Get users from node.js:", response);
+		if (response && response.errCode === 0) {
+			this.setState({
+				arrUsers: response.users,
+			});
+		}
 	}
 
 	render() {
+		console.log(this.state);
+		let arrUsers = this.state.arrUsers;
 		return (
 			<div className="user-container">
 				<div className="title">Manage users</div>
@@ -28,77 +36,27 @@ class UserManage extends Component {
 							<th>Address</th>
 							<th>Actions</th>
 						</tr>
-						<tr>
-							<td>Alfreds Futterkiste</td>
-							<td>Maria Anders</td>
-							<td>Germany</td>
-							<td>Germany</td>
-							<td>Germany</td>
-							<td>Germany</td>
-						</tr>
-						<tr>
-							<td>Berglunds snabbköp</td>
-							<td>Christina Berglund</td>
-							<td>Sweden</td>
-							<td>Sweden</td>
-							<td>Sweden</td>
-						</tr>
-						<tr>
-							<td>Centro comercial Moctezuma</td>
-							<td>Francisco Chang</td>
-							<td>Mexico</td>
-							<td>Mexico</td>
-							<td>Mexico</td>
-						</tr>
-						<tr>
-							<td>Ernst Handel</td>
-							<td>Roland Mendel</td>
-							<td>Austria</td>
-							<td>Austria</td>
-							<td>Austria</td>
-						</tr>
-						<tr>
-							<td>Island Trading</td>
-							<td>Helen Bennett</td>
-							<td>UK</td>
-							<td>UK</td>
-							<td>UK</td>
-						</tr>
-						<tr>
-							<td>Königlich Essen</td>
-							<td>Philip Cramer</td>
-							<td>UK</td>
-							<td>UK</td>
-							<td>Germany</td>
-						</tr>
-						<tr>
-							<td>Laughing Bacchus Winecellars</td>
-							<td>Yoshi Tannamuri</td>
-							<td>UK</td>
-							<td>UK</td>
-							<td>Canada</td>
-						</tr>
-						<tr>
-							<td>Magazzini Alimentari Riuniti</td>
-							<td>Giovanni Rovelli</td>
-							<td>UK</td>
-							<td>UK</td>
-							<td>Italy</td>
-						</tr>
-						<tr>
-							<td>North/South</td>
-							<td>Simon Crowther</td>
-							<td>UK</td>
-							<td>UK</td>
-							<td>UK</td>
-						</tr>
-						<tr>
-							<td>Paris spécialités</td>
-							<td>Marie Bertrand</td>
-							<td>UK</td>
-							<td>UK</td>
-							<td>France</td>
-						</tr>
+						{arrUsers &&
+							arrUsers.map((item, index) => {
+								console.log("check map", item, index);
+								return (
+									<tr>
+										<td>{item.email}</td>
+										<td>{item.fullName}</td>
+										<td>{item.phoneNumber}</td>
+										<td>{item.gender}</td>
+										<td>{item.address}</td>
+										<td>
+											<button className="btn-edit">
+												<i class="fas fa-edit"></i>
+											</button>
+											<button className="btn-delete">
+												<i class="fas fa-trash-alt"></i>
+											</button>
+										</td>
+									</tr>
+								);
+							})}
 					</table>
 				</div>
 			</div>
