@@ -66,67 +66,71 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className="background">
-				<div className="container">
-					<div className="login-section row">
-						<header className="col-12 text-center">Login</header>
-						<div className="social-buttons col-12 form-group">
-							<button className="google">
-								<i className="fab fa-google"></i>Use Google
-							</button>
-							<button className="facebook">
-								<i className="fab fa-facebook-f"></i>Use Facebook
-							</button>
-						</div>
-						<div className="separator col-12 form-group">
-							<div className="line"></div>
-							<p>Or</p>
-							<div className="line"></div>
-						</div>
-						<div className="login-section col-12">
-							<input
-								type="text"
-								className="form-control"
-								placeholder="Username"
-								value={this.state.username}
-								onChange={(event) => this.handleOnChangeUsername(event)}
-							/>
-							<div className="custom-input-pasword">
-								<input
-									type={
-										this.state.isShowPassword ? "text" : "password"
-									}
-									className="form-control"
-									placeholder="Password"
-									required
-									value={this.state.password}
-									onChange={(event) =>
-										this.handleOnChangePassword(event)
-									}
-								/>
-								<span
-									onClick={() => {
-										this.handleShowPassword();
-									}}>
-									<i
-										className={
-											this.state.isShowPassword
-												? "fas fa-eye"
-												: "fas fa-eye-slash"
-										}></i>
-								</span>
-							</div>
-							<div className="col-12" style={{ color: "red" }}>
-								{this.state.errMessage}
-							</div>
-							<div className="col-12">
-								<button
-									className="btn-login"
-									onClick={() => this.handleLogin()}>
-									Login
+			<div className="modal-login-container">
+				<div className="background">
+					<div className="container">
+						<div className="login-section row">
+							<header className="col-12 text-center">Login</header>
+							<div className="social-buttons col-12 form-group">
+								<button className="google">
+									<i className="fab fa-google"></i>Use Google
+								</button>
+								<button className="facebook">
+									<i className="fab fa-facebook-f"></i>Use Facebook
 								</button>
 							</div>
-							<span className="forgot-password">Forgot Password</span>
+							<div className="separator col-12 form-group">
+								<div className="line"></div>
+								<p>Or</p>
+								<div className="line"></div>
+							</div>
+							<div className="login-section col-12">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Username"
+									value={this.state.username}
+									onChange={(event) =>
+										this.handleOnChangeUsername(event)
+									}
+								/>
+								<div className="custom-input-pasword">
+									<input
+										type={
+											this.state.isShowPassword ? "text" : "password"
+										}
+										className="form-control"
+										placeholder="Password"
+										required
+										value={this.state.password}
+										onChange={(event) =>
+											this.handleOnChangePassword(event)
+										}
+									/>
+									<span
+										onClick={() => {
+											this.handleShowPassword();
+										}}>
+										<i
+											className={
+												this.state.isShowPassword
+													? "fas fa-eye"
+													: "fas fa-eye-slash"
+											}></i>
+									</span>
+								</div>
+								<div className="col-12" style={{ color: "red" }}>
+									{this.state.errMessage}
+								</div>
+								<div className="col-12">
+									<button
+										className="btn-login"
+										onClick={() => this.handleLogin()}>
+										Login
+									</button>
+								</div>
+								<span className="forgot-password">Forgot Password</span>
+							</div>
 						</div>
 					</div>
 				</div>
