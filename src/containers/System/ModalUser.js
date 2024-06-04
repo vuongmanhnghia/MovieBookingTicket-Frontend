@@ -6,7 +6,13 @@ import { connect } from "react-redux";
 class ModalUser extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			email: "",
+			password: "",
+			fullName: "",
+			phoneNumber: "",
+			address: "",
+		};
 	}
 
 	componentDidMount() {}
@@ -15,9 +21,43 @@ class ModalUser extends Component {
 		this.props.toggleFromParent();
 	};
 
+	handleOnChangeInput = (event, id) => {
+		let copyState = { ...this.state };
+		copyState[id] = event.target.value;
+
+		this.setState({
+			...copyState,
+		});
+	};
+
+	checkValidateInput = () => {
+		let isValid = true;
+		let arrInput = [
+			"email",
+			"password",
+			"fullName",
+			"phoneNumber",
+			"address",
+		];
+		for (let i = 0; i < arrInput.length; i++) {
+			if (!this.state[arrInput[i]]) {
+				isValid = false;
+				alert("Missing parameter: " + arrInput[i]);
+				break;
+			}
+		}
+		return isValid;
+	};
+
+	handleAddNewUser = () => {
+		let isValid = this.checkValidateInput();
+		if (isValid === true) {
+			//call API create modal
+			this.props.createNewUser(this.state);
+		}
+	};
+
 	render() {
-		console.log("check child props", this.props);
-		console.log("check child open modal", this.props.isOpen);
 		return (
 			<Modal
 				isOpen={this.props.isOpen}
@@ -37,25 +77,60 @@ class ModalUser extends Component {
 					<div className="row">
 						<div className="col-6 form-group">
 							<label>Email</label>
-							<input type="text" className="form-control" />
+							<input
+								type="text"
+								className="form-control"
+								onChange={(event) => {
+									this.handleOnChangeInput(event, "email");
+								}}
+								value={this.state.email}
+							/>
 						</div>
 						<div className="col-6 form-group">
 							<label>Password</label>
-							<input type="password" className="form-control" />
+							<input
+								type="password"
+								className="form-control"
+								onChange={(event) => {
+									this.handleOnChangeInput(event, "password");
+								}}
+								value={this.state.password}
+							/>
 						</div>
 						<div className="col-6">
 							<label>Full name</label>
-							<input type="text" className="form-control" />
+							<input
+								type="text"
+								className="form-control"
+								onChange={(event) => {
+									this.handleOnChangeInput(event, "fullName");
+								}}
+								value={this.state.fullName}
+							/>
 						</div>
 						<div className="col-6">
 							<label>Phone number</label>
-							<input type="number" className="form-control" />
+							<input
+								type="number"
+								className="form-control"
+								onChange={(event) => {
+									this.handleOnChangeInput(event, "phoneNumber");
+								}}
+								value={this.state.phoneNumber}
+							/>
 						</div>
 						<div className="col-12">
 							<label>Address</label>
-							<input type="text" className="form-control" />
+							<input
+								type="text"
+								className="form-control"
+								onChange={(event) => {
+									this.handleOnChangeInput(event, "address");
+								}}
+								value={this.state.address}
+							/>
 						</div>
-						<div className="col-5">
+						{/* <div className="col-5">
 							<label>Date of birth</label>
 							<input type="date" className="form-control" />
 						</div>
@@ -72,7 +147,7 @@ class ModalUser extends Component {
 								<option value="1">Admin</option>
 								<option value="2">User</option>
 							</select>
-						</div>
+						</div> */}
 					</div>
 				</ModalBody>
 				<ModalFooter>
@@ -80,10 +155,10 @@ class ModalUser extends Component {
 						className="btn btn-primary px-3"
 						color="primary"
 						onClick={() => {
-							this.toggle();
+							this.handleAddNewUser();
 						}}>
 						{" "}
-						Save changes
+						Add new
 					</Button>{" "}
 					<Button
 						className="btn btn-danger px-3"

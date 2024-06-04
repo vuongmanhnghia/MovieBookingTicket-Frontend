@@ -34,14 +34,19 @@ class UserManage extends Component {
 		});
 	};
 
+	createNewUser = (data) => {
+		alert("Call me");
+		console.log(data);
+	};
+
 	render() {
-		console.log(this.state);
 		let arrUsers = this.state.arrUsers;
 		return (
 			<div className="user-container">
 				<ModalUser
 					isOpen={this.state.isOpenModalUser}
 					toggleFromParent={this.toggleUserModal}
+					createNewUser={this.createNewUser}
 				/>
 				<div className="title">Manage users</div>
 				<div className="mx-1">
@@ -53,34 +58,37 @@ class UserManage extends Component {
 				</div>
 				<div className="users-table mt-3 mx-1">
 					<table id="customers">
-						<tr>
-							<th>Email</th>
-							<th>Full name</th>
-							<th>Phone number</th>
-							<th>Gender</th>
-							<th>Address</th>
-							<th>Actions</th>
-						</tr>
-						{arrUsers &&
-							arrUsers.map((item, index) => {
-								return (
-									<tr>
-										<td>{item.email}</td>
-										<td>{item.fullName}</td>
-										<td>{item.phoneNumber}</td>
-										<td>{item.gender}</td>
-										<td>{item.address}</td>
-										<td>
-											<button className="btn-edit">
-												<i className="fas fa-edit"></i>
-											</button>
-											<button className="btn-delete">
-												<i className="fas fa-trash-alt"></i>
-											</button>
-										</td>
-									</tr>
-								);
-							})}
+						<tbody>
+							<tr>
+								<th>Email</th>
+								<th>Full name</th>
+								<th>Phone number</th>
+								<th>Gender</th>
+								<th>Address</th>
+								<th>Actions</th>
+							</tr>
+
+							{arrUsers &&
+								arrUsers.map((item, index) => {
+									return (
+										<tr key={index}>
+											<td>{item.email}</td>
+											<td>{item.fullName}</td>
+											<td>{item.phoneNumber}</td>
+											<td>{item.gender}</td>
+											<td>{item.address}</td>
+											<td>
+												<button className="btn-edit">
+													<i className="fas fa-edit"></i>
+												</button>
+												<button className="btn-delete">
+													<i className="fas fa-trash-alt"></i>
+												</button>
+											</td>
+										</tr>
+									);
+								})}
+						</tbody>
 					</table>
 				</div>
 			</div>
