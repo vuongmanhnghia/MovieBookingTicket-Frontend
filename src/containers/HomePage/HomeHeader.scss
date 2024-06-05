@@ -1,0 +1,56 @@
+.home-header-container {
+	height: 65px;
+	border: 1px solid #ccc;
+	line-height: 24px;
+	background: #fffffff2;
+
+	.home-header-content {
+		height: 100%;
+		align-items: center;
+		display: flex;
+		font-size: 15px;
+		justify-content: space-between;
+		line-height: 22.5px;
+		margin: 0px 114px;
+		padding: 0px 32px;
+
+		.left-content {
+			box-sizing: border-box;
+			display: flex;
+			gap: 10px;
+			align-items: center;
+
+			.camera-logo {
+				background: url("../../assets/camera.svg") center no-repeat;
+				height: 36px;
+				width: 36px;
+				color: aqua;
+				cursor: pointer;
+			}
+
+			.account-content {
+				font-size: 15px;
+				font-weight: 600;
+				cursor: pointer;
+			}
+		}
+
+		.right-content {
+			display: flex;
+			padding-right: 40px;
+			justify-content: flex-end;
+			align-items: center;
+			gap: 20px;
+
+			.nav-text {
+				font-size: 15px;
+				font-weight: 600;
+				cursor: pointer;
+
+				.fa-search {
+					font-size: 20px;
+				}
+			}
+		}
+	}
+}

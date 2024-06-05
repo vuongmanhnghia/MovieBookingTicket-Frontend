@@ -68,7 +68,7 @@ class Login extends Component {
 		return (
 			<div className="modal-login-container">
 				<div className="background">
-					<div className="container">
+					<div className="login-container">
 						<div className="login-section row">
 							<header className="col-12 text-center">Login</header>
 							<div className="social-buttons col-12 form-group">
