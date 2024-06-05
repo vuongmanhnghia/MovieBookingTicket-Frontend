@@ -6,15 +6,19 @@ import {
 	getAllUsers,
 	createNewUserService,
 	deleteUserService,
+	editUserServices,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
 import { emitter } from "../../utils/emitter";
+import ModalEditUser from "./ModalEditUser";
 class UserManage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			arrUsers: [],
 			isOpenModalUser: false,
+			isOpenModalEditUser: false,
+			userEdit: {},
 		};
 	}
 
@@ -40,6 +44,12 @@ class UserManage extends Component {
 	toggleUserModal = () => {
 		this.setState({
 			isOpenModalUser: !this.state.isOpenModalUser,
+		});
+	};
+
+	toggleUserEditModal = () => {
+		this.setState({
+			isOpenModalEditUser: !this.state.isOpenModalEditUser,
 		});
 	};
 
@@ -73,6 +83,29 @@ class UserManage extends Component {
 		}
 	};
 
+	handleEditUser = (user) => {
+		this.setState({
+			isOpenModalEditUser: true,
+			userEdit: user,
+		});
+	};
+
+	doEditUser = async (user) => {
+		try {
+			let response = await editUserServices(user);
+			if (response && response.errCode === 0) {
+				this.setState({
+					isOpenModalEditUser: false,
+				});
+				await this.getAllUsersFromReact();
+			} else {
+				alert(response.errMessage);
+			}
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
 	render() {
 		let arrUsers = this.state.arrUsers;
 		return (
@@ -82,6 +115,14 @@ class UserManage extends Component {
 					toggleFromParent={this.toggleUserModal}
 					createNewUser={this.createNewUser}
 				/>
+				{this.state.isOpenModalEditUser && (
+					<ModalEditUser
+						isOpen={this.state.isOpenModalEditUser}
+						toggleFromParent={this.toggleUserEditModal}
+						currentUser={this.state.userEdit}
+						editUser={this.doEditUser}
+					/>
+				)}
 				<div className="title">Manage users</div>
 				<div className="mx-1">
 					<button
@@ -113,7 +154,11 @@ class UserManage extends Component {
 											<td>{item.address}</td>
 											<td>
 												<button className="btn-edit">
-													<i className="fas fa-edit"></i>
+													<i
+														className="fas fa-edit"
+														onClick={() => {
+															this.handleEditUser(item);
+														}}></i>
 												</button>
 												<button className="btn-delete">
 													<i
