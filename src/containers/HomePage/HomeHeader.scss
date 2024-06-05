@@ -1,8 +1,9 @@
 .home-header-container {
 	height: 65px;
-	border: 1px solid #ccc;
 	line-height: 24px;
 	background: #fffffff2;
+	box-shadow: 0px 1px 5px #888888;
+	position: sticky;
 
 	.home-header-content {
 		height: 100%;
@@ -37,7 +38,6 @@
 
 		.right-content {
 			display: flex;
-			padding-right: 40px;
 			justify-content: flex-end;
 			align-items: center;
 			gap: 20px;
@@ -51,6 +51,98 @@
 					font-size: 20px;
 				}
 			}
+			.input-search {
+				width: 150px;
+				height: 28px;
+				display: flex;
+				align-items: center;
+				border: 1px solid #ccc;
+				border-radius: 32px;
+				justify-content: center;
+
+				input {
+					width: 110px;
+					border: none;
+					outline: none;
+					padding-right: 4px;
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}
+
+.home-header-banner-container {
+	width: 100%;
+	height: 400px;
+
+	background: #fff0f6;
+
+	.home-header-banner-content {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0px 114px;
+		gap: 50px;
+
+		.home-header-banner-booking {
+			justify-content: flex-start;
+
+			.banner-content-title {
+				font-size: 40px;
+				font-weight: 600;
+				color: #d82d8b;
+			}
+
+			.banner-content-check {
+				.list-booking-check {
+					list-style-type: none;
+					padding-left: 0;
+
+					li {
+						padding: 5px 0;
+						font-size: 15px;
+
+						i {
+							color: #f6d8e7;
+							background-color: #d82d8b;
+							border-radius: 50px;
+							font-size: 20px;
+							margin-right: 8px;
+						}
+					}
+				}
+			}
+
+			.btn-booking-content {
+				width: 120px;
+				height: 36px;
+				background: #e144a2;
+				align-items: center;
+				justify-content: flex-start;
+				border-radius: 6px;
+
+				.btn-booking {
+					font-size: 16px;
+					font-weight: 600;
+					text-align: center;
+					color: white;
+					padding-top: 6px;
+					cursor: pointer;
+				}
+			}
+		}
+
+		.home-header-banner {
+			background: url("../../assets/momo-background.jpg");
+			background-repeat: no-repeat;
+			background-size: 532px 289px;
+			width: 532px;
+			height: 289px;
+			border-radius: 6px;
+			cursor: pointer;
 		}
 	}
 }
