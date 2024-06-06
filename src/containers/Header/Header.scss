@@ -1,13 +1,13 @@
 @import "../../styles/common.scss";
 
 .header-container {
-	z-index: 99;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	background-color: $colormain;
+	background-color: #faa1d1;
 	color: $common-text-color;
 	height: 40px;
-	position: relative;
+	position: sticky;
 	.btn-logout {
 		color: $common-text-color;
 		line-height: 40px;

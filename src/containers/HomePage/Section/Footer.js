@@ -9,9 +9,15 @@ class Footer extends Component {
 				<div className="row footer-container-content">
 					<div className="col footer-content">
 						<div className="title-footer">MUA VÉ XEM PHIM</div>
-						<div className="text-content-1">Lịch chiếu phim</div>
-						<div className="text-content-1">Rạp chiếu phim</div>
-						<div className="text-content-1">Phim chiếu rạp</div>
+						<div className="text-content-1">
+							<a href="#">Lịch chiếu phim</a>
+						</div>
+						<div className="text-content-1">
+							<a href="#">Rạp chiếu phim</a>
+						</div>
+						<div className="text-content-1">
+							<a href="#">Phim chiếu rạp</a>
+						</div>
 					</div>
 					<div className="col">
 						<div className="title-footer">DỊCH VỤ NỔI BẬT</div>
@@ -30,6 +36,11 @@ class Footer extends Component {
 					</div>
 					<div className="col">
 						<div className="title-footer">KẾT NỐI VỚI CHÚNG TÔI</div>
+					</div>
+					<div className="copyright">
+						<p>
+							&copy; 2024 Vuong Manh Nghia. <a href="#">More info</a>
+						</p>
 					</div>
 				</div>
 			</div>
