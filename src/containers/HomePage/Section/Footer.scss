@@ -1,0 +1,17 @@
+.section-footer-container {
+	height: 300px;
+	background-color: #171717;
+
+	.footer-container-content {
+		margin: 0 56px;
+		padding: 28px 0;
+
+		.footer-content {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+}
+.title-footer {
+	color: white;
+}

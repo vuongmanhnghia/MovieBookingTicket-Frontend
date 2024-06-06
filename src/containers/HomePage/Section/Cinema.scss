@@ -1,0 +1,102 @@
+.section-cinema {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 1060px;
+	background: #fafafa;
+	line-height: 24px;
+
+	.cinema-container {
+		height: 100%;
+		width: 1150px;
+		line-height: 24px;
+		margin: 0px 114.182px;
+		padding: 56px 32px;
+
+		.cinema-title {
+			color: #d82d8b;
+			font-size: 30px;
+			font-weight: 700;
+			line-height: 36px;
+			text-align: center;
+		}
+
+		.cinema-description {
+			color: #737373;
+			font-family: ui-sans-serif;
+			font-size: 18px;
+			line-height: 28px;
+			margin: 8px 160px 0px;
+			text-align: center;
+		}
+
+		.cinema-content {
+			display: grid;
+			gap: 16px;
+			grid-template-columns: 536px 536px;
+			grid-template-rows: 168.455px 129.455px 150.955px 129.455px 129.455px;
+			line-height: 24px;
+
+			.box-cinema {
+				width: 536px;
+				height: 168px;
+				align-items: center;
+				background-color: #fff;
+				border-color: #d4d4d4;
+				border-radius: 8px;
+				border-style: solid;
+				border-width: 0.727273px;
+				box-shadow: #0000 0px 0px 0px 0px;
+				display: flex;
+				line-height: 24px;
+				padding: 12px 16px;
+
+				.logo-cinema {
+					background: url(../../../assets/cinema-logo/cgv.jpg);
+					background-size: cover;
+					border-radius: 8px;
+					height: 80px;
+					width: 80px;
+				}
+
+				.box-cinema-content {
+					padding: 0px 0px 0px 16px;
+
+					.box-cinema-content-title {
+						color: #eb2f96;
+						font-size: 18px;
+						font-weight: 700;
+						line-height: 28px;
+					}
+
+					.box-cinema-content-description {
+						color: #a3a3a3;
+						display: -webkit-box;
+						font-size: 14px;
+						line-height: 20px;
+					}
+
+					.box-cinema-content-rate {
+						align-items: center;
+						display: flex;
+						line-height: 24px;
+						margin: 4px 0px 0px;
+
+						.fa-star {
+							color: #fcd34d;
+						}
+					}
+
+					.box-cinema-content-quantity {
+						align-items: center;
+						color: #17171780;
+						display: flex;
+						font-size: 14px;
+						line-height: 20px;
+						margin: 4px 0px 0px;
+					}
+				}
+			}
+		}
+	}
+}

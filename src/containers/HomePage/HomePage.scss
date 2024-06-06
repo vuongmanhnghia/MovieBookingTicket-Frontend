@@ -1,0 +1,28 @@
+//reset slink slider
+.slick-prev {
+	z-index: 100;
+	left: -22px !important;
+}
+
+.slick-next {
+	right: 10px !important;
+}
+
+.slick-prev,
+.slick-next {
+	transition: all 0.5s ease !important;
+
+	&:hover {
+		opacity: 0.75 !important;
+	}
+}
+
+.slick-prev:before,
+.slick-next:before {
+	font-size: 44px !important;
+	color: #e6e6e6 !important;
+	opacity: 1 !important;
+	background-color: #19191a !important;
+	border-radius: 50% !important;
+	box-shadow: none !important;
+}
