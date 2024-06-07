@@ -30,7 +30,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -40,7 +40,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -50,7 +50,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -60,7 +60,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -70,7 +70,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -80,7 +80,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -90,7 +90,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -100,7 +100,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -110,7 +110,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -120,7 +120,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -130,7 +130,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -140,7 +140,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -150,7 +150,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -160,7 +160,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -170,7 +170,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 							<div className="specialty-customize">
@@ -180,7 +180,7 @@ class Specialty extends Component {
 								</div>
 								<div className="category">Hoạt hình, chính kịch</div>
 								<div className="rate">
-									<i class="fas fa-star"></i> 9.8
+									<i className="fas fa-star"></i> 9.8
 								</div>
 							</div>
 						</Slider>

@@ -22,7 +22,7 @@ class HomeHeader extends Component {
 							<div className="nav-text">Blog phim</div>
 							<div className="input-search">
 								<input type="text" placeholder="Nhập tên phim" />
-								<i class="fas fa-search"></i>
+								<i className="fas fa-search"></i>
 							</div>
 						</div>
 					</div>
@@ -36,19 +36,20 @@ class HomeHeader extends Component {
 							<div className="banner-content-check">
 								<ul className="list-booking-check">
 									<li>
-										<i class="fas fa-check-circle"></i>Mua vé online,
-										trải nghiệm phim hay
+										<i className="fas fa-check-circle"></i>Mua vé
+										online, trải nghiệm phim hay
 									</li>
 									<li>
-										<i class="fas fa-check-circle"></i>Đặt vé an toàn
+										<i className="fas fa-check-circle"></i>Đặt vé an
+										toàn
 									</li>
 									<li>
-										<i class="fas fa-check-circle"></i>Tha hồ chọn chỗ
-										ngồi, mua bắp nước tiện lợi
+										<i className="fas fa-check-circle"></i>Tha hồ chọn
+										chỗ ngồi, mua bắp nước tiện lợi
 									</li>
 									<li>
-										<i class="fas fa-check-circle"></i>Lịch sử đặt vé
-										được lưu lại ngay
+										<i className="fas fa-check-circle"></i>Lịch sử đặt
+										vé được lưu lại ngay
 									</li>
 								</ul>
 							</div>

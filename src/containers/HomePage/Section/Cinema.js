@@ -22,10 +22,10 @@ class Cinema extends Component {
 									Hệ thống rạp chiếu phim lớn nhất Việt Nam
 								</div>
 								<div className="box-cinema-content-rate">
-									<i class="fas fa-star"></i>
+									<i className="fas fa-star"></i>
 								</div>
 								<div className="box-cinema-content-quantity">
-									<i class="fas fa-map-marker-alt"></i>
+									<i className="fas fa-map-marker-alt"></i>
 								</div>
 							</div>
 						</div>
@@ -37,10 +37,10 @@ class Cinema extends Component {
 									Hệ thống rạp chiếu phim lớn nhất Việt Nam
 								</div>
 								<div className="box-cinema-content-rate">
-									<i class="fas fa-star"></i>
+									<i className="fas fa-star"></i>
 								</div>
 								<div className="box-cinema-content-quantity">
-									<i class="fas fa-map-marker-alt"></i>
+									<i className="fas fa-map-marker-alt"></i>
 								</div>
 							</div>
 						</div>

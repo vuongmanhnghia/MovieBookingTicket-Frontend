@@ -3,21 +3,42 @@
 .header-container {
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
 	background-color: #faa1d1;
 	color: $common-text-color;
 	height: 40px;
 	position: sticky;
-	.btn-logout {
-		color: $common-text-color;
-		line-height: 40px;
-		height: 40px;
-		padding: 0 10px;
-		&:hover {
-			background-color: darken($colormain, 5);
+	align-items: center;
+	justify-content: space-between;
+
+	.header-tabs-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// margin-left: 10px;
+	}
+
+	.header-login-section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		// padding-right: 10px;
+
+		.btn-logout {
+			color: $common-text-color;
+			line-height: 40px;
+			height: 40px;
+			padding: 0 10px;
+			&:hover {
+				background-color: darken($colormain, 5);
+			}
+			i {
+				font-size: $base-size + 1px;
+			}
 		}
-		i {
-			font-size: $base-size + 1px;
+		.hello {
+			margin-right: 0;
+			padding-right: 0;
 		}
 	}
 }
