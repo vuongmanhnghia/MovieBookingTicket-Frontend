@@ -1,0 +1,32 @@
+.form-preview-img {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.preview-image-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 200px;
+
+		.label-upload {
+			background: #ccc;
+			border-radius: 4px;
+			padding: 6px;
+			cursor: pointer;
+			&:hover {
+				background: #ddd;
+			}
+		}
+
+		.preview-image {
+			box-sizing: border-box;
+			width: 100%;
+			height: 200px;
+			background: center center no-repeat;
+			background-size: contain;
+			cursor: pointer;
+			border-radius: 4px;
+		}
+	}
+}
