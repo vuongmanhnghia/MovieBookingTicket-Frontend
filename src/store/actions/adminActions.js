@@ -3,6 +3,7 @@ import {
 	getAllCodeService,
 	createNewUserService,
 	getAllUsers,
+	deleteUserService,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -66,20 +67,19 @@ export const fetchRoleFailed = () => ({
 export const createNewUser = (data) => {
 	return async (dispatch, getState) => {
 		try {
-			dispatch({
-				type: actionTypes.FETCH_ROLE_START,
-			});
 			let response = await createNewUserService(data);
 			toast.success("Tạo mới tài khoản thành công!");
 			if (response && response.errCode === 0) {
 				dispatch(createUserSuccess());
 				dispatch(fetchAllUsersStart());
 			} else {
+				toast.error("Tạo mới tài khoản thất bại!");
 				dispatch(createUserFailed());
 			}
 		} catch (e) {
+			toast.error("Tạo mới tài khoản thất bại!");
 			dispatch(createUserFailed());
-			console.log("fetch role start errol: ", e);
+			console.log("Create user errol: ", e);
 		}
 	};
 };
@@ -99,9 +99,11 @@ export const fetchAllUsersStart = () => {
 			if (response && response.errCode === 0) {
 				dispatch(fetchAllUsersSuccess(response.users.reverse()));
 			} else {
+				toast.error("Lấy thông tin tài khoản thất bại!");
 				dispatch(fetchAllUsersFailed());
 			}
 		} catch (e) {
+			toast.error("Lấy thông tin tài khoản thất bại!");
 			dispatch(fetchAllUsersFailed());
 			console.log("fetch role start errol: ", e);
 		}
@@ -115,4 +117,33 @@ export const fetchAllUsersSuccess = (data) => ({
 
 export const fetchAllUsersFailed = () => ({
 	type: actionTypes.FETCH_ALL_USERS_FAILED,
+});
+
+export const deleteUser = (userId) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await deleteUserService(userId);
+			toast.success("Xoá tài khoản thành công!");
+			if (response && response.errCode === 0) {
+				dispatch(deleteUserSuccess());
+				dispatch(fetchAllUsersStart());
+			} else {
+				toast.error("Xoá tài khoản thất bại!");
+
+				dispatch(deleteUserFailed());
+			}
+		} catch (e) {
+			toast.error("Xoá tài khoản thất bại!");
+			dispatch(deleteUserFailed());
+			console.log("Delete user errol: ", e);
+		}
+	};
+};
+
+export const deleteUserSuccess = () => ({
+	type: actionTypes.DELETE_USER_SUCCESS,
+});
+
+export const deleteUserFailed = () => ({
+	type: actionTypes.DELETE_USER_FAILED,
 });
