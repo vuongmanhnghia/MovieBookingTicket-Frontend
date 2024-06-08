@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 // import { getAllCodeService } from "../../../services/userService";
 import * as actions from "../../../store/actions";
 import "./UserRedux.scss";
+import TableManageUser from "./TableManageUser";
 
 class UserRedux extends Component {
 	constructor(props) {
@@ -43,6 +44,20 @@ class UserRedux extends Component {
 			this.setState({
 				roleArr: this.props.roleRedux,
 				role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+			});
+		}
+
+		if (prevProps.users !== this.props.users) {
+			this.setState({
+				email: "",
+				password: "",
+				fullName: "",
+				phoneNumber: "",
+				dateOfBirth: "",
+				gender: "",
+				address: "",
+				role: "",
+				avatar: "",
 			});
 		}
 	}
@@ -104,7 +119,9 @@ class UserRedux extends Component {
 			{
 				...copyState,
 			},
-			() => {}
+			() => {
+				console.log("new state: ", this.state);
+			}
 		);
 		// email: "",
 		// 	password: "",
@@ -296,6 +313,9 @@ class UserRedux extends Component {
 									<FormattedMessage id="manage-user.save" />
 								</button>
 							</div>
+							<div className="col-12 mb-5">
+								<TableManageUser />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -309,16 +329,16 @@ const mapStateToProps = (state) => {
 		genderRedux: state.admin.genders,
 		roleRedux: state.admin.roles,
 		isLoadingGender: state.admin.isLoadingGender,
+		users: state.admin.users,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getGenderStart: () => dispatch(actions.fetchGenderStart()),
-
 		getRoleStart: () => dispatch(actions.fetchRoleStart()),
-
 		createNewUser: (data) => dispatch(actions.createNewUser(data)),
+		fetchUserRedux: () => dispatch(actions.fetchAllUsersStart()),
 
 		// processLogout: () => dispatch(actions.processLogout()),
 	};

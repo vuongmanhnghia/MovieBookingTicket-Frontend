@@ -2,7 +2,9 @@ import actionTypes from "./actionTypes";
 import {
 	getAllCodeService,
 	createNewUserService,
+	getAllUsers,
 } from "../../services/userService";
+import { toast } from "react-toastify";
 
 // export const fetchGenderStart = () => ({
 // 	type: actionTypes.FETCH_GENDER_START,
@@ -39,9 +41,6 @@ export const fetchGenderFailed = () => ({
 export const fetchRoleStart = () => {
 	return async (dispatch, getState) => {
 		try {
-			dispatch({
-				type: actionTypes.FETCH_ROLE_START,
-			});
 			let response = await getAllCodeService("ROLE");
 			if (response && response.errCode === 0) {
 				dispatch(fetchRoleSuccess(response.data));
@@ -71,9 +70,10 @@ export const createNewUser = (data) => {
 				type: actionTypes.FETCH_ROLE_START,
 			});
 			let response = await createNewUserService(data);
-			console.log("check create user redux: ", response);
+			toast.success("Tạo mới tài khoản thành công!");
 			if (response && response.errCode === 0) {
-				dispatch(createUserSuccess(response.data));
+				dispatch(createUserSuccess());
+				dispatch(fetchAllUsersStart());
 			} else {
 				dispatch(createUserFailed());
 			}
@@ -90,4 +90,29 @@ export const createUserSuccess = () => ({
 
 export const createUserFailed = () => ({
 	type: actionTypes.CREATE_USER_FAILED,
+});
+
+export const fetchAllUsersStart = () => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getAllUsers("ALL");
+			if (response && response.errCode === 0) {
+				dispatch(fetchAllUsersSuccess(response.users.reverse()));
+			} else {
+				dispatch(fetchAllUsersFailed());
+			}
+		} catch (e) {
+			dispatch(fetchAllUsersFailed());
+			console.log("fetch role start errol: ", e);
+		}
+	};
+};
+
+export const fetchAllUsersSuccess = (data) => ({
+	type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+	users: data,
+});
+
+export const fetchAllUsersFailed = () => ({
+	type: actionTypes.FETCH_ALL_USERS_FAILED,
 });
