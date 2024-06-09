@@ -284,7 +284,7 @@ class UserRedux extends Component {
 										genders.length > 0 &&
 										genders.map((item, index) => {
 											return (
-												<option key={index} value={item.key}>
+												<option key={index} value={item.keyMap}>
 													{" "}
 													{item.value}
 												</option>
@@ -320,7 +320,7 @@ class UserRedux extends Component {
 										roles.length > 0 &&
 										roles.map((item, index) => {
 											return (
-												<option key={index} value={item.key}>
+												<option key={index} value={item.keyMap}>
 													{item.value}
 												</option>
 											);

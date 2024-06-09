@@ -1,28 +1,44 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./HomeHeader.scss";
+import "./HomeNavigation.scss";
 
-class HomeHeader extends Component {
+class HomeNavigation extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div className="home-header-container">
-					<div className="home-header-content">
-						<div className="left-content">
-							<div className="camera-logo"></div>
-							<div className="account-content">Login</div>
-							<div className="account-content">Signin</div>
+				<div className="home-nav-container">
+					<div className="home-nav-content">
+						<div className="nav-left-container">
+							<a href="http://localhost:3000/home">
+								<div className="camera-logo"></div>
+							</a>
+							<div className="account-content">
+								<a href="#">Đăng nhập</a>
+							</div>
+							<div className="account-content">
+								<a href="#">Đăng ký</a>
+							</div>
 						</div>
-						<div className="right-content">
-							<div className="nav-text">Lịch chiếu</div>
-							<div className="nav-text">Rạp chiếu</div>
-							<div className="nav-text">Phim chiếu</div>
-							<div className="nav-text">Review phim</div>
-							<div className="nav-text">Top phim</div>
-							<div className="nav-text">Blog phim</div>
-							<div className="input-search">
-								<input type="text" placeholder="Nhập tên phim" />
-								<i className="fas fa-search"></i>
+						<div className="nav-right-container">
+							<div className="nav-right-content row">
+								<div className="nav-text">
+									<a href="#">Lịch chiếu</a>
+								</div>
+								<div className="nav-text">
+									<a href="#">Rạp chiếu</a>
+								</div>
+								<div className="nav-text">
+									<a href="#">Phim chiếu</a>
+								</div>
+								<div className="nav-text">
+									<a href="#">Review phim</a>
+								</div>
+								<div className="nav-text">
+									<a href="#">Top phim</a>
+								</div>
+								<div className="nav-text">
+									<a href="#">Blog phim</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -75,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeNavigation);

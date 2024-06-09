@@ -1,78 +1,64 @@
-* {
-	font-family: "Times New Roman", Times, serif;
-}
-
-.home-header-container {
-	z-index: 1000;
-	width: 100%;
-	height: 65px;
-	line-height: 24px;
-	background: #fffffff2;
-	box-shadow: 0px 1px 5px #888888;
+.home-nav-container {
+	display: block;
 	position: fixed;
-	top: 0;
+	width: 100%;
+	background: white;
 
-	.home-header-content {
-		height: 100%;
-		align-items: center;
+	.home-nav-content {
+		padding: 0 32px;
 		display: flex;
-		font-size: 15px;
 		justify-content: space-between;
-		line-height: 22.5px;
-		margin: 0 114px;
-		padding: 0px 32px;
+		align-items: center;
+		margin: 0 300px;
+		height: 65px;
 
-		.left-content {
-			box-sizing: border-box;
+		.nav-left-container {
 			display: flex;
-			gap: 10px;
 			align-items: center;
+			box-sizing: border-box;
+			gap: 10px;
 
 			.camera-logo {
 				background: url("../../assets/camera.svg") center no-repeat;
+				background-size: 36px 36px;
 				height: 36px;
 				width: 36px;
-				color: aqua;
 				cursor: pointer;
 			}
 
 			.account-content {
-				font-size: 15px;
+				font-size: 16px;
 				font-weight: 700;
-				cursor: pointer;
 			}
 		}
 
-		.right-content {
+		.nav-right-container {
 			display: flex;
-			justify-content: flex-end;
 			align-items: center;
-			gap: 20px;
+			padding: 0 12px;
 
-			.nav-text {
-				font-size: 15px;
-				font-weight: 700;
-				cursor: pointer;
-
-				.fa-search {
-					font-size: 20px;
-				}
-			}
-			.input-search {
-				width: 150px;
-				height: 28px;
+			.nav-right-content {
+				position: relative;
 				display: flex;
+				justify-content: flex-end;
 				align-items: center;
-				border: 1px solid #ccc;
-				border-radius: 32px;
-				justify-content: center;
+				flex-wrap: nowrap;
+				flex-direction: row;
+				gap: 20px;
 
-				input {
-					width: 110px;
-					border: none;
-					outline: none;
-					padding: 0px 4px;
-					font-size: 12px;
+				.nav-text {
+					font-size: 16px;
+					font-weight: 700;
+					color: #aaa;
+
+					> a {
+						text-decoration: none;
+						color: #4b4a4a;
+
+						&:hover {
+							color: black;
+						}
+					}
 				}
 			}
 		}

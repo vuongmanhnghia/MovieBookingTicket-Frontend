@@ -24,7 +24,14 @@
 		}
 
 		.specialty-body {
+			overflow: hidden;
 			padding: 0 100px;
+
+			.slick-slide {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 
 			.specialty-customize {
 				height: 288px !important;

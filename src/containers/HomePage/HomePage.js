@@ -1,17 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeHeader from "./HomeHeader";
+import HomeNavigation from "./HomeNavigation";
 import Specialty from "./Section/Specialty";
 import Cinema from "./Section/Cinema";
 import "./HomePage.scss";
 import Footer from "./Section/Footer";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 class HomePage extends Component {
 	render() {
+		let settings = {
+			dots: true,
+			infinite: false,
+			speed: 500,
+			slidesToShow: 5,
+			slidesToScroll: 5,
+		};
 		return (
 			<div>
-				<HomeHeader />
-				<Specialty />
+				<HomeNavigation />
+				<Specialty settings={settings} />
 				<Cinema />
 				<Footer />
 			</div>
