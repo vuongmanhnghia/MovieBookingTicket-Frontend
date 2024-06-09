@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { CRUD_ACTIONS } from "../../../utils/constant.js";
+import { CRUD_ACTIONS, CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
 import "./UserRedux.scss";
 import TableManageUser from "./TableManageUser.js";
@@ -21,7 +21,7 @@ class UserRedux extends Component {
 			gender: "",
 			address: "",
 			role: "",
-			avatar: "",
+			image: "",
 
 			action: "",
 			userEditId: "",
@@ -63,19 +63,22 @@ class UserRedux extends Component {
 					arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
 				address: "",
 				role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
-				avatar: "",
+				image: "",
 				action: CRUD_ACTIONS.CREATE,
+				previewImgUrl: "",
 			});
 		}
 	}
 
-	handleOnChangeImage = (event) => {
-		let file = event.target.files[0];
+	handleOnChangeImage = async (event) => {
+		let data = event.target.files;
+		let file = data[0];
 		if (file) {
-			const objectUrl = URL.createObjectURL(file);
+			let base64 = await CommonUtils.getBase64(file);
+			let objectUrl = URL.createObjectURL(file);
 			this.setState({
 				previewImgUrl: objectUrl,
-				avatar: file,
+				image: base64,
 			});
 		}
 	};
@@ -97,6 +100,7 @@ class UserRedux extends Component {
 				gender: this.state.gender,
 				address: this.state.address,
 				roleId: this.state.role,
+				image: this.state.image,
 			});
 		}
 		if (action === CRUD_ACTIONS.EDIT) {
@@ -111,7 +115,7 @@ class UserRedux extends Component {
 				gender: this.state.gender,
 				address: this.state.address,
 				roleId: this.state.role,
-				// avatar: data.avatar,
+				image: this.state.image,
 			});
 		}
 	};
@@ -140,26 +144,16 @@ class UserRedux extends Component {
 	onChangeInput = (event, id) => {
 		let copyState = { ...this.state };
 		copyState[id] = event.target.value;
-
-		this.setState(
-			{
-				...copyState,
-			},
-			() => {}
-		);
-		// email: "",
-		// 	password: "",
-		// 	fullName: "",
-		// 	phoneNumber: "",
-		// 	dateOfBirth: "",
-		// 	gender: "",
-		// 	address: "",
-		// 	role: "",
-		// 	avatar: "",
+		this.setState({
+			...copyState,
+		});
 	};
 
 	handleEditUserFromParent = (user) => {
-		console.log("check handle eidt user from parent: ", user);
+		let imageBase64 = "";
+		if (user.image) {
+			imageBase64 = new Buffer(user.image, "base64").toString("binary");
+		}
 		this.setState({
 			email: user.email,
 			password: "HARDCODED",
@@ -169,7 +163,8 @@ class UserRedux extends Component {
 			gender: user.gender,
 			address: user.address,
 			role: user.roleId,
-			avatar: user.avatar,
+			image: "",
+			previewImgUrl: imageBase64,
 			action: CRUD_ACTIONS.EDIT,
 			userEditId: user.id,
 		});
