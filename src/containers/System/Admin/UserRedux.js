@@ -38,14 +38,14 @@ class UserRedux extends Component {
 			this.setState({
 				genderArr: arrGenders,
 				gender:
-					arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
+					arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
 			});
 		}
 		if (prevProps.roleRedux !== this.props.roleRedux) {
 			let arrRoles = this.props.roleRedux;
 			this.setState({
 				roleArr: this.props.roleRedux,
-				role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+				role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : "",
 			});
 		}
 
@@ -60,9 +60,9 @@ class UserRedux extends Component {
 				phoneNumber: "",
 				dateOfBirth: "",
 				gender:
-					arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
+					arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
 				address: "",
-				role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+				role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : "",
 				image: "",
 				action: CRUD_ACTIONS.CREATE,
 				previewImgUrl: "",
