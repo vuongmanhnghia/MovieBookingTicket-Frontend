@@ -6,7 +6,7 @@ import {
 	getAllUsers,
 	createNewUserService,
 	deleteUserService,
-	editUserServices,
+	editUserService,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
 import { emitter } from "../../utils/emitter";
@@ -92,7 +92,7 @@ class UserManage extends Component {
 
 	doEditUser = async (user) => {
 		try {
-			let response = await editUserServices(user);
+			let response = await editUserService(user);
 			if (response && response.errCode === 0) {
 				this.setState({
 					isOpenModalEditUser: false,

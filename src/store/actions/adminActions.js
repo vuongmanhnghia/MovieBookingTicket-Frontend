@@ -4,6 +4,7 @@ import {
 	createNewUserService,
 	getAllUsers,
 	deleteUserService,
+	editUserService,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -68,10 +69,10 @@ export const createNewUser = (data) => {
 	return async (dispatch, getState) => {
 		try {
 			let response = await createNewUserService(data);
-			toast.success("Tạo mới tài khoản thành công!");
 			if (response && response.errCode === 0) {
 				dispatch(createUserSuccess());
 				dispatch(fetchAllUsersStart());
+				toast.success("Tạo mới tài khoản thành công!");
 			} else {
 				toast.error("Tạo mới tài khoản thất bại!");
 				dispatch(createUserFailed());
@@ -123,10 +124,10 @@ export const deleteUser = (userId) => {
 	return async (dispatch, getState) => {
 		try {
 			let response = await deleteUserService(userId);
-			toast.success("Xoá tài khoản thành công!");
 			if (response && response.errCode === 0) {
 				dispatch(deleteUserSuccess());
 				dispatch(fetchAllUsersStart());
+				toast.success("Xoá tài khoản thành công!");
 			} else {
 				toast.error("Xoá tài khoản thất bại!");
 
@@ -146,4 +147,33 @@ export const deleteUserSuccess = () => ({
 
 export const deleteUserFailed = () => ({
 	type: actionTypes.DELETE_USER_FAILED,
+});
+
+export const editUser = (data) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await editUserService(data);
+			if (response && response.errCode === 0) {
+				dispatch(editUserSuccess());
+				dispatch(fetchAllUsersStart());
+				toast.success("Cập nhật tài khoản thành công!");
+			} else {
+				toast.error("Cập nhật tài khoản thất bại!");
+
+				dispatch(editUserFailed());
+			}
+		} catch (e) {
+			toast.error("Cập nhật tài khoản thất bại!");
+			dispatch(editUserFailed());
+			console.log("Update user errol: ", e);
+		}
+	};
+};
+
+export const editUserSuccess = () => ({
+	type: actionTypes.EDIT_USER_SUCCESS,
+});
+
+export const editUserFailed = () => ({
+	type: actionTypes.EDIT_USER_FAILED,
 });
