@@ -4,6 +4,7 @@ import HomeNavigation from "./HomeNavigation";
 import Specialty from "./Section/Specialty";
 import Cinema from "./Section/Cinema";
 import "./HomePage.scss";
+import HomeBanner from "./Section/HomeBanner";
 import Footer from "./Section/Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -20,6 +21,7 @@ class HomePage extends Component {
 		return (
 			<div>
 				<HomeNavigation />
+				<HomeBanner />
 				<Specialty settings={settings} />
 				<Cinema />
 				<Footer />
