@@ -13,7 +13,7 @@ const getAllMoviesService = () => {
 };
 
 const getDetailMovieService = (id) => {
-	return axios.get(`/api/get-all-movies?id=${id}`);
+	return axios.get(`/api/get-detail-movie?id=${id}`);
 };
 
 export {

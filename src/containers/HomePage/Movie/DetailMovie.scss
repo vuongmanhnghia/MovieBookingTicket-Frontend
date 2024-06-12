@@ -1,5 +1,6 @@
 .movie-detail-content {
 	background: black;
+	z-index: -1;
 	padding: 56px 150px;
 	width: 100%;
 	height: 480px;
@@ -11,14 +12,78 @@
 
 		.box-movie-detail-image {
 			border: 1px solid #ccc;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
 			.movie-detail-image {
 				width: 254px;
 				height: 363px;
-				background-image: url(../../../assets/movie-image/Doraemon.jpg);
 				background-size: cover;
 				background-position: center;
 				background-repeat: no-repeat;
+				padding: 0;
+			}
+		}
+
+		.box-movie-detail-content {
+			width: 790px;
+			padding-left: 40px;
+
+			.movie-detail-title {
+				font-size: 36px;
+				color: white;
+				font-weight: bold;
+				margin-top: 8px;
+			}
+
+			.box-releaseYear-duration {
+				display: flex;
+				color: #aaa;
+				gap: 10px;
+				padding-top: 4px;
+			}
+
+			.movie-detail-rating {
+				display: flex;
+				color: white;
+				gap: 5px;
+				font-size: 24px;
+				font-weight: 700;
+				padding-top: 12px;
+				padding-bottom: 8px;
+
+				.fa-star {
+					color: #f4c10f;
+					font-size: 22px;
+					inline-size: none;
+					padding-top: 5px;
+				}
+			}
+
+			.description-title {
+				font-size: 16px;
+				font-weight: 700;
+				color: white;
+				padding-bottom: 4px;
+			}
+
+			.movie-detail-description {
+				font-size: 14px;
+				color: #aaa;
+				padding-bottom: 4px;
+			}
+
+			.releaseDate-genre {
+				display: flex;
+				color: white;
+				gap: 20px;
+
+				.box-releaseDate-title,
+				.box-genre-title {
+					font-size: 14px;
+					color: #aaa;
+				}
 			}
 		}
 	}
