@@ -34,7 +34,12 @@ export const adminMenu = [
 	{
 		// Quản lý phim
 		name: "menu.admin.manage-movie",
-		link: "/system/manage-movie",
+		menus: [
+			{
+				name: "menu.admin.manage-movie",
+				link: "/system/manage-movie",
+			},
+		],
 	},
 	{
 		// Quản lý rạp phim

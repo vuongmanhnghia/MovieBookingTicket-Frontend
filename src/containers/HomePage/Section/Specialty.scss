@@ -1,4 +1,4 @@
-.section-specialty {
+.movie-section-container {
 	height: 540px;
 	width: 100%;
 	background: url("../../../assets/cinemas-background.jpg");
@@ -6,73 +6,72 @@
 	background-size: 1000px 540px;
 	background-color: black;
 	background-position: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-	.specialty-container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin: auto 50px;
+	.movie-section-content {
+		width: 100%;
+		padding: 56px 150px;
 
-		.specialty-header {
-			margin: 30px 0;
-			display: flex;
-			justify-content: center;
+		.movie-section-title {
+			margin-bottom: 32px;
 			font-size: 30px;
 			font-weight: 700;
 			color: #fff;
 			text-align: center;
 		}
 
-		.specialty-body {
-			overflow: hidden;
-			padding: 0 100px;
-
-			.slick-slide {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-
-			.specialty-customize {
-				height: 288px !important;
-				width: 208px !important;
-				border-radius: 6px;
-				border: 1px solid #ccc;
-
-				.bg-image {
-					background: url("../../../assets/movie-now/1.jpg");
-					background-size: cover;
-					background-position: center;
-					background-repeat: no-repeat;
-					width: 100%;
-					height: 100%;
-					margin-bottom: 7px;
-				}
-
-				.title-movie {
-					color: #fff;
-					font-size: 15px;
-					font-weight: 600;
-					line-height: 18.75px;
-				}
-
-				.category {
-					line-height: 16px;
-					color: #e5e5e5;
-					font-size: 13px;
-					margin-top: 4px;
-				}
-
-				.rate {
-					font-size: 13px;
-					color: #e5e5e5;
-					margin-top: 4px;
-					line-height: 19px;
+		.movie-section-slide-container {
+			.movie-section-slide-content {
+				.slick-slide {
 					display: flex;
+					justify-content: center;
 					align-items: center;
+				}
 
-					.fa-star {
-						color: #fbbf24;
+				.box-slide-customize {
+					height: 272px !important;
+					width: 185.6px !important;
+					border-radius: 6px;
+					border: 1px solid #ccc;
+
+					.bg-image {
+						// background: url("../../../assets/movie-now/1.jpg");
+						// background-size: cover;
+						// background-position: center;
+						// background-repeat: no-repeat;
+						width: 100%;
+						height: 100%;
+						padding: 8px;
+						margin-bottom: 7px;
+					}
+
+					.title-movie {
+						color: #fff;
+						font-size: 15px;
+						font-weight: 600;
+						line-height: 18.75px;
+					}
+
+					.category {
+						line-height: 16px;
+						color: #e5e5e5;
+						font-size: 13px;
+						margin-top: 4px;
+					}
+
+					.rate {
+						font-size: 13px;
+						color: #e5e5e5;
+						margin-top: 4px;
+						line-height: 19px;
+						display: flex;
+						align-items: center;
+
+						.fa-star {
+							color: #fbbf24;
+						}
 					}
 				}
 			}

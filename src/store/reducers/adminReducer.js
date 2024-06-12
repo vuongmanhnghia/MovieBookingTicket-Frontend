@@ -1,12 +1,5 @@
 import actionTypes from "../actions/actionTypes";
 
-const initContentOfConfirmModal = {
-	isOpen: false,
-	messageId: "",
-	handleFunc: null,
-	dataFunc: null,
-};
-
 const initialState = {
 	isLoadingGender: false,
 	genders: [],

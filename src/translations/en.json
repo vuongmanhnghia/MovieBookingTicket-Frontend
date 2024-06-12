@@ -1,16 +1,54 @@
 {
 	"menu": {
 		"system": {
-			"header": "System",
+			"header": "Hệ thống",
 			"system-administrator": {
-				"header": "System Administrator",
-				"user-manage": "User manage",
-				"user-redux": "Manage user redux",
-				"register-package-group-or-account": "Register service package for group/account"
+				"header": "Quản trị hệ thống",
+				"user-manage": "Quản lý người sử dụng",
+				"user-redux": "Quản lý user redux",
+				"register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
 			},
 			"system-parameter": {
-				"header": "System-parameter"
+				"header": "Tham số hệ thống"
 			}
+		},
+		"admin": {
+			"manage-user": "Quản lý người dùng",
+			"client": "Khách hàng",
+			"admin": "Admin",
+			"crud": "CRUD user",
+			"redux": "CRUD Redux",
+			"manage-movie": "Quản lý phim",
+			"manage-cinema": "Quản lý rạp phim",
+			"manage-showtime": "Quản lý lịch chiếu",
+			"manage-booking": "Quản lý đặt vé"
 		}
+	},
+	"manage-user": {
+		"add": "Thêm người dùng",
+		"email": "Email",
+		"password": "Mật khẩu",
+		"role": "Vai trò",
+		"fullName": "Họ tên",
+		"phoneNumber": "Số điện thoại",
+		"address": "Địa chỉ",
+		"dateOfBirth": "Ngày sinh",
+		"gender": "Giới tính",
+		"img": "Ảnh đại diện",
+		"save": "Lưu người dùng",
+		"edit": "Lưu thay đổi"
+	},
+	"manage-movie": {
+		"add": "Thêm phim",
+		"delete": "Xóa phim",
+		"title": "Tên phim",
+		"description": "Mô tả",
+		"genre": "Thể loại",
+		"duration": "Thời lượng",
+		"releaseDate": "Ngày công chiếu",
+		"rating": "Đánh giá",
+		"director": "Đạo diễn",
+		"image": "Ảnh phim",
+		"save": "Lưu phim"
 	}
 }

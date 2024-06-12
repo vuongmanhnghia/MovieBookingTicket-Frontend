@@ -12,11 +12,13 @@ class HomeNavigation extends Component {
 							<div className="camera-logo"></div>
 						</a>
 						<div className="account-content">
-							<a href="#">Đăng nhập</a>
+							<a href="http://localhost:3000/login">Đăng nhập</a>
 						</div>
 						<span>/</span>
 						<div className="account-content">
-							<a href="#">Đăng ký</a>
+							<a href="http://localhost:3000/system/user-redux">
+								Đăng ký
+							</a>
 						</div>
 					</div>
 					<div className="nav-right-container">

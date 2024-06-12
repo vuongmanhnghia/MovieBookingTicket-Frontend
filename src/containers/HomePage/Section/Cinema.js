@@ -5,8 +5,8 @@ import "./Cinema.scss";
 class Cinema extends Component {
 	render() {
 		return (
-			<div className="section-cinema">
-				<div className="cinema-container">
+			<div className="cinema-section-container">
+				<div className="cinema-section-content">
 					<div className="mb-5 text-center md:mb-8">
 						<div className="cinema-title">Hệ thống rạp chiếu phim</div>
 						<div className="cinema-description">
@@ -44,6 +44,26 @@ class Cinema extends Component {
 								</div>
 							</div>
 						</div>
+						<div className="box-cinema">
+							<div className="logo-cinema"></div>
+							<div className="box-cinema-content">
+								<div className="box-cinema-content-title">CGV</div>
+								<div className="box-cinema-content-description">
+									Hệ thống rạp chiếu phim lớn nhất Việt Nam
+								</div>
+								<div className="box-cinema-content-rate">
+									<i className="fas fa-star"></i>
+								</div>
+								<div className="box-cinema-content-quantity">
+									<i className="fas fa-map-marker-alt"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="cinema-section-btn">
+						<a className="btn-primary medium" href="#">
+							Tìm rạp chiếu
+						</a>
 					</div>
 				</div>
 			</div>

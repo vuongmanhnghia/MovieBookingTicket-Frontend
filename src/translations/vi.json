@@ -37,5 +37,18 @@
 		"img": "Ảnh đại diện",
 		"save": "Lưu người dùng",
 		"edit": "Lưu thay đổi"
+	},
+	"manage-movie": {
+		"add": "Thêm phim",
+		"delete": "Xóa phim",
+		"title": "Tên phim",
+		"description": "Mô tả",
+		"genre": "Thể loại",
+		"duration": "Thời lượng",
+		"releaseDate": "Ngày công chiếu",
+		"rating": "Đánh giá",
+		"director": "Đạo diễn",
+		"image": "Ảnh phim",
+		"save": "Lưu phim"
 	}
 }
