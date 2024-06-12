@@ -15,7 +15,6 @@ class Specialty extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log("prevProps", prevProps.topMovies);
 		if (prevProps.topMovies !== this.props.topMovies) {
 			this.setState({
 				arrMovies: this.props.topMovies,
@@ -41,13 +40,11 @@ class Specialty extends Component {
 								{arrMovies &&
 									arrMovies.length > 0 &&
 									arrMovies.map((item, index) => {
-										let imageBase64 = "";
-										if (item.image) {
-											imageBase64 = new Buffer(
-												item.image,
-												"base64"
-											).toString("binary");
-										}
+										let imageBase64 = new Buffer(
+											item.image,
+											"base64"
+										).toString("binary");
+
 										let title = item.title;
 										let genre = item.genre;
 										let rating = item.rating;
