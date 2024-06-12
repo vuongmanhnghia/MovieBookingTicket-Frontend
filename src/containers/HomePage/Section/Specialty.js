@@ -51,14 +51,26 @@ class Specialty extends Component {
 
 										return (
 											<div className="box-slide-customize">
-												<div
-													className="bg-image"
-													style={{
-														backgroundImage: `url(${imageBase64})`,
-													}}
-												/>
-												<div className="title-movie">{title}</div>
-												<div className="category">{genre}</div>
+												<div className="box-image-movie">
+													<div
+														className="bg-image"
+														style={{
+															backgroundImage: `url(${imageBase64})`,
+														}}
+													/>
+												</div>
+												<div className="box-movie-text">
+													<div className="title-movie">
+														{title.length < 25
+															? title
+															: `${title.slice(0, 23)}...`}
+													</div>
+													<div className="category">
+														{genre.length < 25
+															? genre
+															: `${genre.slice(0, 28)}...`}
+													</div>
+												</div>
 												<div className="rate">
 													<i className="fas fa-star"></i> {rating}
 												</div>
