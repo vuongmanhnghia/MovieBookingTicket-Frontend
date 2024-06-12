@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./SlideMovie.scss";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
+import { withRouter } from "react-router";
 
 // Import css files
 
@@ -14,6 +15,10 @@ class SlideMovie extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.props.loadTopMovies();
+	}
+
 	componentDidUpdate(prevProps) {
 		if (prevProps.topMovies !== this.props.topMovies) {
 			this.setState({
@@ -22,9 +27,9 @@ class SlideMovie extends Component {
 		}
 	}
 
-	componentDidMount() {
-		this.props.loadTopMovies();
-	}
+	handleViewDetailMovie = (item) => {
+		this.props.history.push(`/detail-movie/${item.id}`);
+	};
 
 	render() {
 		let arrMovies = this.state.arrMovies;
@@ -51,7 +56,11 @@ class SlideMovie extends Component {
 
 										return (
 											<div className="box-slide-customize">
-												<div className="box-image-movie">
+												<div
+													className="box-image-movie"
+													onClick={() =>
+														this.handleViewDetailMovie(item)
+													}>
 													<div
 														className="bg-image"
 														style={{
@@ -99,4 +108,6 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SlideMovie);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(SlideMovie)
+);

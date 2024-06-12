@@ -2,6 +2,7 @@ import actionTypes from "./actionTypes";
 import {
 	getTopMoviesService,
 	createNewMovieService,
+	getAllMoviesService,
 } from "../../services/movieService";
 import { toast } from "react-toastify";
 
@@ -12,7 +13,7 @@ export const fetchTopMovies = () => {
 			if (res && res.errCode === 0) {
 				dispatch({
 					type: actionTypes.FETCH_TOP_MOVIES_SUCCESS,
-					dataMovies: res.data,
+					topMovies: res.data,
 				});
 			} else {
 				console.log("fetch top movies failed");
@@ -51,3 +52,26 @@ export const createMovieSuccess = () => ({
 export const createMovieFailed = () => ({
 	type: actionTypes.CREATE_MOVIE_FAILED,
 });
+
+export const fetchAllMovies = () => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getAllMoviesService();
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_ALL_MOVIES_SUCCESS,
+					allMovies: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_ALL_MOVIES_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch all movies errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_ALL_MOVIES_FAILED,
+			});
+		}
+	};
+};

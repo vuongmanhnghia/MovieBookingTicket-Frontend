@@ -11,15 +11,6 @@ class HomeNavigation extends Component {
 						<a href="http://localhost:3000/home">
 							<div className="camera-logo"></div>
 						</a>
-						<div className="account-content">
-							<a href="http://localhost:3000/login">Đăng nhập</a>
-						</div>
-						<span>/</span>
-						<div className="account-content">
-							<a href="http://localhost:3000/system/user-redux">
-								Đăng ký
-							</a>
-						</div>
 					</div>
 					<div className="nav-right-container">
 						<div className="nav-right-content row">

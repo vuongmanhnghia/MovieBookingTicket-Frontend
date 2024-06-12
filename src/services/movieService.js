@@ -8,4 +8,17 @@ const createNewMovieService = (data) => {
 	return axios.post("/api/create-new-movie", data);
 };
 
-export { getTopMoviesService, createNewMovieService };
+const getAllMoviesService = () => {
+	return axios.get("/api/get-all-movies");
+};
+
+const getDetailMovieService = (id) => {
+	return axios.get(`/api/get-all-movies?id=${id}`);
+};
+
+export {
+	getTopMoviesService,
+	createNewMovieService,
+	getDetailMovieService,
+	getAllMoviesService,
+};
