@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomeNavigation from "./HomeNavigation";
-import Specialty from "./Section/Specialty";
+import SlideMovie from "./Section/SlideMovie";
 import Cinema from "./Section/Cinema";
 import "./HomePage.scss";
 import HomeBanner from "./Section/HomeBanner";
@@ -22,7 +22,7 @@ class HomePage extends Component {
 			<div>
 				<HomeNavigation />
 				<HomeBanner />
-				<Specialty settings={settings} />
+				<SlideMovie settings={settings} />
 				<Cinema />
 				<Footer />
 			</div>

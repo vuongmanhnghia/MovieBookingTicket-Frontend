@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./Specialty.scss";
+import "./SlideMovie.scss";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
 
 // Import css files
 
-class Specialty extends Component {
+class SlideMovie extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -99,4 +99,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(SlideMovie);
