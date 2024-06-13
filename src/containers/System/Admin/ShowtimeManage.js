@@ -69,17 +69,14 @@ class MovieManage extends Component {
 
 	handleSelectedMovie = (selectedMovie) => {
 		this.setState({ selectedMovie });
-		console.log(`Option selected:`, selectedMovie);
 	};
 
 	handleSelectedCinema = (selectedCinema) => {
 		this.setState({ selectedCinema });
-		console.log(`Option selected:`, selectedCinema);
 	};
 
 	handleSelectedScreen = (selectedScreen) => {
 		this.setState({ selectedScreen });
-		console.log(`Option selected:`, selectedScreen);
 	};
 
 	onChangeInput = (event, id) => {
