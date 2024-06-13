@@ -50,5 +50,17 @@
 		"director": "Đạo diễn",
 		"image": "Ảnh phim",
 		"save": "Lưu phim"
+	},
+	"manage-showtime": {
+		"add": "Thêm lịch chiếu",
+		"delete": "Xóa lịch chiếu",
+		"select-movie": "Chọn phim",
+		"select-cinema": "Chọn rạp phim",
+		"select-screen": "Chọn phòng chiếu",
+		"select-start-time": "Chọn thời gian bắt đầu",
+		"cinema": "Rạp",
+		"startTime": "Thời gian bắt đầu",
+		"endTime": "Thời gian kết thúc",
+		"save": "Lưu lịch chiếu"
 	}
 }

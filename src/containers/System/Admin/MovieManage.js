@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import "./MovieManage.scss";
-import { CRUD_ACTIONS, CommonUtils } from "../../../utils";
+import { CommonUtils } from "../../../utils";
 
 class MovieManage extends Component {
 	constructor(props) {

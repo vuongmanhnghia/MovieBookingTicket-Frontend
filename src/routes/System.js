@@ -5,6 +5,7 @@ import UserManage from "../containers/System/UserManage";
 import MovieManage from "../containers/System/Admin/MovieManage";
 import UserRedux from "../containers/System/Admin/UserRedux";
 import Header from "../containers/Header/Header";
+import ShowtimeManage from "../containers/System/Admin/ShowtimeManage";
 
 class System extends Component {
 	render() {
@@ -20,6 +21,10 @@ class System extends Component {
 							<Route
 								path="/system/manage-movie"
 								component={MovieManage}
+							/>
+							<Route
+								path="/system/manage-showtime"
+								component={ShowtimeManage}
 							/>
 							<Route
 								component={() => {

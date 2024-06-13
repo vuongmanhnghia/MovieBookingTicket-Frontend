@@ -39,6 +39,10 @@ export const adminMenu = [
 				name: "menu.admin.manage-movie",
 				link: "/system/manage-movie",
 			},
+			{
+				name: "menu.admin.manage-showtime",
+				link: "/system/manage-showtime",
+			},
 		],
 	},
 	{
