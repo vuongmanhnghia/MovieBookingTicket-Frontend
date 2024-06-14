@@ -1,17 +1,19 @@
 import actionTypes from "../actions/actionTypes";
 
-const initialState = {};
+const initialState = {
+	allScreens: [],
+};
 
 const screenReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.FETCH_ALL_SCREENS_SUCCESS:
-			state.allMovies = action.allMovies;
+			state.allScreens = action.allScreens;
 			return {
 				...state,
 			};
 
 		case actionTypes.FETCH_ALL_SCREENS_FAILED:
-			state.allMovies = [];
+			state.allScreens = [];
 			return {
 				...state,
 			};

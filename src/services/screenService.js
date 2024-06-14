@@ -4,8 +4,8 @@ const createNewScreenService = (data) => {
 	return axios.post("/api/create-new-screen", data);
 };
 
-const getAllScreensService = () => {
-	return axios.get("/api/get-all-screens");
+const getAllScreensService = (cinemaId) => {
+	return axios.get(`/api/get-detail-screen?cinemaId=${cinemaId}`);
 };
 
 export { createNewScreenService, getAllScreensService };

@@ -33,10 +33,10 @@ import {
 // 	type: actionTypes.CREATE_SCREEN_FAILED,
 // });
 
-export const fetchAllScreens = () => {
+export const fetchAllScreens = (cinemaId) => {
 	return async (dispatch, getState) => {
 		try {
-			let response = await getAllScreensService();
+			let response = await getAllScreensService(cinemaId);
 			if (response && response.errCode === 0) {
 				dispatch({
 					type: actionTypes.FETCH_ALL_SCREENS_SUCCESS,

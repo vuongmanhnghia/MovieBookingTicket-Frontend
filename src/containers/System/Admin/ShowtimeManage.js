@@ -16,12 +16,14 @@ class MovieManage extends Component {
 			startTime: "",
 			listMovies: [],
 			listCinemas: [],
+			listScreens: [],
 		};
 	}
 
 	async componentDidMount() {
 		this.props.fetchAllMovies();
 		this.props.fetchAllCinemas();
+		// this.props.fetchAllScreens("1");
 	}
 
 	buildDataSelectMovie = (inputData) => {
@@ -52,6 +54,20 @@ class MovieManage extends Component {
 		return result;
 	};
 
+	buildDataSelectScreen = (inputData) => {
+		let result = [];
+		if (inputData && inputData.length > 0) {
+			inputData.map((item, index) => {
+				let object = {};
+				object.label = item.name;
+				object.value = item.id;
+				result.push(object);
+				return result;
+			});
+		}
+		return result;
+	};
+
 	componentDidUpdate(prevProps) {
 		if (prevProps.allMovies !== this.props.allMovies) {
 			let data = this.buildDataSelectMovie(this.props.allMovies);
@@ -65,6 +81,12 @@ class MovieManage extends Component {
 				listCinemas: data,
 			});
 		}
+		if (prevProps.allScreens !== this.props.allScreens) {
+			let data = this.buildDataSelectScreen(this.props.allScreens);
+			this.setState({
+				listScreens: data,
+			});
+		}
 	}
 
 	handleSelectedMovie = (selectedMovie) => {
@@ -73,6 +95,8 @@ class MovieManage extends Component {
 
 	handleSelectedCinema = (selectedCinema) => {
 		this.setState({ selectedCinema });
+		let cinemaId = selectedCinema.value;
+		this.props.fetchAllScreens(cinemaId);
 	};
 
 	handleSelectedScreen = (selectedScreen) => {
@@ -110,7 +134,6 @@ class MovieManage extends Component {
 	};
 
 	render() {
-		console.log(this.state);
 		let { startTime } = this.state;
 		return (
 			<div className="showtime-manage-container">
@@ -150,7 +173,7 @@ class MovieManage extends Component {
 									<Select
 										value={this.state.selectedScreen}
 										onChange={this.handleSelectedScreen}
-										options={this.state.listCinemas}
+										options={this.state.listScreens}
 									/>
 								</div>
 
@@ -193,6 +216,7 @@ const mapStateToProps = (state) => {
 	return {
 		allMovies: state.movie.allMovies,
 		allCinemas: state.cinema.allCinemas,
+		allScreens: state.screen.allScreens,
 	};
 };
 
@@ -200,6 +224,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchAllMovies: () => dispatch(actions.fetchAllMovies()),
 		fetchAllCinemas: () => dispatch(actions.fetchAllCinemas()),
+		fetchAllScreens: (cinemaId) =>
+			dispatch(actions.fetchAllScreens(cinemaId)),
 	};
 };
 
