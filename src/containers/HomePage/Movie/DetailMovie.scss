@@ -34,7 +34,7 @@
 				font-size: 36px;
 				color: white;
 				font-weight: bold;
-				margin-top: 8px;
+				// margin-top: 8px;
 			}
 
 			.box-releaseYear-duration {
@@ -59,6 +59,13 @@
 					inline-size: none;
 					padding-top: 5px;
 				}
+			}
+
+			.movie-detail-director {
+				font-size: 16px;
+				color: #aaa;
+				padding-bottom: 4px;
+				font-style: italic;
 			}
 
 			.description-title {

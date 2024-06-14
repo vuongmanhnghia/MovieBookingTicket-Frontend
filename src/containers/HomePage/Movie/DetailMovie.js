@@ -65,10 +65,11 @@ class DetailMovie extends Component {
 									<i class="fas fa-star"></i>
 									{rating}
 								</div>
+								<div className="movie-detail-director">{director}</div>
 								<div className="description-title">Nội dung</div>
 								<p className="movie-detail-description">
-									{newDescription.length > 600
-										? `${newDescription.substring(0, 600)}...`
+									{newDescription.length > 500
+										? `${newDescription.substring(0, 500)}...`
 										: newDescription}
 								</p>
 								<div className="releaseDate-genre">

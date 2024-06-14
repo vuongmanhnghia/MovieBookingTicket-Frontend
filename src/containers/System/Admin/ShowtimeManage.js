@@ -103,7 +103,7 @@ class MovieManage extends Component {
 		this.setState({ selectedScreen });
 	};
 
-	onChangeInput = (event, id) => {
+	onChangeInputDate = (event, id) => {
 		let copyState = { ...this.state };
 		copyState[id] = event.target.value;
 		this.setState({
@@ -111,9 +111,6 @@ class MovieManage extends Component {
 		});
 	};
 
-	handleSaveShowtime = () => {
-		console.log(this.state);
-	};
 	checkValidateInput = () => {
 		let isValid = true;
 		let arrCheck = [
@@ -133,7 +130,20 @@ class MovieManage extends Component {
 		return isValid;
 	};
 
+	handleSaveShowtime = () => {
+		let isValid = this.checkValidateInput();
+		if (isValid === false) return;
+
+		this.props.createNewScreen({
+			movieId: this.state.selectedMovie.value,
+			cinemaId: this.state.selectedCinema.value,
+			screenId: this.state.selectedScreen.value,
+			startTime: this.state.startTime,
+		});
+	};
+
 	render() {
+		console.log("state", this.state);
 		let { startTime } = this.state;
 		return (
 			<div className="showtime-manage-container">
@@ -186,7 +196,7 @@ class MovieManage extends Component {
 										className="form-control"
 										value={startTime}
 										onChange={(event) => {
-											this.onChangeInput(event, "startTime");
+											this.onChangeInputDate(event, "startTime");
 										}}
 									/>
 								</div>
