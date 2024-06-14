@@ -177,3 +177,26 @@ export const editUserSuccess = () => ({
 export const editUserFailed = () => ({
 	type: actionTypes.EDIT_USER_FAILED,
 });
+
+export const fetchAllTimes = () => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getAllCodeService("TIME");
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_ALLCODE_TIME_SUCCESS,
+					dataTime: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_ALLCODE_TIME_FAILED,
+				});
+			}
+		} catch (e) {
+			dispatch(fetchAllUsersFailed());
+			dispatch({
+				type: actionTypes.FETCH_ALLCODE_TIME_FAILED,
+			});
+		}
+	};
+};

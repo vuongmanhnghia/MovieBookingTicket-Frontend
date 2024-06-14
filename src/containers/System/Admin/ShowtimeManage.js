@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import "./ShowtimeManage.scss";
 import { FormattedMessage } from "react-intl";
+import { dateFormat } from "../../../utils";
 import Select from "react-select";
+import DatePicker from "../../../components/Input/DatePicker";
+import moment from "moment";
+import { toast } from "react-toastify";
 
 class MovieManage extends Component {
 	constructor(props) {
@@ -13,7 +17,8 @@ class MovieManage extends Component {
 			selectedMovie: "",
 			selectedCinema: "",
 			selectedScreen: "",
-			startTime: "",
+			startDate: new Date(),
+			arrayTimes: [],
 			listMovies: [],
 			listCinemas: [],
 			listScreens: [],
@@ -23,7 +28,7 @@ class MovieManage extends Component {
 	async componentDidMount() {
 		this.props.fetchAllMovies();
 		this.props.fetchAllCinemas();
-		// this.props.fetchAllScreens("1");
+		this.props.fetchAllTimes();
 	}
 
 	buildDataSelectMovie = (inputData) => {
@@ -87,6 +92,16 @@ class MovieManage extends Component {
 				listScreens: data,
 			});
 		}
+
+		if (prevProps.allTimes !== this.props.allTimes) {
+			let data = this.props.allTimes;
+			if (data && data.length > 0) {
+				data = data.map((item) => ({ ...item, isSelected: false }));
+			}
+			this.setState({
+				arrayTimes: data,
+			});
+		}
 	}
 
 	handleSelectedMovie = (selectedMovie) => {
@@ -103,47 +118,82 @@ class MovieManage extends Component {
 		this.setState({ selectedScreen });
 	};
 
-	onChangeInputDate = (event, id) => {
-		let copyState = { ...this.state };
-		copyState[id] = event.target.value;
+	onChangeInputDate = (date) => {
 		this.setState({
-			...copyState,
+			startDate: date[0],
 		});
 	};
 
+	// save showtime
 	checkValidateInput = () => {
 		let isValid = true;
 		let arrCheck = [
 			"selectedMovie",
 			"selectedCinema",
 			"selectedScreen",
-			"startTime",
+			"startDate",
 		];
 		for (let i = 0; i < arrCheck.length; i++) {
 			if (this.state[arrCheck[i]] === "") {
 				isValid = false;
-				alert("Vui lòng nhập " + arrCheck[i] + " của bạn");
+				toast.error("Vui lòng nhập " + arrCheck[i] + " của bạn");
 				break;
 			}
 		}
 
 		return isValid;
 	};
-
 	handleSaveShowtime = () => {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
+		let result = [];
+		let {
+			arrayTimes,
+			selectedCinema,
+			selectedMovie,
+			selectedScreen,
+			startDate,
+		} = this.state;
 
-		this.props.createNewShowtime({
-			movieId: this.state.selectedMovie.value,
-			cinemaId: this.state.selectedCinema.value,
-			screenId: this.state.selectedScreen.value,
-			startTime: this.state.startTime,
-		});
+		let formatDate = moment(startDate).format(dateFormat.SEND_TO_SERVER);
+
+		if (arrayTimes && arrayTimes.length > 0) {
+			let selectedTime = arrayTimes.filter(
+				(item) => item.isSelected === true
+			);
+			console.log(selectedTime);
+			if (selectedTime && selectedTime.length > 0) {
+				let data = selectedTime.map((item) => {
+					let object = {};
+					object.movieId = selectedMovie.label;
+					object.cinemaId = selectedCinema.label;
+					object.screenId = selectedScreen.label;
+					object.startDate = formatDate;
+					object.startTime = item.value;
+					result.push(object);
+				});
+				// this.props.createNewShowtime(data);
+			}
+			console.log("result", result);
+		}
+	};
+
+	handleClickButtonTime = (time) => {
+		let { arrayTimes } = this.state;
+		if (arrayTimes && arrayTimes.length > 0) {
+			arrayTimes = arrayTimes.map((item) => {
+				if (item.id === time.id) item.isSelected = !item.isSelected;
+				return item;
+			});
+
+			this.setState({
+				arrayTimes: arrayTimes,
+			});
+		}
 	};
 
 	render() {
-		let { startTime } = this.state;
+		let { arrayTimes } = this.state;
 		return (
 			<div className="showtime-manage-container">
 				<div className="showtime-manage-content">
@@ -185,19 +235,39 @@ class MovieManage extends Component {
 										options={this.state.listScreens}
 									/>
 								</div>
-
 								<div className="form-group col-6">
 									<label>
-										<FormattedMessage id="manage-showtime.select-start-time" />
+										<FormattedMessage id="manage-showtime.start-date" />
 									</label>
-									<input
-										type="datetime-local"
+									<DatePicker
 										className="form-control"
-										value={startTime}
-										onChange={(event) => {
-											this.onChangeInputDate(event, "startTime");
-										}}
+										onChange={this.onChangeInputDate}
+										value={this.state.startDate}
+										minDate={new Date()}
 									/>
+								</div>
+								<div className="col-12 title-pick-time">
+									<FormattedMessage id="manage-showtime.start-time" />
+								</div>
+								<div className="col-12 pick-time-container">
+									{arrayTimes &&
+										arrayTimes.length > 0 &&
+										arrayTimes.map((item, index) => {
+											return (
+												<button
+													onClick={() => {
+														this.handleClickButtonTime(item);
+													}}
+													className={
+														item.isSelected === true
+															? "btn btn-time active"
+															: "btn btn-time"
+													}
+													key={index}>
+													{item.value}
+												</button>
+											);
+										})}
 								</div>
 								<div className="form-group col-12">
 									<button
@@ -211,7 +281,6 @@ class MovieManage extends Component {
 										<FormattedMessage id="manage-showtime.save" />
 									</button>
 								</div>
-								<div className="col-12 mb-5"></div>
 							</div>
 						</div>
 					</div>
@@ -226,6 +295,7 @@ const mapStateToProps = (state) => {
 		allMovies: state.movie.allMovies,
 		allCinemas: state.cinema.allCinemas,
 		allScreens: state.screen.allScreens,
+		allTimes: state.admin.allTimes,
 	};
 };
 
@@ -236,6 +306,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchAllScreens: (cinemaId) =>
 			dispatch(actions.fetchAllScreens(cinemaId)),
 		createNewShowtime: (data) => dispatch(actions.createNewShowtime(data)),
+		fetchAllTimes: () => dispatch(actions.fetchAllTimes()),
 	};
 };
 
