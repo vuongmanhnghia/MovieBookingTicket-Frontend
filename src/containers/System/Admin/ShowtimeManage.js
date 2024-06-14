@@ -134,7 +134,7 @@ class MovieManage extends Component {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
 
-		this.props.createNewScreen({
+		this.props.createNewShowtime({
 			movieId: this.state.selectedMovie.value,
 			cinemaId: this.state.selectedCinema.value,
 			screenId: this.state.selectedScreen.value,
@@ -236,6 +236,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchAllCinemas: () => dispatch(actions.fetchAllCinemas()),
 		fetchAllScreens: (cinemaId) =>
 			dispatch(actions.fetchAllScreens(cinemaId)),
+		createNewShowtime: (data) => dispatch(actions.createNewShowtime(data)),
 	};
 };
 

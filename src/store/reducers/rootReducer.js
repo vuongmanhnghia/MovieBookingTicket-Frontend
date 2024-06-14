@@ -7,6 +7,7 @@ import adminReducer from "./adminReducer";
 import movieReducer from "./movieReducer";
 import cinemaReducer from "./cinemaReducer";
 import screenReducer from "./screenReducer";
+import showtimeReducer from "./showtimeReducer";
 
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
@@ -32,4 +33,5 @@ export default (history) =>
 		movie: movieReducer,
 		cinema: cinemaReducer,
 		screen: screenReducer,
+		showtime: showtimeReducer,
 	});
