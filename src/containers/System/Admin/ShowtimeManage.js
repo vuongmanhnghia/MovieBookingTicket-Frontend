@@ -143,7 +143,6 @@ class MovieManage extends Component {
 	};
 
 	render() {
-		console.log("state", this.state);
 		let { startTime } = this.state;
 		return (
 			<div className="showtime-manage-container">
