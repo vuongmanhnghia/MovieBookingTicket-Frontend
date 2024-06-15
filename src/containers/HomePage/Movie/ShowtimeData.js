@@ -97,8 +97,10 @@ class ShowtimeData extends Component {
 	};
 
 	handleViewDetailMovie = async (item) => {
-		this.props.history.push(`/detail-movie/${item.id}`);
+		await this.props.history.push(`/cinema/detail-movie/${item.id}`);
+		await this.props.history.push(`/detail-movie/${item.id}`);
 		await this.props.fetchDetailMovie(item.id);
+
 		console.log(this.props);
 	};
 
