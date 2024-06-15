@@ -1,8 +1,64 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Cinema.scss";
+import { fetchAllCinemas } from "../../../store/actions";
 
 class Cinema extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			arrCinemas: [],
+			arrTradeMarks: [],
+			arrQuantity: [],
+			arrRating: [],
+			uniqueTradeMarks: [],
+		};
+	}
+
+	async componentDidMount() {
+		await this.props.fetchAllCinemas();
+		this.setState({
+			arrCinemas: this.props.allCinems,
+		});
+		// mảng không trùng lặp thương hiệu các rạp chiếu phim
+		let uniqueTradeMarks = this.state.arrCinemas.filter(
+			(value, index, self) =>
+				self.findIndex((t) => t.tradeMark === value.tradeMark) === index
+		);
+		// mảng thương hiệu các rạp chiếu phim
+		let arrTradeMarksOfCinemas = this.state.arrCinemas.map(
+			(item) => item.tradeMark
+		);
+		let arrTradeMarks = arrTradeMarksOfCinemas.filter(
+			(value, index, self) => self.indexOf(value) === index
+		);
+		// mảng số lượng các rạp chiếu phim theo thương hiệu
+		let arrQuantityCinemas = [];
+		arrTradeMarks.forEach((item) => {
+			let quantity = arrTradeMarksOfCinemas.filter(
+				(value) => value === item
+			).length;
+			arrQuantityCinemas.push(quantity);
+		});
+
+		// mảng tính trung bình rating của các rạp chiếu phim theo thương hiệu
+		let arrRatingCinemas = [];
+		arrTradeMarks.forEach((item) => {
+			let arrRating = this.state.arrCinemas
+				.filter((value) => value.tradeMark === item)
+				.map((value) => value.rating);
+			let rating = arrRating.reduce((a, b) => a + b, 0) / arrRating.length;
+			arrRatingCinemas.push(rating);
+		});
+
+		this.setState({
+			arrTradeMarks: arrTradeMarks,
+			arrQuantity: arrQuantityCinemas,
+			arrRating: arrRatingCinemas,
+			uniqueTradeMarks: uniqueTradeMarks,
+		});
+	}
+
 	render() {
 		return (
 			<div className="cinema-section-container">
@@ -14,51 +70,39 @@ class Cinema extends Component {
 						</div>
 					</div>
 					<div className="cinema-content">
-						<div className="box-cinema">
-							<div className="logo-cinema"></div>
-							<div className="box-cinema-content">
-								<div className="box-cinema-content-title">CGV</div>
-								<div className="box-cinema-content-description">
-									Hệ thống rạp chiếu phim lớn nhất Việt Nam
-								</div>
-								<div className="box-cinema-content-rate">
-									<i className="fas fa-star"></i>
-								</div>
-								<div className="box-cinema-content-quantity">
-									<i className="fas fa-map-marker-alt"></i>
-								</div>
-							</div>
-						</div>
-						<div className="box-cinema">
-							<div className="logo-cinema"></div>
-							<div className="box-cinema-content">
-								<div className="box-cinema-content-title">CGV</div>
-								<div className="box-cinema-content-description">
-									Hệ thống rạp chiếu phim lớn nhất Việt Nam
-								</div>
-								<div className="box-cinema-content-rate">
-									<i className="fas fa-star"></i>
-								</div>
-								<div className="box-cinema-content-quantity">
-									<i className="fas fa-map-marker-alt"></i>
-								</div>
-							</div>
-						</div>
-						<div className="box-cinema">
-							<div className="logo-cinema"></div>
-							<div className="box-cinema-content">
-								<div className="box-cinema-content-title">CGV</div>
-								<div className="box-cinema-content-description">
-									Hệ thống rạp chiếu phim lớn nhất Việt Nam
-								</div>
-								<div className="box-cinema-content-rate">
-									<i className="fas fa-star"></i>
-								</div>
-								<div className="box-cinema-content-quantity">
-									<i className="fas fa-map-marker-alt"></i>
-								</div>
-							</div>
-						</div>
+						{this.state.uniqueTradeMarks &&
+							this.state.uniqueTradeMarks.length > 0 &&
+							this.state.uniqueTradeMarks.map((item, index) => {
+								let imageBase64 = new Buffer(
+									item.image,
+									"base64"
+								).toString("binary");
+
+								return (
+									<div className="box-cinema">
+										<div
+											className="logo-cinema"
+											style={{
+												backgroundImage: `url(${imageBase64})`,
+											}}></div>
+										<div className="box-cinema-content">
+											<div className="box-cinema-content-title">
+												{this.state.arrTradeMarks[index]}
+											</div>
+											<div className="dash"></div>
+											<div className="box-cinema-content-rate">
+												<i className="fas fa-star"></i>
+												{this.state.arrRating[index]}
+											</div>
+											<div className="dash"></div>
+											<div className="box-cinema-content-quantity">
+												<i className="fas fa-map-marker-alt"></i>{" "}
+												{this.state.arrQuantity[index]} rạp
+											</div>
+										</div>
+									</div>
+								);
+							})}
 					</div>
 					<div className="cinema-section-btn">
 						<a className="btn-primary medium" href="#">
@@ -74,11 +118,14 @@ class Cinema extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		allCinems: state.cinema.allCinemas,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchAllCinemas: () => dispatch(fetchAllCinemas()),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cinema);

@@ -6,7 +6,6 @@
 	.cinema-section-content {
 		background: #fafafa;
 		padding: 56px 150px;
-		height: 1060px;
 		width: 100%;
 		line-height: 24px;
 
@@ -28,18 +27,16 @@
 		}
 
 		.cinema-content {
-			display: grid;
-			gap: 16px;
-			grid-template-columns: 536px 536px;
-			grid-template-rows: 168.455px 129.455px 150.955px 129.455px 129.455px;
-			.md\:grid-cols-2 {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-			}
+			display: flex;
+			justify-content: space-around;
+			align-items: self-start;
+			flex-wrap: wrap;
 
 			.box-cinema {
-				width: 536px;
-				height: 168px;
+				width: 500px;
+				height: 130px;
 				align-items: center;
+				justify-content: center;
 				background-color: #fff;
 				border-color: #d4d4d4;
 				border-radius: 8px;
@@ -47,42 +44,49 @@
 				border-width: 0.727273px;
 				box-shadow: #0000 0px 0px 0px 0px;
 				display: flex;
-				line-height: 24px;
-				padding: 12px 16px;
+				margin-bottom: 50px;
+				cursor: pointer;
+
+				&:hover {
+					box-shadow: 0px 0px 10px 0px #d4d4d4;
+				}
 
 				.logo-cinema {
-					background: url(../../../assets/cinema-logo/cgv.jpg);
 					background-size: cover;
 					border-radius: 8px;
-					height: 80px;
-					width: 80px;
+					height: 120px;
+					width: 120px;
 				}
 
 				.box-cinema-content {
-					padding: 0px 0px 0px 16px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					padding: 20px;
+					width: 300px;
 
-					.box-cinema-content-title {
-						color: #eb2f96;
-						font-size: 18px;
-						font-weight: 700;
-						line-height: 28px;
+					.dash {
+						border-color: #d4d4d4;
+						border-style: solid;
+						border-width: 0.727273px;
+						height: 30px;
+						margin: 0 10px;
 					}
 
-					.box-cinema-content-description {
-						color: #a3a3a3;
-						display: -webkit-box;
-						font-size: 14px;
-						line-height: 20px;
+					.box-cinema-content-title {
+						// width: 100%;
+						color: #eb2f96;
+						font-size: 20px;
+						font-weight: 700;
 					}
 
 					.box-cinema-content-rate {
 						align-items: center;
 						display: flex;
-						line-height: 24px;
-						margin: 4px 0px 0px;
 
 						.fa-star {
 							color: #fcd34d;
+							margin-right: 5px;
 						}
 					}
 
@@ -91,14 +95,18 @@
 						color: #17171780;
 						display: flex;
 						font-size: 14px;
-						line-height: 20px;
-						margin: 4px 0px 0px;
+
+						.fa-map-marker-alt {
+							margin-right: 5px;
+						}
 					}
 				}
 			}
 		}
 
 		.cinema-section-btn {
+			padding: 70px;
+
 			display: flex;
 			justify-content: center;
 			.btn-primary.medium {

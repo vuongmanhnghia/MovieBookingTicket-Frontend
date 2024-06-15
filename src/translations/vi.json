@@ -49,7 +49,8 @@
 		"save": "Lưu rạp phim",
 		"rating": "Đánh giá",
 		"location": "Vị trí",
-		"image": "Ảnh rạp phim"
+		"image": "Ảnh rạp phim",
+		"tradeMark": "Thương hiệu"
 	},
 
 	"manage-movie": {

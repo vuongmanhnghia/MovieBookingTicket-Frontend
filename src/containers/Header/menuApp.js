@@ -37,7 +37,7 @@ export const adminMenu = [
 		menus: [
 			{
 				name: "menu.admin.manage-movie",
-				link: "/system/manage-cinema",
+				link: "/system/manage-movie",
 			},
 			{
 				name: "menu.admin.manage-showtime",

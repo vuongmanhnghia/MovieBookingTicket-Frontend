@@ -8,6 +8,7 @@ class CinemaManage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			tradeMark: "",
 			name: "",
 			location: "",
 			rating: "",
@@ -22,6 +23,7 @@ class CinemaManage extends Component {
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		if (prevProps.users !== this.props.users) {
 			this.setState({
+				tradeMark: "",
 				name: "",
 				location: "",
 				rating: "",
@@ -56,7 +58,8 @@ class CinemaManage extends Component {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
 
-		this.props.createNewMovie({
+		this.props.createNewCinema({
+			tradeMark: this.state.tradeMark,
 			name: this.state.name,
 			location: this.state.location,
 			rating: this.state.rating,
@@ -65,7 +68,7 @@ class CinemaManage extends Component {
 	};
 	checkValidateInput = () => {
 		let isValid = true;
-		let arrCheck = ["name", "location", "rating", "image"];
+		let arrCheck = ["tradeMark", "name", "location", "rating", "image"];
 		for (let i = 0; i < arrCheck.length; i++) {
 			if (this.state[arrCheck[i]] === "") {
 				isValid = false;
@@ -78,7 +81,7 @@ class CinemaManage extends Component {
 	};
 
 	render() {
-		let { name, location, rating } = this.state;
+		let { tradeMark, name, location, rating } = this.state;
 		return (
 			<div className="user-redux-container">
 				<div className="title">Cinema - Manage</div>
@@ -88,6 +91,20 @@ class CinemaManage extends Component {
 							<div className="col-12"></div>
 							<div className="add-user col-12 my-3 ">
 								<FormattedMessage id="manage-cinema.add" />
+							</div>
+							<div className="form-group col-6">
+								<label>
+									<FormattedMessage id="manage-cinema.tradeMark" />
+								</label>
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Trade Mark"
+									value={tradeMark}
+									onChange={(event) => {
+										this.onChangeInput(event, "tradeMark");
+									}}
+								/>
 							</div>
 							<div className="form-group col-6">
 								<label>
@@ -117,7 +134,7 @@ class CinemaManage extends Component {
 									}}
 								/>
 							</div>
-							<div className="form-group col-12">
+							<div className="form-group col-6">
 								<label>
 									<FormattedMessage id="manage-cinema.location" />
 								</label>
