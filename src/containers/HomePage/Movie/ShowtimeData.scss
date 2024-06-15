@@ -20,6 +20,7 @@
 		align-items: center;
 		margin-top: 20px;
 		border-radius: 6px;
+		transition: all 0.3s;
 
 		box-shadow: 0px 0px 10px #0000008c;
 
@@ -105,6 +106,7 @@
 			align-items: center;
 			gap: 10px;
 			border: 1px solid #ccc;
+			transition: all 0.3s;
 
 			.box-showtime {
 				width: 120px;
@@ -127,6 +129,67 @@
 				background: #d82d8b;
 				border: 1px solid #d82d8b;
 				color: white;
+			}
+		}
+	}
+}
+
+.more-movie-container {
+	padding: 0 30px;
+
+	.more-movie-title {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		font-size: 20px;
+		font-weight: 700;
+	}
+	.more-movie-content {
+		.divider {
+			width: 90%;
+			height: 1px;
+			background: #ccc;
+			margin: 10px 0;
+		}
+		.more-box-movie {
+			padding: 10px 0;
+			display: flex;
+			.more-box-movie-image {
+				margin-right: 15px;
+				width: 64px;
+				height: 91.5px;
+				background-size: contain;
+				background-position: center;
+				border-radius: 4px;
+				transition: all 0.3s;
+				cursor: pointer;
+				box-shadow: 0px 0px 5px #0000008c;
+			}
+
+			.more-box-movie-content {
+				.more-box-movie-title {
+					font-size: 15px;
+					font-weight: 600;
+					cursor: pointer;
+				}
+
+				.more-box-movie-genre {
+					font-size: 13px;
+					font-weight: 400;
+					color: #666;
+				}
+
+				.more-box-movie-rating {
+					font-size: 13px;
+					font-weight: 400;
+					color: #666;
+
+					.fa-star {
+						color: #f1c40f;
+						font-size: 12px;
+						margin-right: 5px;
+					}
+				}
 			}
 		}
 	}

@@ -9,13 +9,17 @@ class ShowtimeData extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showtimeDate: new Date().getDate(),
+			showtimeDate: "",
 			showtimeCinema: "",
 			showtimeData: [],
 		};
 	}
 
 	componentDidMount() {
+		this.setState({
+			showtimeDate: new Date().getDate(),
+		});
+		this.props.fetchAllMovies();
 		this.handleView();
 	}
 
@@ -92,7 +96,12 @@ class ShowtimeData extends Component {
 		return result;
 	};
 
+	handleViewDetailMovie = (item) => {
+		this.props.history.push(`/detail-movie/${item.id}`);
+	};
+
 	render() {
+		let allMovies = this.props.allMovies;
 		let maxDate = [1, 2, 3, 4, 5, 6, 7];
 		let showtimeData = this.props.showtimeData;
 		// let releaseTime = this.props.showtimeData.;
@@ -147,6 +156,50 @@ class ShowtimeData extends Component {
 						</div>
 					</div>
 				</div>
+				<div className="more-movie-container col-4">
+					<div className="more-movie-title">Phim đang chiếu</div>
+					<div className="more-movie-content">
+						{allMovies &&
+							allMovies.length > 0 &&
+							allMovies.map((item) => {
+								let imageBase64 = new Buffer(
+									item.image,
+									"base64"
+								).toString("binary");
+								return (
+									<>
+										<div className="divider"></div>
+										<div className="more-box-movie">
+											<div
+												className="more-box-movie-image"
+												style={{
+													backgroundImage: `url(${imageBase64})`,
+												}}
+												onClick={() =>
+													this.handleViewDetailMovie(item)
+												}></div>
+											<div className="more-box-movie-content">
+												<div className="more-box-movie-title">
+													{item.title.length < 40
+														? item.title
+														: `${item.title.slice(0, 37)}...`}
+												</div>
+												<div className="more-box-movie-genre">
+													{item.genre.length < 25
+														? item.genre
+														: `${item.genre.slice(0, 28)}...`}
+												</div>
+												<div className="more-box-movie-rating">
+													<i class="fas fa-star"></i>
+													{item.rating}
+												</div>
+											</div>
+										</div>
+									</>
+								);
+							})}
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -155,11 +208,15 @@ class ShowtimeData extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		allMovies: state.movie.allMovies,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchAllMovies: () => dispatch(actions.fetchAllMovies()),
+		// fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
+	};
 };
 
 export default withRouter(
