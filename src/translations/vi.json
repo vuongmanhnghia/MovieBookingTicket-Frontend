@@ -21,7 +21,8 @@
 			"manage-movie": "Quản lý phim",
 			"manage-cinema": "Quản lý rạp phim",
 			"manage-showtime": "Quản lý lịch chiếu",
-			"manage-booking": "Quản lý đặt vé"
+			"manage-booking": "Quản lý đặt vé",
+			"manage-room": "Quản lý phòng chiếu"
 		}
 	},
 	"manage-user": {
@@ -38,6 +39,19 @@
 		"save": "Lưu người dùng",
 		"edit": "Lưu thay đổi"
 	},
+
+	"manage-cinema": {
+		"add": "Thêm rạp phim",
+		"delete": "Xóa rạp phim",
+		"name": "Tên rạp phim",
+		"address": "Địa chỉ",
+		"city": "Thành phố",
+		"save": "Lưu rạp phim",
+		"rating": "Đánh giá",
+		"location": "Vị trí",
+		"image": "Ảnh rạp phim"
+	},
+
 	"manage-movie": {
 		"add": "Thêm phim",
 		"delete": "Xóa phim",

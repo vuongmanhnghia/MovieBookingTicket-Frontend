@@ -37,7 +37,7 @@ export const adminMenu = [
 		menus: [
 			{
 				name: "menu.admin.manage-movie",
-				link: "/system/manage-movie",
+				link: "/system/manage-cinema",
 			},
 			{
 				name: "menu.admin.manage-showtime",
@@ -48,11 +48,20 @@ export const adminMenu = [
 	{
 		// Quản lý rạp phim
 		name: "menu.admin.manage-cinema",
-		link: "/system/manage-cinema",
+		menus: [
+			{
+				name: "menu.admin.manage-cinema",
+				link: "/system/manage-cinema",
+			},
+			{
+				name: "menu.admin.manage-room",
+				link: "/system/manage-room",
+			},
+		],
 	},
 	{
 		// Quản lý đặt vé
 		name: "menu.admin.manage-booking",
-		link: "/system/manage-booking",
+		menus: [],
 	},
 ];

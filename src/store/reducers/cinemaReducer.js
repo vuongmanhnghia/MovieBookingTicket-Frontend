@@ -18,6 +18,17 @@ const cinemaReducer = (state = initialState, action) => {
 				...state,
 			};
 
+		case actionTypes.CREATE_CINEMA_SUCCESS:
+			state.allCinemas.push(action.newCinema);
+			return {
+				...state,
+			};
+
+		case actionTypes.CREATE_CINEMA_FAILED:
+			return {
+				...state,
+			};
+
 		default:
 			return state;
 	}

@@ -4,17 +4,13 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { CommonUtils } from "../../../utils";
 
-class MovieManage extends Component {
+class CinemaManage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			title: "",
-			description: "",
-			genre: "",
-			duration: "",
-			releaseDate: "",
+			name: "",
+			location: "",
 			rating: "",
-			director: "",
 			image: "",
 
 			previewImgUrl: "",
@@ -26,13 +22,9 @@ class MovieManage extends Component {
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		if (prevProps.users !== this.props.users) {
 			this.setState({
-				title: "",
-				description: "",
-				genre: "",
-				duration: "",
-				releaseDate: "",
+				name: "",
+				location: "",
 				rating: "",
-				director: "",
 				image: "",
 				previewImgUrl: "",
 			});
@@ -65,27 +57,15 @@ class MovieManage extends Component {
 		if (isValid === false) return;
 
 		this.props.createNewMovie({
-			title: this.state.title,
-			description: this.state.description,
-			genre: this.state.genre,
-			duration: this.state.duration,
-			releaseDate: this.state.releaseDate,
+			name: this.state.name,
+			location: this.state.location,
 			rating: this.state.rating,
-			director: this.state.director,
 			image: this.state.image,
 		});
 	};
 	checkValidateInput = () => {
 		let isValid = true;
-		let arrCheck = [
-			"title",
-			"description",
-			"genre",
-			"duration",
-			"releaseDate",
-			"rating",
-			"image",
-		];
+		let arrCheck = ["name", "location", "rating", "image"];
 		for (let i = 0; i < arrCheck.length; i++) {
 			if (this.state[arrCheck[i]] === "") {
 				isValid = false;
@@ -98,100 +78,34 @@ class MovieManage extends Component {
 	};
 
 	render() {
-		let {
-			title,
-			description,
-			genre,
-			duration,
-			releaseDate,
-			rating,
-			director,
-		} = this.state;
+		let { name, location, rating } = this.state;
 		return (
 			<div className="user-redux-container">
-				<div className="title">Movie - Manage</div>
+				<div className="title">Cinema - Manage</div>
 				<div className="user-redux-body">
 					<div className="container">
 						<div className="row">
 							<div className="col-12"></div>
 							<div className="add-user col-12 my-3 ">
-								<FormattedMessage id="manage-movie.add" />
+								<FormattedMessage id="manage-cinema.add" />
 							</div>
 							<div className="form-group col-6">
 								<label>
-									<FormattedMessage id="manage-movie.title" />
+									<FormattedMessage id="manage-cinema.name" />
 								</label>
 								<input
 									type="text"
 									className="form-control"
-									placeholder="Title"
-									value={title}
+									placeholder="Name"
+									value={name}
 									onChange={(event) => {
-										this.onChangeInput(event, "title");
+										this.onChangeInput(event, "name");
 									}}
 								/>
 							</div>
 							<div className="form-group col-6">
 								<label>
-									<FormattedMessage id="manage-movie.genre" />
-								</label>
-								<input
-									type="text"
-									className="form-control"
-									placeholder="Genre"
-									value={genre}
-									onChange={(event) => {
-										this.onChangeInput(event, "genre");
-									}}
-								/>
-							</div>
-
-							<div className="form-group col-6">
-								<label>
-									<FormattedMessage id="manage-movie.duration" />
-								</label>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Duration"
-									value={duration}
-									onChange={(event) => {
-										this.onChangeInput(event, "duration");
-									}}
-								/>
-							</div>
-							<div className="form-group col-6">
-								<label>
-									<FormattedMessage id="manage-movie.releaseDate" />
-								</label>
-								<input
-									type="date"
-									className="form-control"
-									placeholder="Release Date"
-									value={releaseDate}
-									onChange={(event) => {
-										this.onChangeInput(event, "releaseDate");
-									}}
-								/>
-							</div>
-
-							<div className="form-group col-6">
-								<label>
-									<FormattedMessage id="manage-movie.director" />
-								</label>
-								<input
-									type="text"
-									className="form-control"
-									placeholder="Director"
-									value={director}
-									onChange={(event) => {
-										this.onChangeInput(event, "director");
-									}}
-								/>
-							</div>
-							<div className="form-group col-6">
-								<label>
-									<FormattedMessage id="manage-movie.rating" />
+									<FormattedMessage id="manage-cinema.rating" />
 								</label>
 								<input
 									type="number"
@@ -205,21 +119,21 @@ class MovieManage extends Component {
 							</div>
 							<div className="form-group col-12">
 								<label>
-									<FormattedMessage id="manage-movie.description" />
+									<FormattedMessage id="manage-cinema.location" />
 								</label>
 								<input
 									type="text"
 									className="form-control"
-									placeholder="Description"
-									value={description}
+									placeholder="Location"
+									value={location}
 									onChange={(event) => {
-										this.onChangeInput(event, "description");
+										this.onChangeInput(event, "location");
 									}}
 								/>
 							</div>
 							<div className="form-group col-12 form-preview-img">
 								<label>
-									<FormattedMessage id="manage-movie.image" />
+									<FormattedMessage id="manage-cinema.image" />
 								</label>
 								<div className="preview-image-container">
 									<input
@@ -251,7 +165,7 @@ class MovieManage extends Component {
 										"form-control btn btn-primary mt-3 col-12"
 									}
 									type="submit">
-									<FormattedMessage id="manage-movie.save" />
+									<FormattedMessage id="manage-cinema.save" />
 								</button>
 							</div>
 							<div className="col-12 mb-5"></div>
@@ -264,15 +178,13 @@ class MovieManage extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {
-		movies: state.movie.movies,
-	};
+	return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		createNewMovie: (data) => dispatch(actions.createNewMovie(data)),
+		createNewCinema: (data) => dispatch(actions.createNewCinema(data)),
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieManage);
+export default connect(mapStateToProps, mapDispatchToProps)(CinemaManage);
