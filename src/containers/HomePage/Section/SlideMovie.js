@@ -29,6 +29,7 @@ class SlideMovie extends Component {
 
 	handleViewDetailMovie = (item) => {
 		this.props.history.push(`/detail-movie/${item.id}`);
+		console.log("props slideMovie: ", this.props);
 	};
 
 	render() {

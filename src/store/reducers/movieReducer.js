@@ -3,6 +3,7 @@ import actionTypes from "../actions/actionTypes";
 const initialState = {
 	topMovies: [],
 	allMovies: [],
+	detailMovie: {},
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -27,6 +28,18 @@ const movieReducer = (state = initialState, action) => {
 
 		case actionTypes.FETCH_ALL_MOVIES_FAILED:
 			state.allMovies = [];
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_DETAIL_MOVIE_SECCUSS:
+			state.detailMovie = action.detailMovie;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_DETAIL_MOVIE_FAILED:
+			state.detailMovie = {};
 			return {
 				...state,
 			};

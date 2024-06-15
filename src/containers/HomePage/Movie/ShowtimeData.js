@@ -96,8 +96,10 @@ class ShowtimeData extends Component {
 		return result;
 	};
 
-	handleViewDetailMovie = (item) => {
+	handleViewDetailMovie = async (item) => {
 		this.props.history.push(`/detail-movie/${item.id}`);
+		await this.props.fetchDetailMovie(item.id);
+		console.log(this.props);
 	};
 
 	render() {
@@ -209,13 +211,14 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		allMovies: state.movie.allMovies,
+		detailMovie: state.movie.detailMovie,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchAllMovies: () => dispatch(actions.fetchAllMovies()),
-		// fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
+		fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
 	};
 };
 
