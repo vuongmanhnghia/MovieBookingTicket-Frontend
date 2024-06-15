@@ -61,7 +61,7 @@ class Cinema extends Component {
 	}
 
 	handleViewDetailCinema = (tradeMark) => {
-		console.log("View detail cinema");
+		console.log(tradeMark);
 		this.props.history.push(`/detail-cinema/${tradeMark}`);
 	};
 
@@ -87,7 +87,11 @@ class Cinema extends Component {
 								return (
 									<div
 										className="box-cinema"
-										onClick={() => this.handleViewDetailCinema()}>
+										onClick={() =>
+											this.handleViewDetailCinema(
+												this.state.uniqueTradeMarks[index].tradeMark
+											)
+										}>
 										<div
 											className="logo-cinema"
 											style={{
