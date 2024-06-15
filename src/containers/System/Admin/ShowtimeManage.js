@@ -4,10 +4,8 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import "./ShowtimeManage.scss";
 import { FormattedMessage } from "react-intl";
-import { dateFormat } from "../../../utils";
 import Select from "react-select";
 import DatePicker from "../../../components/Input/DatePicker";
-import moment from "moment";
 import { toast } from "react-toastify";
 
 class MovieManage extends Component {
@@ -17,7 +15,7 @@ class MovieManage extends Component {
 			selectedMovie: "",
 			selectedCinema: "",
 			selectedScreen: "",
-			startDate: new Date(),
+			startDate: "",
 			arrayTimes: [],
 			listMovies: [],
 			listCinemas: [],
@@ -143,7 +141,7 @@ class MovieManage extends Component {
 
 		return isValid;
 	};
-	handleSaveShowtime = () => {
+	handleSaveShowtime = async () => {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
 		let result = [];
@@ -155,15 +153,13 @@ class MovieManage extends Component {
 			startDate,
 		} = this.state;
 
-		let formatDate = moment(startDate).format(dateFormat.SEND_TO_SERVER);
-
+		let formatDate = new Date(startDate).getTime();
 		if (arrayTimes && arrayTimes.length > 0) {
 			let selectedTime = arrayTimes.filter(
 				(item) => item.isSelected === true
 			);
-			console.log(selectedTime);
-			if (selectedTime && selectedTime.length > 0) {
-				let data = selectedTime.map((item) => {
+			if (selectedTime && selectedTime.length > 0 && !isNaN(formatDate)) {
+				selectedTime.map((item) => {
 					let object = {};
 					object.movieId = selectedMovie.label;
 					object.cinemaId = selectedCinema.label;
@@ -172,9 +168,12 @@ class MovieManage extends Component {
 					object.startTime = item.value;
 					result.push(object);
 				});
-				// this.props.createNewShowtime(data);
+				await this.props.createNewShowtime({
+					arrShowtimes: result,
+				});
+			} else {
+				toast.error("Vui lòng chọn thời gian");
 			}
-			console.log("result", result);
 		}
 	};
 
@@ -193,6 +192,7 @@ class MovieManage extends Component {
 	};
 
 	render() {
+		console.log(this.state);
 		let { arrayTimes } = this.state;
 		return (
 			<div className="showtime-manage-container">
