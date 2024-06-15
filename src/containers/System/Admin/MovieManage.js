@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { CommonUtils } from "../../../utils";
+import DatePicker from "../../../components/Input/DatePicker";
 
 class MovieManage extends Component {
 	constructor(props) {
@@ -97,6 +98,12 @@ class MovieManage extends Component {
 		return isValid;
 	};
 
+	onChangeInputDate = (date) => {
+		this.setState({
+			releaseDate: date[0],
+		});
+	};
+
 	render() {
 		let {
 			title,
@@ -164,7 +171,12 @@ class MovieManage extends Component {
 								<label>
 									<FormattedMessage id="manage-movie.releaseDate" />
 								</label>
-								<input
+								<DatePicker
+									className="form-control"
+									onChange={this.onChangeInputDate}
+									value={releaseDate}
+								/>
+								{/* <input
 									type="date"
 									className="form-control"
 									placeholder="Release Date"
@@ -172,7 +184,7 @@ class MovieManage extends Component {
 									onChange={(event) => {
 										this.onChangeInput(event, "releaseDate");
 									}}
-								/>
+								/> */}
 							</div>
 
 							<div className="form-group col-6">

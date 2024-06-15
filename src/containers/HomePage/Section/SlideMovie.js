@@ -70,9 +70,9 @@ class SlideMovie extends Component {
 												</div>
 												<div className="box-movie-text">
 													<div className="title-movie">
-														{title.length < 25
+														{title.length < 20
 															? title
-															: `${title.slice(0, 23)}...`}
+															: `${title.slice(0, 20)}...`}
 													</div>
 													<div className="category">
 														{genre.length < 25
