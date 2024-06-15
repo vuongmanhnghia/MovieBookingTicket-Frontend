@@ -15,6 +15,7 @@ import System from "../routes/System";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailMovie from "./HomePage/Movie/DetailMovie";
+import DetailCinema from "./HomePage/Cinema/DetailCinema";
 // import { CustomToastCloseButton } from "../components/CustomToast";
 
 class App extends Component {
@@ -58,6 +59,10 @@ class App extends Component {
 									<Route
 										path={path.DETAIL_MOVIE}
 										component={DetailMovie}
+									/>
+									<Route
+										path={path.DETAIL_CINEMA}
+										component={DetailCinema}
 									/>
 								</Switch>
 							</CustomScrollbars>

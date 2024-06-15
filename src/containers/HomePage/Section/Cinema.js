@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Cinema.scss";
 import { fetchAllCinemas } from "../../../store/actions";
+import { withRouter } from "react-router";
 
 class Cinema extends Component {
 	constructor(props) {
@@ -59,6 +60,11 @@ class Cinema extends Component {
 		});
 	}
 
+	handleViewDetailCinema = (tradeMark) => {
+		console.log("View detail cinema");
+		this.props.history.push(`/detail-cinema/${tradeMark}`);
+	};
+
 	render() {
 		return (
 			<div className="cinema-section-container">
@@ -79,7 +85,9 @@ class Cinema extends Component {
 								).toString("binary");
 
 								return (
-									<div className="box-cinema">
+									<div
+										className="box-cinema"
+										onClick={() => this.handleViewDetailCinema()}>
 										<div
 											className="logo-cinema"
 											style={{
@@ -128,4 +136,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cinema);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cinema));
