@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import HomeNavigation from "../HomeNavigation";
 import "./DetailCinema.scss";
 import { getDetailCinemaService } from "../../../services/cinemaService";
+import { getShowtimeByCinemaService } from "../../../services/showtimeService";
+import { get } from "lodash";
 class DetailCinema extends Component {
 	constructor(props) {
 		super(props);
@@ -19,6 +21,10 @@ class DetailCinema extends Component {
 			location: "",
 
 			maxDate: [1, 2, 3, 4, 5, 6, 7],
+
+			dataShow: [],
+			showtimeCinema: "",
+			showtimeDate: "",
 		};
 	}
 
@@ -69,7 +75,28 @@ class DetailCinema extends Component {
 		});
 	}
 
+	// handleChaneBoxCinema = async (item) => {
+	// 	let dataShow = (await getShowtimeByCinemaService(item.name)).data;
+	// 	await this.setState({
+	// 		dataShow: dataShow,
+	// 	});
+
+	// 	let activeCinema = document.querySelector(".cinema-box-content");
+	// 	activeCinema.style = "opacity: 1";
+	// 	this.setState({
+	// 		nameCinemaShowtime: item.name,
+	// 		location: item.location,
+	// 	});
+	// };
+
 	handleChaneBoxCinema = async (item) => {
+		await this.setState({
+			showtimeCinema: item.name,
+		});
+		this.setState({
+			dataShow: await this.handleView(),
+		});
+
 		let activeCinema = document.querySelector(".cinema-box-content");
 		activeCinema.style = "opacity: 1";
 		this.setState({
@@ -79,12 +106,41 @@ class DetailCinema extends Component {
 	};
 
 	handleChangeDate = async (date) => {
-		// await this.setState({
-		// 	showtimeDate: await date,
-		// });
-		// await this.setState({
-		// 	showtimeData: await this.handleView(),
-		// });
+		await this.setState({
+			showtimeDate: await date,
+		});
+		this.setState({
+			dataShow: await this.handleView(),
+		});
+	};
+
+	handleView = async () => {
+		let dataShow = (
+			await getShowtimeByCinemaService(this.state.showtimeCinema)
+		).data;
+		if (!dataShow || dataShow.length === 0) {
+			return;
+		} else if (this.state.showtimeDate === "") {
+			return dataShow;
+		} else if (this.state.showtimeCinema === "") {
+			return;
+		} else {
+			let result = [];
+			dataShow.map((item) => {
+				let showtime = item.showtime;
+				let newShowtime = showtime.filter((item) => {
+					return (
+						new Date(item.startDate).getDate() === this.state.showtimeDate
+					);
+				});
+				item.showtime = newShowtime;
+				if (item.showtime.length > 0) {
+					result.push(item);
+				}
+			});
+
+			return result;
+		}
 	};
 
 	render() {
@@ -190,7 +246,45 @@ class DetailCinema extends Component {
 									</div>
 									<div className="list-showtime-content">
 										<div className="scrollbar">
-											<div className="scrollbar-inner"></div>
+											<div className="scrollbar-inner">
+												{this.state.dataShow &&
+													this.state.dataShow.length > 0 &&
+													this.state.dataShow.map((item) => {
+														return (
+															<div className="box-showtime">
+																<div
+																	className="box-showtime-image"
+																	style={{
+																		background: `url(${item.movie.image})`,
+																	}}></div>
+																<div className="box-showtime-info">
+																	<div className="box-showtime-name">
+																		{item.movie.title}
+																	</div>
+																	<div className="box-showtime-genre">
+																		{item.movie.genre}
+																	</div>
+																	<div className="box-showtime-showtimes">
+																		{item.showtime &&
+																			item.showtime.length >
+																				0 &&
+																			item.showtime.map(
+																				(item) => {
+																					return (
+																						<div className="box-showtime-startTime">
+																							{
+																								item.startTime
+																							}
+																						</div>
+																					);
+																				}
+																			)}
+																	</div>
+																</div>
+															</div>
+														);
+													})}
+											</div>
 										</div>
 									</div>
 								</div>

@@ -243,7 +243,6 @@ class MovieManage extends Component {
 										className="form-control"
 										onChange={this.onChangeInputDate}
 										value={this.state.startDate}
-										minDate={new Date()}
 									/>
 								</div>
 								<div className="col-12 title-pick-time">

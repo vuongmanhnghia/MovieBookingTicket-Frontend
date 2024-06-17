@@ -88,10 +88,10 @@ class DetailMovie extends Component {
 								</div>
 								<div className="description-title">Nội dung</div>
 								<p className="movie-detail-description">
-									{this.state.newDescription.length > 500
+									{this.state.newDescription.length > 200
 										? `${this.state.newDescription.substring(
 												0,
-												500
+												200
 										  )}...`
 										: this.state.newDescription}
 								</p>

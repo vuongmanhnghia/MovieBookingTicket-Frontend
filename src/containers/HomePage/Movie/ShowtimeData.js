@@ -56,6 +56,7 @@ class ShowtimeData extends Component {
 	}
 
 	handleChangeDate = async (date) => {
+		console.log(date);
 		await this.setState({
 			showtimeDate: await date,
 		});

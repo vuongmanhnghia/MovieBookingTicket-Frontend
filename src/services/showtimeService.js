@@ -4,6 +4,11 @@ const createNewShowtimeService = (data) => {
 	return axios.post("/api/create-new-showtime", data);
 };
 
+const getShowtimeByCinemaService = (name) => {
+	console.log(name);
+	return axios.get(`/api/get-showtime-by-cinema?name=${name}`);
+};
+
 // const getAllShowtimesService = () => {
 // 	return axios.get("/api/get-all-showtimes");
 // };
@@ -14,6 +19,7 @@ const createNewShowtimeService = (data) => {
 
 export {
 	createNewShowtimeService,
+	getShowtimeByCinemaService,
 	// getDetailShowtimeService,
 	// getAllShowtimesService,
 };
