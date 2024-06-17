@@ -9,38 +9,41 @@ class Footer extends Component {
 				<div className="row footer-container-content">
 					<div className="col footer-content">
 						<div className="title-footer">MUA VÉ XEM PHIM</div>
-						<div className="text-content-1">
-							<a href="#">Lịch chiếu phim</a>
-						</div>
-						<div className="text-content-1">
-							<a href="#">Rạp chiếu phim</a>
-						</div>
-						<div className="text-content-1">
-							<a href="#">Phim chiếu rạp</a>
-						</div>
+						<div className="text-content">Lịch chiếu phim</div>
+						<div className="text-content">Rạp chiếu phim</div>
+						<div className="text-content">Phim chiếu rạp</div>
 					</div>
-					<div className="col">
+					<div className="col footer-content">
 						<div className="title-footer">DỊCH VỤ NỔI BẬT</div>
-						<div className="text-content-2"></div>
-						<div className="text-content-2"></div>
-						<div className="text-content-2"></div>
-						<div className="text-content-2"></div>
-						<div className="text-content-2"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
 					</div>
-					<div className="col">
+					<div className="col footer-content">
 						<div className="title-footer">CHĂM SÓC KHÁCH HÀNG</div>
-						<div className="text-content-3"></div>
-						<div className="text-content-3"></div>
-						<div className="text-content-3"></div>
-						<div className="text-content-3"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
+						<div className="text-content"></div>
 					</div>
-					<div className="col">
-						<div className="title-footer">KẾT NỐI VỚI CHÚNG TÔI</div>
+					<div className="col footer-content">
+						<div className="title-footer">KẾT NỐI VỚI TÔI</div>
+					</div>
+				</div>
+				<div className="more-info-container">
+					<div className="more-info-content">
+						<div className="logo"></div>
+						<div className="info">
+							<div className="myName">Vuong Manh Nghia</div>
+							<div className="school">
+								Học viện Công nghệ Bưu chính Viễn thông
+							</div>
+						</div>
 					</div>
 					<div className="copyright">
-						<p>
-							&copy; 2024 Vuong Manh Nghia. <a href="#">More info</a>
-						</p>
+						<p>&copy; 2024 Vuong Manh Nghia 2024. All rights reserved.</p>
 					</div>
 				</div>
 			</div>
