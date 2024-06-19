@@ -2,16 +2,54 @@
 	.footer-container-content {
 		background-color: #171717;
 		padding: 56px 150px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 
 		.footer-content {
+			font-size: 14px;
+			display: flex;
+			justify-content: center;
+			gap: 150px;
+			color: #ccc;
+			font-weight: 600;
+		}
+
+		.call-me {
+			margin-top: 50px;
 			display: flex;
 			align-items: center;
-			flex-direction: column;
+			justify-content: center;
+
+			.call-me-text {
+				color: #ccc;
+				font-weight: 600;
+				font-size: 14px;
+			}
+
+			.fa-facebook {
+				color: #3b5998;
+				font-size: 30px;
+				margin: 0 10px;
+				margin-left: 20px;
+				cursor: pointer;
+				transition: 0.3s;
+				&:hover {
+					color: #fff;
+				}
+			}
+
+			.fa-github-square {
+				color: white;
+				font-size: 30px;
+				cursor: pointer;
+				transition: 0.3s;
+				&:hover {
+					color: #3b5998;
+				}
+			}
 		}
 	}
-}
-.title-footer {
-	color: white;
 }
 
 .more-info-container {
