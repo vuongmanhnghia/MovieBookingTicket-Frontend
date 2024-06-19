@@ -14,16 +14,6 @@ export const adminMenu = [
 			{
 				name: "menu.admin.client",
 				link: "/system/user-client",
-				// subMenus: [
-				// 	{
-				// 		name: "menu.system.system-administrator.user-manage",
-				// 		link: "/system/user-manage",
-				// 	},
-				// 	{
-				// 		name: "menu.system.system-administrator.user-redux",
-				// 		link: "/system/user-redux",
-				// 	},
-				// ],
 			},
 			{
 				name: "menu.admin.admin",
@@ -54,8 +44,8 @@ export const adminMenu = [
 				link: "/system/manage-cinema",
 			},
 			{
-				name: "menu.admin.manage-room",
-				link: "/system/manage-room",
+				name: "menu.admin.manage-screen",
+				link: "/system/manage-screen",
 			},
 		],
 	},

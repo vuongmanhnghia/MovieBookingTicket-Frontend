@@ -32,7 +32,7 @@ const movieReducer = (state = initialState, action) => {
 				...state,
 			};
 
-		case actionTypes.FETCH_DETAIL_MOVIE_SECCUSS:
+		case actionTypes.FETCH_DETAIL_MOVIE_SUCCESS:
 			state.detailMovie = action.detailMovie;
 			return {
 				...state,

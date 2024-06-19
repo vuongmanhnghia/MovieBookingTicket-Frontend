@@ -12,4 +12,18 @@ const getDetailCinemaService = (id) => {
 	return axios.get(`/api/get-detail-cinema?id=${id}`);
 };
 
-export { createNewCinemaService, getDetailCinemaService, getAllCinemasService };
+const getAllTradeMarksService = () => {
+	return axios.get("/api/get-all-trademarks");
+};
+
+const getAllCinemasByTradeMarkService = (tradeMark) => {
+	return axios.get(`/api/get-all-cinemas-by-trademark?tradeMark=${tradeMark}`);
+};
+
+export {
+	createNewCinemaService,
+	getDetailCinemaService,
+	getAllCinemasService,
+	getAllTradeMarksService,
+	getAllCinemasByTradeMarkService,
+};

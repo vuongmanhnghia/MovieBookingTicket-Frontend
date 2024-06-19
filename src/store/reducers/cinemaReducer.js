@@ -2,6 +2,8 @@ import actionTypes from "../actions/actionTypes";
 
 const initialState = {
 	allCinemas: [],
+	allTradeMarks: [],
+	allCinemasByTradeMark: [],
 };
 
 const cinemaReducer = (state = initialState, action) => {
@@ -25,6 +27,30 @@ const cinemaReducer = (state = initialState, action) => {
 			};
 
 		case actionTypes.CREATE_CINEMA_FAILED:
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_ALL_TRADEMARKS_SUCCESS:
+			state.allTradeMarks = action.allTradeMarks;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_ALL_TRADEMARKS_FAILED:
+			state.allTradeMaks = [];
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_ALL_CINEMAS_BY_TRADEMARK_SUCCESS:
+			state.allCinemasByTradeMark = action.allCinemasByTradeMark;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_ALL_CINEMAS_BY_TRADEMARK_FAILED:
+			state.allCinemasByTradeMark = [];
 			return {
 				...state,
 			};

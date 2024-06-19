@@ -24,9 +24,9 @@ class MovieManage extends Component {
 	}
 
 	async componentDidMount() {
-		this.props.fetchAllMovies();
-		this.props.fetchAllCinemas();
-		this.props.fetchAllTimes();
+		await this.props.fetchAllMovies();
+		await this.props.fetchAllCinemas();
+		await this.props.fetchAllTimes();
 	}
 
 	buildDataSelectMovie = (inputData) => {
@@ -108,7 +108,7 @@ class MovieManage extends Component {
 
 	handleSelectedCinema = (selectedCinema) => {
 		this.setState({ selectedCinema });
-		let cinemaId = selectedCinema.value;
+		let cinemaId = selectedCinema.label;
 		this.props.fetchAllScreens(cinemaId);
 	};
 
@@ -192,7 +192,6 @@ class MovieManage extends Component {
 	};
 
 	render() {
-		console.log(this.state);
 		let { arrayTimes } = this.state;
 		return (
 			<div className="showtime-manage-container">

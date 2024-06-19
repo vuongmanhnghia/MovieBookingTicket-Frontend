@@ -22,7 +22,7 @@
 			"manage-cinema": "Quản lý rạp phim",
 			"manage-showtime": "Quản lý lịch chiếu",
 			"manage-booking": "Quản lý đặt vé",
-			"manage-room": "Quản lý phòng chiếu"
+			"manage-screen": "Quản lý phòng chiếu"
 		}
 	},
 	"manage-user": {
@@ -79,5 +79,18 @@
 		"startTime": "Thời gian bắt đầu",
 		"endTime": "Thời gian kết thúc",
 		"save": "Lưu lịch chiếu"
+	},
+
+	"manage-screen": {
+		"add": "Thêm phòng chiếu",
+		"delete": "Xóa phòng chiếu",
+		"name": "Tên phòng chiếu",
+		"cinema": "Rạp phim",
+		"save": "Lưu phòng chiếu",
+		"total-seats": "Tổng số ghế",
+		"image": "Ảnh phòng chiếu",
+		"select-cinema": "Chọn rạp phim",
+		"select-tradeMark": "Chọn thương hiệu",
+		"name-screen": "Tên phòng chiếu"
 	}
 }
