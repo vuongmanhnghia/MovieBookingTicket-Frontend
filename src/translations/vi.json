@@ -78,7 +78,8 @@
 		"cinema": "Rạp",
 		"startTime": "Thời gian bắt đầu",
 		"endTime": "Thời gian kết thúc",
-		"save": "Lưu lịch chiếu"
+		"save": "Lưu lịch chiếu",
+		"select-tradeMark": "Chọn thương hiệu"
 	},
 
 	"manage-screen": {

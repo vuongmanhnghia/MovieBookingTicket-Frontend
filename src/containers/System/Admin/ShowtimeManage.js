@@ -12,11 +12,14 @@ class MovieManage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			selectedTradeMark: "",
 			selectedMovie: "",
 			selectedCinema: "",
 			selectedScreen: "",
 			startDate: "",
+
 			arrayTimes: [],
+			listTradeMarks: [],
 			listMovies: [],
 			listCinemas: [],
 			listScreens: [],
@@ -24,8 +27,8 @@ class MovieManage extends Component {
 	}
 
 	async componentDidMount() {
+		await this.props.fetchAllTradeMarks();
 		await this.props.fetchAllMovies();
-		await this.props.fetchAllCinemas();
 		await this.props.fetchAllTimes();
 	}
 
@@ -36,6 +39,21 @@ class MovieManage extends Component {
 				let object = {};
 				object.label = item.title;
 				object.value = item.id;
+				result.push(object);
+				return result;
+			});
+		}
+		return result;
+	};
+
+	buildDataSelectTradeMark = (inputData) => {
+		let result = [];
+		if (inputData && inputData.length > 0) {
+			let newData = [...new Set(inputData.map((item) => item.tradeMark))];
+			newData.map((item, index) => {
+				let object = {};
+				object.label = item;
+				object.value = index + 1;
 				result.push(object);
 				return result;
 			});
@@ -71,21 +89,30 @@ class MovieManage extends Component {
 		return result;
 	};
 
-	componentDidUpdate(prevProps) {
+	async componentDidUpdate(prevProps) {
 		if (prevProps.allMovies !== this.props.allMovies) {
 			let data = this.buildDataSelectMovie(this.props.allMovies);
 			this.setState({
 				listMovies: data,
 			});
 		}
+		if (prevProps.allTradeMarks !== this.props.allTradeMarks) {
+			let data = await this.buildDataSelectTradeMark(
+				this.props.allTradeMarks
+			);
+			this.setState({
+				listTradeMarks: data,
+			});
+		}
+
 		if (prevProps.allCinemas !== this.props.allCinemas) {
-			let data = this.buildDataSelectCinema(this.props.allCinemas);
+			let data = await this.buildDataSelectCinema(this.props.allCinemas);
 			this.setState({
 				listCinemas: data,
 			});
 		}
 		if (prevProps.allScreens !== this.props.allScreens) {
-			let data = this.buildDataSelectScreen(this.props.allScreens);
+			let data = await this.buildDataSelectScreen(this.props.allScreens);
 			this.setState({
 				listScreens: data,
 			});
@@ -104,6 +131,12 @@ class MovieManage extends Component {
 
 	handleSelectedMovie = (selectedMovie) => {
 		this.setState({ selectedMovie });
+	};
+
+	handleSelectedTradeMark = (selectedTradeMark) => {
+		this.setState({ selectedTradeMark });
+		let tradeMarkId = selectedTradeMark.label;
+		this.props.fetchAllCinemasByTradeMark(tradeMarkId);
 	};
 
 	handleSelectedCinema = (selectedCinema) => {
@@ -126,6 +159,7 @@ class MovieManage extends Component {
 	checkValidateInput = () => {
 		let isValid = true;
 		let arrCheck = [
+			"selectedTradeMark",
 			"selectedMovie",
 			"selectedCinema",
 			"selectedScreen",
@@ -147,6 +181,7 @@ class MovieManage extends Component {
 		let result = [];
 		let {
 			arrayTimes,
+			selectedTradeMark,
 			selectedCinema,
 			selectedMovie,
 			selectedScreen,
@@ -161,6 +196,7 @@ class MovieManage extends Component {
 			if (selectedTime && selectedTime.length > 0 && !isNaN(formatDate)) {
 				selectedTime.map((item) => {
 					let object = {};
+					object.tradeMarkId = selectedTradeMark.label;
 					object.movieId = selectedMovie.label;
 					object.cinemaId = selectedCinema.label;
 					object.screenId = selectedScreen.label;
@@ -204,6 +240,7 @@ class MovieManage extends Component {
 								<div className="add-user col-12 my-3 ">
 									<FormattedMessage id="manage-showtime.add" />
 								</div>
+
 								<div className="form-group col-6">
 									<label>
 										<FormattedMessage id="manage-showtime.select-movie" />
@@ -216,6 +253,16 @@ class MovieManage extends Component {
 								</div>
 								<div className="form-group col-6">
 									<label>
+										<FormattedMessage id="manage-showtime.select-tradeMark" />
+									</label>
+									<Select
+										value={this.state.selectedTradeMark}
+										onChange={this.handleSelectedTradeMark}
+										options={this.state.listTradeMarks}
+									/>
+								</div>
+								<div className="form-group col-4">
+									<label>
 										<FormattedMessage id="manage-showtime.select-cinema" />
 									</label>
 									<Select
@@ -224,7 +271,7 @@ class MovieManage extends Component {
 										options={this.state.listCinemas}
 									/>
 								</div>
-								<div className="form-group col-6">
+								<div className="form-group col-4">
 									<label>
 										<FormattedMessage id="manage-showtime.select-screen" />
 									</label>
@@ -234,7 +281,7 @@ class MovieManage extends Component {
 										options={this.state.listScreens}
 									/>
 								</div>
-								<div className="form-group col-6">
+								<div className="form-group col-4">
 									<label>
 										<FormattedMessage id="manage-showtime.start-date" />
 									</label>
@@ -290,8 +337,9 @@ class MovieManage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+		allTradeMarks: state.cinema.allTradeMarks,
+		allCinemas: state.cinema.allCinemasByTradeMark,
 		allMovies: state.movie.allMovies,
-		allCinemas: state.cinema.allCinemas,
 		allScreens: state.screen.allScreens,
 		allTimes: state.admin.allTimes,
 	};
@@ -299,8 +347,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		fetchAllTradeMarks: () => dispatch(actions.fetchAllTradeMarks()),
 		fetchAllMovies: () => dispatch(actions.fetchAllMovies()),
-		fetchAllCinemas: () => dispatch(actions.fetchAllCinemas()),
+		fetchAllCinemasByTradeMark: (data) =>
+			dispatch(actions.fetchAllCinemasByTradeMark(data)),
 		fetchAllScreens: (cinemaId) =>
 			dispatch(actions.fetchAllScreens(cinemaId)),
 		createNewShowtime: (data) => dispatch(actions.createNewShowtime(data)),
