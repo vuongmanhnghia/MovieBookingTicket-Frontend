@@ -4,6 +4,7 @@ import HomeNavigation from "../HomeNavigation";
 import "./DetailMovie.scss";
 import { getDetailMovieService } from "../../../services/movieService";
 import ShowtimeData from "./ShowtimeData";
+import Footer from "../Section/Footer";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -112,6 +113,7 @@ class DetailMovie extends Component {
 					</div>
 				</div>
 				<ShowtimeData showtimeData={this.state.showtimeData} />
+				<Footer />
 			</>
 		);
 	}

@@ -5,6 +5,7 @@ import "./DetailCinema.scss";
 import { getDetailCinemaService } from "../../../services/cinemaService";
 import { getShowtimeByCinemaService } from "../../../services/showtimeService";
 import { get } from "lodash";
+import Footer from "../Section/Footer";
 class DetailCinema extends Component {
 	constructor(props) {
 		super(props);
@@ -292,6 +293,7 @@ class DetailCinema extends Component {
 						</div>
 					</div>
 				</div>
+				<Footer />
 			</>
 		);
 	}

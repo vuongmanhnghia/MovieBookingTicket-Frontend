@@ -36,7 +36,7 @@ class Footer extends Component {
 						</div>
 					</div>
 					<div className="copyright">
-						<p>&copy; 2024 Vuong Manh Nghia 2024. All rights reserved.</p>
+						<p>&copy; Vuong Manh Nghia 2024. All rights reserved.</p>
 					</div>
 				</div>
 			</div>
