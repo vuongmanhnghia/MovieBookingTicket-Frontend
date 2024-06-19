@@ -1,10 +1,9 @@
 .booking-modal-container {
 	.modal-content {
 		border-radius: 8px !important;
+		overflow: hidden !important;
 		.booking-modal-content {
 			.booking-modal-header {
-				border-top-left-radius: 8px;
-				border-top-right-radius: 8px;
 				display: flex;
 				align-items: center;
 				height: 45px;
@@ -19,6 +18,10 @@
 					margin-left: 15px;
 					position: absolute;
 					cursor: pointer;
+
+					&:hover {
+						color: #eee7e7;
+					}
 				}
 
 				.booking-modal-title {
@@ -35,6 +38,9 @@
 			}
 
 			.booking-modal-body {
+				.information {
+					padding: 10px 20px;
+				}
 			}
 
 			.booking-modal-footer {

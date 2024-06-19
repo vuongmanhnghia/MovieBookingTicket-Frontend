@@ -32,6 +32,20 @@ class BookingModal extends Component {
 						<div className="booking-modal-title">Mua vé xem phim</div>
 					</div>
 					<div className="booking-modal-body">
+						<div className="information row">
+							<div className="col-4 form-group">
+								<label>Họ tên</label>
+								<input className="form-control" type="text"></input>
+							</div>
+							<div className="col-5 form-group">
+								<label>Email</label>
+								<input className="form-control" type="text"></input>
+							</div>
+							<div className="col-3 form-group">
+								<label>Số điện thoại</label>
+								<input className="form-control" type="number"></input>
+							</div>
+						</div>
 						{JSON.stringify(dataBookingModal)}
 					</div>
 					<div className="booking-modal-footer">
