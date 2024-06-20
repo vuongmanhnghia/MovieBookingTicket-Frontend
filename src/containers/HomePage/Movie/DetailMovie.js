@@ -53,6 +53,7 @@ class DetailMovie extends Component {
 	}
 
 	render() {
+		let { image } = this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
 		return (
@@ -112,7 +113,10 @@ class DetailMovie extends Component {
 						</div>
 					</div>
 				</div>
-				<ShowtimeData showtimeData={this.state.showtimeData} />
+				<ShowtimeData
+					showtimeData={this.state.showtimeData}
+					image={this.state.image}
+				/>
 				<Footer />
 			</>
 		);

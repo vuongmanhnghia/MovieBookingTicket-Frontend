@@ -127,8 +127,8 @@ class ShowtimeData extends Component {
 	};
 
 	render() {
+		let { allMovies, image } = this.props;
 		let { isOpenModal, dataShowtime, dataScreen } = this.state;
-		let allMovies = this.props.allMovies;
 		let maxDate = [1, 2, 3, 4, 5, 6, 7];
 		let showtimeData = this.props.showtimeData;
 		// let releaseTime = this.props.showtimeData.;
@@ -137,10 +137,9 @@ class ShowtimeData extends Component {
 				<div className="movie-detail-showtimeData-container row">
 					<div className="movie-detail-showtimeData-content col-8">
 						<div className="showtimeData-content-title">
-							Lịch chiếu{" "}
 							{showtimeData && showtimeData.length > 0
-								? showtimeData[0].movieId
-								: " phim không tồn tại"}{" "}
+								? `Lịch chiếu ${showtimeData[0].movieId}`
+								: "Xin lỗi, phim hiện chưa có xuất chiếu."}
 						</div>
 						<div className="showtimeData-container">
 							<div className="showtimeData-date">
@@ -242,6 +241,7 @@ class ShowtimeData extends Component {
 					closeBookingModal={this.closeBookingModal}
 					dataScreen={dataScreen}
 					dataShowtime={dataShowtime}
+					image={image}
 				/>
 			</>
 		);

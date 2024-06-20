@@ -17,7 +17,7 @@ class BookingModal extends Component {
 	}
 
 	render() {
-		let { isOpenModal, closeBookingModal, dataShowtime, dataScreen } =
+		let { isOpenModal, closeBookingModal, dataShowtime, dataScreen, image } =
 			this.props;
 		return (
 			<Modal
@@ -47,8 +47,47 @@ class BookingModal extends Component {
 								<input className="form-control" type="number"></input>
 							</div>
 						</div>
-						{JSON.stringify(dataShowtime)}
-						{JSON.stringify(dataScreen)}
+						<div className="modal-body-container">
+							<div
+								className="modal-body-image"
+								style={{ background: `url(${image})` }}></div>
+							<div className="modal-body-content">
+								<div className="modal-body-header">
+									{dataShowtime && dataShowtime.movieId}
+								</div>
+
+								<div className="modal-body-cinema">
+									{`${dataShowtime && dataShowtime.tradeMarkId} - ${
+										dataShowtime && dataShowtime.cinemaId
+									}`}
+								</div>
+
+								<div className="modal-body-showtime">
+									{`${
+										dataShowtime && dataShowtime.startTime
+									} - ${new Date(
+										dataShowtime.startDate
+									).getDate()}/${new Date(
+										dataShowtime.startDate
+									).getMonth()} - Phòng chiếu ${dataScreen.name}`}
+								</div>
+
+								<div className="modal-body-seat">
+									<div className="total-seats">
+										<span className="text">Tổng số chỗ ngồi:</span>{" "}
+										<span className="sum">
+											{dataScreen.totalSeats}
+										</span>
+									</div>
+									<div className="remaining-seats">
+										<span className="text">Số chỗ ngồi còn lại:</span>{" "}
+										<span className="sum">
+											{dataScreen.totalSeats}
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="booking-modal-footer">
 						<div className="total">
