@@ -92,6 +92,7 @@
 		"image": "Ảnh phòng chiếu",
 		"select-cinema": "Chọn rạp phim",
 		"select-tradeMark": "Chọn thương hiệu",
-		"name-screen": "Tên phòng chiếu"
+		"name-screen": "Tên phòng chiếu",
+		"price-seats": "Giá vé"
 	}
 }

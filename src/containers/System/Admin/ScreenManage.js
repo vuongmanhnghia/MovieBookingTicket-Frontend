@@ -16,6 +16,8 @@ class ScreenManage extends Component {
 			selectedCinema: "",
 			nameScreen: "",
 			totalSeats: "",
+			priceSeats: "",
+
 			listTradeMarks: [],
 			listCinemas: [],
 		};
@@ -98,6 +100,7 @@ class ScreenManage extends Component {
 			"selectedCinema",
 			"nameScreen",
 			"totalSeats",
+			"priceSeats",
 		];
 		for (let i = 0; i < arrCheck.length; i++) {
 			if (this.state[arrCheck[i]] === "") {
@@ -112,13 +115,19 @@ class ScreenManage extends Component {
 	handleSaveShowtime = async () => {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
-		let { selectedTradeMark, selectedCinema, nameScreen, totalSeats } =
-			this.state;
+		let {
+			selectedTradeMark,
+			selectedCinema,
+			nameScreen,
+			totalSeats,
+			priceSeats,
+		} = this.state;
 		await this.props.createNewScreen({
 			tradeMarkId: selectedTradeMark.label,
 			cinemaId: selectedCinema.label,
 			name: nameScreen,
 			totalSeats: totalSeats,
+			priceSeats: priceSeats,
 		});
 	};
 
@@ -154,7 +163,7 @@ class ScreenManage extends Component {
 										options={this.state.listCinemas}
 									/>
 								</div>
-								<div className="form-group col-6">
+								<div className="form-group col-4">
 									<label>
 										<FormattedMessage id="manage-screen.name-screen" />
 									</label>
@@ -167,7 +176,7 @@ class ScreenManage extends Component {
 										}
 									/>
 								</div>
-								<div className="form-group col-6">
+								<div className="form-group col-4">
 									<label>
 										<FormattedMessage id="manage-screen.total-seats" />
 									</label>
@@ -177,6 +186,18 @@ class ScreenManage extends Component {
 										className="form-control"
 										onChange={(event) =>
 											this.handleOnChangeInput(event, "totalSeats")
+										}></input>
+								</div>
+								<div className="form-group col-4">
+									<label>
+										<FormattedMessage id="manage-screen.price-seats" />
+									</label>
+									<input
+										type="number"
+										value={this.state.priceSeats}
+										className="form-control"
+										onChange={(event) =>
+											this.handleOnChangeInput(event, "priceSeats")
 										}></input>
 								</div>
 								<div className="form-group col-12">
