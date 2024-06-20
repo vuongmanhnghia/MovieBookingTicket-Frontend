@@ -88,6 +88,8 @@ class BookingModal extends Component {
 								</div>
 							</div>
 						</div>
+						{JSON.stringify(dataShowtime)}
+						{JSON.stringify(dataScreen)}
 					</div>
 					<div className="booking-modal-footer">
 						<div className="total">
