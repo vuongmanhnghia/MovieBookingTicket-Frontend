@@ -16,16 +16,17 @@ class ShowtimeData extends Component {
 
 			isOpenModal: false,
 
-			dataBookingModal: {},
+			dataShowtime: {},
+			dataScreen: {},
 		};
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		this.setState({
 			showtimeDate: new Date().getDate(),
 		});
-		this.props.fetchAllMovies();
-		this.handleView();
+		await this.props.fetchAllMovies();
+		await this.handleView();
 	}
 
 	componentDidUpdate(prevProps) {
@@ -111,9 +112,11 @@ class ShowtimeData extends Component {
 	};
 
 	handleClickBooking = async (item) => {
+		await this.props.fetchSeatsByShowtime(item);
 		this.setState({
 			isOpenModal: true,
-			dataBookingModal: item,
+			dataShowtime: item,
+			dataScreen: this.props.screenData,
 		});
 	};
 
@@ -124,7 +127,7 @@ class ShowtimeData extends Component {
 	};
 
 	render() {
-		let { isOpenModal, dataBookingModal } = this.state;
+		let { isOpenModal, dataShowtime, dataScreen } = this.state;
 		let allMovies = this.props.allMovies;
 		let maxDate = [1, 2, 3, 4, 5, 6, 7];
 		let showtimeData = this.props.showtimeData;
@@ -237,7 +240,8 @@ class ShowtimeData extends Component {
 				<BookingModal
 					isOpenModal={isOpenModal}
 					closeBookingModal={this.closeBookingModal}
-					dataBookingModal={dataBookingModal}
+					dataScreen={dataScreen}
+					dataShowtime={dataShowtime}
 				/>
 			</>
 		);
@@ -249,6 +253,7 @@ const mapStateToProps = (state) => {
 		isLoggedIn: state.user.isLoggedIn,
 		allMovies: state.movie.allMovies,
 		detailMovie: state.movie.detailMovie,
+		screenData: state.showtime.seatsByShowtime,
 	};
 };
 
@@ -256,6 +261,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchAllMovies: () => dispatch(actions.fetchAllMovies()),
 		fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
+		fetchSeatsByShowtime: (data) =>
+			dispatch(actions.fetchSeatsByShowtime(data)),
 	};
 };
 

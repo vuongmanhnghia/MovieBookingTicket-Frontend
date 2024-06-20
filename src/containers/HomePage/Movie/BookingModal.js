@@ -17,7 +17,8 @@ class BookingModal extends Component {
 	}
 
 	render() {
-		let { isOpenModal, closeBookingModal, dataBookingModal } = this.props;
+		let { isOpenModal, closeBookingModal, dataShowtime, dataScreen } =
+			this.props;
 		return (
 			<Modal
 				isOpen={isOpenModal}
@@ -46,7 +47,8 @@ class BookingModal extends Component {
 								<input className="form-control" type="number"></input>
 							</div>
 						</div>
-						{JSON.stringify(dataBookingModal)}
+						{JSON.stringify(dataShowtime)}
+						{JSON.stringify(dataScreen)}
 					</div>
 					<div className="booking-modal-footer">
 						<div className="total">

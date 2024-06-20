@@ -22,7 +22,6 @@ class DetailMovie extends Component {
 			newDescription: "",
 		};
 	}
-
 	async componentDidMount() {
 		if (
 			this.props.match &&
@@ -31,6 +30,7 @@ class DetailMovie extends Component {
 		) {
 			let id = this.props.match.params.id;
 			let response = await getDetailMovieService(id);
+			console.log("response", response);
 			if (response && response.errCode === 0) {
 				this.setState({
 					detailMovie: response.data,

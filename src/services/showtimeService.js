@@ -17,9 +17,14 @@ const getShowtimeByCinemaService = (name) => {
 // 	return axios.get(`/api/get-detail-showtime?id=${id}`);
 // };
 
+const getSeatsByShowtimeService = (data) => {
+	return axios.post("/api/get-seats-by-showtime", data);
+};
+
 export {
 	createNewShowtimeService,
 	getShowtimeByCinemaService,
+	getSeatsByShowtimeService,
 	// getDetailShowtimeService,
 	// getAllShowtimesService,
 };

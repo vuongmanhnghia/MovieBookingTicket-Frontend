@@ -2,6 +2,7 @@ import actionTypes from "./actionTypes";
 import {
 	createNewShowtimeService,
 	// getAllShowtimesService,
+	getSeatsByShowtimeService,
 } from "../../services/showtimeService";
 import { toast } from "react-toastify";
 
@@ -55,3 +56,26 @@ export const createShowtimeFailed = () => ({
 // 		}
 // 	};
 // };
+
+export const fetchSeatsByShowtime = (data) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getSeatsByShowtimeService(data);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_SEATS_BY_SHOWTIME_SUCCESS,
+					seats: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_SEATS_BY_SHOWTIME_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch all showtimes errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_SEATS_BY_SHOWTIME_FAILED,
+			});
+		}
+	};
+};
