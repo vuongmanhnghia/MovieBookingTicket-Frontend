@@ -41,10 +41,17 @@
 				padding: 10px 20px;
 				.information {
 					padding: 10px 0;
+
+					.no-spinner::-webkit-outer-spin-button,
+					.no-spinner::-webkit-inner-spin-button {
+						-webkit-appearance: none;
+						margin: 0;
+					}
 				}
 
 				.modal-body-container {
 					display: flex;
+					justify-content: center;
 
 					.modal-body-image {
 						width: 200px;
@@ -55,13 +62,95 @@
 						border-radius: 4px;
 						border: 2px solid #ccc;
 					}
+
+					.modal-body-content {
+						padding-left: 30px;
+
+						.modal-body-header {
+							width: 100%;
+							font-size: 18px;
+							font-weight: bold;
+							border-bottom: 1px solid #ccc;
+							padding-bottom: 10px;
+						}
+
+						.modal-body-cinema {
+							margin-top: 10px;
+							width: 100%;
+							display: flex;
+							justify-content: center;
+							font-size: 14px;
+							font-weight: bold;
+							color: #d82d8b;
+						}
+
+						.modal-body-showtime {
+							width: 100%;
+							display: flex;
+							justify-content: center;
+							font-size: 14px;
+							color: #b7232b;
+							font-style: italic;
+							margin-bottom: 30px;
+						}
+
+						.modal-body-seat {
+							.text {
+								font-size: 14px;
+								color: #4e4c4c;
+							}
+
+							.sum {
+								font-weight: bold;
+								color: #d82d8b;
+							}
+						}
+
+						.booking {
+							margin-top: 20px;
+
+							.price-seats {
+								display: flex;
+								align-items: center;
+							}
+							.text {
+								font-size: 14px;
+								color: #4e4c4c;
+							}
+							.sum {
+								padding-left: 5px;
+								font-weight: bold;
+								color: #d82d8b;
+							}
+
+							.total-tickets {
+								display: flex;
+								align-items: center;
+
+								.text {
+									width: 50px;
+								}
+
+								.form-control {
+									width: 50px;
+								}
+								.form-control::-webkit-outer-spin-button,
+								.form-control::-webkit-inner-spin-button {
+									-webkit-appearance: none;
+									margin: 0;
+								}
+							}
+						}
+					}
 				}
 			}
 
 			.booking-modal-footer {
+				padding: 5px;
+				border-top: 1px solid #ccc;
 				position: relative;
 				display: flex;
-				height: 60px;
+				height: 70px;
 
 				.total {
 					display: flex;
@@ -70,12 +159,12 @@
 					margin-left: 15px;
 
 					.text {
-						font-size: 15px;
+						font-size: 14px;
 						color: #777474;
 					}
 
 					.sum {
-						font-size: 18px;
+						font-size: 16px;
 						font-weight: bold;
 					}
 				}
@@ -87,8 +176,8 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					right: 15px;
-					top: 10px;
+					right: 20px;
+					top: 15px;
 					display: flex;
 					background-color: #d82d8b;
 					border: none;
