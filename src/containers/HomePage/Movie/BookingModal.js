@@ -47,6 +47,13 @@ class BookingModal extends Component {
 			showtimeId: this.props.dataShowtime.startTime,
 			bookingDate: new Date(),
 		});
+		this.setState({
+			fullName: "",
+			email: "",
+			phoneNumber: "",
+			totalTickets: 0,
+			totalPrice: 0,
+		});
 		this.props.closeBookingModal();
 	};
 	checkValidateInput = () => {
@@ -129,13 +136,11 @@ class BookingModal extends Component {
 								<div className="modal-body-header">
 									{dataShowtime && dataShowtime.movieId}
 								</div>
-
 								<div className="modal-body-cinema">
 									{`${dataShowtime && dataShowtime.tradeMarkId} - ${
 										dataShowtime && dataShowtime.cinemaId
 									}`}
 								</div>
-
 								<div className="modal-body-showtime">
 									{`${
 										dataShowtime && dataShowtime.startTime
@@ -145,7 +150,6 @@ class BookingModal extends Component {
 										dataShowtime.startDate
 									).getMonth()} - Phòng chiếu ${dataScreen.name}`}
 								</div>
-
 								<div className="modal-body-seat row">
 									<div className="total-seats col-6 ">
 										<span className="text">Tổng số chỗ ngồi:</span>{" "}
