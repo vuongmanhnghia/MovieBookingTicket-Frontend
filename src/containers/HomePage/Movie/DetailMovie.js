@@ -30,7 +30,6 @@ class DetailMovie extends Component {
 		) {
 			let id = this.props.match.params.id;
 			let response = await getDetailMovieService(id);
-			console.log("response", response);
 			if (response && response.errCode === 0) {
 				this.setState({
 					detailMovie: response.data,
@@ -53,7 +52,7 @@ class DetailMovie extends Component {
 	}
 
 	render() {
-		let { image } = this.state;
+		let { image, title } = this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
 		return (
@@ -115,7 +114,8 @@ class DetailMovie extends Component {
 				</div>
 				<ShowtimeData
 					showtimeData={this.state.showtimeData}
-					image={this.state.image}
+					image={image}
+					title={title}
 				/>
 				<Footer />
 			</>

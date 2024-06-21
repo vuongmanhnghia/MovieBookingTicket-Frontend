@@ -31,11 +31,11 @@ class BookingModal extends Component {
 		});
 	};
 
-	handleSaveBooking = () => {
-		let isValid = this.checkValidateInput();
-		if (isValid === false) return;
+	handleSaveBooking = async () => {
+		// let isValid = this.checkValidateInput();
+		// if (isValid === false) return;
 
-		this.props.createNewBooking({
+		await this.props.createNewBooking({
 			fullName: this.state.fullName,
 			email: this.state.email,
 			phoneNumber: this.state.phoneNumber,
@@ -44,7 +44,8 @@ class BookingModal extends Component {
 			movieId: this.props.dataShowtime.movieId,
 			cinemaId: this.props.dataShowtime.cinemaId,
 			screenId: this.props.dataScreen.id,
-			showtimeId: this.props.dataShowtime.startTime,
+			time: this.props.dataShowtime.startTime,
+			date: new Date(this.props.dataShowtime.startDate),
 			bookingDate: new Date(),
 		});
 		this.setState({

@@ -61,40 +61,45 @@
 			display: flex;
 			justify-content: left;
 			align-items: center;
-			height: 80px;
+			height: 100px;
 			gap: 10px;
 			border: 1px solid #ccc;
 
 			.box-cinema {
 				width: 50px;
-				height: 50px;
-				background: #eee;
-				border-radius: 4px;
+				height: 80px;
 				display: flex;
+				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				border: 1px solid #ccc;
 				font-weight: 600;
-				font-size: 18px;
 				cursor: pointer;
 				transition: all 0.3s;
-			}
 
-			.active {
-				// background: #d82d8b;
-				border: 1px solid #d82d8b;
-				color: white;
-			}
+				.logo-cinema {
+					background-size: cover !important;
+					background-position: center !important;
+					background-repeat: no-repeat !important;
+					width: 50px;
+					height: 50px;
+					background: #eee;
+					border-radius: 4px;
+					border: 1px solid #ccc;
+					transition: all 0.3s;
+				}
+				.active {
+					border: 1px solid #d82d8b;
+					color: white;
+				}
 
-			.logo-lotte {
-				background: url(../../../assets/cinema-logo/lotte.webp);
-				background-size: cover;
-			}
-
-			.logo-beta {
-				background: url(../../../assets/cinema-logo/beta.webp);
-				background-size: cover;
-				background-position: center;
+				.tradeMark-cinema {
+					margin-top: 5px;
+					font-size: 12px;
+					color: #716f6f;
+				}
+				.active-tradeMark {
+					color: #d82d8b;
+				}
 			}
 		}
 

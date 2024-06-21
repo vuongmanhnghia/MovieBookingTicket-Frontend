@@ -13,6 +13,7 @@ class ShowtimeData extends Component {
 			showtimeDate: "",
 			showtimeCinema: "",
 			showtimeData: [],
+			allTradeMarks: [],
 
 			isOpenModal: false,
 
@@ -22,14 +23,18 @@ class ShowtimeData extends Component {
 	}
 
 	async componentDidMount() {
+		await this.props.fetchAllTradeMarks();
+		// lọc các phần tử giống nhau trong allTrademarks
+		let allTradeMarks = this.props.allTradeMarks.filter(
+			(item, index, self) =>
+				index === self.findIndex((t) => t.trademark === item.trademark)
+		);
 		this.setState({
-			showtimeDate: new Date().getDate(),
+			allTradeMarks: allTradeMarks,
 		});
 		await this.props.fetchAllMovies();
 		await this.handleView();
-	}
 
-	componentDidUpdate(prevProps) {
 		let activeDate = document.querySelectorAll(".box-date");
 		activeDate.forEach((item) => {
 			item.addEventListener("click", () => {
@@ -40,15 +45,41 @@ class ShowtimeData extends Component {
 			});
 		});
 
-		let activeCinema = document.querySelectorAll(".box-cinema");
-		activeCinema.forEach((item) => {
+		let activeCinema = document.querySelectorAll("div.box-cinema");
+		let activeLogo = document.querySelectorAll("div.logo-cinema");
+		let activeTradeMark = document.querySelectorAll("div.tradeMark-cinema");
+		activeCinema.forEach((item, index) => {
 			item.addEventListener("click", () => {
 				document
-					.querySelectorAll(".box-cinema")
+					.querySelectorAll("div.logo-cinema")
 					.forEach((item) => item.classList.remove("active"));
-				item.classList.add("active");
+				document
+					.querySelectorAll("div.tradeMark-cinema")
+					.forEach((item) => item.classList.remove("active-tradeMark"));
+				activeLogo[index].classList.add("active");
+				activeTradeMark[index].classList.add("active-tradeMark");
 			});
 		});
+
+		// let activeLogo = document.querySelectorAll("div.logo-cinema");
+		// activeLogo.forEach((item) => {
+		// 	item.addEventListener("click", () => {
+		// 		document
+		// 			.querySelectorAll("div.logo-cinema")
+		// 			.forEach((item) => item.classList.remove("active"));
+		// 		item.classList.add("active");
+		// 	});
+		// });
+
+		// let activeTradeMark = document.querySelectorAll("div.tradeMark-cinema");
+		// activeTradeMark.forEach((item) => {
+		// 	item.addEventListener("click", () => {
+		// 		document
+		// 			.querySelectorAll("div.tradeMark-cinema")
+		// 			.forEach((item) => item.classList.remove("active-tradeMark"));
+		// 		item.classList.add("active-tradeMark");
+		// 	});
+		// });
 
 		let activeTime = document.querySelectorAll(".box-showtime");
 		activeTime.forEach((item) => {
@@ -61,8 +92,9 @@ class ShowtimeData extends Component {
 		});
 	}
 
+	componentDidUpdate(prevProps) {}
+
 	handleChangeDate = async (date) => {
-		console.log(date);
 		await this.setState({
 			showtimeDate: await date,
 		});
@@ -71,9 +103,10 @@ class ShowtimeData extends Component {
 		});
 	};
 
-	handleChangeCinema = async (cinema) => {
+	handleChangeCinema = async (tradeMark) => {
+		console.log(tradeMark);
 		await this.setState({
-			showtimeCinema: await cinema,
+			showtimeCinema: await tradeMark,
 		});
 		await this.setState({
 			showtimeData: await this.handleView(),
@@ -83,19 +116,21 @@ class ShowtimeData extends Component {
 	handleView = async () => {
 		let dataView = this.props.showtimeData;
 		let date = this.state.showtimeDate;
-		let cinema = this.state.showtimeCinema;
+		let tradeMark = this.state.showtimeCinema;
 		let result = [];
+
 		await dataView.map((item) => {
 			if (
 				new Date(item.startDate).getDate() === date &&
-				item.cinemaId.split(" ")[0] === cinema
+				item.tradeMarkId === tradeMark
 			) {
+				console.log(item);
 				result.push(item);
-			} else if (date === "" && item.cinemaId.split(" ")[0] === cinema) {
+			} else if (date === "" && item.tradeMarkId === tradeMark) {
 				result.push(item);
 			} else if (
 				new Date(item.startDate).getDate() === date &&
-				cinema === ""
+				tradeMark === ""
 			) {
 				result.push(item);
 			}
@@ -127,18 +162,17 @@ class ShowtimeData extends Component {
 	};
 
 	render() {
-		let { allMovies, image } = this.props;
-		let { isOpenModal, dataShowtime, dataScreen } = this.state;
+		let { allMovies, image, title } = this.props;
+		let { isOpenModal, dataShowtime, dataScreen, allTradeMarks } = this.state;
 		let maxDate = [1, 2, 3, 4, 5, 6, 7];
-		let showtimeData = this.props.showtimeData;
 		// let releaseTime = this.props.showtimeData.;
 		return (
 			<>
 				<div className="movie-detail-showtimeData-container row">
 					<div className="movie-detail-showtimeData-content col-8">
 						<div className="showtimeData-content-title">
-							{showtimeData && showtimeData.length > 0
-								? `Lịch chiếu ${showtimeData[0].movieId}`
+							{title
+								? `Lịch chiếu ${title}`
 								: "Xin lỗi, phim hiện chưa có xuất chiếu."}
 						</div>
 						<div className="showtimeData-container">
@@ -161,18 +195,28 @@ class ShowtimeData extends Component {
 									})}
 							</div>
 							<div className="showtimeData-cinema">
-								<div
-									className="box-cinema logo-lotte"
-									onClick={() =>
-										this.handleChangeCinema("Lotte")
-									}></div>
-								<div className="logo-cinema"></div>
-								<div
-									className="box-cinema logo-beta"
-									onClick={() =>
-										this.handleChangeCinema("Beta")
-									}></div>
-								<div className="logo-cinema"></div>
+								{allTradeMarks &&
+									allTradeMarks.length > 0 &&
+									allTradeMarks.map((item) => {
+										return (
+											<div
+												className="box-cinema"
+												onClick={() =>
+													this.handleChangeCinema(item.tradeMark)
+												}>
+												<div
+													className="logo-cinema"
+													style={{
+														background: `url(${item.image})`,
+													}}></div>
+												<div className="tradeMark-cinema">
+													{item.tradeMark < 7
+														? item.tradeMark
+														: `${item.tradeMark.slice(0, 7)}...`}
+												</div>
+											</div>
+										);
+									})}
 							</div>
 							<div className="showtimeData-showtime">
 								{this.state.showtimeData &&
@@ -254,6 +298,7 @@ const mapStateToProps = (state) => {
 		allMovies: state.movie.allMovies,
 		detailMovie: state.movie.detailMovie,
 		screenData: state.showtime.seatsByShowtime,
+		allTradeMarks: state.cinema.allTradeMarks,
 	};
 };
 
@@ -263,6 +308,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
 		fetchSeatsByShowtime: (data) =>
 			dispatch(actions.fetchSeatsByShowtime(data)),
+		fetchAllTradeMarks: () => dispatch(actions.fetchAllTradeMarks()),
 	};
 };
 
