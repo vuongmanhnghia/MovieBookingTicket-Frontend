@@ -8,12 +8,19 @@ class HomeNavigation extends Component {
 			<div className="home-nav-container">
 				<div className="home-nav-content">
 					<div className="nav-left-container">
-						<a href="https://github.com/vuongmanhnghia">
+						<a href="https://github.com/vuongmanhnghia" target="blank">
 							<div className="avatar"></div>
 						</a>
 						<div className="line-mid"></div>
-						<a href="http://localhost:3000/cinema">
+						<a
+							className="home-backroll"
+							href="http://localhost:3000/cinema">
 							<div className="camera-logo"></div>
+							<div className="text-home-rollback">
+								<span>
+									Đặt vé <br></br> xem phim
+								</span>
+							</div>
 						</a>
 					</div>
 					<div className="nav-right-container">

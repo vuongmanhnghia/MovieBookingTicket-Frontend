@@ -5,6 +5,7 @@
 	justify-content: center;
 
 	.home-nav-content {
+		box-shadow: #00000012 0px 5px 10px 0px;
 		position: fixed;
 		background: white;
 		z-index: 100;
@@ -43,12 +44,37 @@
 				background: #ccc;
 			}
 
-			.camera-logo {
-				background: url("../../assets/camera.svg") center no-repeat;
-				background-size: 36px 36px;
-				height: 36px;
-				width: 36px;
-				cursor: pointer;
+			.home-backroll {
+				display: flex;
+				align-items: center;
+				width: 150px;
+
+				&:hover {
+					text-decoration: none;
+					opacity: 0.8;
+				}
+
+				.camera-logo {
+					background: url("../../assets/camera.svg") center no-repeat;
+					background-size: 36px 36px;
+					height: 36px;
+					width: 36px;
+					cursor: pointer;
+				}
+
+				.text-home-rollback {
+					padding-left: 5px;
+					display: flex;
+					flex-wrap: wrap;
+
+					> span {
+						text-decoration: none;
+						color: #e2559c;
+						font-size: 14px;
+						font-weight: 700;
+						line-height: 1.1;
+					}
+				}
 			}
 
 			.account-content {
