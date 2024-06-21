@@ -8,6 +8,10 @@ class HomeNavigation extends Component {
 			<div className="home-nav-container">
 				<div className="home-nav-content">
 					<div className="nav-left-container">
+						<a href="https://github.com/vuongmanhnghia">
+							<div className="avatar"></div>
+						</a>
+						<div className="line-mid"></div>
 						<a href="http://localhost:3000/cinema">
 							<div className="camera-logo"></div>
 						</a>

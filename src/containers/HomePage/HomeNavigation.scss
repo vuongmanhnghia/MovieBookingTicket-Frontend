@@ -27,6 +27,22 @@
 				text-decoration: none;
 			}
 
+			.avatar {
+				background: url(../../assets/logo.png) center no-repeat;
+				background-size: cover;
+				height: 40px;
+				width: 40px;
+				cursor: pointer;
+				border-radius: 6px;
+			}
+
+			.line-mid {
+				margin-left: 5px;
+				height: 32px;
+				width: 1px;
+				background: #ccc;
+			}
+
 			.camera-logo {
 				background: url("../../assets/camera.svg") center no-repeat;
 				background-size: 36px 36px;
