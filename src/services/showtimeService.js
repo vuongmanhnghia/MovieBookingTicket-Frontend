@@ -5,7 +5,6 @@ const createNewShowtimeService = (data) => {
 };
 
 const getShowtimeByCinemaService = (name) => {
-	console.log(name);
 	return axios.get(`/api/get-showtime-by-cinema?name=${name}`);
 };
 

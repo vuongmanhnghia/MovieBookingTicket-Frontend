@@ -1,22 +1,61 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./DetailCinema.scss";
+import { getDetailCinemaService } from "../../../services/cinemaService";
+
 class DetailCinema extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			detailCinema: [],
+			tradeMark: "",
+			name: "",
+			rating: "",
+			image: "",
+			background: "",
+			slogan: "",
+			location: "",
+		};
+	}
+
+	async componentDidMount() {
+		if (this.props.id) {
+			let id = this.props.id;
+			let response = await getDetailCinemaService(id);
+			if (response && response.errCode === 0) {
+				this.setState({
+					detailCinema: response.data,
+				});
+			}
+			this.setState({
+				tradeMark: this.state.detailCinema[0].tradeMark,
+				rating: this.state.detailCinema[0].rating,
+				image: this.state.detailCinema[0].image,
+				background: this.state.detailCinema[0].background,
+			});
+			if (this.state.tradeMark === "Lotte Cinema") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim từ Hàn Quốc",
+				});
+			} else if (this.state.tradeMark === "CGV") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim lớn nhất Việt Nam",
+				});
+			} else if (this.state.tradeMark === "BHD Star") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim hiện đại",
+				});
+			} else if (this.state.tradeMark === "Beta Cinemas") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim Beta Cinemas",
+				});
+			}
+		}
 	}
 
 	render() {
-		let {
-			detailCinema,
-			tradeMark,
-			rating,
-			image,
-			background,
-			slogan,
-			location,
-		} = this.props;
+		let { detailCinema, tradeMark, image, background, slogan, rating } =
+			this.state;
 		return (
 			<>
 				<div className="cinema-detail-container">
@@ -62,9 +101,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		// fetchAllCinemas: () => dispatch(actions.fetchAllCinemas()),
-	};
+	return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailCinema);

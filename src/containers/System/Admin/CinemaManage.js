@@ -106,7 +106,6 @@ class CinemaManage extends Component {
 	};
 
 	render() {
-		console.log("state", this.state);
 		let { tradeMark, name, location, rating } = this.state;
 		return (
 			<div className="user-redux-container">
