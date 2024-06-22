@@ -21,16 +21,16 @@ class HomeNavigation extends Component {
 							<div className="avatar"></div>
 						</a>
 						<div className="line-mid"></div>
-						<a
+						<div
 							className="home-backroll"
-							href="http://localhost:3000/cinema">
+							onClick={() => this.props.history.push("/cinema")}>
 							<div className="camera-logo"></div>
 							<div className="text-home-rollback">
 								<span>
 									Đặt vé <br></br> xem phim
 								</span>
 							</div>
-						</a>
+						</div>
 					</div>
 					<div className="nav-right-container">
 						<div className="nav-right-content row">

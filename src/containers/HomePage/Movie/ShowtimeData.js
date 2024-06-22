@@ -27,12 +27,7 @@ class ShowtimeData extends Component {
 	async componentDidMount() {
 		await this.props.fetchAllTradeMarks();
 		// lọc các phần tử giống nhau trong allTrademarks
-
 		let allTradeMarks = this.filterTradeMarks(this.props.allTradeMarks);
-		// let allTradeMarks = this.props.allTradeMarks.filter(
-		// 	(item, index, self) =>
-		// 		index === self.findIndex((t) => t.trademark === item.trademark)
-		// );
 		this.setState({
 			allTradeMarks: allTradeMarks,
 		});

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import "./DefaultClass.scss";
+import "./HeaderShowtime.scss";
 
-class DefaultClass extends Component {
+class HeaderShowtime extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -17,7 +17,19 @@ class DefaultClass extends Component {
 	}
 
 	render() {
-		return <></>;
+		let { tradeMark } = this.props;
+		return (
+			<>
+				{" "}
+				<div className="header-showtime-container">
+					<div className="header-showtime-content">
+						<div className="header-showtime-title">
+							Lịch chiếu phim tại {tradeMark}
+						</div>
+					</div>
+				</div>
+			</>
+		);
 	}
 }
 
@@ -32,5 +44,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(DefaultClass)
+	connect(mapStateToProps, mapDispatchToProps)(HeaderShowtime)
 );

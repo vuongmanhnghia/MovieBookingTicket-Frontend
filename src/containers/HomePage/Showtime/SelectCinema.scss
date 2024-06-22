@@ -1,0 +1,50 @@
+.select-cinema-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 100px 300px;
+	padding-bottom: 0;
+	transition: all 0.3s;
+
+	.select-cinema-content {
+		gap: 30px;
+		width: 100%;
+		display: flex;
+		border: 1px solid #ebebeb;
+		border-radius: 12px;
+		box-shadow: #14100b12 0px 2px 8px 0px;
+		padding: 20px 30px;
+		transition: all 0.5s ease;
+
+		.select-cinema-item {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			transition: all 0.3s;
+
+			.select-cinema-item-logo {
+				width: 50px;
+				height: 50px;
+				background-size: cover !important;
+				border-radius: 12px;
+				border: 1px solid #ccc;
+			}
+
+			.active {
+				border: 1px solid #d82d8b;
+			}
+
+			.select-cinema-item-name {
+				font-size: 14px;
+				font-weight: 600;
+				color: #767474;
+			}
+
+			.active-tradeMark {
+				color: #d82d8b;
+			}
+		}
+	}
+}

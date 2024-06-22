@@ -4,23 +4,38 @@ import HomeNavigation from "../HomeNavigation";
 import "./DetailShowtime.scss";
 import Footer from "../Section/Footer";
 import { withRouter } from "react-router-dom";
-import DetailCinema from "../Cinema/DetailCinema";
+import ShowtimeSection from "../Cinema/ShowtimeSection";
+import SelectCinema from "./SelectCinema";
+import HeaderShowtime from "./HeaderShowtime";
+import HomeBanner from "./../Section/HomeBanner";
 class DetailShowtime extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			tradeMark: "Lotte Cinema",
+		};
 	}
 
-	async componentDidMount() {
-		console.log(this.props);
-	}
+	async componentDidMount() {}
+	async componentDidUpdate() {}
+
+	handleShowSelectCinema = async (item) => {
+		await this.setState({
+			tradeMark: item.tradeMark,
+		});
+	};
 
 	render() {
-		console.log(this.props);
+		let { tradeMark } = this.state;
 		return (
 			<>
 				<HomeNavigation />
-				{/* <DetailCinema /> */}
+				<HomeBanner />
+				<SelectCinema
+					handleShowSelectCinema={this.handleShowSelectCinema}
+				/>
+				<HeaderShowtime tradeMark={tradeMark} />
+				<ShowtimeSection id={tradeMark} />
 				<Footer />
 			</>
 		);

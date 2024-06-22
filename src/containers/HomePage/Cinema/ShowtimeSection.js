@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import "./DetailCinema.scss";
 import { getDetailCinemaService } from "../../../services/cinemaService";
 import { getShowtimeByCinemaService } from "../../../services/showtimeService";
@@ -25,13 +26,22 @@ class DetailCinema extends Component {
 			let id = this.props.id;
 			let response = await getDetailCinemaService(id);
 			if (response && response.errCode === 0) {
-				console.log(response.data);
 				this.setState({
 					detailCinema: response.data,
 				});
 			}
 			this.setState({
-				tradeMark: this.state.detailCinema[0].tradeMark,
+				image: this.state.detailCinema[0].image,
+			});
+		} else {
+			let id = "Lotte Cinema";
+			let response = await getDetailCinemaService(id);
+			if (response && response.errCode === 0) {
+				this.setState({
+					detailCinema: response.data,
+				});
+			}
+			this.setState({
 				image: this.state.detailCinema[0].image,
 			});
 		}
@@ -111,10 +121,41 @@ class DetailCinema extends Component {
 		}
 	};
 
+	async componentDidUpdate(prevProps, prevState) {
+		let activeCinema = document.querySelectorAll(".list-cinema-box");
+		activeCinema.forEach((item) => {
+			item.addEventListener("click", () => {
+				document
+					.querySelectorAll(".list-cinema-box")
+					.forEach((item) => item.classList.remove("active"));
+				item.classList.add("active");
+			});
+		});
+		if (prevProps.id !== this.props.id) {
+			this.setState({
+				dataShow: [],
+			});
+			document
+				.querySelectorAll(".list-cinema-box")
+				.forEach((item) => item.classList.remove("active"));
+			if (this.props.id) {
+				let id = this.props.id;
+				let response = await getDetailCinemaService(id);
+				if (response && response.errCode === 0) {
+					await this.setState({
+						detailCinema: response.data,
+					});
+				}
+				this.setState({
+					image: this.state.detailCinema[0].image,
+				});
+			}
+		}
+	}
+
 	render() {
 		let {
 			detailCinema,
-			tradeMark,
 			image,
 			nameCinemaShowtime,
 			location,
@@ -125,9 +166,6 @@ class DetailCinema extends Component {
 			<>
 				<div className="cinema-detail-showtime-container">
 					<div className="cinema-detail-showtime-content">
-						<div className="cinema-detail-showtime-title">
-							Lịch chiếu phim tại {tradeMark}
-						</div>
 						<div className="detail-showtime-content row">
 							<div className="null col-12"></div>
 							<div className="col-5 list-cinema">
@@ -250,4 +288,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailCinema);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(DetailCinema)
+);
