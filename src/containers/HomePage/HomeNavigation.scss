@@ -89,18 +89,17 @@
 			padding: 0 12px;
 
 			.nav-right-content {
-				position: relative;
 				display: flex;
 				justify-content: flex-end;
 				align-items: center;
 				flex-wrap: nowrap;
-				flex-direction: row;
-				gap: 20px;
 
 				.nav-text {
+					display: block;
 					font-size: 15px;
 					font-weight: 700;
 					color: #aaa;
+					padding: 20px 10px;
 
 					> div {
 						color: #4b4a4a;
@@ -109,6 +108,98 @@
 						&:hover {
 							color: black;
 						}
+					}
+				}
+
+				:root {
+					--primary: #fff;
+					--secondary: #f9dae7;
+				}
+
+				.dropdown {
+					position: relative;
+					width: 115px;
+					transition: all 0.3s;
+
+					&:hover .dropdown_list {
+						display: block;
+					}
+
+					.dropdown-select {
+						display: flex;
+						flex-wrap: nowrap;
+						justify-content: space-between;
+						width: 100%;
+
+						.fa-chevron-right {
+							font-size: 12px;
+							line-height: 24px;
+							transition: all 0.3s;
+						}
+					}
+
+					.dropdown_list {
+						width: 300px;
+						position: absolute;
+						left: 0;
+						top: calc(100% + 15px);
+						padding: 0;
+						background-color: #fff;
+						border-radius: 4px;
+						margin: 0;
+						color: #4b4a4a;
+						display: none;
+
+						&::before {
+							content: "";
+							height: 20px;
+							position: absolute;
+							left: 0;
+							right: 0;
+							transform: translateY(-100%);
+							background-color: transparent;
+						}
+
+						.dropdown_item {
+							padding: 15px !important;
+							cursor: pointer;
+							transition: 0.2s linear;
+
+							&:hover {
+								color: white;
+								background-color: #e876af;
+							}
+
+							&:first-child {
+								border-radius: 4px 4px 0 0;
+								position: relative;
+							}
+							&:last-child {
+								border-radius: 0 0 4px 4px;
+							}
+
+							&:first-child:before {
+								content: "";
+								position: absolute;
+								top: 0;
+								left: 20px;
+								border-left: 10px solid transparent;
+								border-right: 10px solid transparent;
+								border-bottom: 10px solid #fff;
+								transform: translateY(-100%);
+								transition: border-color 0.2s linear;
+							}
+
+							&:first-child:hover:before {
+								border-bottom-color: #e876af;
+							}
+						}
+					}
+				}
+
+				.dropdown:hover {
+					.fa-chevron-right {
+						rotate: 90deg;
 					}
 				}
 			}
