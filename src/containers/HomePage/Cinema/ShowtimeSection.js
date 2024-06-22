@@ -9,28 +9,20 @@ class DetailCinema extends Component {
 		this.state = {
 			detailCinema: [],
 			tradeMark: "",
-			name: "",
-			rating: "",
 			image: "",
-			background: "",
-			slogan: "",
-
 			nameCinemaShowtime: "",
 			location: "",
-
 			maxDate: [1, 2, 3, 4, 5, 6, 7],
 
 			dataShow: [],
 			showtimeCinema: "",
 			showtimeDate: "",
-
-			id: this.props.id,
 		};
 	}
 
 	async componentDidMount() {
-		if (this.state.id) {
-			let id = this.state.id;
+		if (this.props.id) {
+			let id = this.props.id;
 			let response = await getDetailCinemaService(id);
 			if (response && response.errCode === 0) {
 				console.log(response.data);
@@ -40,27 +32,8 @@ class DetailCinema extends Component {
 			}
 			this.setState({
 				tradeMark: this.state.detailCinema[0].tradeMark,
-				rating: this.state.detailCinema[0].rating,
 				image: this.state.detailCinema[0].image,
-				background: this.state.detailCinema[0].background,
 			});
-			if (this.state.tradeMark === "Lotte Cinema") {
-				this.setState({
-					slogan: "Hệ thống rạp chiếu phim từ Hàn Quốc",
-				});
-			} else if (this.state.tradeMark === "CGV") {
-				this.setState({
-					slogan: "Hệ thống rạp chiếu phim lớn nhất Việt Nam",
-				});
-			} else if (this.state.tradeMark === "BHD Star") {
-				this.setState({
-					slogan: "Hệ thống rạp chiếu phim hiện đại",
-				});
-			} else if (this.state.tradeMark === "Beta Cinemas") {
-				this.setState({
-					slogan: "Hệ thống rạp chiếu phim Beta Cinemas",
-				});
-			}
 		}
 
 		let activeCinema = document.querySelectorAll(".list-cinema-box");
