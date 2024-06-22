@@ -6,6 +6,7 @@ export const path = {
 	SYSTEM: "/system",
 	DETAIL_MOVIE: "/detail-movie/:id",
 	DETAIL_CINEMA: "/detail-cinema/:id",
+	DETAIL_SHOWTIME: "/detail-showtime",
 };
 
 export const languages = {

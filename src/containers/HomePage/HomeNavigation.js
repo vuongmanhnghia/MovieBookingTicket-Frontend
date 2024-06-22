@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./HomeNavigation.scss";
+import { withRouter } from "react-router-dom";
 
 class HomeNavigation extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+	handleViewShowtime = () => {
+		this.props.history.push(`/detail-showtime`);
+	};
+
 	render() {
 		return (
 			<div className="home-nav-container">
@@ -26,7 +35,9 @@ class HomeNavigation extends Component {
 					<div className="nav-right-container">
 						<div className="nav-right-content row">
 							<div className="nav-text">
-								<a href="#">Lịch chiếu</a>
+								<div onClick={() => this.handleViewShowtime()}>
+									Lịch chiếu
+								</div>
 							</div>
 							<div className="nav-text">
 								<a href="#">Rạp chiếu</a>
@@ -61,4 +72,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeNavigation);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(HomeNavigation)
+);

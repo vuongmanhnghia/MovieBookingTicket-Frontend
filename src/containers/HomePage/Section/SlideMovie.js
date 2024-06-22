@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./SlideMovie.scss";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
 // Import css files
 

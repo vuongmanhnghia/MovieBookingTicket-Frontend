@@ -102,9 +102,9 @@
 					font-weight: 700;
 					color: #aaa;
 
-					> a {
-						text-decoration: none;
+					> div {
 						color: #4b4a4a;
+						cursor: pointer;
 
 						&:hover {
 							color: black;

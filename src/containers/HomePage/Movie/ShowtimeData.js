@@ -243,7 +243,6 @@ class ShowtimeData extends Component {
 							</div>
 							<div className="showtimeData-showtime">
 								{this.state.showtimeData.map((item) => {
-									console.log("item:", item);
 									return (
 										<div className="box-showtime-cinema">
 											<div className="cinema-info">

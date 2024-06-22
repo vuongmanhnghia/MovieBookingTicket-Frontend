@@ -61,7 +61,6 @@ class Cinema extends Component {
 	}
 
 	handleViewDetailCinema = (tradeMark) => {
-		console.log(tradeMark);
 		this.props.history.push(`/detail-cinema/${tradeMark}`);
 	};
 
