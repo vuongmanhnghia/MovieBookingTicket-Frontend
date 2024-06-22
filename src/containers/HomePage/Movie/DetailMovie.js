@@ -5,6 +5,7 @@ import "./DetailMovie.scss";
 import { getDetailMovieService } from "../../../services/movieService";
 import ShowtimeData from "./ShowtimeData";
 import Footer from "../Section/Footer";
+import { withRouter } from "react-router-dom";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -50,6 +51,40 @@ class DetailMovie extends Component {
 			});
 		}
 	}
+
+	async componentDidUpdate() {}
+
+	handleNewTabMovie = async (item) => {
+		await this.props.history.push(`/detail-movie/${item.id}`);
+		if (this.prevProps !== this.props) {
+			if (
+				this.props.match &&
+				this.props.match.params &&
+				this.props.match.params.id
+			) {
+				let id = this.props.match.params.id;
+				let response = await getDetailMovieService(id);
+				if (response && response.errCode === 0) {
+					await this.setState({
+						detailMovie: response.data,
+					});
+				}
+				await this.setState({
+					title: this.state.detailMovie.title,
+					description: this.state.detailMovie.description,
+					rating: this.state.detailMovie.rating,
+					duration: this.state.detailMovie.duration,
+					releaseDate: this.state.detailMovie.releaseDate,
+					genre: this.state.detailMovie.genre,
+					director: this.state.detailMovie.director,
+					image: this.state.detailMovie.image,
+					showtimeData: this.state.detailMovie.showtimeData,
+					date: new Date(this.state.releaseDate),
+					newDescription: String(this.state.detailMovie.description),
+				});
+			}
+		}
+	};
 
 	render() {
 		let { image, title } = this.state;
@@ -116,6 +151,7 @@ class DetailMovie extends Component {
 					showtimeData={this.state.showtimeData}
 					image={image}
 					title={title}
+					handleNewTabMovie={this.handleNewTabMovie}
 				/>
 				<Footer />
 			</>
@@ -133,4 +169,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailMovie);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(DetailMovie)
+);

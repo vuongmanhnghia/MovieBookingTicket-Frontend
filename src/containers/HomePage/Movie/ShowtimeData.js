@@ -25,6 +25,7 @@ class ShowtimeData extends Component {
 	}
 
 	async componentDidMount() {
+		this.handleView();
 		await this.props.fetchAllTradeMarks();
 		// lọc các phần tử giống nhau trong allTrademarks
 		let allTradeMarks = this.filterTradeMarks(this.props.allTradeMarks);
@@ -153,9 +154,16 @@ class ShowtimeData extends Component {
 	}
 
 	handleViewDetailMovie = async (item) => {
-		await this.props.history.push(`/cinema/detail-movie/${item.id}`);
-		await this.props.history.push(`/detail-movie/${item.id}`);
-		await this.props.fetchDetailMovie(item.id);
+		this.props.handleNewTabMovie(item);
+		document
+			.querySelectorAll(".box-date")
+			.forEach((item) => item.classList.remove("active"));
+		document
+			.querySelectorAll("div.logo-cinema")
+			.forEach((item) => item.classList.remove("active"));
+		this.setState({
+			showtimeData: [],
+		});
 	};
 
 	handleClickBooking = async (item) => {

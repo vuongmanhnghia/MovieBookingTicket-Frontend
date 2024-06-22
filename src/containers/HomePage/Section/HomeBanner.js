@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./HomeBanner.scss";
+import { withRouter } from "react-router-dom";
 
 class HomeBanner extends Component {
 	render() {
@@ -32,7 +33,13 @@ class HomeBanner extends Component {
 							</ul>
 						</div>
 						<div className="btn-booking-content">
-							<div className="btn-booking">Đặt vé ngay</div>
+							<div
+								className="btn-booking"
+								onClick={() =>
+									this.props.history.push(`/detail-showtime`)
+								}>
+								Đặt vé ngay
+							</div>
 						</div>
 					</div>
 					<div className="home-header-banner"></div>
@@ -52,4 +59,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeBanner);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(HomeBanner)
+);
