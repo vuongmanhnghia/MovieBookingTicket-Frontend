@@ -38,6 +38,12 @@ class HomeNavigation extends Component {
 		});
 	}
 
+	// componentDidUpdate(prevProps) {
+	// 	if(this.prevProps !== this.props) {
+
+	// 	}
+	// }
+
 	render() {
 		let { allTradeMarks } = this.state;
 		return (

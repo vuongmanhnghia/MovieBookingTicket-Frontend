@@ -15,6 +15,8 @@ class DetailCinema extends Component {
 			background: "",
 			slogan: "",
 			location: "",
+
+			id: "",
 		};
 	}
 
@@ -28,6 +30,43 @@ class DetailCinema extends Component {
 				});
 			}
 			this.setState({
+				id: this.props.id,
+				tradeMark: this.state.detailCinema[0].tradeMark,
+				rating: this.state.detailCinema[0].rating,
+				image: this.state.detailCinema[0].image,
+				background: this.state.detailCinema[0].background,
+			});
+			if (this.state.tradeMark === "Lotte Cinema") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim từ Hàn Quốc",
+				});
+			} else if (this.state.tradeMark === "CGV") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim lớn nhất Việt Nam",
+				});
+			} else if (this.state.tradeMark === "BHD Star") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim hiện đại",
+				});
+			} else if (this.state.tradeMark === "Beta Cinemas") {
+				this.setState({
+					slogan: "Hệ thống rạp chiếu phim Beta Cinemas",
+				});
+			}
+		}
+	}
+
+	async componentDidUpdate(prevPops) {
+		if (this.props.id !== this.state.id) {
+			let id = this.props.id;
+			let response = await getDetailCinemaService(id);
+			if (response && response.errCode === 0) {
+				this.setState({
+					detailCinema: response.data,
+				});
+			}
+			this.setState({
+				id: this.props.id,
 				tradeMark: this.state.detailCinema[0].tradeMark,
 				rating: this.state.detailCinema[0].rating,
 				image: this.state.detailCinema[0].image,
