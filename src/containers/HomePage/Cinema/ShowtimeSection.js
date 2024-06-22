@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import "./DetailCinema.scss";
+import "./ShowtimeSection.scss";
 import { getDetailCinemaService } from "../../../services/cinemaService";
 import { getShowtimeByCinemaService } from "../../../services/showtimeService";
-class DetailCinema extends Component {
+import BookingModal from "../Movie/BookingModal";
+import * as actions from "../../../store/actions";
+class ShowtimeSection extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			detailCinema: [],
-			tradeMark: "",
+			tradeMark: "Lotte Cinema",
+			background: "",
 			image: "",
-			nameCinemaShowtime: "",
+			nameCinemaShowtime: "Lotte Hà Đông",
 			location: "",
 			maxDate: [1, 2, 3, 4, 5, 6, 7],
 
 			dataShow: [],
 			showtimeCinema: "",
-			showtimeDate: "",
+			showtimeDate: new Date().getDate(),
+
+			isOpenModal: false,
+			dataShowtime: {},
+			dataScreen: {},
 		};
 	}
 
@@ -31,7 +38,8 @@ class DetailCinema extends Component {
 				});
 			}
 			this.setState({
-				image: this.state.detailCinema[0].image,
+				// image: this.state.detailCinema[0].image,
+				background: this.state.detailCinema[0].image,
 			});
 		} else {
 			let id = "Lotte Cinema";
@@ -42,7 +50,8 @@ class DetailCinema extends Component {
 				});
 			}
 			this.setState({
-				image: this.state.detailCinema[0].image,
+				// image: this.state.detailCinema[0].image,
+				background: this.state.detailCinema[0].image,
 			});
 		}
 
@@ -98,8 +107,6 @@ class DetailCinema extends Component {
 		).data;
 		if (!dataShow || dataShow.length === 0) {
 			return;
-		} else if (this.state.showtimeDate === "") {
-			return dataShow;
 		} else if (this.state.showtimeCinema === "") {
 			return;
 		} else {
@@ -135,6 +142,7 @@ class DetailCinema extends Component {
 			this.setState({
 				dataShow: [],
 			});
+			document.querySelector(".cinema-box-content").style = "opacity: 0";
 			document
 				.querySelectorAll(".list-cinema-box")
 				.forEach((item) => item.classList.remove("active"));
@@ -146,21 +154,47 @@ class DetailCinema extends Component {
 						detailCinema: response.data,
 					});
 				}
-				this.setState({
-					image: this.state.detailCinema[0].image,
+				await this.setState({
+					// image: this.state.detailCinema[0].image,
+					background: this.state.detailCinema[0].image,
+					tradeMark: this.state.detailCinema[0].tradeMark,
 				});
 			}
 		}
 	}
 
+	handleViewBookingModal = async (item) => {
+		console.log(item);
+		this.setState({
+			image: item.image,
+		});
+		await this.props.fetchSeatsByShowtime(item);
+		this.setState({
+			isOpenModal: true,
+			dataShowtime: item,
+			dataScreen: this.props.screenData,
+		});
+	};
+
+	closeBookingModal = () => {
+		this.setState({
+			isOpenModal: false,
+		});
+	};
+
 	render() {
 		let {
+			tradeMark,
 			detailCinema,
 			image,
+			background,
 			nameCinemaShowtime,
 			location,
 			maxDate,
 			dataShow,
+			isOpenModal,
+			dataScreen,
+			dataShowtime,
 		} = this.state;
 		return (
 			<>
@@ -195,7 +229,7 @@ class DetailCinema extends Component {
 										<div
 											className="showtime-cinema-box-logo"
 											style={{
-												background: `url(${image})`,
+												background: `url(${background})`,
 											}}></div>
 										<div className="showtime-cinema-box-info">
 											<div className="showtime-cinema-box-name">
@@ -212,17 +246,31 @@ class DetailCinema extends Component {
 											maxDate.length > 0 &&
 											maxDate.map((item, index) => {
 												let date = new Date();
-												return (
-													<div
-														className="box-date"
-														onClick={() =>
-															this.handleChangeDate(
-																date.getDate() + index
-															)
-														}>
-														{date.getDate() + index}
-													</div>
-												);
+												if (index === 0) {
+													return (
+														<div
+															className="box-date active"
+															onClick={() =>
+																this.handleChangeDate(
+																	date.getDate() + index
+																)
+															}>
+															{date.getDate() + index}
+														</div>
+													);
+												} else {
+													return (
+														<div
+															className="box-date"
+															onClick={() =>
+																this.handleChangeDate(
+																	date.getDate() + index
+																)
+															}>
+															{date.getDate() + index}
+														</div>
+													);
+												}
 											})}
 									</div>
 									<div className="list-showtime-content">
@@ -250,11 +298,26 @@ class DetailCinema extends Component {
 																			item.showtime.length >
 																				0 &&
 																			item.showtime.map(
-																				(item) => {
+																				(it) => {
+																					console.log(
+																						nameCinemaShowtime
+																					);
+																					it.cinemaId =
+																						nameCinemaShowtime;
+																					it.tradeMarkId =
+																						tradeMark;
+																					it.image =
+																						item.movie.image;
 																					return (
-																						<div className="box-showtime-startTime">
+																						<div
+																							onClick={() =>
+																								this.handleViewBookingModal(
+																									it
+																								)
+																							}
+																							className="box-showtime-startTime">
 																							{
-																								item.startTime
+																								it.startTime
 																							}
 																						</div>
 																					);
@@ -273,6 +336,13 @@ class DetailCinema extends Component {
 						</div>
 					</div>
 				</div>
+				<BookingModal
+					isOpenModal={isOpenModal}
+					closeBookingModal={this.closeBookingModal}
+					dataScreen={dataScreen}
+					dataShowtime={dataShowtime}
+					image={this.state.image}
+				/>
 			</>
 		);
 	}
@@ -281,13 +351,17 @@ class DetailCinema extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		screenData: state.showtime.seatsByShowtime,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchSeatsByShowtime: (data) =>
+			dispatch(actions.fetchSeatsByShowtime(data)),
+	};
 };
 
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(DetailCinema)
+	connect(mapStateToProps, mapDispatchToProps)(ShowtimeSection)
 );

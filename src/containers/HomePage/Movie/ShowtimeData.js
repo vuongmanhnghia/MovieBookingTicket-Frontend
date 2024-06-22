@@ -138,6 +138,7 @@ class ShowtimeData extends Component {
 	};
 
 	groupCinema(arrShowtime) {
+		console.log(arrShowtime);
 		const groups = arrShowtime.reduce((acc, item) => {
 			const group = acc[item.cinemaId] || [];
 			group.push(item);
@@ -179,11 +180,10 @@ class ShowtimeData extends Component {
 			dataShowtime,
 			dataScreen,
 			allTradeMarks,
-			showtimeData,
+			// showtimeData,
 			imageTradeMark,
 		} = this.state;
 		let maxDate = [1, 2, 3, 4, 5, 6, 7];
-		// let releaseTime = this.props.showtimeData.;
 		return (
 			<>
 				<div className="movie-detail-showtimeData-container row">
