@@ -38,12 +38,6 @@ class HomeNavigation extends Component {
 		});
 	}
 
-	// componentDidUpdate(prevProps) {
-	// 	if(this.prevProps !== this.props) {
-
-	// 	}
-	// }
-
 	render() {
 		let { allTradeMarks } = this.state;
 		return (
@@ -99,7 +93,12 @@ class HomeNavigation extends Component {
 							</div>
 
 							<div className="nav-text">
-								<div>Phim chiếu</div>
+								<div
+									onClick={() =>
+										this.props.history.push(`/all-movies`)
+									}>
+									Phim chiếu
+								</div>
 							</div>
 							<div className="nav-text">
 								<div>Review phim</div>

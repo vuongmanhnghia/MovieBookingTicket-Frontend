@@ -284,11 +284,16 @@ class ShowtimeData extends Component {
 						<div className="more-movie-content">
 							{allMovies &&
 								allMovies.length > 0 &&
-								allMovies.map((item) => {
+								allMovies.map((item, index) => {
+									if (index >= 10) {
+										return;
+									}
+
 									let imageBase64 = new Buffer(
-										item.image,
+										allMovies[allMovies.length - index - 1].image,
 										"base64"
 									).toString("binary");
+
 									return (
 										<>
 											<div className="divider"></div>
@@ -299,22 +304,42 @@ class ShowtimeData extends Component {
 														backgroundImage: `url(${imageBase64})`,
 													}}
 													onClick={() =>
-														this.handleViewDetailMovie(item)
+														this.handleViewDetailMovie(
+															allMovies[
+																allMovies.length - index - 1
+															]
+														)
 													}></div>
 												<div className="more-box-movie-content">
 													<div className="more-box-movie-title">
-														{item.title.length < 40
-															? item.title
-															: `${item.title.slice(0, 37)}...`}
+														{allMovies[
+															allMovies.length - index - 1
+														].title.length < 40
+															? allMovies[
+																	allMovies.length - index - 1
+															  ].title
+															: `${allMovies[
+																	allMovies.length - index - 1
+															  ].title.slice(0, 37)}...`}
 													</div>
 													<div className="more-box-movie-genre">
-														{item.genre.length < 25
-															? item.genre
-															: `${item.genre.slice(0, 28)}...`}
+														{allMovies[
+															allMovies.length - index - 1
+														].genre.length < 25
+															? allMovies[
+																	allMovies.length - index - 1
+															  ].genre
+															: `${allMovies[
+																	allMovies.length - index - 1
+															  ].genre.slice(0, 28)}...`}
 													</div>
 													<div className="more-box-movie-rating">
 														<i class="fas fa-star"></i>
-														{item.rating}
+														{
+															allMovies[
+																allMovies.length - index - 1
+															].rating
+														}
 													</div>
 												</div>
 											</div>

@@ -61,11 +61,11 @@ class MovieManage extends Component {
 		}
 	};
 
-	handleSaveMovie = () => {
+	handleSaveMovie = async () => {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
 
-		this.props.createNewMovie({
+		await this.props.createNewMovie({
 			title: this.state.title,
 			description: this.state.description,
 			genre: this.state.genre,
@@ -74,6 +74,17 @@ class MovieManage extends Component {
 			rating: this.state.rating,
 			director: this.state.director,
 			image: this.state.image,
+		});
+		this.setState({
+			title: "",
+			description: "",
+			genre: "",
+			duration: "",
+			releaseDate: "",
+			rating: "",
+			director: "",
+			image: "",
+			previewImgUrl: "",
 		});
 	};
 	checkValidateInput = () => {
