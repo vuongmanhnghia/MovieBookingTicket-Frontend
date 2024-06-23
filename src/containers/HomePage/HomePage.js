@@ -8,8 +8,23 @@ import HomeBanner from "./Section/HomeBanner";
 import Footer from "./Section/Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import DetailShowtime from "./Showtime/DetailShowtime";
+import SelectCinema from "./Showtime/SelectCinema";
+import HeaderShowtime from "./Showtime/HeaderShowtime";
+import ShowtimeSection from "./Cinema/ShowtimeSection";
 
 class HomePage extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			tradeMark: "Lotte Cinema",
+		};
+	}
+	handleShowSelectCinema = async (item) => {
+		await this.setState({
+			tradeMark: item.tradeMark,
+		});
+	};
 	render() {
 		let settings = {
 			dots: true,
@@ -18,11 +33,17 @@ class HomePage extends Component {
 			slidesToShow: 5,
 			slidesToScroll: 5,
 		};
+		let { tradeMark } = this.state;
 		return (
 			<div>
 				<HomeNavigation />
 				<HomeBanner />
 				<SlideMovie settings={settings} />
+				<SelectCinema
+					handleShowSelectCinema={this.handleShowSelectCinema}
+				/>
+				<HeaderShowtime tradeMark={tradeMark} />
+				<ShowtimeSection id={tradeMark} />
 				<Cinema />
 				<Footer />
 			</div>

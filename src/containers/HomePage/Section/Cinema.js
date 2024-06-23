@@ -116,9 +116,13 @@ class Cinema extends Component {
 							})}
 					</div>
 					<div className="cinema-section-btn">
-						<a className="btn-primary medium" href="#">
+						<div
+							className="btn-primary medium"
+							onClick={() =>
+								this.props.history.push(`/detail-showtime`)
+							}>
 							Tìm rạp chiếu
-						</a>
+						</div>
 					</div>
 				</div>
 			</div>

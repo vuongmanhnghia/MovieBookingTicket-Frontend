@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import ShowtimeSection from "../Cinema/ShowtimeSection";
 import SelectCinema from "./SelectCinema";
 import HeaderShowtime from "./HeaderShowtime";
-import HomeBanner from "./../Section/HomeBanner";
+import BannerShowtime from "./BannerShowtime";
 class DetailShowtime extends Component {
 	constructor(props) {
 		super(props);
@@ -30,7 +30,7 @@ class DetailShowtime extends Component {
 		return (
 			<>
 				<HomeNavigation />
-				<HomeBanner />
+				<BannerShowtime />
 				<SelectCinema
 					handleShowSelectCinema={this.handleShowSelectCinema}
 				/>
