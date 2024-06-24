@@ -4,6 +4,7 @@ import {
 	createNewMovieService,
 	getAllMoviesService,
 	getDetailMovieService,
+	getMoviesPageService,
 } from "../../services/movieService";
 import { toast } from "react-toastify";
 
@@ -96,6 +97,29 @@ export const fetchDetailMovie = (id) => {
 			console.log("fetch detail movie errol: ", e);
 			dispatch({
 				type: actionTypes.FETCH_DETAIL_MOVIE_FAILED,
+			});
+		}
+	};
+};
+
+export const fetchMoviesPage = (page, limit) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getMoviesPageService(page, limit);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_MOVIES_PAGE_SUCCESS,
+					moviesPage: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_MOVIES_PAGE_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch movies page errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_MOVIES_PAGE_FAILED,
 			});
 		}
 	};

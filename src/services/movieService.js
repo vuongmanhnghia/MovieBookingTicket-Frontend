@@ -16,9 +16,14 @@ const getDetailMovieService = (id) => {
 	return axios.get(`/api/get-detail-movie?id=${id}`);
 };
 
+const getMoviesPageService = (page, limit) => {
+	return axios.get(`/api/get-movies?page=${page}&limit=${limit}`);
+};
+
 export {
 	getTopMoviesService,
 	createNewMovieService,
 	getDetailMovieService,
 	getAllMoviesService,
+	getMoviesPageService,
 };

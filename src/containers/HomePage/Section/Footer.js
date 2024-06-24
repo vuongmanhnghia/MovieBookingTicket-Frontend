@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Footer.scss";
+import { withRouter } from "react-router-dom";
 
 class Footer extends Component {
 	render() {
@@ -8,10 +9,30 @@ class Footer extends Component {
 			<div className="section-footer-container">
 				<div className="footer-container-content">
 					<div className="footer-content">
-						<div>MUA VÉ XEM PHIM</div>
-						<div>LỊCH CHIẾU PHIM</div>
-						<div>RẠP CHIẾU PHIM</div>
-						<div>PHIM CHIẾU RẠP</div>
+						<div
+							className="footer-title"
+							onClick={() => this.props.history.push("/cinema")}>
+							MUA VÉ XEM PHIM
+						</div>
+						<div
+							className="footer-title"
+							onClick={() =>
+								this.props.history.push("/detail-showtime")
+							}>
+							LỊCH CHIẾU PHIM
+						</div>
+						<div
+							className="footer-title"
+							onClick={() =>
+								this.props.history.push("/detail-showtime")
+							}>
+							RẠP CHIẾU PHIM
+						</div>
+						<div
+							className="footer-title"
+							onClick={() => this.props.history.push("/all-movies")}>
+							PHIM CHIẾU RẠP
+						</div>
 					</div>
 					<div className="call-me">
 						<div className="call-me-text">KẾT NỐI VỚI TÔI</div>
@@ -54,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Footer));

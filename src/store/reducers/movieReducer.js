@@ -4,6 +4,7 @@ const initialState = {
 	topMovies: [],
 	allMovies: [],
 	detailMovie: {},
+	moviesPage: [],
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -40,6 +41,18 @@ const movieReducer = (state = initialState, action) => {
 
 		case actionTypes.FETCH_DETAIL_MOVIE_FAILED:
 			state.detailMovie = {};
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_MOVIES_PAGE_SUCCESS:
+			state.moviesPage = action.moviesPage;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_MOVIES_PAGE_FAILED:
+			state.moviesPage = [];
 			return {
 				...state,
 			};

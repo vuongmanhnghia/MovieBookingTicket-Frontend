@@ -100,7 +100,7 @@ class HomeNavigation extends Component {
 									Phim chiếu
 								</div>
 							</div>
-							<div className="nav-text">
+							{/* <div className="nav-text">
 								<div>Review phim</div>
 							</div>
 							<div className="nav-text">
@@ -108,7 +108,7 @@ class HomeNavigation extends Component {
 							</div>
 							<div className="nav-text">
 								<div>Blog phim</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

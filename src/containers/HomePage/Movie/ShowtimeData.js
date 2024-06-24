@@ -126,12 +126,6 @@ class ShowtimeData extends Component {
 			} else if (date === "" && item.tradeMarkId === tradeMark) {
 				arrResult.push(item);
 			}
-			// else if (
-			// 	new Date(item.startDate).getDate() === date &&
-			// 	tradeMark === ""
-			// ) {
-			// 	arrResult.push(item);
-			// }
 		});
 
 		let result = this.groupCinema(arrResult);
@@ -161,6 +155,9 @@ class ShowtimeData extends Component {
 		document
 			.querySelectorAll("div.logo-cinema")
 			.forEach((item) => item.classList.remove("active"));
+		document
+			.querySelectorAll("div.tradeMark-cinema")
+			.forEach((item) => item.classList.remove("active-tradeMark"));
 		this.setState({
 			showtimeData: [],
 		});
