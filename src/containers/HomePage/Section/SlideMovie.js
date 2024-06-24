@@ -4,6 +4,7 @@ import "./SlideMovie.scss";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
 import { withRouter } from "react-router-dom";
+import TrailerMovie from "../Movie/TrailerMovie";
 
 // Import css files
 
@@ -12,6 +13,7 @@ class SlideMovie extends Component {
 		super(props);
 		this.state = {
 			arrMovies: [],
+			isOpenModal: false,
 		};
 	}
 
@@ -27,12 +29,31 @@ class SlideMovie extends Component {
 		}
 	}
 
+	closeBookingModal = () => {
+		this.setState({
+			isOpenModal: false,
+		});
+	};
+
 	handleViewDetailMovie = async (item) => {
 		await this.props.history.push(`/detail-movie/${item.id}`);
 	};
 
+	handleClickBooking = async (item) => {
+		await this.props.fetchSeatsByShowtime(item);
+		this.setState({
+			isOpenModal: true,
+			dataShowtime: item,
+			dataScreen: this.props.screenData,
+		});
+	};
+
+	handleViewTraileMovie = async (item) => {
+		console.log("item", item);
+	};
+
 	render() {
-		let arrMovies = this.state.arrMovies;
+		let { isOpenModal, dataShowtime, dataScreen, arrMovies } = this.state;
 		return (
 			<div className="movie-section-container">
 				<div className="movie-section-content">
@@ -56,17 +77,21 @@ class SlideMovie extends Component {
 
 										return (
 											<div className="box-slide-customize">
-												<div
-													className="box-image-movie"
-													onClick={() =>
-														this.handleViewDetailMovie(item)
-													}>
+												<div className="box-image-movie">
 													<div
+														onClick={() =>
+															this.handleViewDetailMovie(item)
+														}
 														className="bg-image"
 														style={{
 															backgroundImage: `url(${imageBase64})`,
 														}}
 													/>
+													<i
+														class="far fa-play-circle"
+														onClick={() =>
+															this.handleViewTraileMovie(item)
+														}></i>
 												</div>
 												<div className="box-movie-text">
 													<div className="title-movie">
@@ -90,6 +115,12 @@ class SlideMovie extends Component {
 						</div>
 					</div>
 				</div>
+				<TrailerMovie
+					isOpenModal={isOpenModal}
+					closeBookingModal={this.closeBookingModal}
+					dataScreen={dataScreen}
+					dataShowtime={dataShowtime}
+				/>
 			</div>
 		);
 	}

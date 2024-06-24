@@ -47,6 +47,14 @@
 						margin-bottom: 10px;
 						border-radius: 6px;
 
+						&:hover {
+							.bg-image {
+								opacity: 0.8;
+								width: 120%;
+								height: 120%;
+							}
+						}
+
 						.bg-image {
 							background-size: cover;
 							background-position: center;
@@ -56,11 +64,17 @@
 							padding: 8px;
 							cursor: pointer;
 							transition: ease 0.3s;
+						}
+
+						.fa-play-circle {
+							position: absolute;
+							font-size: 45px;
+							color: #fff;
+							cursor: pointer;
+							transition: 0.3s ease-in-out;
 
 							&:hover {
-								opacity: 0.8;
-								width: 130%;
-								height: 130%;
+								color: #eb2f96;
 							}
 						}
 					}
