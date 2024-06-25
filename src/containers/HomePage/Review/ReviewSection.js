@@ -80,7 +80,7 @@ class ReviewSection extends Component {
 							})}
 					</div>
 					{totalPage > 0 && (
-						<div className="all-movies-footer">
+						<div className="review-movies-footer">
 							<ReactPaginate
 								nextLabel={
 									<i class="fa fa-angle-right" aria-hidden="true"></i>

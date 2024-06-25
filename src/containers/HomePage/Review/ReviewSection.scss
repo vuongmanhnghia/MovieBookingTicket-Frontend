@@ -1,12 +1,14 @@
 .review-section-content {
-	height: 1000px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	padding: 65px 150px;
 
 	.review-section-list {
 		display: grid;
 		gap: 24px 20px;
 		grid-template-columns: 349.332px 349.332px 349.347px;
-		grid-template-rows: 477.23px 477.244px;
+		grid-template-rows: 200px 200px;
 		line-height: 24px;
 
 		.box-review-movie {
@@ -52,4 +54,50 @@
 			}
 		}
 	}
+
+	.review-movies-footer {
+		margin-top: 80px;
+		margin-bottom: 20px;
+
+		.pagination {
+			margin: 0;
+			gap: 10px;
+
+			.page-item {
+				width: 32px;
+				height: 32px;
+
+				.page-link {
+					display: list-item;
+					font-size: 14px;
+					line-height: 15px;
+					text-align: center;
+					width: 32px;
+					height: 32px;
+					border-radius: 4px;
+					background-color: #efefef;
+					border: 1px solid #ccc;
+					transition: all 0.3s ease-in-out;
+					color: black;
+					font-weight: 500;
+
+					&:hover {
+						background-color: #ccc;
+					}
+				}
+			}
+		}
+	}
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: #fff;
+	background-color: white !important;
+	border-color: #007bff;
 }
