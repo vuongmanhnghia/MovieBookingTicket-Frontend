@@ -9,15 +9,18 @@ class SelectCinema extends Component {
 		super(props);
 		this.state = {
 			allTradeMarks: [],
+			selectTradeMark: "",
 		};
 	}
 
 	async componentDidMount() {
 		await this.props.fetchAllTradeMarks();
 		let allTradeMarks = this.filterTradeMarks(this.props.allTradeMarks);
-		this.setState({
+		await this.setState({
 			allTradeMarks: allTradeMarks,
+			selectTradeMark: allTradeMarks[0].tradeMark,
 		});
+		this.getSelectedCinema();
 
 		let activeCinema = document.querySelectorAll("div.select-cinema-item");
 		let activeLogo = document.querySelectorAll("div.select-cinema-item-logo");
@@ -56,7 +59,11 @@ class SelectCinema extends Component {
 	}
 
 	getSelectedCinema = (item) => {
-		this.props.handleShowSelectCinema(item);
+		if (item) {
+			this.props.handleShowSelectCinema(item.tradeMark);
+		} else {
+			this.props.handleShowSelectCinema(this.state.selectTradeMark);
+		}
 	};
 
 	render() {

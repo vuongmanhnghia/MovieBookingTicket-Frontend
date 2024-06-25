@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomeNavigation from "../HomeNavigation";
-import "./DetailCinema.scss";
 import Footer from "../Section/Footer";
 import NavigationSection from "./NavigationSection";
 import ShowtimeSection from "./ShowtimeSection";

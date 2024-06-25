@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import "./AllMovies.scss";
 import * as actions from "../../../store/actions";
 import ReactPaginate from "react-paginate";
+import TrailerMovie from "./TrailerMovie";
 
 class AllMovies extends Component {
 	constructor(props) {
@@ -13,6 +14,9 @@ class AllMovies extends Component {
 			currentPage: 1,
 			currentLimit: 10,
 			totalPage: 0,
+
+			isOpenModal: false,
+			dataMovie: {},
 		};
 	}
 
@@ -36,8 +40,21 @@ class AllMovies extends Component {
 		this.fetchMovies();
 	};
 
+	closeTrailerModal = () => {
+		this.setState({
+			isOpenModal: false,
+		});
+	};
+
+	handleViewTraileMovie = async (item) => {
+		this.setState({
+			isOpenModal: true,
+			dataMovie: item,
+		});
+	};
+
 	render() {
-		let { totalPage, listMovies } = this.state;
+		let { totalPage, listMovies, isOpenModal, dataMovie } = this.state;
 		return (
 			<>
 				<div className="all-movies-container">
@@ -48,18 +65,22 @@ class AllMovies extends Component {
 								listMovies.map((movie, index) => {
 									return (
 										<div className="box-movie" key={index}>
-											<div
-												className="box-movie-image-content"
-												onClick={() =>
-													this.props.history.push(
-														`/detail-movie/${movie.id}`
-													)
-												}>
+											<div className="box-movie-image-content">
 												<div
 													className="box-movie-image"
 													style={{
 														background: `url(${movie.image})`,
-													}}></div>
+													}}
+													onClick={() =>
+														this.props.history.push(
+															`/detail-movie/${movie.id}`
+														)
+													}></div>
+												<i
+													class="far fa-play-circle"
+													onClick={() =>
+														this.handleViewTraileMovie(movie)
+													}></i>
 											</div>
 											<div
 												className="box-movie-content"
@@ -121,6 +142,11 @@ class AllMovies extends Component {
 								/>
 							</div>
 						)}
+						<TrailerMovie
+							isOpenModal={isOpenModal}
+							closeBookingModal={this.closeTrailerModal}
+							dataMovie={dataMovie}
+						/>
 					</div>
 				</div>
 			</>

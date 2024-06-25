@@ -30,6 +30,10 @@
 				display: block;
 
 				.box-movie-image-content {
+					position: relative;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 					width: 202px;
 					height: 288px;
 					overflow: hidden;
@@ -37,6 +41,11 @@
 					box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1),
 						0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
+					&:hover {
+						.box-movie-image {
+							transform: scale(1.1);
+						}
+					}
 					.box-movie-image {
 						width: 202px;
 						height: 288px;
@@ -44,9 +53,18 @@
 						background-size: cover !important;
 						cursor: pointer;
 						transition: all 0.3s ease-in-out;
+					}
+
+					.fa-play-circle {
+						position: absolute;
+						font-size: 45px;
+						color: #ede5e5;
+						cursor: pointer;
+						transition: 0.3s ease-in-out;
 
 						&:hover {
 							transform: scale(1.1);
+							color: white;
 						}
 					}
 				}

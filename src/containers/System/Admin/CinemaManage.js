@@ -50,7 +50,7 @@ class CinemaManage extends Component {
 		let file = data[0];
 		if (file) {
 			let base64 = await CommonUtils.getBase64(file);
-			let objectUrl = URL.createObjectURL(file);
+			let objectUrl = await URL.createObjectURL(file);
 			this.setState({
 				previewImgUrl: objectUrl,
 				image: base64,

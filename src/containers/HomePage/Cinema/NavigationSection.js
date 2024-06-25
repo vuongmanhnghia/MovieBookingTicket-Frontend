@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./DetailCinema.scss";
+import "./NavigationSection.scss";
 import { getDetailCinemaService } from "../../../services/cinemaService";
 
-class DetailCinema extends Component {
+class NavigationSection extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -143,4 +143,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailCinema);
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationSection);

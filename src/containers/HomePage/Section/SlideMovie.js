@@ -71,7 +71,6 @@ class SlideMovie extends Component {
 								{arrMovies &&
 									arrMovies.length > 0 &&
 									arrMovies.map((item, index) => {
-										console.log("item", item);
 										return (
 											<div className="box-slide-customize">
 												<div className="box-image-movie">
@@ -82,8 +81,7 @@ class SlideMovie extends Component {
 														className="bg-image"
 														style={{
 															backgroundImage: `url(${item.image})`,
-														}}
-													/>
+														}}></div>
 													<i
 														class="far fa-play-circle"
 														onClick={() =>
@@ -91,6 +89,9 @@ class SlideMovie extends Component {
 														}></i>
 												</div>
 												<div className="box-movie-text">
+													<div className="order-slide">
+														{index + 1}
+													</div>
 													<div className="title-movie">
 														{item.title.length < 20
 															? item.title

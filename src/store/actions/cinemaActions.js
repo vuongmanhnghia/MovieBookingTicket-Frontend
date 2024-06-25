@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 
 export const createNewCinema = (data) => {
+	console.log(data);
 	return async (dispatch, getState) => {
 		try {
 			let response = await createNewCinemaService(data);

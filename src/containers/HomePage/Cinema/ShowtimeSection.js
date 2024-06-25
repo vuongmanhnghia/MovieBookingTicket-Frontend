@@ -11,10 +11,10 @@ class ShowtimeSection extends Component {
 		super(props);
 		this.state = {
 			detailCinema: [],
-			tradeMark: "Lotte Cinema",
+			tradeMark: "",
 			background: "",
 			image: "",
-			nameCinemaShowtime: "Lotte Hà Đông",
+			nameCinemaShowtime: "",
 			location: "",
 			maxDate: [1, 2, 3, 4, 5, 6, 7],
 
@@ -33,24 +33,11 @@ class ShowtimeSection extends Component {
 			let id = this.props.id;
 			let response = await getDetailCinemaService(id);
 			if (response && response.errCode === 0) {
-				this.setState({
+				await this.setState({
 					detailCinema: response.data,
 				});
 			}
 			this.setState({
-				// image: this.state.detailCinema[0].image,
-				background: this.state.detailCinema[0].image,
-			});
-		} else {
-			let id = "Lotte Cinema";
-			let response = await getDetailCinemaService(id);
-			if (response && response.errCode === 0) {
-				this.setState({
-					detailCinema: response.data,
-				});
-			}
-			this.setState({
-				// image: this.state.detailCinema[0].image,
 				background: this.state.detailCinema[0].image,
 			});
 		}
@@ -74,21 +61,23 @@ class ShowtimeSection extends Component {
 				item.classList.add("active");
 			});
 		});
+		document
+			.querySelectorAll(".list-cinema-box")
+			.forEach((item) => item.classList.remove("active"));
 	}
 
 	handleChaneBoxCinema = async (item) => {
 		await this.setState({
 			showtimeCinema: item.name,
 		});
-		this.setState({
-			dataShow: await this.handleView(),
-		});
-
 		let activeCinema = document.querySelector(".cinema-box-content");
 		activeCinema.style = "opacity: 1";
-		this.setState({
+		await this.setState({
 			nameCinemaShowtime: item.name,
 			location: item.location,
+		});
+		this.setState({
+			dataShow: await this.handleView(),
 		});
 	};
 
@@ -155,7 +144,6 @@ class ShowtimeSection extends Component {
 					});
 				}
 				await this.setState({
-					// image: this.state.detailCinema[0].image,
 					background: this.state.detailCinema[0].image,
 					tradeMark: this.state.detailCinema[0].tradeMark,
 				});
@@ -186,7 +174,6 @@ class ShowtimeSection extends Component {
 		let {
 			tradeMark,
 			detailCinema,
-			image,
 			background,
 			nameCinemaShowtime,
 			location,
@@ -204,6 +191,25 @@ class ShowtimeSection extends Component {
 							<div className="null col-12"></div>
 							<div className="col-5 list-cinema">
 								{detailCinema.map((item, index) => {
+									if (index === 0) {
+										return (
+											<div
+												className="list-cinema-box active"
+												onClick={() =>
+													this.handleChaneBoxCinema(item)
+												}>
+												<div
+													className="list-cinema-box-logo"
+													style={{
+														background: `url(${item.image})`,
+													}}></div>
+												<div className="list-cinema-box-name">
+													{item.name}
+												</div>
+												<i class="fas fa-chevron-right"></i>
+											</div>
+										);
+									}
 									return (
 										<div
 											className="list-cinema-box"

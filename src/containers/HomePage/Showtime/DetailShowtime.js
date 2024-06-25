@@ -21,7 +21,7 @@ class DetailShowtime extends Component {
 
 	handleShowSelectCinema = async (item) => {
 		await this.setState({
-			tradeMark: item.tradeMark,
+			tradeMark: item,
 		});
 	};
 
