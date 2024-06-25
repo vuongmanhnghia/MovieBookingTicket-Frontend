@@ -6,6 +6,7 @@ import { getDetailMovieService } from "../../../services/movieService";
 import ShowtimeData from "./ShowtimeData";
 import Footer from "../Section/Footer";
 import { withRouter } from "react-router-dom";
+import TrailerMovie from "./TrailerMovie";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -19,8 +20,11 @@ class DetailMovie extends Component {
 			genre: "",
 			director: "",
 			image: "",
+			trailer: "",
 			showtimeData: [],
 			newDescription: "",
+
+			isOpenModal: false,
 		};
 	}
 	async componentDidMount() {
@@ -45,6 +49,7 @@ class DetailMovie extends Component {
 				genre: this.state.detailMovie.genre,
 				director: this.state.detailMovie.director,
 				image: this.state.detailMovie.image,
+				trailer: this.state.detailMovie.trailer,
 				showtimeData: this.state.detailMovie.showtimeData,
 				date: new Date(this.state.releaseDate),
 				newDescription: String(this.state.detailMovie.description),
@@ -78,12 +83,30 @@ class DetailMovie extends Component {
 					genre: this.state.detailMovie.genre,
 					director: this.state.detailMovie.director,
 					image: this.state.detailMovie.image,
+					trailer: this.state.detailMovie.trailer,
 					showtimeData: this.state.detailMovie.showtimeData,
 					date: new Date(this.state.releaseDate),
 					newDescription: String(this.state.detailMovie.description),
 				});
 			}
 		}
+	};
+
+	handleClickBooking = async (item) => {
+		await this.props.fetchSeatsByShowtime(item);
+	};
+
+	closeBookingModal = () => {
+		this.setState({
+			isOpenModal: false,
+		});
+	};
+
+	handleViewTraileMovie = async (item) => {
+		this.setState({
+			isOpenModal: true,
+			dataMovie: item,
+		});
 	};
 
 	render() {
@@ -103,6 +126,15 @@ class DetailMovie extends Component {
 										backgroundImage: `url(${this.state.image})`,
 									}}
 								/>
+								<div className="open-trailer-movie">
+									<i
+										class="far fa-play-circle"
+										onClick={() =>
+											this.handleViewTraileMovie(
+												this.state.detailMovie
+											)
+										}></i>
+								</div>
 							</div>
 							<div className="box-movie-detail-content">
 								<div className="movie-detail-title">
@@ -147,6 +179,11 @@ class DetailMovie extends Component {
 						</div>
 					</div>
 				</div>
+				<TrailerMovie
+					isOpenModal={this.state.isOpenModal}
+					closeBookingModal={this.closeBookingModal}
+					dataMovie={this.state.dataMovie}
+				/>
 				<ShowtimeData
 					showtimeData={this.state.showtimeData}
 					image={image}

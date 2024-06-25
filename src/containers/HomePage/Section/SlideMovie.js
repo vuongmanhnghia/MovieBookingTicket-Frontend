@@ -14,6 +14,7 @@ class SlideMovie extends Component {
 		this.state = {
 			arrMovies: [],
 			isOpenModal: false,
+			dataMovie: {},
 		};
 	}
 
@@ -41,19 +42,17 @@ class SlideMovie extends Component {
 
 	handleClickBooking = async (item) => {
 		await this.props.fetchSeatsByShowtime(item);
-		this.setState({
-			isOpenModal: true,
-			dataShowtime: item,
-			dataScreen: this.props.screenData,
-		});
 	};
 
 	handleViewTraileMovie = async (item) => {
-		console.log("item", item);
+		this.setState({
+			isOpenModal: true,
+			dataMovie: item,
+		});
 	};
 
 	render() {
-		let { isOpenModal, dataShowtime, dataScreen, arrMovies } = this.state;
+		let { isOpenModal, dataMovie, arrMovies } = this.state;
 		return (
 			<div className="movie-section-container">
 				<div className="movie-section-content">
@@ -66,15 +65,7 @@ class SlideMovie extends Component {
 								{arrMovies &&
 									arrMovies.length > 0 &&
 									arrMovies.map((item, index) => {
-										let imageBase64 = new Buffer(
-											item.image,
-											"base64"
-										).toString("binary");
-
-										let title = item.title;
-										let genre = item.genre;
-										let rating = item.rating;
-
+										console.log("item", item);
 										return (
 											<div className="box-slide-customize">
 												<div className="box-image-movie">
@@ -84,7 +75,7 @@ class SlideMovie extends Component {
 														}
 														className="bg-image"
 														style={{
-															backgroundImage: `url(${imageBase64})`,
+															backgroundImage: `url(${item.image})`,
 														}}
 													/>
 													<i
@@ -95,18 +86,19 @@ class SlideMovie extends Component {
 												</div>
 												<div className="box-movie-text">
 													<div className="title-movie">
-														{title.length < 20
-															? title
-															: `${title.slice(0, 20)}...`}
+														{item.title.length < 20
+															? item.title
+															: `${item.title.slice(0, 20)}...`}
 													</div>
 													<div className="category">
-														{genre.length < 25
-															? genre
-															: `${genre.slice(0, 28)}...`}
+														{item.genre.length < 25
+															? item.genre
+															: `${item.genre.slice(0, 28)}...`}
 													</div>
 												</div>
 												<div className="rate">
-													<i className="fas fa-star"></i> {rating}
+													<i className="fas fa-star"></i>{" "}
+													{item.rating}
 												</div>
 											</div>
 										);
@@ -118,8 +110,7 @@ class SlideMovie extends Component {
 				<TrailerMovie
 					isOpenModal={isOpenModal}
 					closeBookingModal={this.closeBookingModal}
-					dataScreen={dataScreen}
-					dataShowtime={dataShowtime}
+					dataMovie={dataMovie}
 				/>
 			</div>
 		);

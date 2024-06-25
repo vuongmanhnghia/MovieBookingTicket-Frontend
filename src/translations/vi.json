@@ -58,14 +58,15 @@
 		"add": "Thêm phim",
 		"delete": "Xóa phim",
 		"title": "Tên phim",
-		"description": "Mô tả",
+		"description": "Nội dung",
 		"genre": "Thể loại",
 		"duration": "Thời lượng",
 		"releaseDate": "Ngày công chiếu",
 		"rating": "Đánh giá",
-		"director": "Đạo diễn",
+		"director": "Mô tả",
 		"image": "Ảnh phim",
-		"save": "Lưu phim"
+		"save": "Lưu phim",
+		"trailer": "Trailer"
 	},
 	"manage-showtime": {
 		"add": "Thêm lịch chiếu",

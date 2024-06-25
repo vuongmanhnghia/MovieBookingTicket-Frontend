@@ -17,6 +17,7 @@ class MovieManage extends Component {
 			rating: "",
 			director: "",
 			image: "",
+			trailer: "",
 
 			previewImgUrl: "",
 		};
@@ -35,6 +36,7 @@ class MovieManage extends Component {
 				rating: "",
 				director: "",
 				image: "",
+				trailer: "",
 				previewImgUrl: "",
 			});
 		}
@@ -74,6 +76,7 @@ class MovieManage extends Component {
 			rating: this.state.rating,
 			director: this.state.director,
 			image: this.state.image,
+			trailer: this.state.trailer,
 		});
 		this.setState({
 			title: "",
@@ -85,6 +88,7 @@ class MovieManage extends Component {
 			director: "",
 			image: "",
 			previewImgUrl: "",
+			trailer: "",
 		});
 	};
 	checkValidateInput = () => {
@@ -97,6 +101,7 @@ class MovieManage extends Component {
 			"releaseDate",
 			"rating",
 			"image",
+			"trailer",
 		];
 		for (let i = 0; i < arrCheck.length; i++) {
 			if (this.state[arrCheck[i]] === "") {
@@ -124,6 +129,7 @@ class MovieManage extends Component {
 			releaseDate,
 			rating,
 			director,
+			trailer,
 		} = this.state;
 		return (
 			<div className="user-redux-container">
@@ -187,15 +193,6 @@ class MovieManage extends Component {
 									onChange={this.onChangeInputDate}
 									value={releaseDate}
 								/>
-								{/* <input
-									type="date"
-									className="form-control"
-									placeholder="Release Date"
-									value={releaseDate}
-									onChange={(event) => {
-										this.onChangeInput(event, "releaseDate");
-									}}
-								/> */}
 							</div>
 
 							<div className="form-group col-6">
@@ -205,7 +202,7 @@ class MovieManage extends Component {
 								<input
 									type="text"
 									className="form-control"
-									placeholder="Director"
+									placeholder="Description"
 									value={director}
 									onChange={(event) => {
 										this.onChangeInput(event, "director");
@@ -226,17 +223,31 @@ class MovieManage extends Component {
 									}}
 								/>
 							</div>
-							<div className="form-group col-12">
+							<div className="form-group col-6">
 								<label>
 									<FormattedMessage id="manage-movie.description" />
 								</label>
 								<input
 									type="text"
 									className="form-control"
-									placeholder="Description"
+									placeholder="Content"
 									value={description}
 									onChange={(event) => {
 										this.onChangeInput(event, "description");
+									}}
+								/>
+							</div>
+							<div className="form-group col-6">
+								<label>
+									<FormattedMessage id="manage-movie.trailer" />
+								</label>
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Trailer"
+									value={trailer}
+									onChange={(event) => {
+										this.onChangeInput(event, "trailer");
 									}}
 								/>
 							</div>

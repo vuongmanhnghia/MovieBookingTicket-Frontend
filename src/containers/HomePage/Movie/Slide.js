@@ -45,15 +45,6 @@ class Slide extends Component {
 								{arrMovies &&
 									arrMovies.length > 0 &&
 									arrMovies.map((item, index) => {
-										let imageBase64 = new Buffer(
-											item.image,
-											"base64"
-										).toString("binary");
-
-										let title = item.title;
-										let genre = item.genre;
-										let rating = item.rating;
-
 										return (
 											<div className="box-slide-customize">
 												<div
@@ -64,24 +55,25 @@ class Slide extends Component {
 													<div
 														className="bg-image"
 														style={{
-															backgroundImage: `url(${imageBase64})`,
+															backgroundImage: `url(${item.image})`,
 														}}
 													/>
 												</div>
 												<div className="box-movie-text">
 													<div className="title-movie">
-														{title.length < 20
-															? title
-															: `${title.slice(0, 20)}...`}
+														{item.title.length < 20
+															? item.title
+															: `${item.title.slice(0, 20)}...`}
 													</div>
 													<div className="category">
-														{genre.length < 25
-															? genre
-															: `${genre.slice(0, 28)}...`}
+														{item.genre.length < 25
+															? item.genre
+															: `${item.genre.slice(0, 28)}...`}
 													</div>
 												</div>
 												<div className="rate">
-													<i className="fas fa-star"></i> {rating}
+													<i className="fas fa-star"></i>{" "}
+													{item.rating}
 												</div>
 											</div>
 										);

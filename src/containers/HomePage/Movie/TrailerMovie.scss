@@ -1,0 +1,130 @@
+.modal-content {
+	width: 770px !important;
+	display: block !important;
+
+	.trailer-movie-content {
+		width: 100%;
+		.trailer-movie-video {
+			width: 768px;
+			height: 432px;
+		}
+
+		.movie-info {
+			background: #161616;
+			width: 100%x !important;
+			display: flex;
+			justify-content: space-between;
+			padding: 20px;
+
+			.movie-image {
+				width: 100px;
+				height: 150px;
+				background-repeat: no-repeat !important;
+				background-size: cover !important;
+				background-position: center !important;
+				border-radius: 4px;
+				border: 2px solid #ccc;
+			}
+
+			.movie-content {
+				width: 700px;
+				padding-left: 30px;
+				display: flex;
+				flex-wrap: wrap;
+
+				.trailer-movie-title-genre {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+
+					.trailer-movie-title {
+						color: #fff;
+						font-size: 20px;
+						font-weight: 700;
+						line-height: 28px;
+					}
+
+					.line-mid {
+						font-size: 20px;
+						font-weight: 700;
+						color: white;
+						padding: 0 10px;
+					}
+
+					.trailer-movie-genre {
+						color: #ffffffb3;
+						display: inline-block;
+						font-size: 14px;
+						font-weight: 700;
+						line-height: 20px;
+					}
+				}
+
+				.trailer-movie-description {
+					color: #ffffffb3;
+					display: -webkit-box;
+					font-size: 14px;
+					line-height: 20px;
+					margin: 8px 0px 0px;
+				}
+
+				.movie-actions {
+					padding-top: 10px;
+					display: flex;
+					gap: 10px;
+					.trailer-movie-booking {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 80px;
+						background: #d82d8b;
+						color: white;
+						font-size: 14px;
+						font-weight: 700;
+						border-radius: 8px;
+						transition: all 0.3s ease-in-out;
+
+						&:hover {
+							background: #a6226b;
+						}
+					}
+
+					.movie-close {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 80px;
+						background: #5d5d5d;
+						color: white;
+						font-size: 14px;
+						font-weight: 700;
+						border-radius: 8px;
+						transition: all 0.3s ease-in-out;
+
+						&:hover {
+							background: #3c3c3c;
+						}
+					}
+				}
+			}
+		}
+
+		.close-trailer {
+			position: absolute;
+			top: -17px;
+			right: -17px;
+			color: white;
+
+			.fa-times-circle {
+				color: rgb(223, 223, 223);
+				font-size: 35px;
+				cursor: pointer;
+				transition: all 0.3s ease-in-out;
+
+				&:hover {
+					color: white;
+				}
+			}
+		}
+	}
+}
