@@ -7,6 +7,7 @@ import BannerMovie from "./BannerMovie";
 import Slide from "./Slide";
 import AllMovies from "./AllMovies";
 import Footer from "../Section/Footer";
+import Loading from "../Loading";
 
 class MovieComponent extends Component {
 	constructor(props) {
@@ -31,6 +32,7 @@ class MovieComponent extends Component {
 		};
 		return (
 			<>
+				<Loading countdown={700} />
 				<HomeNavigation />
 				<BannerMovie />
 				<Slide settings={settings} />

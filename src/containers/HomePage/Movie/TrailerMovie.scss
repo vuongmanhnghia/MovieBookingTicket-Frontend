@@ -4,8 +4,13 @@
 	transition: all 0.5s;
 
 	.trailer-movie-content {
+		position: relative;
 		width: 100%;
+
 		.trailer-movie-video {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			width: 768px;
 			height: 432px;
 		}

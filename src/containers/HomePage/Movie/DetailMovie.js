@@ -7,6 +7,7 @@ import ShowtimeData from "./ShowtimeData";
 import Footer from "../Section/Footer";
 import { withRouter } from "react-router-dom";
 import TrailerMovie from "./TrailerMovie";
+import Loading from "../Loading";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -115,6 +116,7 @@ class DetailMovie extends Component {
 		let date = new Date(releaseDate);
 		return (
 			<>
+				<Loading countdown={700} />
 				<HomeNavigation />
 				<div className="movie-detail-container">
 					<div className="movie-detail-content">

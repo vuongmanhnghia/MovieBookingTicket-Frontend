@@ -6,6 +6,7 @@ import HomeNavigation from "../HomeNavigation";
 import BannerReview from "./BannerReview";
 import ReviewSection from "./ReviewSection";
 import Footer from "../Section/Footer";
+import Loading from "../Loading";
 
 class ReviewMovie extends Component {
 	constructor(props) {
@@ -23,6 +24,7 @@ class ReviewMovie extends Component {
 	render() {
 		return (
 			<>
+				<Loading countdown={700} />
 				<HomeNavigation />
 				<BannerReview />
 				<ReviewSection />
