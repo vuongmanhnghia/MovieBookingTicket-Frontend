@@ -1,6 +1,7 @@
 .modal-content {
 	width: 770px !important;
 	display: block !important;
+	transition: all 0.5s;
 
 	.trailer-movie-content {
 		width: 100%;
@@ -127,4 +128,8 @@
 			}
 		}
 	}
+}
+
+.modal {
+	transition: all 0.3s linear !important;
 }

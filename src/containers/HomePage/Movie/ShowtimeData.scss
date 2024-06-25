@@ -202,23 +202,45 @@
 		.more-box-movie {
 			padding: 10px 0;
 			display: flex;
+			justify-content: flex-start;
+
 			.more-box-movie-image {
-				margin-right: 15px;
+				position: relative;
 				width: 64px;
 				height: 91.5px;
-				background-size: contain;
+				background-size: cover;
 				background-position: center;
+				background-repeat: no-repeat;
 				border-radius: 4px;
 				transition: all 0.3s;
 				cursor: pointer;
 				box-shadow: 0px 0px 5px #0000008c;
+
+				&:hover {
+					transform: scale(1.1);
+				}
+
+				.order-movie {
+					position: absolute;
+					bottom: 0;
+					left: 5px;
+					font-size: 20px;
+					font-weight: 700;
+					color: white;
+				}
 			}
 
 			.more-box-movie-content {
+				padding-left: 15px;
+
 				.more-box-movie-title {
 					font-size: 15px;
 					font-weight: 600;
 					cursor: pointer;
+
+					&:hover {
+						color: #d82d8b;
+					}
 				}
 
 				.more-box-movie-genre {

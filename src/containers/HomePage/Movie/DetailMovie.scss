@@ -29,13 +29,15 @@
 				position: absolute;
 				.fa-play-circle {
 					font-size: 50px;
-					color: white;
+					color: rgb(226, 226, 226);
 					opacity: 0.8;
 					cursor: pointer;
 					transition: all 0.3s ease-in-out;
 
 					&:hover {
+						color: #fff;
 						opacity: 1;
+						transform: scale(1.1);
 					}
 				}
 			}

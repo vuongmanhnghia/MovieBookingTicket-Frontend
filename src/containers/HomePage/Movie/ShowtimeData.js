@@ -285,12 +285,6 @@ class ShowtimeData extends Component {
 									if (index >= 10) {
 										return;
 									}
-
-									let imageBase64 = new Buffer(
-										allMovies[allMovies.length - index - 1].image,
-										"base64"
-									).toString("binary");
-
 									return (
 										<>
 											<div className="divider"></div>
@@ -298,7 +292,11 @@ class ShowtimeData extends Component {
 												<div
 													className="more-box-movie-image"
 													style={{
-														backgroundImage: `url(${imageBase64})`,
+														backgroundImage: `url(${
+															allMovies[
+																allMovies.length - index - 1
+															].image
+														})`,
 													}}
 													onClick={() =>
 														this.handleViewDetailMovie(
@@ -306,9 +304,21 @@ class ShowtimeData extends Component {
 																allMovies.length - index - 1
 															]
 														)
-													}></div>
+													}>
+													<div className="order-movie">
+														{index + 1}
+													</div>
+												</div>
 												<div className="more-box-movie-content">
-													<div className="more-box-movie-title">
+													<div
+														className="more-box-movie-title"
+														onClick={() =>
+															this.handleViewDetailMovie(
+																allMovies[
+																	allMovies.length - index - 1
+																]
+															)
+														}>
 														{allMovies[
 															allMovies.length - index - 1
 														].title.length < 40
