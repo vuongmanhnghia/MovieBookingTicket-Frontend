@@ -44,6 +44,12 @@ class SlideMovie extends Component {
 		await this.props.fetchSeatsByShowtime(item);
 	};
 
+	closeTrailerModal = () => {
+		this.setState({
+			isOpenModal: false,
+		});
+	};
+
 	handleViewTraileMovie = async (item) => {
 		this.setState({
 			isOpenModal: true,
@@ -109,7 +115,7 @@ class SlideMovie extends Component {
 				</div>
 				<TrailerMovie
 					isOpenModal={isOpenModal}
-					closeBookingModal={this.closeBookingModal}
+					closeBookingModal={this.closeTrailerModal}
 					dataMovie={dataMovie}
 				/>
 			</div>

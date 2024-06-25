@@ -137,7 +137,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchAllMovies: () => dispatch(actions.fetchAllMovies()),
 		fetchMoviesPage: (page, limit) =>
 			dispatch(actions.fetchMoviesPage(page, limit)),
 	};

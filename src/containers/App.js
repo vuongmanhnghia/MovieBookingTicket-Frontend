@@ -18,6 +18,8 @@ import DetailMovie from "./HomePage/Movie/DetailMovie";
 import DetailCinema from "./HomePage/Cinema/DetailCinema";
 import DetailShowtime from "./HomePage/Showtime/DetailShowtime";
 import MovieComponent from "./HomePage/Movie/MovieComponent.js";
+import ReviewMovie from "./HomePage/Review/ReviewMovie.js";
+
 // import { CustomToastCloseButton } from "../components/CustomToast";
 
 class App extends Component {
@@ -73,6 +75,10 @@ class App extends Component {
 									<Route
 										path={path.ALL_MOVIE}
 										component={MovieComponent}
+									/>
+									<Route
+										path={path.REVIEW_MOVIE}
+										component={ReviewMovie}
 									/>
 								</Switch>
 							</CustomScrollbars>

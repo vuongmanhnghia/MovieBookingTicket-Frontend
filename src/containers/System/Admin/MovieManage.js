@@ -17,9 +17,11 @@ class MovieManage extends Component {
 			rating: "",
 			director: "",
 			image: "",
+			background: "",
 			trailer: "",
 
 			previewImgUrl: "",
+			previewBgUrl: "",
 		};
 	}
 
@@ -36,8 +38,11 @@ class MovieManage extends Component {
 				rating: "",
 				director: "",
 				image: "",
+				background: "",
 				trailer: "",
+
 				previewImgUrl: "",
+				previewBgUrl: "",
 			});
 		}
 	}
@@ -63,6 +68,19 @@ class MovieManage extends Component {
 		}
 	};
 
+	handleOnChangeBackground = async (event) => {
+		let data = event.target.files;
+		let file = data[0];
+		if (file) {
+			let base64 = await CommonUtils.getBase64(file);
+			let objectUrl = URL.createObjectURL(file);
+			this.setState({
+				previewBgUrl: objectUrl,
+				background: base64,
+			});
+		}
+	};
+
 	handleSaveMovie = async () => {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
@@ -76,6 +94,7 @@ class MovieManage extends Component {
 			rating: this.state.rating,
 			director: this.state.director,
 			image: this.state.image,
+			background: this.state.background,
 			trailer: this.state.trailer,
 		});
 		this.setState({
@@ -87,7 +106,9 @@ class MovieManage extends Component {
 			rating: "",
 			director: "",
 			image: "",
+			background: "",
 			previewImgUrl: "",
+			previewBgUrl: "",
 			trailer: "",
 		});
 	};
@@ -101,6 +122,8 @@ class MovieManage extends Component {
 			"releaseDate",
 			"rating",
 			"image",
+			"background",
+			"director",
 			"trailer",
 		];
 		for (let i = 0; i < arrCheck.length; i++) {
@@ -251,7 +274,7 @@ class MovieManage extends Component {
 									}}
 								/>
 							</div>
-							<div className="form-group col-12 form-preview-img">
+							<div className="form-group col-6 form-preview-img">
 								<label>
 									<FormattedMessage id="manage-movie.image" />
 								</label>
@@ -271,6 +294,30 @@ class MovieManage extends Component {
 										className="preview-image"
 										style={{
 											backgroundImage: `url(${this.state.previewImgUrl})`,
+										}}></div>
+								</div>
+							</div>
+
+							<div className="form-group col-6 form-preview-img">
+								<label>
+									<FormattedMessage id="manage-movie.background" />
+								</label>
+								<div className="preview-image-container">
+									<input
+										hidden
+										id="previewBg"
+										type="file"
+										onChange={(event) => {
+											this.handleOnChangeBackground(event);
+										}}
+									/>
+									<label className="label-upload" htmlFor="previewBg">
+										Tải ảnh <i className="fas fa-upload"></i>
+									</label>
+									<div
+										className="preview-image"
+										style={{
+											backgroundImage: `url(${this.state.previewBgUrl})`,
 										}}></div>
 								</div>
 							</div>

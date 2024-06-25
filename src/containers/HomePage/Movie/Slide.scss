@@ -57,9 +57,7 @@
 							transition: ease 0.3s;
 
 							&:hover {
-								opacity: 0.8;
-								width: 130%;
-								height: 130%;
+								transform: scale(1.1);
 							}
 						}
 					}

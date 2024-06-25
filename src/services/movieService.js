@@ -20,10 +20,15 @@ const getMoviesPageService = (page, limit) => {
 	return axios.get(`/api/get-movies?page=${page}&limit=${limit}`);
 };
 
+const getReviewMoviesPageService = (page, limit) => {
+	return axios.get(`/api/get-review-movies?page=${page}&limit=${limit}`);
+};
+
 export {
 	getTopMoviesService,
 	createNewMovieService,
 	getDetailMovieService,
 	getAllMoviesService,
 	getMoviesPageService,
+	getReviewMoviesPageService,
 };

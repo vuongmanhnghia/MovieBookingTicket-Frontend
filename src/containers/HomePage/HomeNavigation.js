@@ -91,7 +91,6 @@ class HomeNavigation extends Component {
 										})}
 								</ul>
 							</div>
-
 							<div className="nav-text">
 								<div
 									onClick={() =>
@@ -100,15 +99,14 @@ class HomeNavigation extends Component {
 									Phim chiếu
 								</div>
 							</div>
-							{/* <div className="nav-text">
-								<div>Review phim</div>
-							</div>
 							<div className="nav-text">
-								<div>Top phim</div>
+								<div
+									onClick={() =>
+										this.props.history.push(`/review-movie`)
+									}>
+									<span>Review phim</span>
+								</div>
 							</div>
-							<div className="nav-text">
-								<div>Blog phim</div>
-							</div> */}
 						</div>
 					</div>
 				</div>

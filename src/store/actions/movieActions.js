@@ -5,6 +5,7 @@ import {
 	getAllMoviesService,
 	getDetailMovieService,
 	getMoviesPageService,
+	getReviewMoviesPageService,
 } from "../../services/movieService";
 import { toast } from "react-toastify";
 
@@ -120,6 +121,29 @@ export const fetchMoviesPage = (page, limit) => {
 			console.log("fetch movies page errol: ", e);
 			dispatch({
 				type: actionTypes.FETCH_MOVIES_PAGE_FAILED,
+			});
+		}
+	};
+};
+
+export const fetchReviewMoviesPage = (page, limit) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getReviewMoviesPageService(page, limit);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_REVIEW_MOVIES_PAGE_SUCCESS,
+					reviewMoviesPage: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_REVIEW_MOVIES_PAGE_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch review movies page errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_REVIEW_MOVIES_PAGE_FAILED,
 			});
 		}
 	};
