@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeNavigation from "../HomeNavigation";
 import "./DetailMovie.scss";
 import { getDetailMovieService } from "../../../services/movieService";
 import ShowtimeData from "./ShowtimeData";
-import Footer from "../Section/Footer";
 import { withRouter } from "react-router-dom";
 import TrailerMovie from "./TrailerMovie";
-import Loading from "../Loading";
+// import Loading from "../Loading";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -116,8 +114,7 @@ class DetailMovie extends Component {
 		let date = new Date(releaseDate);
 		return (
 			<>
-				<Loading countdown={700} />
-				<HomeNavigation />
+				{/* <Loading countdown={700} /> */}
 				<div className="movie-detail-container">
 					<div className="movie-detail-content">
 						<div className="box-movie-detail">
@@ -192,7 +189,6 @@ class DetailMovie extends Component {
 					title={title}
 					handleNewTabMovie={this.handleNewTabMovie}
 				/>
-				<Footer />
 			</>
 		);
 	}

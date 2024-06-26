@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeNavigation from "./HomeNavigation";
 import SlideMovie from "./Section/SlideMovie";
 import Cinema from "./Section/Cinema";
 import "./HomePage.scss";
 import HomeBanner from "./Section/HomeBanner";
-import Footer from "./Section/Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SelectCinema from "./Showtime/SelectCinema";
 import HeaderShowtime from "./Showtime/HeaderShowtime";
 import ShowtimeSection from "./Cinema/ShowtimeSection";
-import Loading from "./Loading";
+// import Loading from "./Loading";
 
 class HomePage extends Component {
 	constructor(props) {
@@ -37,8 +35,7 @@ class HomePage extends Component {
 		let { tradeMark } = this.state;
 		return (
 			<div>
-				<Loading countdown={1000} />
-				<HomeNavigation />
+				{/* <Loading countdown={1000} /> */}
 				<HomeBanner />
 				<SlideMovie settings={settings} />
 				<SelectCinema
@@ -47,7 +44,6 @@ class HomePage extends Component {
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={tradeMark} />
 				<Cinema />
-				<Footer />
 			</div>
 		);
 	}

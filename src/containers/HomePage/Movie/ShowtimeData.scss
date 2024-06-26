@@ -1,5 +1,5 @@
 .movie-detail-showtimeData-container {
-	padding: 56px 200px;
+	padding: 56px 150px;
 
 	.movie-detail-showtimeData-content {
 		width: 100%;
@@ -28,10 +28,9 @@
 			padding: 10px 20px;
 			width: 100%;
 			display: flex;
-			justify-content: left;
+			justify-content: space-between;
 			align-items: center;
 			height: 80px;
-			gap: 10px;
 			border: 1px solid #ccc;
 
 			.box-date {
@@ -52,6 +51,7 @@
 				background: #d82d8b;
 				border: 1px solid #d82d8b;
 				color: white;
+				transform: scale(1.05);
 			}
 		}
 
@@ -90,15 +90,18 @@
 				.active {
 					border: 1px solid #d82d8b;
 					color: white;
+					transform: scale(1.05);
 				}
 
 				.tradeMark-cinema {
 					margin-top: 5px;
 					font-size: 12px;
 					color: #716f6f;
+					transition: all 0.3s;
 				}
 				.active-tradeMark {
 					color: #d82d8b;
+					transform: scale(1.05);
 				}
 			}
 		}
@@ -194,7 +197,7 @@
 	}
 	.more-movie-content {
 		.divider {
-			width: 90%;
+			width: 95%;
 			height: 1px;
 			background: #ccc;
 			margin: 10px 0;

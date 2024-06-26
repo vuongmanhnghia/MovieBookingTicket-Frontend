@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./MovieComponent.scss";
-import HomeNavigation from "../HomeNavigation";
 import BannerMovie from "./BannerMovie";
 import Slide from "./Slide";
 import AllMovies from "./AllMovies";
-import Footer from "../Section/Footer";
-import Loading from "../Loading";
+// import Loading from "../Loading";
 
 class MovieComponent extends Component {
 	constructor(props) {
@@ -32,12 +30,10 @@ class MovieComponent extends Component {
 		};
 		return (
 			<>
-				<Loading countdown={700} />
-				<HomeNavigation />
+				{/* <Loading countdown={700} /> */}
 				<BannerMovie />
 				<Slide settings={settings} />
 				<AllMovies />
-				<Footer />
 			</>
 		);
 	}

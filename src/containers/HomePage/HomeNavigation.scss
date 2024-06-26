@@ -93,20 +93,30 @@
 				justify-content: flex-end;
 				align-items: center;
 				flex-wrap: nowrap;
+				gap: 30px;
 
 				.nav-text {
 					display: block;
 					font-size: 15px;
 					font-weight: 700;
 					color: #aaa;
-					padding: 20px 10px;
 
-					> div {
+					.nav-text-item {
 						color: #4b4a4a;
 						cursor: pointer;
+						transition: all 0.3s;
 
 						&:hover {
 							color: black;
+						}
+					}
+
+					.active {
+						color: #e2559c;
+						transform: scale(1.05);
+
+						&:hover {
+							color: #e2559c;
 						}
 					}
 				}
@@ -118,7 +128,6 @@
 
 				.dropdown {
 					position: relative;
-					width: 115px;
 					transition: all 0.3s;
 
 					&:hover .dropdown_list {
@@ -128,8 +137,8 @@
 					.dropdown-select {
 						display: flex;
 						flex-wrap: nowrap;
-						justify-content: space-between;
 						width: 100%;
+						gap: 10px;
 
 						.fa-chevron-right {
 							font-size: 12px;
@@ -168,6 +177,8 @@
 							&:hover {
 								color: white;
 								background-color: #e876af;
+								transform: scale(1.02);
+								border-radius: 4px !important;
 							}
 
 							&:first-child {

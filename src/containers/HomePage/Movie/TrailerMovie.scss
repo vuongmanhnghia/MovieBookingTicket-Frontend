@@ -1,5 +1,5 @@
 .modal-content {
-	width: 770px !important;
+	width: 768px !important;
 	display: block !important;
 	transition: all 0.5s;
 
@@ -8,11 +8,12 @@
 		width: 100%;
 
 		.trailer-movie-video {
+			height: auto;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 768px;
-			height: 432px;
+			width: 100%;
+			background-color: #161616;
 		}
 
 		.movie-info {

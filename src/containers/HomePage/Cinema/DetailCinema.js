@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeNavigation from "../HomeNavigation";
-import Footer from "../Section/Footer";
 import NavigationSection from "./NavigationSection";
 import ShowtimeSection from "./ShowtimeSection";
 import { getDetailCinemaService } from "../../../services/cinemaService";
@@ -35,14 +33,12 @@ class DetailCinema extends Component {
 		let { tradeMark } = this.state;
 		return (
 			<>
-				<HomeNavigation />
 				<NavigationSection
 					id={this.props.match.params.id}
 					handleGetTradeMark={this.handleGetTradeMark}
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={this.props.match.params.id} />
-				<Footer />
 			</>
 		);
 	}

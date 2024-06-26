@@ -98,7 +98,7 @@
 }
 
 .modal-content {
-	height: 1080px;
+	min-height: 100px;
 	background: none;
 	border: none;
 	overflow: none !important ;
@@ -121,7 +121,7 @@
 	border-radius: 50%;
 	border-color: #ccc #0000;
 	animation: ls 1s infinite linear;
-	background-color: #fff0f6;
+	background-color: #858283;
 }
 .loader::before,
 .loader::after {

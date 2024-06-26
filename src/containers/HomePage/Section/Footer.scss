@@ -9,7 +9,7 @@
 		.footer-content {
 			font-size: 14px;
 			display: flex;
-			justify-content: center;
+			justify-content: space-between;
 			gap: 150px;
 			color: #ccc;
 			font-weight: 600;
@@ -61,7 +61,8 @@
 	height: 80px;
 	background-color: #262626;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	padding: 0 150px;
 
 	.more-info-content {
 		display: flex;

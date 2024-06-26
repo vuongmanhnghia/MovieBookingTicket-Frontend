@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeNavigation from "../HomeNavigation";
 import "./DetailShowtime.scss";
-import Footer from "../Section/Footer";
 import { withRouter } from "react-router-dom";
 import ShowtimeSection from "../Cinema/ShowtimeSection";
 import SelectCinema from "./SelectCinema";
@@ -29,14 +27,12 @@ class DetailShowtime extends Component {
 		let { tradeMark } = this.state;
 		return (
 			<>
-				<HomeNavigation />
 				<BannerShowtime />
 				<SelectCinema
 					handleShowSelectCinema={this.handleShowSelectCinema}
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={tradeMark} />
-				<Footer />
 			</>
 		);
 	}

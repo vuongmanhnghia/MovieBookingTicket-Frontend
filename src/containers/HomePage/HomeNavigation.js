@@ -24,6 +24,16 @@ class HomeNavigation extends Component {
 		this.setState({
 			allTradeMarks: allTradeMarks,
 		});
+
+		let activeNagigation = document.querySelectorAll(".nav-text-item");
+		activeNagigation.forEach((item) => {
+			item.addEventListener("click", () => {
+				document
+					.querySelectorAll(".nav-text-item")
+					.forEach((item) => item.classList.remove("active"));
+				item.classList.add("active");
+			});
+		});
 	}
 
 	filterTradeMarks(items) {
@@ -38,6 +48,22 @@ class HomeNavigation extends Component {
 		});
 	}
 
+	handleViewHomePage = async () => {
+		await this.props.history.push("/cinema");
+		document
+			.querySelectorAll(".nav-text-item")
+			.forEach((item) => item.classList.remove("active"));
+	};
+
+	handleViewDeatilCinema = async (item) => {
+		await this.props.history.push(`/detail-cinema/${item}`);
+		let activeNagigation = document.querySelector(".dropdown-select");
+		await document
+			.querySelectorAll(".nav-text-item")
+			.forEach((item) => item.classList.remove("active"));
+		activeNagigation.classList.add("active");
+	};
+
 	render() {
 		let { allTradeMarks } = this.state;
 		return (
@@ -50,7 +76,7 @@ class HomeNavigation extends Component {
 						<div className="line-mid"></div>
 						<div
 							className="home-backroll"
-							onClick={() => this.props.history.push("/cinema")}>
+							onClick={() => this.handleViewHomePage()}>
 							<div className="camera-logo"></div>
 							<div className="text-home-rollback">
 								<span>
@@ -62,12 +88,14 @@ class HomeNavigation extends Component {
 					<div className="nav-right-container">
 						<div className="nav-right-content row">
 							<div className="nav-text">
-								<div onClick={() => this.handleViewShowtime()}>
+								<div
+									className="nav-text-item"
+									onClick={() => this.handleViewShowtime()}>
 									<span>Lịch chiếu</span>
 								</div>
 							</div>
 							<div className="nav-text dropdown">
-								<div className="dropdown-select">
+								<div className="dropdown-select nav-text-item">
 									<span className="dropdown-selected">Rạp chiếu</span>
 									<i
 										class="fa fa-chevron-right"
@@ -81,9 +109,7 @@ class HomeNavigation extends Component {
 												<div
 													className="dropdown_item"
 													onClick={() =>
-														this.props.history.push(
-															`/detail-cinema/${item}`
-														)
+														this.handleViewDeatilCinema(item)
 													}>
 													<span>{item}</span>
 												</div>
@@ -93,6 +119,7 @@ class HomeNavigation extends Component {
 							</div>
 							<div className="nav-text">
 								<div
+									className="nav-text-item"
 									onClick={() =>
 										this.props.history.push(`/all-movies`)
 									}>
@@ -101,6 +128,7 @@ class HomeNavigation extends Component {
 							</div>
 							<div className="nav-text">
 								<div
+									className="nav-text-item"
 									onClick={() =>
 										this.props.history.push(`/review-movie`)
 									}>

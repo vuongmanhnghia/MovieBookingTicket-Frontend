@@ -19,7 +19,8 @@ import DetailCinema from "./HomePage/Cinema/DetailCinema";
 import DetailShowtime from "./HomePage/Showtime/DetailShowtime";
 import MovieComponent from "./HomePage/Movie/MovieComponent.js";
 import ReviewMovie from "./HomePage/Review/ReviewMovie.js";
-
+import HomeNavigation from "./HomePage/HomeNavigation.js";
+import Footer from "./HomePage/Section/Footer.js";
 // import { CustomToastCloseButton } from "../components/CustomToast";
 
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
 						<div className="content-container">
 							<CustomScrollbars
 								style={{ height: "100vh", width: "100%" }}>
+								<HomeNavigation />
 								<Switch>
 									<Route path={path.HOME} exact component={Home} />
 									<Route
@@ -81,21 +83,9 @@ class App extends Component {
 										component={ReviewMovie}
 									/>
 								</Switch>
+								<Footer />
 							</CustomScrollbars>
 						</div>
-
-						{/* <ToastContainer
-							className="toast-container"
-							toastClassName="toast-item"
-							bodyClassName="toast-item-body"
-							autoClose={false}
-							hideProgressBar={true}
-							pauseOnHover={false}
-							pauseOnFocusLoss={true}
-							closeOnClick={false}
-							draggable={false}
-							closeButton={<CustomToastCloseButton />}
-						/> */}
 
 						<ToastContainer
 							position="top-right"

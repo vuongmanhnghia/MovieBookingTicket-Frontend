@@ -5,11 +5,16 @@
 	padding: 65px 150px;
 
 	.review-section-list {
-		display: grid;
-		gap: 24px 20px;
-		grid-template-columns: 349.332px 349.332px 349.347px;
-		grid-template-rows: 200px 200px;
-		line-height: 24px;
+		display: flex;
+		justify-content: space-between;
+		align-items: self-start;
+		flex-wrap: wrap;
+		gap: 28px;
+		// display: grid;
+		// gap: 24px 20px;
+		// grid-template-columns: 349.332px 349.332px 349.347px;
+		// grid-template-rows: 200px 200px;
+		// line-height: 24px;
 
 		.box-review-movie {
 			width: 347px;
@@ -18,6 +23,11 @@
 			overflow: hidden;
 			border-radius: 12px;
 			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+			transition: all 0.3s;
+
+			&:hover {
+				transform: scale(1.05);
+			}
 
 			.box-review-movie-background {
 				width: 100%;
