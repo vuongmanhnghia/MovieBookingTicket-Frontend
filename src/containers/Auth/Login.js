@@ -16,6 +16,11 @@ class Login extends Component {
 			errMessage: "",
 		};
 	}
+
+	componentDidMount() {
+		document.addEventListener("keydown", this.onFormSubmit.bind(this));
+	}
+
 	handleOnChangeUsername = (event) => {
 		this.setState({
 			username: event.target.value,
@@ -57,6 +62,12 @@ class Login extends Component {
 			}
 		}
 	};
+
+	onFormSubmit(e) {
+		if (e.keyCode === 13) {
+			this.handleLogin();
+		}
+	}
 
 	handleShowPassword = () => {
 		this.setState({
@@ -127,6 +138,8 @@ class Login extends Component {
 							</div>
 							<div className="col-12">
 								<button
+									// disabled={submitting}
+									onSubmit={this.onFormSubmit}
 									className="btn-login"
 									onClick={() => this.handleLogin()}>
 									Login
