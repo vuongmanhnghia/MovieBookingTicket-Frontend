@@ -2,7 +2,7 @@ a {
 	text-decoration: none;
 }
 
-.background {
+.background-login {
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -22,10 +22,11 @@ a {
 
 		.login-section {
 			transition: all 1s ease;
-			header {
+
+			.text-center {
 				font-size: 40px;
 				color: #fff;
-				font-weight: 600;
+				font-weight: 700;
 			}
 
 			.social-buttons {
@@ -72,7 +73,7 @@ a {
 				}
 			}
 
-			.login-section {
+			.login-form {
 				display: flex;
 				flex-direction: column;
 				gap: 20px;
@@ -95,7 +96,9 @@ a {
 
 					i {
 						position: absolute;
-						top: 13px;
+
+						top: 50%;
+						transform: translateY(-50%);
 						right: 12px;
 						font-size: 20px;
 						cursor: pointer;
@@ -106,28 +109,32 @@ a {
 						color: black;
 					}
 				}
+			}
+			.err-message {
+				// height: 20px !important;
+				margin: 10px 0;
+			}
 
-				.forgot-password {
-					color: rgb(250, 83, 83);
-					font-size: 14px;
-					font-weight: 500;
-					cursor: pointer;
-				}
+			.forgot-password {
+				color: rgb(250, 83, 83);
+				font-size: 14px;
+				font-weight: 500;
+				cursor: pointer;
+			}
 
-				forgot-password:hover {
-					color: rgb(245, 13, 13);
-				}
+			forgot-password:hover {
+				color: rgb(245, 13, 13);
+			}
 
-				button {
-					width: 100%;
-					border: 1px solid #aaa;
-					padding: 15px;
-					margin-top: 30px;
-					border-radius: 8px;
-					font-size: 18px;
-					font-weight: 500;
-					cursor: pointer;
-				}
+			button {
+				width: 100%;
+				border: 1px solid #aaa;
+				padding: 15px;
+				margin: 10px 0;
+				border-radius: 8px;
+				font-size: 18px;
+				font-weight: 500;
+				cursor: pointer;
 			}
 		}
 	}

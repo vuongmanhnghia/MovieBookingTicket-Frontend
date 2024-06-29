@@ -67,7 +67,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="modal-login-container">
-				<div className="background">
+				<div className="background-login">
 					<div className="login-container">
 						<div className="login-section row">
 							<header className="col-12 text-center">Login</header>
@@ -84,7 +84,7 @@ class Login extends Component {
 								<p>Or</p>
 								<div className="line"></div>
 							</div>
-							<div className="login-section col-12">
+							<div className="login-form col-12">
 								<input
 									type="text"
 									className="form-control"
@@ -119,18 +119,22 @@ class Login extends Component {
 											}></i>
 									</span>
 								</div>
-								<div className="col-12" style={{ color: "red" }}>
-									{this.state.errMessage}
-								</div>
-								<div className="col-12">
-									<button
-										className="btn-login"
-										onClick={() => this.handleLogin()}>
-										Login
-									</button>
-								</div>
-								<span className="forgot-password">Forgot Password</span>
 							</div>
+							<div
+								className="col-12 err-message"
+								style={{ color: "red" }}>
+								{this.state.errMessage}
+							</div>
+							<div className="col-12">
+								<button
+									className="btn-login"
+									onClick={() => this.handleLogin()}>
+									Login
+								</button>
+							</div>
+							{/* <span className="col-12 forgot-password">
+								Forgot Password
+							</span> */}
 						</div>
 					</div>
 				</div>
