@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import SelectCinema from "./Showtime/SelectCinema";
 import HeaderShowtime from "./Showtime/HeaderShowtime";
 import ShowtimeSection from "./Cinema/ShowtimeSection";
+import { withRouter } from "react-router-dom";
 // import Loading from "./Loading";
 
 class HomePage extends Component {
@@ -34,7 +35,7 @@ class HomePage extends Component {
 		};
 		let { tradeMark } = this.state;
 		return (
-			<div>
+			<>
 				{/* <Loading countdown={1000} /> */}
 				<HomeBanner />
 				<SlideMovie settings={settings} />
@@ -44,7 +45,7 @@ class HomePage extends Component {
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={tradeMark} />
 				<Cinema />
-			</div>
+			</>
 		);
 	}
 }
@@ -59,4 +60,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(HomePage)
+);
