@@ -14,6 +14,7 @@
 		},
 		"admin": {
 			"manage-user": "Quản lý người dùng",
+			"user": "Quản lý tài khoản",
 			"client": "Khách hàng",
 			"admin": "Admin",
 			"crud": "CRUD user",

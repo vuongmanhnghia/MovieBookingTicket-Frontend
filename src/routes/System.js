@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import UserManage from "../containers/System/UserManage";
+// import UserManage from "../containers/System/UserManage";
 import MovieManage from "../containers/System/Admin/MovieManage";
-import UserRedux from "../containers/System/Admin/UserRedux";
+import UserManage from "../containers/System/Admin/UserRedux";
 import Header from "../containers/Header/Header";
 import ShowtimeManage from "../containers/System/Admin/ShowtimeManage";
 import CinemaManage from "../containers/System/Admin/CinemaManage";
@@ -19,7 +19,6 @@ class System extends Component {
 					<div className="system-list">
 						<Switch>
 							<Route path="/system/user-manage" component={UserManage} />
-							<Route path="/system/user-redux" component={UserRedux} />
 							<Route
 								path="/system/manage-movie"
 								component={MovieManage}
