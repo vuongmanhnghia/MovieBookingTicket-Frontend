@@ -5,6 +5,7 @@ import * as actions from "../../store/actions";
 import "./Login.scss";
 // import { FormattedMessage } from "react-intl";
 import { handleLoginApi } from "../../services/userService";
+import CustomScrollbars from "../../components/CustomScrollbars";
 
 class Login extends Component {
 	constructor(props) {
@@ -77,81 +78,85 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className="modal-login-container">
-				<div className="background-login">
-					<div className="login-container">
-						<div className="login-section row">
-							<header className="col-12 text-center">Login</header>
-							<div className="social-buttons col-12 form-group">
-								<button className="google">
-									<i className="fab fa-google"></i>Use Google
-								</button>
-								<button className="facebook">
-									<i className="fab fa-facebook-f"></i>Use Facebook
-								</button>
-							</div>
-							<div className="separator col-12 form-group">
-								<div className="line"></div>
-								<p>Or</p>
-								<div className="line"></div>
-							</div>
-							<div className="login-form col-12">
-								<input
-									type="text"
-									className="form-control"
-									placeholder="Username"
-									value={this.state.username}
-									onChange={(event) =>
-										this.handleOnChangeUsername(event)
-									}
-								/>
-								<div className="custom-input-pasword">
+			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
+				<div className="modal-login-container">
+					<div className="background-login">
+						<div className="login-container">
+							<div className="login-section row">
+								<header className="col-12 text-center">Login</header>
+								<div className="social-buttons col-12 form-group">
+									<button className="google">
+										<i className="fab fa-google"></i>Use Google
+									</button>
+									<button className="facebook">
+										<i className="fab fa-facebook-f"></i>Use Facebook
+									</button>
+								</div>
+								<div className="separator col-12 form-group">
+									<div className="line"></div>
+									<p>Or</p>
+									<div className="line"></div>
+								</div>
+								<div className="login-form col-12">
 									<input
-										type={
-											this.state.isShowPassword ? "text" : "password"
-										}
+										type="text"
 										className="form-control"
-										placeholder="Password"
-										required
-										value={this.state.password}
+										placeholder="Username"
+										value={this.state.username}
 										onChange={(event) =>
-											this.handleOnChangePassword(event)
+											this.handleOnChangeUsername(event)
 										}
 									/>
-									<span
-										onClick={() => {
-											this.handleShowPassword();
-										}}>
-										<i
-											className={
+									<div className="custom-input-pasword">
+										<input
+											type={
 												this.state.isShowPassword
-													? "fas fa-eye"
-													: "fas fa-eye-slash"
-											}></i>
-									</span>
+													? "text"
+													: "password"
+											}
+											className="form-control"
+											placeholder="Password"
+											required
+											value={this.state.password}
+											onChange={(event) =>
+												this.handleOnChangePassword(event)
+											}
+										/>
+										<span
+											onClick={() => {
+												this.handleShowPassword();
+											}}>
+											<i
+												className={
+													this.state.isShowPassword
+														? "fas fa-eye"
+														: "fas fa-eye-slash"
+												}></i>
+										</span>
+									</div>
 								</div>
-							</div>
-							<div
-								className="col-12 err-message"
-								style={{ color: "red" }}>
-								{this.state.errMessage}
-							</div>
-							<div className="col-12">
-								<button
-									// disabled={submitting}
-									onSubmit={this.onFormSubmit}
-									className="btn-login"
-									onClick={() => this.handleLogin()}>
-									Login
-								</button>
-							</div>
-							{/* <span className="col-12 forgot-password">
+								<div
+									className="col-12 err-message"
+									style={{ color: "red" }}>
+									{this.state.errMessage}
+								</div>
+								<div className="col-12">
+									<button
+										// disabled={submitting}
+										onSubmit={this.onFormSubmit}
+										className="btn-login"
+										onClick={() => this.handleLogin()}>
+										Login
+									</button>
+								</div>
+								{/* <span className="col-12 forgot-password">
 								Forgot Password
 							</span> */}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</CustomScrollbars>
 		);
 	}
 }
