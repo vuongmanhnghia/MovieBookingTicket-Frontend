@@ -58,36 +58,36 @@ class App extends Component {
 									component={userIsAuthenticated(System)}
 								/>
 							</Switch>
-							<CustomScrollbars
-								style={{ height: "100vh", width: "100%" }}>
-								<HomeNavigation />
-								<Switch>
-									<Route path={path.HOME} exact component={Home} />
+							{/* <CustomScrollbars
+								style={{ height: "100vh", width: "100%" }}> */}
+							<HomeNavigation />
+							<Switch>
+								<Route path={path.HOME} exact component={Home} />
 
-									<Route path={path.HOMEPAGE} component={HomePage} />
-									<Route
-										path={path.DETAIL_MOVIE}
-										component={DetailMovie}
-									/>
-									<Route
-										path={path.DETAIL_CINEMA}
-										component={DetailCinema}
-									/>
-									<Route
-										path={path.DETAIL_SHOWTIME}
-										component={DetailShowtime}
-									/>
-									<Route
-										path={path.ALL_MOVIE}
-										component={MovieComponent}
-									/>
-									<Route
-										path={path.REVIEW_MOVIE}
-										component={ReviewMovie}
-									/>
-								</Switch>
-								<Footer />
-							</CustomScrollbars>
+								<Route path={path.HOMEPAGE} component={HomePage} />
+								<Route
+									path={path.DETAIL_MOVIE}
+									component={DetailMovie}
+								/>
+								<Route
+									path={path.DETAIL_CINEMA}
+									component={DetailCinema}
+								/>
+								<Route
+									path={path.DETAIL_SHOWTIME}
+									component={DetailShowtime}
+								/>
+								<Route
+									path={path.ALL_MOVIE}
+									component={MovieComponent}
+								/>
+								<Route
+									path={path.REVIEW_MOVIE}
+									component={ReviewMovie}
+								/>
+							</Switch>
+							<Footer />
+							{/* </CustomScrollbars> */}
 						</div>
 
 						<ToastContainer

@@ -5,6 +5,8 @@ import "./MovieComponent.scss";
 import BannerMovie from "./BannerMovie";
 import Slide from "./Slide";
 import AllMovies from "./AllMovies";
+import CustomScrollbars from "../../../components/CustomScrollbars";
+import Footer from "../Section/Footer";
 // import Loading from "../Loading";
 
 class MovieComponent extends Component {
@@ -29,12 +31,13 @@ class MovieComponent extends Component {
 			slidesToScroll: 5,
 		};
 		return (
-			<>
+			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				{/* <Loading countdown={700} /> */}
 				<BannerMovie />
 				<Slide settings={settings} />
 				<AllMovies />
-			</>
+				<Footer />
+			</CustomScrollbars>
 		);
 	}
 }

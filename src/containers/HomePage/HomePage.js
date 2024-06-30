@@ -10,6 +10,8 @@ import SelectCinema from "./Showtime/SelectCinema";
 import HeaderShowtime from "./Showtime/HeaderShowtime";
 import ShowtimeSection from "./Cinema/ShowtimeSection";
 import { withRouter } from "react-router-dom";
+import CustomScrollbars from "../../components/CustomScrollbars";
+import Footer from "./Section/Footer";
 // import Loading from "./Loading";
 
 class HomePage extends Component {
@@ -35,7 +37,7 @@ class HomePage extends Component {
 		};
 		let { tradeMark } = this.state;
 		return (
-			<>
+			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				{/* <Loading countdown={1000} /> */}
 				<HomeBanner />
 				<SlideMovie settings={settings} />
@@ -45,7 +47,8 @@ class HomePage extends Component {
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={tradeMark} />
 				<Cinema />
-			</>
+				<Footer />
+			</CustomScrollbars>
 		);
 	}
 }

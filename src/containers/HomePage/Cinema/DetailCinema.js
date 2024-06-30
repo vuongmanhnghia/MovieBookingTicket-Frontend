@@ -4,6 +4,8 @@ import NavigationSection from "./NavigationSection";
 import ShowtimeSection from "./ShowtimeSection";
 import { getDetailCinemaService } from "../../../services/cinemaService";
 import HeaderShowtime from "../Showtime/HeaderShowtime";
+import CustomScrollbars from "../../../components/CustomScrollbars";
+import Footer from "../Section/Footer";
 
 class DetailCinema extends Component {
 	constructor(props) {
@@ -32,14 +34,15 @@ class DetailCinema extends Component {
 	render() {
 		let { tradeMark } = this.state;
 		return (
-			<>
+			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<NavigationSection
 					id={this.props.match.params.id}
 					handleGetTradeMark={this.handleGetTradeMark}
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={this.props.match.params.id} />
-			</>
+				<Footer />
+			</CustomScrollbars>
 		);
 	}
 }

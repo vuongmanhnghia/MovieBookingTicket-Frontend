@@ -6,6 +6,8 @@ import ShowtimeSection from "../Cinema/ShowtimeSection";
 import SelectCinema from "./SelectCinema";
 import HeaderShowtime from "./HeaderShowtime";
 import BannerShowtime from "./BannerShowtime";
+import CustomScrollbars from "../../../components/CustomScrollbars";
+import Footer from "../Section/Footer";
 class DetailShowtime extends Component {
 	constructor(props) {
 		super(props);
@@ -26,14 +28,15 @@ class DetailShowtime extends Component {
 	render() {
 		let { tradeMark } = this.state;
 		return (
-			<>
+			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<BannerShowtime />
 				<SelectCinema
 					handleShowSelectCinema={this.handleShowSelectCinema}
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={tradeMark} />
-			</>
+				<Footer />
+			</CustomScrollbars>
 		);
 	}
 }

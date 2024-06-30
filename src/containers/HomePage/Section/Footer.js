@@ -60,6 +60,7 @@ class Footer extends Component {
 						<p>&copy; Vuong Manh Nghia 2024. All rights reserved.</p>
 					</div>
 				</div>
+				<div className="null-navigation"></div>
 			</div>
 		);
 	}
