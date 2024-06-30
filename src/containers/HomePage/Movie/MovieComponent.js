@@ -7,7 +7,7 @@ import Slide from "./Slide";
 import AllMovies from "./AllMovies";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
-// import Loading from "../Loading";
+import Loading from "../Loading";
 
 class MovieComponent extends Component {
 	constructor(props) {
@@ -32,7 +32,7 @@ class MovieComponent extends Component {
 		};
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-				{/* <Loading countdown={700} /> */}
+				<Loading countdown={700} />
 				<BannerMovie />
 				<Slide settings={settings} />
 				<AllMovies />

@@ -119,9 +119,9 @@
 	display: grid;
 	border: 4px solid #0000;
 	border-radius: 50%;
-	border-color: #ccc #0000;
+	border-color: #fff0f6 #0000;
 	animation: ls 1s infinite linear;
-	background-color: #858283;
+	// background-color: #858283;
 }
 .loader::before,
 .loader::after {

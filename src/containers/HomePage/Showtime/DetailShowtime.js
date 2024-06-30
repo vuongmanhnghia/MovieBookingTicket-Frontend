@@ -8,6 +8,7 @@ import HeaderShowtime from "./HeaderShowtime";
 import BannerShowtime from "./BannerShowtime";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
+import Loading from "../Loading";
 class DetailShowtime extends Component {
 	constructor(props) {
 		super(props);
@@ -29,6 +30,7 @@ class DetailShowtime extends Component {
 		let { tradeMark } = this.state;
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
+				<Loading countdown={500} />
 				<BannerShowtime />
 				<SelectCinema
 					handleShowSelectCinema={this.handleShowSelectCinema}

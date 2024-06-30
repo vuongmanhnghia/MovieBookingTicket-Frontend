@@ -19,10 +19,12 @@ class Loading extends Component {
 		}
 	}
 
-	closeLoading = () => {
-		// this.setState({
-		// 	isOpenModal: false,
-		// });
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				isOpenModal: false,
+			});
+		}, countdown);
 	};
 
 	render() {
@@ -32,12 +34,10 @@ class Loading extends Component {
 			<div className="loading-container">
 				<Modal
 					isOpen={isOpenModal}
-					// className={"booking-modal-container"}
-					// size="lg"
+					className={"booking-modal-container"}
+					size="lg"
 					centered>
-					{setTimeout(() => {
-						this.closeLoading();
-					}, countdown)}
+					{this.closeLoading(countdown)}
 					<div class="loader"></div>
 				</Modal>
 			</div>
