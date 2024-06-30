@@ -191,25 +191,6 @@ class ShowtimeSection extends Component {
 							<div className="null col-12"></div>
 							<div className="col-5 list-cinema">
 								{detailCinema.map((item, index) => {
-									if (index === 0) {
-										return (
-											<div
-												className="list-cinema-box active"
-												onClick={() =>
-													this.handleChaneBoxCinema(item)
-												}>
-												<div
-													className="list-cinema-box-logo"
-													style={{
-														background: `url(${item.image})`,
-													}}></div>
-												<div className="list-cinema-box-name">
-													{item.name}
-												</div>
-												<i class="fas fa-chevron-right"></i>
-											</div>
-										);
-									}
 									return (
 										<div
 											className="list-cinema-box"

@@ -13,7 +13,6 @@ import Home from "../routes/Home";
 import Login from "./Auth/Login";
 import System from "../routes/System";
 import HomePage from "./HomePage/HomePage.js";
-import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailMovie from "./HomePage/Movie/DetailMovie";
 import DetailCinema from "./HomePage/Cinema/DetailCinema";
 import DetailShowtime from "./HomePage/Showtime/DetailShowtime";
@@ -21,7 +20,7 @@ import MovieComponent from "./HomePage/Movie/MovieComponent.js";
 import ReviewMovie from "./HomePage/Review/ReviewMovie.js";
 import HomeNavigation from "./HomePage/HomeNavigation.js";
 import Footer from "./HomePage/Section/Footer.js";
-// import { CustomToastCloseButton } from "../components/CustomToast";
+import CinemaComponent from "./HomePage/Cinema/CinemaComponent.js";
 
 class App extends Component {
 	handlePersistorState = () => {
@@ -84,6 +83,10 @@ class App extends Component {
 								<Route
 									path={path.REVIEW_MOVIE}
 									component={ReviewMovie}
+								/>
+								<Route
+									path={path.ALL_CINEMA}
+									component={CinemaComponent}
 								/>
 							</Switch>
 							<Footer />

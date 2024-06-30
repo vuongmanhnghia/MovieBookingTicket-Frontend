@@ -28,9 +28,8 @@ class ShowtimeData extends Component {
 		this.handleView();
 		await this.props.fetchAllTradeMarks();
 		// lọc các phần tử giống nhau trong allTrademarks
-		let allTradeMarks = this.filterTradeMarks(this.props.allTradeMarks);
 		this.setState({
-			allTradeMarks: allTradeMarks,
+			allTradeMarks: this.props.allTradeMarks,
 		});
 		await this.props.fetchAllMovies();
 		await this.handleView();
@@ -69,18 +68,6 @@ class ShowtimeData extends Component {
 					.forEach((item) => item.classList.remove("active"));
 				item.classList.add("active");
 			});
-		});
-	}
-
-	filterTradeMarks(items) {
-		const seenNames = new Set();
-		return items.filter((item) => {
-			if (seenNames.has(item.tradeMark)) {
-				return false; // Bỏ qua các đối tượng có tên trùng
-			} else {
-				seenNames.add(item.tradeMark); // Lưu lại tên đã gặp
-				return true; // Giữ lại đối tượng đầu tiên có tên này
-			}
 		});
 	}
 

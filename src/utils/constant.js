@@ -9,6 +9,7 @@ export const path = {
 	DETAIL_SHOWTIME: "/detail-showtime",
 	ALL_MOVIE: "/all-movies",
 	REVIEW_MOVIE: "/review-movie",
+	ALL_CINEMA: "/all-cinemas",
 };
 
 export const languages = {

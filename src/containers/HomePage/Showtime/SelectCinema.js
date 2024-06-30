@@ -15,10 +15,9 @@ class SelectCinema extends Component {
 
 	async componentDidMount() {
 		await this.props.fetchAllTradeMarks();
-		let allTradeMarks = this.filterTradeMarks(this.props.allTradeMarks);
 		await this.setState({
-			allTradeMarks: allTradeMarks,
-			selectTradeMark: allTradeMarks[0].tradeMark,
+			allTradeMarks: this.props.allTradeMarks,
+			selectTradeMark: this.props.allTradeMarks[0].tradeMark,
 		});
 		this.getSelectedCinema();
 
@@ -38,18 +37,6 @@ class SelectCinema extends Component {
 				activeLogo[index].classList.add("active");
 				activeTradeMark[index].classList.add("active-tradeMark");
 			});
-		});
-	}
-
-	filterTradeMarks(items) {
-		const seenNames = new Set();
-		return items.filter((item) => {
-			if (seenNames.has(item.tradeMark)) {
-				return false; // Bỏ qua các đối tượng có tên trùng
-			} else {
-				seenNames.add(item.tradeMark); // Lưu lại tên đã gặp
-				return true; // Giữ lại đối tượng đầu tiên có tên này
-			}
 		});
 	}
 

@@ -16,11 +16,9 @@ class HomeNavigation extends Component {
 	};
 	async componentDidMount() {
 		await this.props.fetchAllTradeMarks();
-		let allTradeMarks = this.filterTradeMarks(this.props.allTradeMarks).map(
-			(item) => {
-				return item.tradeMark;
-			}
-		);
+		let allTradeMarks = this.props.allTradeMarks.map((item) => {
+			return item.tradeMark;
+		});
 		this.setState({
 			allTradeMarks: allTradeMarks,
 		});
@@ -33,18 +31,6 @@ class HomeNavigation extends Component {
 					.forEach((item) => item.classList.remove("active"));
 				item.classList.add("active");
 			});
-		});
-	}
-
-	filterTradeMarks(items) {
-		const seenNames = new Set();
-		return items.filter((item) => {
-			if (seenNames.has(item.tradeMark)) {
-				return false; // Bỏ qua các đối tượng có tên trùng
-			} else {
-				seenNames.add(item.tradeMark); // Lưu lại tên đã gặp
-				return true; // Giữ lại đối tượng đầu tiên có tên này
-			}
 		});
 	}
 
@@ -95,7 +81,11 @@ class HomeNavigation extends Component {
 								</div>
 							</div>
 							<div className="nav-text dropdown">
-								<div className="dropdown-select nav-text-item">
+								<div
+									className="dropdown-select nav-text-item"
+									onClick={() =>
+										this.props.history.push(`/all-cinemas`)
+									}>
 									<span className="dropdown-selected">Rạp chiếu</span>
 									<i
 										class="fa fa-chevron-right"
