@@ -5,6 +5,8 @@ import "./AllMovies.scss";
 import * as actions from "../../../store/actions";
 import ReactPaginate from "react-paginate";
 import TrailerMovie from "./TrailerMovie";
+import LoadingSkeleton from "../LoadingSkeleton";
+import { set } from "lodash";
 
 class AllMovies extends Component {
 	constructor(props) {
@@ -17,6 +19,8 @@ class AllMovies extends Component {
 
 			isOpenModal: false,
 			dataMovie: {},
+
+			loading: true,
 		};
 	}
 
@@ -53,34 +57,58 @@ class AllMovies extends Component {
 		});
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
-		let { totalPage, listMovies, isOpenModal, dataMovie } = this.state;
+		let { totalPage, listMovies, isOpenModal, dataMovie, loading } =
+			this.state;
 		return (
 			<>
 				<div className="all-movies-container">
 					<div className="all-movies-content">
 						<div className="all-movies-title">Danh sách phim</div>
 						<div className="list-movies">
+							{this.closeLoading(2000)}
 							{listMovies &&
 								listMovies.map((movie, index) => {
 									return (
 										<div className="box-movie" key={index}>
 											<div className="box-movie-image-content">
-												<div
-													className="box-movie-image"
-													style={{
-														background: `url(${movie.image})`,
-													}}
-													onClick={() =>
-														this.props.history.push(
-															`/detail-movie/${movie.id}`
-														)
-													}></div>
-												<i
-													class="far fa-play-circle"
-													onClick={() =>
-														this.handleViewTraileMovie(movie)
-													}></i>
+												{loading && (
+													<LoadingSkeleton
+														style={{
+															width: "100%",
+															height: "100%",
+														}}
+													/>
+												)}
+												{!loading && (
+													<>
+														<div
+															className="box-movie-image"
+															style={{
+																background: `url(${movie.image})`,
+															}}
+															onClick={() =>
+																this.props.history.push(
+																	`/detail-movie/${movie.id}`
+																)
+															}></div>
+														<i
+															class="far fa-play-circle"
+															onClick={() =>
+																this.handleViewTraileMovie(
+																	movie
+																)
+															}></i>
+													</>
+												)}
 											</div>
 											<div
 												className="box-movie-content"
@@ -89,23 +117,57 @@ class AllMovies extends Component {
 														`/detail-movie/${movie.id}`
 													)
 												}>
-												<div className="box-movie-title">
-													{movie.title.length > 23
-														? movie.title.slice(0, 20) + "..."
-														: movie.title}
-												</div>
-												<div className="box-movie-genre">
-													{movie.genre.length > 30
-														? movie.genre.slice(0, 30) + "..."
-														: movie.genre}
-												</div>
+												{loading && (
+													<LoadingSkeleton
+														style={{
+															width: "100%",
+															height: "18.75px",
+															marginBottom: "5px",
+														}}
+													/>
+												)}
+												{!loading && (
+													<div className="box-movie-title">
+														{movie.title.length > 23
+															? movie.title.slice(0, 20) + "..."
+															: movie.title}
+													</div>
+												)}
+
+												{loading && (
+													<LoadingSkeleton
+														style={{
+															width: "100%",
+															height: "18px",
+															marginBottom: "5px",
+														}}
+													/>
+												)}
+												{!loading && (
+													<div className="box-movie-genre">
+														{movie.genre.length > 30
+															? movie.genre.slice(0, 30) + "..."
+															: movie.genre}
+													</div>
+												)}
 											</div>
-											<div className="box-movie-rating">
-												<i
-													class="fa fa-star"
-													aria-hidden="true"></i>
-												{movie.rating}
-											</div>
+
+											{loading && (
+												<LoadingSkeleton
+													style={{
+														width: "100%",
+														height: "18px",
+													}}
+												/>
+											)}
+											{!loading && (
+												<div className="box-movie-rating">
+													<i
+														class="fa fa-star"
+														aria-hidden="true"></i>
+													{movie.rating}
+												</div>
+											)}
 										</div>
 									);
 								})}

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./Cinema.scss";
 import { fetchAllCinemas } from "../../../store/actions";
 import { withRouter } from "react-router";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 class Cinema extends Component {
 	constructor(props) {
@@ -13,6 +14,8 @@ class Cinema extends Component {
 			arrQuantity: [],
 			arrRating: [],
 			uniqueTradeMarks: [],
+
+			loading: true,
 		};
 	}
 
@@ -64,7 +67,16 @@ class Cinema extends Component {
 		this.props.history.push(`/detail-cinema/${tradeMark}`);
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
+		let { loading } = this.state;
 		return (
 			<div className="cinema-section-container">
 				<div className="cinema-section-content">
@@ -75,14 +87,10 @@ class Cinema extends Component {
 						</div>
 					</div>
 					<div className="cinema-content">
+						{this.closeLoading(3000)}
 						{this.state.uniqueTradeMarks &&
 							this.state.uniqueTradeMarks.length > 0 &&
 							this.state.uniqueTradeMarks.map((item, index) => {
-								let imageBase64 = new Buffer(
-									item.image,
-									"base64"
-								).toString("binary");
-
 								return (
 									<div
 										className="box-cinema"
@@ -91,26 +99,35 @@ class Cinema extends Component {
 												this.state.uniqueTradeMarks[index].tradeMark
 											)
 										}>
-										<div
-											className="logo-cinema"
-											style={{
-												backgroundImage: `url(${imageBase64})`,
-											}}></div>
-										<div className="box-cinema-content">
-											<div className="box-cinema-content-title">
-												{this.state.arrTradeMarks[index]}
-											</div>
-											<div className="dash"></div>
-											<div className="box-cinema-content-rate">
-												<i className="fas fa-star"></i>
-												{this.state.arrRating[index]}
-											</div>
-											<div className="dash"></div>
-											<div className="box-cinema-content-quantity">
-												<i className="fas fa-map-marker-alt"></i>{" "}
-												{this.state.arrQuantity[index]} rạp
-											</div>
-										</div>
+										{loading && (
+											<LoadingSkeleton
+												style={{ height: "100%", width: "100%" }}
+											/>
+										)}
+										{!loading && (
+											<>
+												<div
+													className="logo-cinema"
+													style={{
+														backgroundImage: `url(${item.image})`,
+													}}></div>
+												<div className="box-cinema-content">
+													<div className="box-cinema-content-title">
+														{this.state.arrTradeMarks[index]}
+													</div>
+													<div className="dash"></div>
+													<div className="box-cinema-content-rate">
+														<i className="fas fa-star"></i>
+														{this.state.arrRating[index]}
+													</div>
+													<div className="dash"></div>
+													<div className="box-cinema-content-quantity">
+														<i className="fas fa-map-marker-alt"></i>{" "}
+														{this.state.arrQuantity[index]} rạp
+													</div>
+												</div>
+											</>
+										)}
 									</div>
 								);
 							})}

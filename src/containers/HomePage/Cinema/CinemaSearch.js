@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./CinemaSearch.scss";
 import * as actions from "../../../store/actions";
+import { set } from "lodash";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 class CinemaSearch extends Component {
 	constructor(props) {
@@ -12,6 +14,7 @@ class CinemaSearch extends Component {
 			imageTradeMark: "",
 			allTradeMarks: [],
 			allCinemasByTradeMark: [],
+			loading: true,
 		};
 	}
 
@@ -21,21 +24,25 @@ class CinemaSearch extends Component {
 			allTradeMarks: this.props.allTradeMarks,
 		});
 
-		let activeCinema = document.querySelectorAll("div.box-cinema");
-		let activeLogo = document.querySelectorAll("div.logo-cinema");
-		let activeTradeMark = document.querySelectorAll("div.tradeMark-cinema");
-		activeCinema.forEach((item, index) => {
-			item.addEventListener("click", () => {
-				document
-					.querySelectorAll("div.logo-cinema")
-					.forEach((item) => item.classList.remove("active"));
-				document
-					.querySelectorAll("div.tradeMark-cinema")
-					.forEach((item) => item.classList.remove("active-tradeMark"));
-				activeLogo[index].classList.add("active");
-				activeTradeMark[index].classList.add("active-tradeMark");
+		setTimeout(() => {
+			let activeCinema = document.querySelectorAll("div.box-cinema");
+			let activeLogo = document.querySelectorAll("div.logo-cinema");
+			let activeTradeMark = document.querySelectorAll(
+				"div.tradeMark-cinema"
+			);
+			activeCinema.forEach((item, index) => {
+				item.addEventListener("click", () => {
+					document
+						.querySelectorAll("div.logo-cinema")
+						.forEach((item) => item.classList.remove("active"));
+					document
+						.querySelectorAll("div.tradeMark-cinema")
+						.forEach((item) => item.classList.remove("active-tradeMark"));
+					activeLogo[index].classList.add("active");
+					activeTradeMark[index].classList.add("active-tradeMark");
+				});
 			});
-		});
+		}, 2000);
 
 		this.handleChangeCinema(this.state.allTradeMarks[0]);
 	}
@@ -60,52 +67,76 @@ class CinemaSearch extends Component {
 		console.log(item);
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
-		let { allTradeMarks, allCinemasByTradeMark, imageTradeMark } = this.state;
+		let { allTradeMarks, allCinemasByTradeMark, imageTradeMark, loading } =
+			this.state;
 
 		return (
 			<div className="cinema-search-container">
 				<div className="cinema-search-content">
-					<div className="cinema-search-select-content">
-						{allTradeMarks &&
-							allTradeMarks.length > 0 &&
-							allTradeMarks.map((item, index) => {
-								if (index === 0) {
+					{this.closeLoading(2000)}
+					{loading && (
+						<LoadingSkeleton
+							style={{
+								width: "756px",
+								height: "80px",
+								borderRadius: "12px",
+								margin: "20px",
+							}}
+						/>
+					)}
+					{!loading && (
+						<div className="cinema-search-select-content">
+							{allTradeMarks &&
+								allTradeMarks.length > 0 &&
+								allTradeMarks.map((item, index) => {
+									if (index === 0) {
+										return (
+											<div
+												className="box-cinema"
+												onClick={() =>
+													this.handleChangeCinema(item)
+												}>
+												<div
+													className="logo-cinema active"
+													style={{
+														background: `url(${item.image})`,
+													}}></div>
+												<div className="tradeMark-cinema active-tradeMark">
+													{item.tradeMark < 7
+														? item.tradeMark
+														: `${item.tradeMark.slice(0, 7)}...`}
+												</div>
+											</div>
+										);
+									}
 									return (
 										<div
 											className="box-cinema"
 											onClick={() => this.handleChangeCinema(item)}>
 											<div
-												className="logo-cinema active"
+												className="logo-cinema"
 												style={{
 													background: `url(${item.image})`,
 												}}></div>
-											<div className="tradeMark-cinema active-tradeMark">
+											<div className="tradeMark-cinema">
 												{item.tradeMark < 7
 													? item.tradeMark
 													: `${item.tradeMark.slice(0, 7)}...`}
 											</div>
 										</div>
 									);
-								}
-								return (
-									<div
-										className="box-cinema"
-										onClick={() => this.handleChangeCinema(item)}>
-										<div
-											className="logo-cinema"
-											style={{
-												background: `url(${item.image})`,
-											}}></div>
-										<div className="tradeMark-cinema">
-											{item.tradeMark < 7
-												? item.tradeMark
-												: `${item.tradeMark.slice(0, 7)}...`}
-										</div>
-									</div>
-								);
-							})}
-					</div>
+								})}
+						</div>
+					)}
 					<div className="cinema-search-all-cinemas">
 						{allCinemasByTradeMark &&
 							allCinemasByTradeMark.length > 0 &&
@@ -114,20 +145,56 @@ class CinemaSearch extends Component {
 									<div
 										className="list-cinema-box"
 										onClick={() => this.handleChaneBoxCinema(item)}>
-										<div
-											className="list-cinema-box-logo"
-											style={{
-												background: `url(${imageTradeMark})`,
-											}}></div>
+										{loading && (
+											<LoadingSkeleton
+												style={{
+													width: "40px",
+													height: "40px",
+													borderRadius: "6px",
+													marginRight: "12px",
+												}}
+											/>
+										)}
+										{!loading && (
+											<div
+												className="list-cinema-box-logo"
+												style={{
+													background: `url(${imageTradeMark})`,
+												}}></div>
+										)}
+
 										<div className="name-address">
-											<div className="list-cinema-box-name">
-												{item.name}
-											</div>
-											<div className="list-cinema-box-address">
-												{item.location.length < 120
-													? item.location
-													: `${item.location.slice(0, 120)}...`}
-											</div>
+											{loading && (
+												<LoadingSkeleton
+													style={{
+														width: "570px",
+														height: "24px",
+														borderRadius: "6px",
+														marginBottom: "6px",
+													}}
+												/>
+											)}
+											{!loading && (
+												<div className="list-cinema-box-name">
+													{item.name}
+												</div>
+											)}
+											{loading && (
+												<LoadingSkeleton
+													style={{
+														width: "650px",
+														height: "24px",
+														borderRadius: "6px",
+													}}
+												/>
+											)}
+											{!loading && (
+												<div className="list-cinema-box-address">
+													{item.location.length < 120
+														? item.location
+														: `${item.location.slice(0, 120)}...`}
+												</div>
+											)}
 										</div>
 										<i class="fas fa-chevron-right"></i>
 									</div>

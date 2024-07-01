@@ -5,6 +5,7 @@ import * as actions from "../../../store/actions";
 import "./ReviewSection.scss";
 import ReactPaginate from "react-paginate";
 import TrailerMovie from "../Movie/TrailerMovie";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 class ReviewSection extends Component {
 	constructor(props) {
@@ -16,6 +17,7 @@ class ReviewSection extends Component {
 			totalPage: 0,
 
 			isOpenModal: false,
+			loading: true,
 		};
 	}
 
@@ -52,29 +54,50 @@ class ReviewSection extends Component {
 		});
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
-		let { totalPage, listMovies, isOpenModal, dataMovie } = this.state;
+		let { totalPage, listMovies, isOpenModal, dataMovie, loading } =
+			this.state;
 		return (
 			<div className="review-section-container">
 				<div className="review-section-content">
 					<div className="review-section-list">
+						{this.closeLoading(1000)}
 						{listMovies &&
 							listMovies.map((movie, index) => {
 								return (
 									<div className="box-review-movie">
-										<div
-											className="box-review-movie-background"
-											style={{
-												background: `url(${movie.background})`,
-											}}></div>
-										<div className="box-review-movie-title">
-											{movie.title}
-										</div>
-										<i
-											class="far fa-play-circle"
-											onClick={() =>
-												this.handleViewTraileMovie(movie)
-											}></i>
+										{loading && (
+											<LoadingSkeleton
+												width="100%"
+												height="100%"
+												borderRadius="12px"
+											/>
+										)}
+										{!loading && (
+											<>
+												<div
+													className="box-review-movie-background"
+													style={{
+														background: `url(${movie.background})`,
+													}}></div>
+												<div className="box-review-movie-title">
+													{movie.title}
+												</div>
+												<i
+													class="far fa-play-circle"
+													onClick={() =>
+														this.handleViewTraileMovie(movie)
+													}></i>
+											</>
+										)}
 									</div>
 								);
 							})}

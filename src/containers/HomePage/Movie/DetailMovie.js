@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import TrailerMovie from "./TrailerMovie";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
-import Loading from "../Loading";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -116,7 +115,6 @@ class DetailMovie extends Component {
 		let date = new Date(releaseDate);
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-				<Loading countdown={700} />
 				<div className="movie-detail-container">
 					<div className="movie-detail-content">
 						<div className="box-movie-detail">

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../../store/actions";
 import "./SelectCinema.scss";
+import LoadingSkeleton from "../LoadingSkeleton";
+import { set } from "lodash";
 
 class SelectCinema extends Component {
 	constructor(props) {
@@ -10,6 +12,7 @@ class SelectCinema extends Component {
 		this.state = {
 			allTradeMarks: [],
 			selectTradeMark: "",
+			loading: true,
 		};
 	}
 
@@ -21,23 +24,27 @@ class SelectCinema extends Component {
 		});
 		this.getSelectedCinema();
 
-		let activeCinema = document.querySelectorAll("div.select-cinema-item");
-		let activeLogo = document.querySelectorAll("div.select-cinema-item-logo");
-		let activeTradeMark = document.querySelectorAll(
-			"div.select-cinema-item-name"
-		);
-		activeCinema.forEach((item, index) => {
-			item.addEventListener("click", () => {
-				document
-					.querySelectorAll("div.select-cinema-item-logo")
-					.forEach((item) => item.classList.remove("active"));
-				document
-					.querySelectorAll("div.select-cinema-item-name")
-					.forEach((item) => item.classList.remove("active-tradeMark"));
-				activeLogo[index].classList.add("active");
-				activeTradeMark[index].classList.add("active-tradeMark");
+		setTimeout(() => {
+			let activeCinema = document.querySelectorAll("div.select-cinema-item");
+			let activeLogo = document.querySelectorAll(
+				"div.select-cinema-item-logo"
+			);
+			let activeTradeMark = document.querySelectorAll(
+				"div.select-cinema-item-name"
+			);
+			activeCinema.forEach((item, index) => {
+				item.addEventListener("click", () => {
+					document
+						.querySelectorAll("div.select-cinema-item-logo")
+						.forEach((item) => item.classList.remove("active"));
+					document
+						.querySelectorAll("div.select-cinema-item-name")
+						.forEach((item) => item.classList.remove("active-tradeMark"));
+					activeLogo[index].classList.add("active");
+					activeTradeMark[index].classList.add("active-tradeMark");
+				});
 			});
-		});
+		}, 2000);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -53,51 +60,83 @@ class SelectCinema extends Component {
 		}
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
-		let { allTradeMarks } = this.state;
+		let { allTradeMarks, loading } = this.state;
 		return (
 			<>
 				<div className="select-cinema-container">
 					<div className="select-cinema-content">
-						{allTradeMarks &&
-							allTradeMarks.length > 0 &&
-							allTradeMarks.map((item, index) => {
-								if (index === 0) {
-									return (
-										<div
-											className="select-cinema-item"
-											onClick={() => this.getSelectedCinema(item)}>
-											<div
-												className="select-cinema-item-logo active"
-												style={{
-													background: `url(${item.image})`,
-												}}></div>
-											<div className="select-cinema-item-name active-tradeMark">
-												{item.tradeMark.length > 7
-													? `${item.tradeMark.slice(0, 7)}...`
-													: item.tradeMark}
-											</div>
-										</div>
-									);
-								} else {
-									return (
-										<div
-											className="select-cinema-item"
-											onClick={() => this.getSelectedCinema(item)}>
-											<div
-												className="select-cinema-item-logo"
-												style={{
-													background: `url(${item.image})`,
-												}}></div>
-											<div className="select-cinema-item-name">
-												{item.tradeMark.length > 7
-													? `${item.tradeMark.slice(0, 7)}...`
-													: item.tradeMark}
-											</div>
-										</div>
-									);
-								}
-							})}
+						{this.closeLoading(2000)}
+						{loading && (
+							<LoadingSkeleton
+								style={{
+									width: "100%",
+									height: "71px",
+									"border-radius": "12px",
+								}}
+							/>
+						)}
+						{!loading && (
+							<>
+								{allTradeMarks &&
+									allTradeMarks.length > 0 &&
+									allTradeMarks.map((item, index) => {
+										if (index === 0) {
+											return (
+												<div
+													className="select-cinema-item"
+													onClick={() =>
+														this.getSelectedCinema(item)
+													}>
+													<div
+														className="select-cinema-item-logo active"
+														style={{
+															background: `url(${item.image})`,
+														}}></div>
+													<div className="select-cinema-item-name active-tradeMark">
+														{item.tradeMark.length > 7
+															? `${item.tradeMark.slice(
+																	0,
+																	7
+															  )}...`
+															: item.tradeMark}
+													</div>
+												</div>
+											);
+										} else {
+											return (
+												<div
+													className="select-cinema-item"
+													onClick={() =>
+														this.getSelectedCinema(item)
+													}>
+													<div
+														className="select-cinema-item-logo"
+														style={{
+															background: `url(${item.image})`,
+														}}></div>
+													<div className="select-cinema-item-name">
+														{item.tradeMark.length > 7
+															? `${item.tradeMark.slice(
+																	0,
+																	7
+															  )}...`
+															: item.tradeMark}
+													</div>
+												</div>
+											);
+										}
+									})}
+							</>
+						)}
 					</div>
 				</div>
 			</>

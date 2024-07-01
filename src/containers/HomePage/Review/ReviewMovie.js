@@ -6,7 +6,6 @@ import BannerReview from "./BannerReview";
 import ReviewSection from "./ReviewSection";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
-import Loading from "../Loading";
 
 class ReviewMovie extends Component {
 	constructor(props) {
@@ -24,7 +23,6 @@ class ReviewMovie extends Component {
 	render() {
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-				<Loading countdown={700} />
 				<BannerReview />
 				<ReviewSection />
 				<Footer />

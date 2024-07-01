@@ -8,6 +8,7 @@ import CinemaBanner from "./CinemaBanner";
 import CinemaSearch from "./CinemaSearch";
 import SlideMovie from "../Section/SlideMovie";
 import Cinema from "../Section/Cinema";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 class CinemaComponent extends Component {
 	constructor(props) {
@@ -32,7 +33,6 @@ class CinemaComponent extends Component {
 		};
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-				{/* <Loading countdown={1000} /> */}
 				<CinemaBanner />
 				<div className="cinema-component-title">Tìm rạp chiếu phim</div>
 				<div className="cinema-component-box">

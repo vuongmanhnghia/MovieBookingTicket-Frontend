@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import * as actions from "../../../store/actions";
 import { withRouter } from "react-router-dom";
 import TrailerMovie from "../Movie/TrailerMovie";
+import LoadingSkeleton from "../LoadingSkeleton";
 // Import css files
 
 class Slide extends Component {
@@ -14,6 +15,7 @@ class Slide extends Component {
 			arrMovies: [],
 			isOpenModal: false,
 			dataMovie: {},
+			loading: true,
 		};
 	}
 
@@ -56,8 +58,16 @@ class Slide extends Component {
 		});
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
-		let { isOpenModal, dataMovie, arrMovies } = this.state;
+		let { isOpenModal, dataMovie, arrMovies, loading } = this.state;
 		return (
 			<div className="background-movie-container">
 				<div className="movie-section-content">
@@ -67,44 +77,107 @@ class Slide extends Component {
 					<div className="movie-section-slide-container">
 						<div className="movie-section-slide-content">
 							<Slider {...this.props.settings}>
+								{this.closeLoading(2000)}
 								{arrMovies &&
 									arrMovies.length > 0 &&
 									arrMovies.map((item, index) => {
 										return (
 											<div className="box-slide-customize">
 												<div className="box-image-movie">
-													<div
-														onClick={() =>
-															this.handleViewDetailMovie(item)
-														}
-														className="bg-image"
-														style={{
-															backgroundImage: `url(${item.image})`,
-														}}></div>
-													<i
-														class="far fa-play-circle"
-														onClick={() =>
-															this.handleViewTraileMovie(item)
-														}></i>
+													{loading && (
+														<LoadingSkeleton
+															style={{
+																width: "100%",
+																height: "100%",
+															}}
+														/>
+													)}
+													{!loading && (
+														<>
+															<div
+																onClick={() =>
+																	this.handleViewDetailMovie(
+																		item
+																	)
+																}
+																className="bg-image"
+																style={{
+																	backgroundImage: `url(${item.image})`,
+																}}></div>
+															<i
+																class="far fa-play-circle"
+																onClick={() =>
+																	this.handleViewTraileMovie(
+																		item
+																	)
+																}></i>
+														</>
+													)}
 												</div>
-												<div className="box-movie-text">
+												<div
+													className="box-movie-text"
+													onClick={() =>
+														this.handleViewDetailMovie(item)
+													}>
 													<div className="order-slide">
 														{index + 1}
 													</div>
 													<div className="title-movie">
-														{item.title.length < 20
-															? item.title
-															: `${item.title.slice(0, 20)}...`}
+														{loading && (
+															<LoadingSkeleton
+																style={{
+																	width: "185px",
+																	height: "18.75px",
+																}}
+															/>
+														)}
+														{!loading && (
+															<>
+																{item.title.length < 20
+																	? item.title
+																	: `${item.title.slice(
+																			0,
+																			20
+																	  )}...`}
+															</>
+														)}
 													</div>
 													<div className="category">
-														{item.genre.length < 25
-															? item.genre
-															: `${item.genre.slice(0, 28)}...`}
+														{loading && (
+															<LoadingSkeleton
+																style={{
+																	width: "185px",
+																	height: "16px",
+																}}
+															/>
+														)}
+														{!loading && (
+															<>
+																{item.genre.length < 25
+																	? item.genre
+																	: `${item.genre.slice(
+																			0,
+																			28
+																	  )}...`}
+															</>
+														)}
 													</div>
 												</div>
 												<div className="rate">
-													<i className="fas fa-star"></i>{" "}
-													{item.rating}
+													{loading && (
+														<LoadingSkeleton
+															style={{
+																width: "185px",
+																height: "18.75px",
+															}}
+														/>
+													)}
+													{!loading && (
+														<>
+															<i className="fas fa-star"></i>{" "}
+															{item.rating}
+														</>
+													)}
 												</div>
 											</div>
 										);

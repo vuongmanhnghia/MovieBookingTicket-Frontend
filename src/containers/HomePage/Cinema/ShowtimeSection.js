@@ -6,6 +6,7 @@ import { getDetailCinemaService } from "../../../services/cinemaService";
 import { getShowtimeByCinemaService } from "../../../services/showtimeService";
 import BookingModal from "../Movie/BookingModal";
 import * as actions from "../../../store/actions";
+import LoadingSkeleton from "../LoadingSkeleton";
 class ShowtimeSection extends Component {
 	constructor(props) {
 		super(props);
@@ -25,6 +26,8 @@ class ShowtimeSection extends Component {
 			isOpenModal: false,
 			dataShowtime: {},
 			dataScreen: {},
+
+			loading: true,
 		};
 	}
 
@@ -170,6 +173,14 @@ class ShowtimeSection extends Component {
 		});
 	};
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	render() {
 		let {
 			tradeMark,
@@ -182,6 +193,7 @@ class ShowtimeSection extends Component {
 			isOpenModal,
 			dataScreen,
 			dataShowtime,
+			loading,
 		} = this.state;
 		return (
 			<>
@@ -190,6 +202,7 @@ class ShowtimeSection extends Component {
 						<div className="detail-showtime-content row">
 							<div className="null col-12"></div>
 							<div className="col-5 list-cinema">
+								{this.closeLoading(3000)}
 								{detailCinema.map((item, index) => {
 									return (
 										<div
@@ -197,15 +210,39 @@ class ShowtimeSection extends Component {
 											onClick={() =>
 												this.handleChaneBoxCinema(item)
 											}>
-											<div
-												className="list-cinema-box-logo"
-												style={{
-													background: `url(${item.image})`,
-												}}></div>
-											<div className="list-cinema-box-name">
-												{item.name}
-											</div>
-											<i class="fas fa-chevron-right"></i>
+											{loading && (
+												<LoadingSkeleton
+													style={{
+														width: "40px",
+														height: "40px",
+														borderRadius: "6px",
+														marginRight: "12px",
+													}}
+												/>
+											)}
+											{!loading && (
+												<div
+													className="list-cinema-box-logo"
+													style={{
+														background: `url(${item.image})`,
+													}}></div>
+											)}
+											{loading && (
+												<LoadingSkeleton
+													style={{
+														width: "100%",
+														height: "24px",
+													}}
+												/>
+											)}
+											{!loading && (
+												<>
+													<div className="list-cinema-box-name">
+														{item.name}
+													</div>
+													<i class="fas fa-chevron-right"></i>
+												</>
+											)}
 										</div>
 									);
 								})}
