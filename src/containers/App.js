@@ -21,6 +21,7 @@ import ReviewMovie from "./HomePage/Review/ReviewMovie.js";
 import HomeNavigation from "./HomePage/HomeNavigation.js";
 import Footer from "./HomePage/Section/Footer.js";
 import CinemaComponent from "./HomePage/Cinema/CinemaComponent.js";
+import CinemaShowtime from "./HomePage/Cinema/CinemaShowtime.js";
 
 class App extends Component {
 	handlePersistorState = () => {
@@ -87,6 +88,10 @@ class App extends Component {
 								<Route
 									path={path.ALL_CINEMA}
 									component={CinemaComponent}
+								/>
+								<Route
+									path={path.CINEMA_SHOWTIME}
+									component={CinemaShowtime}
 								/>
 							</Switch>
 							<Footer />

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./CinemaSearch.scss";
 import * as actions from "../../../store/actions";
-import { set } from "lodash";
 import LoadingSkeleton from "../LoadingSkeleton";
 
 class CinemaSearch extends Component {
@@ -15,10 +14,13 @@ class CinemaSearch extends Component {
 			allTradeMarks: [],
 			allCinemasByTradeMark: [],
 			loading: true,
+
+			selectTradeMark: "",
 		};
 	}
 
 	async componentDidMount() {
+		this.closeLoading(1000);
 		await this.props.fetchAllTradeMarks();
 		this.setState({
 			allTradeMarks: this.props.allTradeMarks,
@@ -50,6 +52,7 @@ class CinemaSearch extends Component {
 	handleChangeCinema = async (item) => {
 		this.setState({
 			imageTradeMark: item.image,
+			selectTradeMark: item.tradeMark,
 		});
 
 		await this.props.fetchAllCinemasByTradeMark(item.tradeMark);
@@ -63,8 +66,8 @@ class CinemaSearch extends Component {
 		}
 	}
 
-	handleChaneBoxCinema = (item) => {
-		console.log(item);
+	handleViewShowtime = (item) => {
+		this.props.history.push(`/cinema-showtime/${item.name}`);
 	};
 
 	closeLoading = (countdown) => {
@@ -82,7 +85,6 @@ class CinemaSearch extends Component {
 		return (
 			<div className="cinema-search-container">
 				<div className="cinema-search-content">
-					{this.closeLoading(2000)}
 					{loading && (
 						<LoadingSkeleton
 							style={{
@@ -144,7 +146,7 @@ class CinemaSearch extends Component {
 								return (
 									<div
 										className="list-cinema-box"
-										onClick={() => this.handleChaneBoxCinema(item)}>
+										onClick={() => this.handleViewShowtime(item)}>
 										{loading && (
 											<LoadingSkeleton
 												style={{

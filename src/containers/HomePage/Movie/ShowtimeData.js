@@ -120,7 +120,6 @@ class ShowtimeData extends Component {
 	};
 
 	groupCinema(arrShowtime) {
-		console.log(arrShowtime);
 		const groups = arrShowtime.reduce((acc, item) => {
 			const group = acc[item.cinemaId] || [];
 			group.push(item);

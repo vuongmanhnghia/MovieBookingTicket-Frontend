@@ -20,7 +20,6 @@ class DetailCinema extends Component {
 			let id = this.props.match.params.id;
 			let response = await getDetailCinemaService(id);
 			if (response && response.errCode === 0) {
-				console.log(response.data);
 				this.setState({
 					detailCinema: response.data,
 				});
@@ -35,10 +34,7 @@ class DetailCinema extends Component {
 		let { tradeMark } = this.state;
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-				<NavigationSection
-					id={this.props.match.params.id}
-					handleGetTradeMark={this.handleGetTradeMark}
-				/>
+				<NavigationSection id={this.props.match.params.id} />
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection id={this.props.match.params.id} />
 				<Footer />

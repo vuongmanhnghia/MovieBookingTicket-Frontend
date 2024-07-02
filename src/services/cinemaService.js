@@ -20,10 +20,20 @@ const getAllCinemasByTradeMarkService = (tradeMark) => {
 	return axios.get(`/api/get-all-cinemas-by-trademark?tradeMark=${tradeMark}`);
 };
 
+const getShowtimeByCinemaService = (name) => {
+	return axios.get(`/api/get-showtime-by-cinema?name=${name}`);
+};
+
+const getTradeMarkByCinemaService = (name) => {
+	return axios.get(`/api/get-tradeMark-by-cinema?name=${name}`);
+};
+
 export {
 	createNewCinemaService,
 	getDetailCinemaService,
 	getAllCinemasService,
 	getAllTradeMarksService,
 	getAllCinemasByTradeMarkService,
+	getShowtimeByCinemaService,
+	getTradeMarkByCinemaService,
 };

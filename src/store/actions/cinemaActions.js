@@ -4,11 +4,12 @@ import {
 	getAllCinemasService,
 	getAllTradeMarksService,
 	getAllCinemasByTradeMarkService,
+	getShowtimeByCinemaService,
+	getTradeMarkByCinemaService,
 } from "../../services/cinemaService";
 import { toast } from "react-toastify";
 
 export const createNewCinema = (data) => {
-	console.log(data);
 	return async (dispatch, getState) => {
 		try {
 			let response = await createNewCinemaService(data);
@@ -100,6 +101,52 @@ export const fetchAllCinemasByTradeMark = (data) => {
 			console.log("fetch all TradeMarks errol: ", e);
 			dispatch({
 				type: actionTypes.FETCH_ALL_CINEMAS_BY_TRADEMARK_FAILED,
+			});
+		}
+	};
+};
+
+export const fetchShowtimeByCinema = (name) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getShowtimeByCinemaService(name);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_SHOWTIME_BY_CINEMA_SUCCESS,
+					showtimeData: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_SHOWTIME_BY_CINEMA_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch all showtimes errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_SHOWTIME_BY_CINEMA_FAILED,
+			});
+		}
+	};
+};
+
+export const fetchTradeMarkByCinema = (name) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getTradeMarkByCinemaService(name);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_TRADEMARK_BY_CINEMA_SUCCESS,
+					tradeMark: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_TRADEMARK_BY_CINEMA_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch all showtimes errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_TRADEMARK_BY_CINEMA_FAILED,
 			});
 		}
 	};

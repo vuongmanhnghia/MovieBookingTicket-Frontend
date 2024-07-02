@@ -8,7 +8,6 @@ import CinemaBanner from "./CinemaBanner";
 import CinemaSearch from "./CinemaSearch";
 import SlideMovie from "../Section/SlideMovie";
 import Cinema from "../Section/Cinema";
-import LoadingSkeleton from "../LoadingSkeleton";
 
 class CinemaComponent extends Component {
 	constructor(props) {

@@ -155,7 +155,6 @@ class ShowtimeSection extends Component {
 	}
 
 	handleViewBookingModal = async (item) => {
-		console.log(item);
 		this.setState({
 			image: item.image,
 		});
@@ -323,9 +322,6 @@ class ShowtimeSection extends Component {
 																				0 &&
 																			item.showtime.map(
 																				(it) => {
-																					console.log(
-																						nameCinemaShowtime
-																					);
 																					it.cinemaId =
 																						nameCinemaShowtime;
 																					it.tradeMarkId =
