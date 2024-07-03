@@ -129,6 +129,7 @@
 				.dropdown {
 					position: relative;
 					transition: all 0.3s;
+					cursor: pointer;
 
 					&:hover .dropdown_list {
 						display: block;
@@ -140,7 +141,7 @@
 						width: 100%;
 						gap: 10px;
 
-						.fa-chevron-right {
+						.fa-chevron-down {
 							font-size: 12px;
 							line-height: 24px;
 							transition: all 0.3s;
@@ -209,8 +210,8 @@
 				}
 
 				.dropdown:hover {
-					.fa-chevron-right {
-						rotate: 90deg;
+					.fa-chevron-down {
+						rotate: 180deg;
 					}
 				}
 			}

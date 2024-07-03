@@ -8,22 +8,19 @@ const getShowtimeByCinemaService = (name) => {
 	return axios.get(`/api/get-showtime-by-cinema?name=${name}`);
 };
 
-// const getAllShowtimesService = () => {
-// 	return axios.get("/api/get-all-showtimes");
-// };
-
-// const getDetailShowtimeService = (id) => {
-// 	return axios.get(`/api/get-detail-showtime?id=${id}`);
-// };
-
 const getSeatsByShowtimeService = (data) => {
 	return axios.post("/api/get-seats-by-showtime", data);
+};
+
+const getShowtimeByCinemaAndDateService = (name, date) => {
+	return axios.get(
+		`/api/get-showtime-by-cinema-and-date?name=${name}&date=${date}`
+	);
 };
 
 export {
 	createNewShowtimeService,
 	getShowtimeByCinemaService,
 	getSeatsByShowtimeService,
-	// getDetailShowtimeService,
-	// getAllShowtimesService,
+	getShowtimeByCinemaAndDateService,
 };

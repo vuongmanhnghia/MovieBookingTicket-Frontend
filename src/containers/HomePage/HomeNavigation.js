@@ -87,9 +87,7 @@ class HomeNavigation extends Component {
 										this.props.history.push(`/all-cinemas`)
 									}>
 									<span className="dropdown-selected">Rạp chiếu</span>
-									<i
-										class="fa fa-chevron-right"
-										aria-hidden="true"></i>
+									<i class="fa fa-chevron-down" aria-hidden="true"></i>
 								</div>
 								<ul className="dropdown_list">
 									{allTradeMarks &&

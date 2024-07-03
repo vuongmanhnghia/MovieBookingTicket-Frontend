@@ -9,7 +9,19 @@ class CinemaShowtimeBooking extends Component {
 		this.state = {};
 	}
 
-	async componentDidMount() {}
+	async componentDidMount() {
+		console.log(this.props.showtimeData);
+
+		let activeDate = document.querySelectorAll(".box-date");
+		activeDate.forEach((item) => {
+			item.addEventListener("click", () => {
+				document
+					.querySelectorAll(".box-date")
+					.forEach((item) => item.classList.remove("active"));
+				item.classList.add("active");
+			});
+		});
+	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
@@ -27,7 +39,6 @@ class CinemaShowtimeBooking extends Component {
 
 	handleView = async () => {
 		let dataShow = await this.props.showtimeData;
-
 		let result = [];
 		dataShow.map((item) => {
 			let showtime = item.showtime;
@@ -48,7 +59,6 @@ class CinemaShowtimeBooking extends Component {
 	render() {
 		let { showtimeData } = this.props;
 		let maxDate = [1, 2, 3, 4, 5, 6, 7];
-		console.log("showtimeData", showtimeData);
 		return (
 			<div className="cinema-showtime-container">
 				<div className="cinema-showtime-content">

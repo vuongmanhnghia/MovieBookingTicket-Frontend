@@ -45,6 +45,7 @@
 				box-shadow: #0000 0px 0px 0px 0px;
 				display: flex;
 				margin-bottom: 50px;
+				transition: all 0.3s;
 				cursor: pointer;
 
 				&:hover {
@@ -121,10 +122,12 @@
 				font-weight: 700;
 				line-height: 1.5rem;
 				background-color: #d82d8b;
+				transition: all 0.3s;
 				cursor: pointer;
 
 				&:hover {
 					background-color: #b32071;
+					transform: scale(1.05);
 				}
 			}
 		}
