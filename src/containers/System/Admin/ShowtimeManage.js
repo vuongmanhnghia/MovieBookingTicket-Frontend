@@ -7,6 +7,7 @@ import { FormattedMessage } from "react-intl";
 import Select from "react-select";
 import DatePicker from "../../../components/Input/DatePicker";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 class MovieManage extends Component {
 	constructor(props) {
@@ -151,7 +152,7 @@ class MovieManage extends Component {
 
 	onChangeInputDate = (date) => {
 		this.setState({
-			startDate: date[0],
+			startDate: moment(date[0]).format("DD/MM/YYYY"),
 		});
 	};
 
@@ -188,19 +189,18 @@ class MovieManage extends Component {
 			startDate,
 		} = this.state;
 
-		let formatDate = new Date(startDate).getTime();
 		if (arrayTimes && arrayTimes.length > 0) {
 			let selectedTime = arrayTimes.filter(
 				(item) => item.isSelected === true
 			);
-			if (selectedTime && selectedTime.length > 0 && !isNaN(formatDate)) {
+			if (selectedTime && selectedTime.length > 0) {
 				selectedTime.map((item) => {
 					let object = {};
 					object.tradeMarkId = selectedTradeMark.label;
 					object.movieId = selectedMovie.label;
 					object.cinemaId = selectedCinema.label;
 					object.screenId = selectedScreen.label;
-					object.startDate = formatDate;
+					object.startDate = startDate;
 					object.startTime = item.value;
 					result.push(object);
 				});

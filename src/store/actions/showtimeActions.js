@@ -14,7 +14,7 @@ export const createNewShowtime = (data) => {
 				// dispatch(fetchAllShowtimeStart());
 				toast.success("Thêm mới lịch chiếu phim thành công!");
 			} else {
-				toast.error("Thêm mới lịch chiếu phim thất bại!");
+				toast.error("Có lịch chiếu phim đã tồn tại!");
 				dispatch(createShowtimeFailed());
 			}
 		} catch (e) {

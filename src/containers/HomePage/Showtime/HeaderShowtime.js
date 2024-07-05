@@ -12,6 +12,10 @@ class HeaderShowtime extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.closeLoading(1000);
+	}
+
 	closeLoading = (countdown) => {
 		setTimeout(() => {
 			this.setState({
@@ -28,7 +32,6 @@ class HeaderShowtime extends Component {
 				{" "}
 				<div className="header-showtime-container">
 					<div className="header-showtime-content">
-						{this.closeLoading(2000)}
 						{loading && (
 							<LoadingSkeleton
 								style={{

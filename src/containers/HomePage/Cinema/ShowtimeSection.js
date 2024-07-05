@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./ShowtimeSection.scss";
 import { getDetailCinemaService } from "../../../services/cinemaService";
-import { getShowtimeByCinemaService } from "../../../services/showtimeService";
+// import { getShowtimeByCinemaService } from "../../../services/showtimeService";
+import { getShowtimeByCinemaAndDateService } from "../../../services/showtimeService";
 import BookingModal from "../Movie/BookingModal";
 import * as actions from "../../../store/actions";
 import LoadingSkeleton from "../LoadingSkeleton";
+import moment from "moment";
+import { set } from "lodash";
 class ShowtimeSection extends Component {
 	constructor(props) {
 		super(props);
@@ -21,17 +24,19 @@ class ShowtimeSection extends Component {
 
 			dataShow: [],
 			showtimeCinema: "",
-			showtimeDate: new Date().getDate(),
+			showtimeDate: moment().format("DD/MM/YYYY"),
 
 			isOpenModal: false,
 			dataShowtime: {},
 			dataScreen: {},
 
 			loading: true,
+			loaddingShowtime: false,
 		};
 	}
 
 	async componentDidMount() {
+		this.closeLoading(1500);
 		if (this.props.id) {
 			let id = this.props.id;
 			let response = await getDetailCinemaService(id);
@@ -79,14 +84,15 @@ class ShowtimeSection extends Component {
 			nameCinemaShowtime: item.name,
 			location: item.location,
 		});
+
 		this.setState({
 			dataShow: await this.handleView(),
 		});
 	};
 
-	handleChangeDate = async (date) => {
+	handleChangeDate = async (index) => {
 		await this.setState({
-			showtimeDate: await date,
+			showtimeDate: moment().add(index, "days").format("DD/MM/YYYY"),
 		});
 		this.setState({
 			dataShow: await this.handleView(),
@@ -94,30 +100,22 @@ class ShowtimeSection extends Component {
 	};
 
 	handleView = async () => {
-		let dataShow = (
-			await getShowtimeByCinemaService(this.state.showtimeCinema)
-		).data;
-		if (!dataShow || dataShow.length === 0) {
-			return;
-		} else if (this.state.showtimeCinema === "") {
-			return;
-		} else {
-			let result = [];
-			dataShow.map((item) => {
-				let showtime = item.showtime;
-				let newShowtime = showtime.filter((item) => {
-					return (
-						new Date(item.startDate).getDate() === this.state.showtimeDate
-					);
-				});
-				item.showtime = newShowtime;
-				if (item.showtime.length > 0) {
-					result.push(item);
-				}
+		this.setState({
+			loaddingShowtime: true,
+		});
+		setTimeout(() => {
+			this.setState({
+				loaddingShowtime: false,
 			});
+		}, 500);
+		let data = (
+			await getShowtimeByCinemaAndDateService(
+				this.state.nameCinemaShowtime,
+				this.state.showtimeDate
+			)
+		).data;
 
-			return result;
-		}
+		return data;
 	};
 
 	async componentDidUpdate(prevProps, prevState) {
@@ -193,6 +191,7 @@ class ShowtimeSection extends Component {
 			dataScreen,
 			dataShowtime,
 			loading,
+			loaddingShowtime,
 		} = this.state;
 		return (
 			<>
@@ -201,7 +200,6 @@ class ShowtimeSection extends Component {
 						<div className="detail-showtime-content row">
 							<div className="null col-12"></div>
 							<div className="col-5 list-cinema">
-								{this.closeLoading(3000)}
 								{detailCinema.map((item, index) => {
 									return (
 										<div
@@ -274,9 +272,7 @@ class ShowtimeSection extends Component {
 														<div
 															className="box-date active"
 															onClick={() =>
-																this.handleChangeDate(
-																	date.getDate() + index
-																)
+																this.handleChangeDate(index)
 															}>
 															{date.getDate() + index}
 														</div>
@@ -286,9 +282,7 @@ class ShowtimeSection extends Component {
 														<div
 															className="box-date"
 															onClick={() =>
-																this.handleChangeDate(
-																	date.getDate() + index
-																)
+																this.handleChangeDate(index)
 															}>
 															{date.getDate() + index}
 														</div>
@@ -297,59 +291,68 @@ class ShowtimeSection extends Component {
 											})}
 									</div>
 									<div className="list-showtime-content">
-										<div className="scrollbar">
-											<div className="scrollbar-inner">
-												{dataShow &&
-													dataShow.length > 0 &&
-													dataShow.map((item) => {
-														return (
-															<div className="box-showtime">
-																<div
-																	className="box-showtime-image"
-																	style={{
-																		background: `url(${item.movie.image})`,
-																	}}></div>
-																<div className="box-showtime-info">
-																	<div className="box-showtime-name">
-																		{item.movie.title}
+										{loaddingShowtime && (
+											<LoadingSkeleton
+												style={{ width: "100%", height: "100%" }}
+											/>
+										)}
+										{!loaddingShowtime &&
+											dataShow &&
+											dataShow.length > 0 && (
+												<div className="scrollbar">
+													<div className="scrollbar-inner">
+														{dataShow &&
+															dataShow.length > 0 &&
+															dataShow.map((item) => {
+																return (
+																	<div className="box-showtime">
+																		<div
+																			className="box-showtime-image"
+																			style={{
+																				background: `url(${item.movie.image})`,
+																			}}></div>
+																		<div className="box-showtime-info">
+																			<div className="box-showtime-name">
+																				{item.movie.title}
+																			</div>
+																			<div className="box-showtime-genre">
+																				{item.movie.genre}
+																			</div>
+																			<div className="box-showtime-showtimes">
+																				{item.showtime &&
+																					item.showtime
+																						.length > 0 &&
+																					item.showtime.map(
+																						(it) => {
+																							it.cinemaId =
+																								nameCinemaShowtime;
+																							it.tradeMarkId =
+																								tradeMark;
+																							it.image =
+																								item.movie.image;
+																							return (
+																								<div
+																									onClick={() =>
+																										this.handleViewBookingModal(
+																											it
+																										)
+																									}
+																									className="box-showtime-startTime">
+																									{
+																										it.startTime
+																									}
+																								</div>
+																							);
+																						}
+																					)}
+																			</div>
+																		</div>
 																	</div>
-																	<div className="box-showtime-genre">
-																		{item.movie.genre}
-																	</div>
-																	<div className="box-showtime-showtimes">
-																		{item.showtime &&
-																			item.showtime.length >
-																				0 &&
-																			item.showtime.map(
-																				(it) => {
-																					it.cinemaId =
-																						nameCinemaShowtime;
-																					it.tradeMarkId =
-																						tradeMark;
-																					it.image =
-																						item.movie.image;
-																					return (
-																						<div
-																							onClick={() =>
-																								this.handleViewBookingModal(
-																									it
-																								)
-																							}
-																							className="box-showtime-startTime">
-																							{
-																								it.startTime
-																							}
-																						</div>
-																					);
-																				}
-																			)}
-																	</div>
-																</div>
-															</div>
-														);
-													})}
-											</div>
-										</div>
+																);
+															})}
+													</div>
+												</div>
+											)}
 									</div>
 								</div>
 							</div>

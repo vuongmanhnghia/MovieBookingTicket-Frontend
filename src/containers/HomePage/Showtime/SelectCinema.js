@@ -17,6 +17,7 @@ class SelectCinema extends Component {
 	}
 
 	async componentDidMount() {
+		this.closeLoading(1000);
 		await this.props.fetchAllTradeMarks();
 		await this.setState({
 			allTradeMarks: this.props.allTradeMarks,
@@ -74,7 +75,6 @@ class SelectCinema extends Component {
 			<>
 				<div className="select-cinema-container">
 					<div className="select-cinema-content">
-						{this.closeLoading(2000)}
 						{loading && (
 							<LoadingSkeleton
 								style={{
