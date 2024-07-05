@@ -27,87 +27,138 @@
 		.null {
 			height: 50px;
 			width: 100%;
+			border-bottom: 1px solid #e5e5e5;
 		}
 
 		.list-cinema {
+			display: flex;
+			flex-direction: column;
 			width: 100%;
-			height: auto;
-			// height: 550px;
+			height: 600px;
 			border-right: 1px solid #e5e5e5;
 			padding: 0 !important;
+			// overflow: hidden;
 
-			.list-cinema-box {
-				width: 100%;
-				height: 60px;
-				display: flex;
-				align-items: center;
-				padding: 0 20px;
-				border-top: 1px solid #e5e5e5;
-				cursor: pointer;
-				transition: all 0.3s;
-				z-index: 1;
-				position: relative;
+			.scrollbar {
+				overflow: auto;
 
-				&:hover {
-					background-color: #f0f0f0;
-					transform: scale(1.05);
-					border-radius: 6px;
+				&::-webkit-scrollbar {
+					width: 5px !important;
 				}
 
-				.list-cinema-box-logo {
-					width: 40px;
-					height: 40px;
-					background-size: cover !important;
-					background-repeat: no-repeat !important;
-					background-position: center !important;
-					border-radius: 6px;
-					border: 1px solid #e5e5e5;
-					margin-right: 12px;
-					transition: all 0.3s;
+				&::-webkit-scrollbar-thumb {
+					background: #d82d8b !important;
+					border-radius: 10px !important;
 				}
+				.scrollbar-inner {
+					visibility: visible;
 
-				.list-cinema-box-name {
-					transition: all 0.3s;
-				}
+					.list-cinema-box {
+						width: 100%;
+						height: 60px;
+						display: flex;
+						align-items: center;
+						padding: 0 20px;
+						border-top: 1px solid #e5e5e5;
+						cursor: pointer;
+						transition: all 0.3s;
+						z-index: 1;
+						position: relative;
 
-				.fa-chevron-right {
-					font-size: 12px;
-					color: #e7b1c7;
-					margin-left: auto;
-					transition: all 0.3s;
-				}
-			}
-			.active {
-				background-color: #fff0f6;
+						&:first-child {
+							border-top: none;
+						}
 
-				.list-cinema-box-logo {
-					border: 1px solid #d82d8b;
-					transform: scale(1.05);
-				}
-				.list-cinema-box-name {
-					color: #d82d8b;
-					transform: scale(1.05);
-				}
-				.fa-chevron-right {
-					color: #d82d8b;
+						&:hover {
+							background-color: #f0f0f0;
+							border-radius: 6px;
+
+							.list-cinema-box-logo {
+								transform: scale(1.05);
+							}
+							.list-cinema-box-name {
+								transform: scale(1.05);
+							}
+							.fa-chevron-right {
+								color: #d82d8b;
+								transform: scale(1.05);
+							}
+						}
+
+						.list-cinema-box-logo {
+							width: 40px;
+							height: 40px;
+							background-size: cover !important;
+							background-repeat: no-repeat !important;
+							background-position: center !important;
+							border-radius: 6px;
+							border: 1px solid #e5e5e5;
+							margin-right: 12px;
+							transition: all 0.3s;
+						}
+
+						.list-cinema-box-name {
+							transition: all 0.3s linear;
+						}
+
+						.fa-chevron-right {
+							font-size: 12px;
+							color: #e7b1c7;
+							margin-left: auto;
+							transition: all 0.3s;
+						}
+					}
+					.active {
+						background-color: #fff0f6;
+
+						.list-cinema-box-logo {
+							border: 1px solid #d82d8b;
+						}
+						.list-cinema-box-name {
+							color: #d82d8b;
+						}
+						.fa-chevron-right {
+							color: #d82d8b;
+						}
+
+						&:hover {
+							background-color: #fff0f6;
+							border-radius: 6px;
+						}
+					}
+
+					.list-cinema-box::first .active {
+						background-color: #fff0f6;
+
+						.list-cinema-box-logo {
+							border: 1px solid #d82d8b;
+							transform: scale(1.05);
+						}
+						.list-cinema-box-name {
+							color: #d82d8b;
+							transform: scale(1.05);
+						}
+						.fa-chevron-right {
+							color: #d82d8b;
+						}
+					}
 				}
 			}
 		}
 
 		.list-showtime {
 			width: 100%;
-			height: auto;
+			height: 600px;
 			padding: 0 !important;
 
 			.list-showtime-cinema-box {
 				width: 100%;
-				height: auto;
+				height: 100%;
 				background-color: #fafafa;
-				border-top: 1px solid #e5e5e5;
-				border-bottom: 1px solid #e5e5e5;
+
 				.cinema-box-content {
 					width: 100%;
-					min-height: 80px;
+					height: 100px;
 					display: flex;
 					align-items: center;
 					transition: all 0.3s;
@@ -152,7 +203,7 @@
 
 			.list-showtime-date {
 				width: 100%;
-				height: 50px;
+				height: 60px;
 				border-bottom: 1px solid #e5e5e5;
 				display: flex;
 				align-items: center;
@@ -185,7 +236,7 @@
 				display: flex;
 				flex-direction: column;
 				width: 100%;
-				height: 500px;
+				height: 440px;
 				// height: 420px;
 
 				.scrollbar {
@@ -211,6 +262,10 @@
 							display: flex;
 							padding: 20px;
 							border-top: 1px solid #e5e5e5;
+
+							&:first-child {
+								border-top: none;
+							}
 
 							.box-showtime-image {
 								width: 120px;

@@ -200,49 +200,53 @@ class ShowtimeSection extends Component {
 						<div className="detail-showtime-content row">
 							<div className="null col-12"></div>
 							<div className="col-5 list-cinema">
-								{detailCinema.map((item, index) => {
-									return (
-										<div
-											className="list-cinema-box"
-											onClick={() =>
-												this.handleChaneBoxCinema(item)
-											}>
-											{loading && (
-												<LoadingSkeleton
-													style={{
-														width: "40px",
-														height: "40px",
-														borderRadius: "6px",
-														marginRight: "12px",
-													}}
-												/>
-											)}
-											{!loading && (
+								<div className="scrollbar">
+									<div className="scrollbar-inner">
+										{detailCinema.map((item, index) => {
+											return (
 												<div
-													className="list-cinema-box-logo"
-													style={{
-														background: `url(${item.image})`,
-													}}></div>
-											)}
-											{loading && (
-												<LoadingSkeleton
-													style={{
-														width: "100%",
-														height: "24px",
-													}}
-												/>
-											)}
-											{!loading && (
-												<>
-													<div className="list-cinema-box-name">
-														{item.name}
-													</div>
-													<i class="fas fa-chevron-right"></i>
-												</>
-											)}
-										</div>
-									);
-								})}
+													className="list-cinema-box"
+													onClick={() =>
+														this.handleChaneBoxCinema(item)
+													}>
+													{loading && (
+														<LoadingSkeleton
+															style={{
+																width: "40px",
+																height: "40px",
+																borderRadius: "6px",
+																marginRight: "12px",
+															}}
+														/>
+													)}
+													{!loading && (
+														<div
+															className="list-cinema-box-logo"
+															style={{
+																background: `url(${item.image})`,
+															}}></div>
+													)}
+													{loading && (
+														<LoadingSkeleton
+															style={{
+																width: "100%",
+																height: "24px",
+															}}
+														/>
+													)}
+													{!loading && (
+														<>
+															<div className="list-cinema-box-name">
+																{item.name}
+															</div>
+															<i class="fas fa-chevron-right"></i>
+														</>
+													)}
+												</div>
+											);
+										})}
+									</div>
+								</div>
 							</div>
 							<div className="col-7 list-showtime">
 								<div className="list-showtime-cinema-box">
