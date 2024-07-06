@@ -89,121 +89,126 @@ class BookingModal extends Component {
 				className={"booking-modal-container"}
 				size="lg"
 				centered>
-				<div className="booking-modal-content">
-					<div className="booking-modal-header">
-						<i
-							class="fas fa-chevron-left"
-							onClick={closeBookingModal}></i>
-						<div className="booking-modal-title">Mua vé xem phim</div>
-					</div>
-					<div className="booking-modal-body">
-						<div className="information row">
-							<div className="col-4 form-group">
-								<label>Họ tên</label>
-								<input
-									className="form-control"
-									type="text"
-									value={this.state.fullName}
-									onChange={(event) => {
-										this.handleOnChangeInput(event, "fullName");
-									}}></input>
+				{dataShowtime && dataScreen && (
+					<div className="booking-modal-content">
+						<div className="booking-modal-header">
+							<i
+								class="fas fa-chevron-left"
+								onClick={closeBookingModal}></i>
+							<div className="booking-modal-title">Mua vé xem phim</div>
+						</div>
+						<div className="booking-modal-body">
+							<div className="information row">
+								<div className="col-4 form-group">
+									<label>Họ tên</label>
+									<input
+										className="form-control"
+										type="text"
+										value={this.state.fullName}
+										onChange={(event) => {
+											this.handleOnChangeInput(event, "fullName");
+										}}></input>
+								</div>
+								<div className="col-5 form-group">
+									<label>Email</label>
+									<input
+										className="form-control"
+										type="email"
+										value={this.state.email}
+										onChange={(event) => {
+											this.handleOnChangeInput(event, "email");
+										}}></input>
+								</div>
+								<div className="col-3 form-group">
+									<label>Số điện thoại</label>
+									<input
+										className="form-control no-spinner"
+										type="number"
+										value={this.state.phoneNumber}
+										onChange={(event) => {
+											this.handleOnChangeInput(event, "phoneNumber");
+										}}></input>
+								</div>
 							</div>
-							<div className="col-5 form-group">
-								<label>Email</label>
-								<input
-									className="form-control"
-									type="email"
-									value={this.state.email}
-									onChange={(event) => {
-										this.handleOnChangeInput(event, "email");
-									}}></input>
-							</div>
-							<div className="col-3 form-group">
-								<label>Số điện thoại</label>
-								<input
-									className="form-control no-spinner"
-									type="number"
-									value={this.state.phoneNumber}
-									onChange={(event) => {
-										this.handleOnChangeInput(event, "phoneNumber");
-									}}></input>
+
+							<div className="modal-body-container">
+								<div
+									className="modal-body-image"
+									style={{ background: `url(${image})` }}></div>
+								<div className="modal-body-content">
+									<div className="modal-body-header">
+										{dataShowtime && dataShowtime.movieId}
+									</div>
+									<div className="modal-body-cinema">
+										{`${dataShowtime && dataShowtime.tradeMarkId} - ${
+											dataShowtime && dataShowtime.cinemaId
+										}`}
+									</div>
+									<div className="modal-body-showtime">
+										{`${
+											dataShowtime && dataShowtime.startTime
+										} - ${new Date(
+											dataShowtime.startDate
+										).getDate()}/${new Date(
+											dataShowtime.startDate
+										).getMonth()} - Phòng chiếu ${dataScreen.name}`}
+									</div>
+									<div className="modal-body-seat ">
+										<div className="total-seats  ">
+											<span className="text">Tổng số chỗ ngồi:</span>{" "}
+											<span className="sum">
+												{dataScreen.totalSeats}
+											</span>
+										</div>
+										<div className="remaining-seats">
+											<span className="text">
+												Số chỗ ngồi còn lại:
+											</span>{" "}
+											<span className="sum">
+												{dataScreen.totalSeats}
+											</span>
+										</div>
+									</div>
+									<div className="booking row">
+										<div className="price-seats col-6">
+											<span className="text">Giá vé: </span>{" "}
+											<span className="sum">
+												{`${dataScreen.priceSeats} VNĐ`}
+											</span>
+										</div>
+										<div className="total-tickets col-6">
+											<span className="text">Số vé:</span>{" "}
+											<input
+												className="form-control"
+												type="number"
+												max={10}
+												value={this.state.totalTickets}
+												onChange={(event) => {
+													this.handleOnChangeInputTicket(
+														event,
+														"totalTickets"
+													);
+												}}></input>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div className="modal-body-container">
-							<div
-								className="modal-body-image"
-								style={{ background: `url(${image})` }}></div>
-							<div className="modal-body-content">
-								<div className="modal-body-header">
-									{dataShowtime && dataShowtime.movieId}
-								</div>
-								<div className="modal-body-cinema">
-									{`${dataShowtime && dataShowtime.tradeMarkId} - ${
-										dataShowtime && dataShowtime.cinemaId
-									}`}
-								</div>
-								<div className="modal-body-showtime">
-									{`${
-										dataShowtime && dataShowtime.startTime
-									} - ${new Date(
-										dataShowtime.startDate
-									).getDate()}/${new Date(
-										dataShowtime.startDate
-									).getMonth()} - Phòng chiếu ${dataScreen.name}`}
-								</div>
-								<div className="modal-body-seat row">
-									<div className="total-seats col-6 ">
-										<span className="text">Tổng số chỗ ngồi:</span>{" "}
-										<span className="sum">
-											{dataScreen.totalSeats}
-										</span>
-									</div>
-									<div className="remaining-seats col-6">
-										<span className="text">Số chỗ ngồi còn lại:</span>{" "}
-										<span className="sum">
-											{dataScreen.totalSeats}
-										</span>
-									</div>
-								</div>
-								<div className="booking row">
-									<div className="price-seats col-6">
-										<span className="text">Giá vé: </span>{" "}
-										<span className="sum">
-											{`${dataScreen.priceSeats} VNĐ`}
-										</span>
-									</div>
-									<div className="total-tickets col-6">
-										<span className="text">Số vé:</span>{" "}
-										<input
-											className="form-control"
-											type="number"
-											max={10}
-											value={this.state.totalTickets}
-											onChange={(event) => {
-												this.handleOnChangeInputTicket(
-													event,
-													"totalTickets"
-												);
-											}}></input>
-									</div>
-								</div>
+						<div className="booking-modal-footer">
+							<div className="total">
+								<span className="text">Tổng thanh toán</span>
+								<span className="sum">{`${
+									dataScreen.priceSeats * this.state.totalTickets
+								}đ`}</span>
 							</div>
+							<button
+								className="btn btn-secondary"
+								onClick={() => this.handleSaveBooking()}>
+								Đặt vé
+							</button>
 						</div>
 					</div>
-					<div className="booking-modal-footer">
-						<div className="total">
-							<span className="text">Tổng thanh toán</span>
-							<span className="sum">{`${
-								dataScreen.priceSeats * this.state.totalTickets
-							}đ`}</span>
-						</div>
-						<button
-							className="btn btn-secondary"
-							onClick={() => this.handleSaveBooking()}>
-							Đặt vé
-						</button>
-					</div>
-				</div>
+				)}
 			</Modal>
 		);
 	}

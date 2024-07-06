@@ -5,11 +5,16 @@ import * as actions from "../../../store/actions";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import CinemaShowtimeBanner from "./CinemaShowtimeBanner";
 import CinemaShowtimeBooking from "./CinemaShowtimeBooking";
+import Footer from "../Section/Footer";
+import { getShowtimeByCinemaAndDateService } from "../../../services/showtimeService";
+import moment from "moment";
 
 class CinemaShowtime extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			dataView: [],
+		};
 	}
 
 	async componentDidMount() {
@@ -19,8 +24,8 @@ class CinemaShowtime extends Component {
 			this.props.match.params.name
 		) {
 			let name = this.props.match.params.name;
-			await this.props.fetchShowtimeByCinema(name);
 			await this.props.fetchTradeMarkByCinema(name);
+			await this.getDataView(name, moment().format("DD/MM/YYYY"));
 		}
 	}
 
@@ -29,12 +34,32 @@ class CinemaShowtime extends Component {
 		}
 	}
 
+	getDateSelected = async (date) => {
+		await this.getDataView(
+			this.props.match.params.name,
+			moment().add(date, "days").format("DD/MM/YYYY")
+		);
+	};
+
+	getDataView = async (name, date) => {
+		let data = await getShowtimeByCinemaAndDateService(name, date);
+		await this.setState({
+			dataView: data.data,
+		});
+	};
+
 	render() {
-		let { showtimeData, tradeMark } = this.props;
+		let { tradeMark } = this.props;
+		let { dataView } = this.state;
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<CinemaShowtimeBanner tradeMark={tradeMark} />
-				<CinemaShowtimeBooking showtimeData={showtimeData} />
+				<CinemaShowtimeBooking
+					dataView={dataView}
+					getDateSelected={this.getDateSelected}
+					tradeMark={tradeMark}
+				/>
+				<Footer />
 			</CustomScrollbars>
 		);
 	}
@@ -50,8 +75,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchShowtimeByCinema: (name) =>
-			dispatch(actions.fetchShowtimeByCinema(name)),
 		fetchTradeMarkByCinema: (name) =>
 			dispatch(actions.fetchTradeMarkByCinema(name)),
 	};

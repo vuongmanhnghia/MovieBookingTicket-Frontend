@@ -7,6 +7,9 @@ import { withRouter } from "react-router-dom";
 import TrailerMovie from "./TrailerMovie";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
+import * as actions from "../../../store/actions";
+import moment from "moment";
+import { getShowtimeByCinemaAndDateAndMovieService } from "../../../services/showtimeService";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -25,19 +28,29 @@ class DetailMovie extends Component {
 			newDescription: "",
 
 			isOpenModal: false,
+
+			nameMovie: "",
+			tradeMarkSelected: "",
+			dateSelected: moment().format("DD/MM/YYYY"),
+
+			allTradeMarks: [],
 		};
 	}
 	async componentDidMount() {
 		if (
 			this.props.match &&
 			this.props.match.params &&
-			this.props.match.params.id
+			this.props.match.params.name
 		) {
-			let id = this.props.match.params.id;
-			let response = await getDetailMovieService(id);
+			let name = this.props.match.params.name;
+			let response = await getDetailMovieService(name);
+			await this.props.fetchAllTradeMarks();
 			if (response && response.errCode === 0) {
 				this.setState({
+					nameMovie: name,
 					detailMovie: response.data,
+					allTradeMarks: this.props.allTradeMarks,
+					tradeMarkSelected: this.props.allTradeMarks[0].tradeMark,
 				});
 			}
 			this.setState({
@@ -50,25 +63,23 @@ class DetailMovie extends Component {
 				director: this.state.detailMovie.director,
 				image: this.state.detailMovie.image,
 				trailer: this.state.detailMovie.trailer,
-				showtimeData: this.state.detailMovie.showtimeData,
 				date: new Date(this.state.releaseDate),
 				newDescription: String(this.state.detailMovie.description),
 			});
 		}
 	}
 
-	async componentDidUpdate() {}
-
 	handleNewTabMovie = async (item) => {
-		await this.props.history.push(`/detail-movie/${item.id}`);
+		this.hadleGetNameMovie(item.title);
+		await this.props.history.push(`/detail-movie/${item.title}`);
 		if (this.prevProps !== this.props) {
 			if (
 				this.props.match &&
 				this.props.match.params &&
-				this.props.match.params.id
+				this.props.match.params.name
 			) {
-				let id = this.props.match.params.id;
-				let response = await getDetailMovieService(id);
+				let name = this.props.match.params.name;
+				let response = await getDetailMovieService(name);
 				if (response && response.errCode === 0) {
 					await this.setState({
 						detailMovie: response.data,
@@ -84,7 +95,6 @@ class DetailMovie extends Component {
 					director: this.state.detailMovie.director,
 					image: this.state.detailMovie.image,
 					trailer: this.state.detailMovie.trailer,
-					showtimeData: this.state.detailMovie.showtimeData,
 					date: new Date(this.state.releaseDate),
 					newDescription: String(this.state.detailMovie.description),
 				});
@@ -109,8 +119,46 @@ class DetailMovie extends Component {
 		});
 	};
 
+	hadleGetNameMovie = async (name) => {
+		await this.setState({
+			nameMovie: name,
+		});
+		await this.handleDataShowtime();
+	};
+
+	handleGetTradeMarkSelected = async (tradeMark) => {
+		await this.setState({
+			tradeMarkSelected: tradeMark,
+		});
+		await this.handleDataShowtime();
+	};
+
+	handleGetDateSelected = async (date) => {
+		await this.setState({
+			dateSelected: date,
+		});
+		await this.handleDataShowtime();
+	};
+
+	handleDataShowtime = async () => {
+		let data = await getShowtimeByCinemaAndDateAndMovieService(
+			this.state.tradeMarkSelected,
+			this.state.dateSelected,
+			this.state.nameMovie
+		);
+		if (data && data.errCode === 0) {
+			this.setState({
+				showtimeData: data.data,
+			});
+		} else {
+			this.setState({
+				showtimeData: [],
+			});
+		}
+	};
+
 	render() {
-		let { image, title } = this.state;
+		let { image, title, showtimeData, imageTradeMark } = this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
 		return (
@@ -184,7 +232,10 @@ class DetailMovie extends Component {
 					dataMovie={this.state.dataMovie}
 				/>
 				<ShowtimeData
-					showtimeData={this.state.showtimeData}
+					allTradeMarks={this.state.allTradeMarks}
+					handleGetTradeMarkSelected={this.handleGetTradeMarkSelected}
+					handleGetDateSelected={this.handleGetDateSelected}
+					showtimeData={showtimeData}
 					image={image}
 					title={title}
 					handleNewTabMovie={this.handleNewTabMovie}
@@ -198,11 +249,14 @@ class DetailMovie extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		allTradeMarks: state.cinema.allTradeMarks,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchAllTradeMarks: () => dispatch(actions.fetchAllTradeMarks()),
+	};
 };
 
 export default withRouter(

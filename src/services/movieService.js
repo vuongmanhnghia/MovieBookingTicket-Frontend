@@ -12,8 +12,8 @@ const getAllMoviesService = () => {
 	return axios.get("/api/get-all-movies");
 };
 
-const getDetailMovieService = (id) => {
-	return axios.get(`/api/get-detail-movie?id=${id}`);
+const getDetailMovieService = (nameMovie) => {
+	return axios.get(`/api/get-detail-movie?name=${nameMovie}`);
 };
 
 const getMoviesPageService = (page, limit) => {

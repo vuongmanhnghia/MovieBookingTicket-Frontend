@@ -28,7 +28,7 @@
 			padding: 10px 20px;
 			width: 100%;
 			display: flex;
-			justify-content: space-between;
+			gap: 20px;
 			align-items: center;
 			height: 80px;
 			border: 1px solid #ccc;
@@ -137,12 +137,18 @@
 						border-radius: 4px;
 						border: 1px solid #ccc;
 					}
-
-					.name-cinema {
+					.name-location-box {
 						padding-left: 15px;
-						font-weight: 700 !important;
-						font-size: 14px;
-						color: #666;
+						.name-cinema {
+							font-weight: 700 !important;
+							font-size: 14px;
+							color: #666;
+						}
+						.location-cinema {
+							font-weight: 400 !important;
+							font-size: 13px;
+							color: #666;
+						}
 					}
 				}
 

@@ -70,6 +70,10 @@
 						padding: 20px;
 						border-top: 1px solid #e5e5e5;
 
+						&:first-child {
+							border-top: none;
+						}
+
 						.box-showtime-image {
 							width: 120px;
 							height: 171px;

@@ -51,7 +51,7 @@
 
 				.modal-body-container {
 					display: flex;
-					justify-content: center;
+					justify-content: space-around;
 
 					.modal-body-image {
 						width: 200px;
@@ -64,9 +64,11 @@
 					}
 
 					.modal-body-content {
-						padding-left: 30px;
+						padding: 20px 50px;
 
 						.modal-body-header {
+							display: flex;
+							justify-content: center;
 							width: 100%;
 							font-size: 18px;
 							font-weight: bold;
@@ -95,6 +97,9 @@
 						}
 
 						.modal-body-seat {
+							display: flex;
+							gap: 40px;
+
 							.text {
 								font-size: 14px;
 								color: #4e4c4c;
@@ -103,6 +108,10 @@
 							.sum {
 								font-weight: bold;
 								color: #d82d8b;
+							}
+
+							.total-seats,
+							.remaining-seats {
 							}
 						}
 

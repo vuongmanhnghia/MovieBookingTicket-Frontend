@@ -94,7 +94,7 @@ class App extends Component {
 									component={CinemaShowtime}
 								/>
 							</Switch>
-							<Footer />
+							{/* <Footer /> */}
 							{/* </CustomScrollbars> */}
 						</div>
 

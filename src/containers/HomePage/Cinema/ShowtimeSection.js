@@ -20,7 +20,6 @@ class ShowtimeSection extends Component {
 			image: "",
 			nameCinemaShowtime: "",
 			location: "",
-			maxDate: [1, 2, 3, 4, 5, 6, 7],
 
 			dataShow: [],
 			showtimeCinema: "",
@@ -40,14 +39,14 @@ class ShowtimeSection extends Component {
 		if (this.props.id) {
 			let id = this.props.id;
 			let response = await getDetailCinemaService(id);
-			if (response && response.errCode === 0) {
-				await this.setState({
-					detailCinema: response.data,
-				});
-			}
-			this.setState({
-				background: this.state.detailCinema[0].image,
+			await this.setState({
+				detailCinema: response.data,
 			});
+			setTimeout(() => {
+				this.setState({
+					background: this.state.detailCinema[0].image,
+				});
+			}, 500);
 		}
 
 		let activeCinema = document.querySelectorAll(".list-cinema-box");
@@ -153,6 +152,7 @@ class ShowtimeSection extends Component {
 	}
 
 	handleViewBookingModal = async (item) => {
+		console.log(item);
 		this.setState({
 			image: item.image,
 		});
@@ -162,6 +162,7 @@ class ShowtimeSection extends Component {
 			dataShowtime: item,
 			dataScreen: this.props.screenData,
 		});
+		console.log(this.props.screenData);
 	};
 
 	closeBookingModal = () => {
@@ -185,7 +186,6 @@ class ShowtimeSection extends Component {
 			background,
 			nameCinemaShowtime,
 			location,
-			maxDate,
 			dataShow,
 			isOpenModal,
 			dataScreen,
@@ -267,32 +267,30 @@ class ShowtimeSection extends Component {
 										</div>
 									</div>
 									<div className="list-showtime-date">
-										{maxDate &&
-											maxDate.length > 0 &&
-											maxDate.map((item, index) => {
-												let date = new Date();
-												if (index === 0) {
-													return (
-														<div
-															className="box-date active"
-															onClick={() =>
-																this.handleChangeDate(index)
-															}>
-															{date.getDate() + index}
-														</div>
-													);
-												} else {
-													return (
-														<div
-															className="box-date"
-															onClick={() =>
-																this.handleChangeDate(index)
-															}>
-															{date.getDate() + index}
-														</div>
-													);
-												}
-											})}
+										{new Array(7).fill("vmn").map((item, index) => {
+											let date = new Date();
+											if (index === 0) {
+												return (
+													<div
+														className="box-date active"
+														onClick={() =>
+															this.handleChangeDate(index)
+														}>
+														{date.getDate() + index}
+													</div>
+												);
+											} else {
+												return (
+													<div
+														className="box-date"
+														onClick={() =>
+															this.handleChangeDate(index)
+														}>
+														{date.getDate() + index}
+													</div>
+												);
+											}
+										})}
 									</div>
 									<div className="list-showtime-content">
 										{loaddingShowtime && (

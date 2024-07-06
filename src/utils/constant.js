@@ -4,7 +4,7 @@ export const path = {
 	LOGIN: "/login",
 	LOG_OUT: "/logout",
 	SYSTEM: "/system",
-	DETAIL_MOVIE: "/detail-movie/:id",
+	DETAIL_MOVIE: "/detail-movie/:name",
 	DETAIL_CINEMA: "/detail-cinema/:id",
 	DETAIL_SHOWTIME: "/detail-showtime",
 	ALL_MOVIE: "/all-movies",

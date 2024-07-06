@@ -71,17 +71,21 @@ class CinemaManage extends Component {
 		}
 	};
 
-	handleSaveMovie = () => {
+	handleSaveMovie = async () => {
 		let isValid = this.checkValidateInput();
 		if (isValid === false) return;
 
-		this.props.createNewCinema({
+		await this.props.createNewCinema({
 			tradeMark: this.state.tradeMark,
 			name: this.state.name,
 			location: this.state.location,
 			rating: this.state.rating,
 			image: this.state.image,
 			background: this.state.background,
+		});
+
+		this.setState({
+			location: "",
 		});
 	};
 	checkValidateInput = () => {

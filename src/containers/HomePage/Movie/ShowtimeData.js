@@ -4,6 +4,7 @@ import "./ShowtimeData.scss";
 import * as actions from "../../../store/actions";
 import { withRouter } from "react-router";
 import BookingModal from "./BookingModal";
+import moment from "moment";
 // Import css files
 
 class ShowtimeData extends Component {
@@ -14,136 +15,84 @@ class ShowtimeData extends Component {
 			showtimeCinema: "",
 			showtimeData: [],
 			allTradeMarks: [],
-
 			isOpenModal: false,
-
 			dataShowtime: {},
 			dataScreen: {},
-
 			imageTradeMark: "",
 		};
 	}
 
 	async componentDidMount() {
-		this.handleView();
-		await this.props.fetchAllTradeMarks();
-		// lọc các phần tử giống nhau trong allTrademarks
-		this.setState({
-			allTradeMarks: this.props.allTradeMarks,
-		});
+		console.log(this.props.allTradeMarks[0]);
 		await this.props.fetchAllMovies();
-		await this.handleView();
 
-		let activeDate = document.querySelectorAll(".box-date");
-		activeDate.forEach((item) => {
-			item.addEventListener("click", () => {
-				document
-					.querySelectorAll(".box-date")
-					.forEach((item) => item.classList.remove("active"));
-				item.classList.add("active");
+		setTimeout(() => {
+			let activeDate = document.querySelectorAll(".box-date");
+			activeDate.forEach((item) => {
+				item.addEventListener("click", () => {
+					document
+						.querySelectorAll(".box-date")
+						.forEach((item) => item.classList.remove("active"));
+					item.classList.add("active");
+				});
 			});
-		});
 
-		let activeCinema = document.querySelectorAll("div.box-cinema");
-		let activeLogo = document.querySelectorAll("div.logo-cinema");
-		let activeTradeMark = document.querySelectorAll("div.tradeMark-cinema");
-		activeCinema.forEach((item, index) => {
-			item.addEventListener("click", () => {
-				document
-					.querySelectorAll("div.logo-cinema")
-					.forEach((item) => item.classList.remove("active"));
-				document
-					.querySelectorAll("div.tradeMark-cinema")
-					.forEach((item) => item.classList.remove("active-tradeMark"));
-				activeLogo[index].classList.add("active");
-				activeTradeMark[index].classList.add("active-tradeMark");
+			let activeCinema = document.querySelectorAll("div.box-cinema");
+			let activeLogo = document.querySelectorAll("div.logo-cinema");
+			let activeTradeMark = document.querySelectorAll(
+				"div.tradeMark-cinema"
+			);
+			activeCinema.forEach((item, index) => {
+				item.addEventListener("click", () => {
+					document
+						.querySelectorAll("div.logo-cinema")
+						.forEach((item) => item.classList.remove("active"));
+					document
+						.querySelectorAll("div.tradeMark-cinema")
+						.forEach((item) => item.classList.remove("active-tradeMark"));
+					activeLogo[index].classList.add("active");
+					activeTradeMark[index].classList.add("active-tradeMark");
+				});
 			});
-		});
 
-		let activeTime = document.querySelectorAll(".box-showtime");
-		activeTime.forEach((item) => {
-			item.addEventListener("click", () => {
-				document
-					.querySelectorAll(".box-showtime")
-					.forEach((item) => item.classList.remove("active"));
-				item.classList.add("active");
+			let activeTime = document.querySelectorAll(".box-showtime");
+			activeTime.forEach((item) => {
+				item.addEventListener("click", () => {
+					document
+						.querySelectorAll(".box-showtime")
+						.forEach((item) => item.classList.remove("active"));
+					item.classList.add("active");
+				});
 			});
-		});
+		}, 500);
 	}
 
 	componentDidUpdate(prevProps) {}
 
 	handleChangeDate = async (date) => {
-		await this.setState({
-			showtimeDate: await date,
-		});
-		await this.setState({
-			showtimeData: await this.handleView(),
-		});
+		await this.props.handleGetDateSelected(
+			moment().add(date, "days").format("DD/MM/YYYY")
+		);
 	};
 
-	handleChangeCinema = async (tradeMark) => {
-		await this.state.allTradeMarks.map((item, index) => {
-			if (item.tradeMark === tradeMark) {
-				this.setState({
-					imageTradeMark: item.image,
-				});
-			}
+	handleChangeCinema = async (item) => {
+		this.setState({
+			imageTradeMark: item.image,
 		});
-		await this.setState({
-			showtimeCinema: await tradeMark,
-		});
-		await this.setState({
-			showtimeData: await this.handleView(),
-		});
+		await this.props.handleGetTradeMarkSelected(item.tradeMark);
 	};
-
-	handleView = async () => {
-		let dataView = this.props.showtimeData;
-		let date = this.state.showtimeDate;
-		let tradeMark = this.state.showtimeCinema;
-		let arrResult = [];
-
-		await dataView.map((item) => {
-			if (
-				new Date(item.startDate).getDate() === date &&
-				item.tradeMarkId === tradeMark
-			) {
-				arrResult.push(item);
-			} else if (date === "" && item.tradeMarkId === tradeMark) {
-				arrResult.push(item);
-			}
-		});
-
-		let result = this.groupCinema(arrResult);
-		return result;
-	};
-
-	groupCinema(arrShowtime) {
-		const groups = arrShowtime.reduce((acc, item) => {
-			const group = acc[item.cinemaId] || [];
-			group.push(item);
-			acc[item.cinemaId] = group;
-			return acc;
-		}, {});
-
-		return Object.keys(groups).map((cinemaId) => ({
-			cinemaId,
-			arrShowtime: groups[cinemaId],
-		}));
-	}
 
 	handleViewDetailMovie = async (item) => {
 		this.props.handleNewTabMovie(item);
-		document
-			.querySelectorAll(".box-date")
-			.forEach((item) => item.classList.remove("active"));
-		document
-			.querySelectorAll("div.logo-cinema")
-			.forEach((item) => item.classList.remove("active"));
-		document
-			.querySelectorAll("div.tradeMark-cinema")
-			.forEach((item) => item.classList.remove("active-tradeMark"));
+		// document
+		// 	.querySelectorAll(".box-date")
+		// 	.forEach((item) => item.classList.remove("active"));
+		// document
+		// 	.querySelectorAll("div.logo-cinema")
+		// 	.forEach((item) => item.classList.remove("active"));
+		// document
+		// 	.querySelectorAll("div.tradeMark-cinema")
+		// 	.forEach((item) => item.classList.remove("active-tradeMark"));
 		this.setState({
 			showtimeData: [],
 		});
@@ -165,16 +114,9 @@ class ShowtimeData extends Component {
 	};
 
 	render() {
-		let { allMovies, image, title } = this.props;
-		let {
-			isOpenModal,
-			dataShowtime,
-			dataScreen,
-			allTradeMarks,
-			// showtimeData,
-			imageTradeMark,
-		} = this.state;
-		let maxDate = [1, 2, 3, 4, 5, 6, 7];
+		let { allMovies, image, title, allTradeMarks, showtimeData } = this.props;
+		let { isOpenModal, dataShowtime, dataScreen, imageTradeMark } =
+			this.state;
 		return (
 			<>
 				<div className="movie-detail-showtimeData-container row">
@@ -186,22 +128,16 @@ class ShowtimeData extends Component {
 						</div>
 						<div className="showtimeData-container">
 							<div className="showtimeData-date">
-								{maxDate &&
-									maxDate.length > 0 &&
-									maxDate.map((item, index) => {
-										let date = new Date();
-										return (
-											<div
-												className="box-date"
-												onClick={() =>
-													this.handleChangeDate(
-														date.getDate() + index
-													)
-												}>
-												{date.getDate() + index}
-											</div>
-										);
-									})}
+								{new Array(7).fill("vmn").map((item, index) => {
+									let date = new Date();
+									return (
+										<div
+											className="box-date"
+											onClick={() => this.handleChangeDate(index)}>
+											{date.getDate() + index}
+										</div>
+									);
+								})}
 							</div>
 							<div className="showtimeData-cinema">
 								{allTradeMarks &&
@@ -211,7 +147,7 @@ class ShowtimeData extends Component {
 											<div
 												className="box-cinema"
 												onClick={() =>
-													this.handleChangeCinema(item.tradeMark)
+													this.handleChangeCinema(item)
 												}>
 												<div
 													className="logo-cinema"
@@ -228,37 +164,48 @@ class ShowtimeData extends Component {
 									})}
 							</div>
 							<div className="showtimeData-showtime">
-								{this.state.showtimeData.map((item) => {
-									return (
-										<div className="box-showtime-cinema">
-											<div className="cinema-info">
-												<div
-													className="logo-cinema"
-													style={{
-														background: `url(${imageTradeMark})`,
-													}}></div>
-												<div className="name-cinema">
-													{item.cinemaId}
+								{showtimeData &&
+									showtimeData.length > 0 &&
+									showtimeData.map((itemShowtime) => {
+										return (
+											<div className="box-showtime-cinema">
+												<div className="cinema-info">
+													<div
+														className="logo-cinema"
+														style={{
+															background: `url(${imageTradeMark})`,
+														}}></div>
+													<div className="name-location-box">
+														<div className="name-cinema">
+															{itemShowtime.cinema.name}
+														</div>
+														<div className="location-cinema">
+															{itemShowtime.cinema.location}
+														</div>
+													</div>
+												</div>
+												<div className="list-box-showtime">
+													{itemShowtime.showtime &&
+														itemShowtime.showtime.length > 0 &&
+														itemShowtime.showtime.map(
+															(item, index) => {
+																return (
+																	<div
+																		className="box-showtime"
+																		onClick={() =>
+																			this.handleClickBooking(
+																				item
+																			)
+																		}>
+																		{item.startTime}
+																	</div>
+																);
+															}
+														)}
 												</div>
 											</div>
-											<div className="list-box-showtime">
-												{item.arrShowtime &&
-													item.arrShowtime.length > 0 &&
-													item.arrShowtime.map((item, index) => {
-														return (
-															<div
-																className="box-showtime"
-																onClick={() =>
-																	this.handleClickBooking(item)
-																}>
-																{item.startTime}
-															</div>
-														);
-													})}
-											</div>
-										</div>
-									);
-								})}
+										);
+									})}
 							</div>
 						</div>
 					</div>
@@ -360,7 +307,6 @@ const mapStateToProps = (state) => {
 		allMovies: state.movie.allMovies,
 		detailMovie: state.movie.detailMovie,
 		screenData: state.showtime.seatsByShowtime,
-		allTradeMarks: state.cinema.allTradeMarks,
 	};
 };
 
@@ -370,7 +316,6 @@ const mapDispatchToProps = (dispatch) => {
 		fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
 		fetchSeatsByShowtime: (data) =>
 			dispatch(actions.fetchSeatsByShowtime(data)),
-		fetchAllTradeMarks: () => dispatch(actions.fetchAllTradeMarks()),
 	};
 };
 

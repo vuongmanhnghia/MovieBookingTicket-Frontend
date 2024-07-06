@@ -18,9 +18,20 @@ const getShowtimeByCinemaAndDateService = (name, date) => {
 	);
 };
 
+const getShowtimeByCinemaAndDateAndMovieService = (
+	tradeMark,
+	date,
+	nameMovie
+) => {
+	return axios.get(
+		`/api/get-showtime-by-movie-and-date-and-trademark?nameMovie=${nameMovie}&tradeMarkSelected=${tradeMark}&dateSelected=${date}`
+	);
+};
+
 export {
 	createNewShowtimeService,
 	getShowtimeByCinemaService,
 	getSeatsByShowtimeService,
 	getShowtimeByCinemaAndDateService,
+	getShowtimeByCinemaAndDateAndMovieService,
 };
