@@ -19,10 +19,12 @@ class SelectCinema extends Component {
 	async componentDidMount() {
 		this.closeLoading(1000);
 		await this.props.fetchAllTradeMarks();
-		await this.setState({
-			allTradeMarks: this.props.allTradeMarks,
-			selectTradeMark: this.props.allTradeMarks[0].tradeMark,
-		});
+		if (this.props.allTradeMarks && this.props.allTradeMarks.length > 0) {
+			this.setState({
+				allTradeMarks: this.props.allTradeMarks,
+				selectTradeMark: this.props.allTradeMarks[0].tradeMark,
+			});
+		}
 		this.getSelectedCinema();
 
 		setTimeout(() => {

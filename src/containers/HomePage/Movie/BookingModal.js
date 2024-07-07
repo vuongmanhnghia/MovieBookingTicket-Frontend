@@ -43,7 +43,7 @@ class BookingModal extends Component {
 			totalPrice: this.state.totalPrice,
 			movieId: this.props.dataShowtime.movieId,
 			cinemaId: this.props.dataShowtime.cinemaId,
-			screenId: this.props.dataScreen.id,
+			screenId: this.props.dataScreen.name,
 			time: this.props.dataShowtime.startTime,
 			date: new Date(this.props.dataShowtime.startDate),
 			bookingDate: new Date(),
