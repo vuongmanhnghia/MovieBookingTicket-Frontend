@@ -20,7 +20,7 @@ class CinemaSearch extends Component {
 	}
 
 	async componentDidMount() {
-		this.closeLoading(1000);
+		this.closeLoading(500);
 		await this.props.fetchAllTradeMarks();
 		this.setState({
 			allTradeMarks: this.props.allTradeMarks,
@@ -44,7 +44,7 @@ class CinemaSearch extends Component {
 					activeTradeMark[index].classList.add("active-tradeMark");
 				});
 			});
-		}, 2000);
+		}, 5000);
 
 		this.handleChangeCinema(this.state.allTradeMarks[0]);
 	}

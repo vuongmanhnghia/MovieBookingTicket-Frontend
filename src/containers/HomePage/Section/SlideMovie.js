@@ -21,6 +21,7 @@ class SlideMovie extends Component {
 	}
 
 	componentDidMount() {
+		this.closeLoading(500);
 		this.props.loadTopMovies();
 	}
 
@@ -78,7 +79,6 @@ class SlideMovie extends Component {
 					<div className="movie-section-slide-container">
 						<div className="movie-section-slide-content">
 							<Slider {...this.props.settings}>
-								{this.closeLoading(2000)}
 								{arrMovies &&
 									arrMovies.length > 0 &&
 									arrMovies.map((item, index) => {
@@ -129,6 +129,7 @@ class SlideMovie extends Component {
 																style={{
 																	width: "185px",
 																	height: "18.75px",
+																	borderRadius: "4px",
 																}}
 															/>
 														)}
@@ -149,6 +150,7 @@ class SlideMovie extends Component {
 																style={{
 																	width: "185px",
 																	height: "16px",
+																	borderRadius: "4px",
 																}}
 															/>
 														)}
@@ -170,6 +172,7 @@ class SlideMovie extends Component {
 															style={{
 																width: "185px",
 																height: "18.75px",
+																borderRadius: "4px",
 															}}
 														/>
 													)}

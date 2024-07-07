@@ -13,7 +13,7 @@ class HeaderShowtime extends Component {
 	}
 
 	componentDidMount() {
-		this.closeLoading(1000);
+		this.closeLoading(500);
 	}
 
 	closeLoading = (countdown) => {
@@ -38,6 +38,7 @@ class HeaderShowtime extends Component {
 									width: "100%",
 									height: "36px",
 									marginBottom: "20px",
+									"border-radius": "8px",
 								}}
 							/>
 						)}

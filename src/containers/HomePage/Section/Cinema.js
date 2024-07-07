@@ -20,6 +20,7 @@ class Cinema extends Component {
 	}
 
 	async componentDidMount() {
+		this.closeLoading(1000);
 		await this.props.fetchAllCinemas();
 		this.setState({
 			arrCinemas: this.props.allCinems,
@@ -87,7 +88,6 @@ class Cinema extends Component {
 						</div>
 					</div>
 					<div className="cinema-content">
-						{this.closeLoading(3000)}
 						{this.state.uniqueTradeMarks &&
 							this.state.uniqueTradeMarks.length > 0 &&
 							this.state.uniqueTradeMarks.map((item, index) => {

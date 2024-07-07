@@ -17,7 +17,7 @@ class SelectCinema extends Component {
 	}
 
 	async componentDidMount() {
-		this.closeLoading(1000);
+		this.closeLoading(500);
 		await this.props.fetchAllTradeMarks();
 		if (this.props.allTradeMarks && this.props.allTradeMarks.length > 0) {
 			this.setState({

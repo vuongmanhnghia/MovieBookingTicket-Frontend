@@ -35,7 +35,7 @@ class ShowtimeSection extends Component {
 	}
 
 	async componentDidMount() {
-		this.closeLoading(1500);
+		this.closeLoading(700);
 		if (this.props.id) {
 			let id = this.props.id;
 			let response = await getDetailCinemaService(id);
@@ -99,7 +99,6 @@ class ShowtimeSection extends Component {
 	};
 
 	handleView = async () => {
-		console.log(this.state.nameCinemaShowtime);
 		this.setState({
 			loaddingShowtime: true,
 		});
@@ -107,7 +106,7 @@ class ShowtimeSection extends Component {
 			this.setState({
 				loaddingShowtime: false,
 			});
-		}, 500);
+		}, 200);
 		let data = (
 			await getShowtimeByCinemaAndDateService(
 				this.state.nameCinemaShowtime,

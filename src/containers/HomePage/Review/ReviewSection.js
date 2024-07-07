@@ -22,6 +22,8 @@ class ReviewSection extends Component {
 	}
 
 	async componentDidMount() {
+		this.closeLoading(500);
+
 		await this.fetchMovies();
 	}
 
@@ -37,6 +39,10 @@ class ReviewSection extends Component {
 	};
 
 	handlePageClick = async (event) => {
+		this.setState({ loading: true });
+		setTimeout(() => {
+			this.setState({ loading: false });
+		}, 500);
 		await this.setState({ currentPage: event.selected + 1 });
 		this.fetchMovies();
 	};
@@ -69,20 +75,23 @@ class ReviewSection extends Component {
 			<div className="review-section-container">
 				<div className="review-section-content">
 					<div className="review-section-list">
-						{this.closeLoading(1000)}
 						{listMovies &&
 							listMovies.map((movie, index) => {
 								return (
-									<div className="box-review-movie">
+									<>
 										{loading && (
 											<LoadingSkeleton
-												width="100%"
-												height="100%"
-												borderRadius="12px"
+												style={{
+													height: "195px",
+													width: "347px",
+													borderRadius: "12px",
+													boxShadow:
+														"0px 4px 20px rgba(0, 0, 0, 0.25)",
+												}}
 											/>
 										)}
 										{!loading && (
-											<>
+											<div className="box-review-movie">
 												<div
 													className="box-review-movie-background"
 													style={{
@@ -96,9 +105,9 @@ class ReviewSection extends Component {
 													onClick={() =>
 														this.handleViewTraileMovie(movie)
 													}></i>
-											</>
+											</div>
 										)}
-									</div>
+									</>
 								);
 							})}
 					</div>

@@ -6,6 +6,7 @@ import BannerReview from "./BannerReview";
 import ReviewSection from "./ReviewSection";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
+import SlideMovie from "../Section/SlideMovie";
 
 class ReviewMovie extends Component {
 	constructor(props) {
@@ -21,10 +22,18 @@ class ReviewMovie extends Component {
 	}
 
 	render() {
+		let settings = {
+			dots: true,
+			infinite: false,
+			speed: 500,
+			slidesToShow: 5,
+			slidesToScroll: 5,
+		};
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<BannerReview />
 				<ReviewSection />
+				<SlideMovie settings={settings} />
 				<Footer />
 			</CustomScrollbars>
 		);

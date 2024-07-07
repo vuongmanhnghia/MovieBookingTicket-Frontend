@@ -25,6 +25,8 @@ class AllMovies extends Component {
 	}
 
 	async componentDidMount() {
+		this.closeLoading(700);
+
 		await this.fetchMovies();
 	}
 
@@ -40,6 +42,10 @@ class AllMovies extends Component {
 	};
 
 	handlePageClick = async (event) => {
+		this.setState({ loading: true });
+		setTimeout(() => {
+			this.setState({ loading: false });
+		}, 500);
 		await this.setState({ currentPage: event.selected + 1 });
 		this.fetchMovies();
 	};
@@ -74,7 +80,6 @@ class AllMovies extends Component {
 					<div className="all-movies-content">
 						<div className="all-movies-title">Danh sách phim</div>
 						<div className="list-movies">
-							{this.closeLoading(2000)}
 							{listMovies &&
 								listMovies.map((movie, index) => {
 									return (
