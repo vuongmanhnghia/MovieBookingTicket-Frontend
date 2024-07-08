@@ -39,7 +39,7 @@ class Slide extends Component {
 	};
 
 	handleViewDetailMovie = async (item) => {
-		await this.props.history.push(`/detail-movie/${item.id}`);
+		await this.props.history.push(`/detail-movie/${item.title}`);
 	};
 
 	handleClickBooking = async (item) => {

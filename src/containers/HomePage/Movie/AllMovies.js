@@ -102,7 +102,7 @@ class AllMovies extends Component {
 															}}
 															onClick={() =>
 																this.props.history.push(
-																	`/detail-movie/${movie.id}`
+																	`/detail-movie/${movie.title}`
 																)
 															}></div>
 														<i
