@@ -3,6 +3,28 @@ import { connect } from "react-redux";
 import "./BookingModal.scss";
 import { Modal } from "reactstrap";
 import * as actions from "../../../store/actions";
+import moment from "moment";
+import { set } from "lodash";
+
+// handleClickBooking = async (item) => {
+// 	await this.props.fetchSeatsByShowtime(item);
+// 	await this.setState({
+// 		isOpenModal: true,
+// 		dataShowtime: item,
+// 		dataScreen: this.props.screenData,
+// 	});
+// 	await this.getTotalBooking();
+// };
+
+// getTotalBooking = async () => {
+// 	await this.props.fetchBookingByCinemaMovieScreenDateTime({
+// 		cinema: this.state.dataShowtime.cinemaId,
+// 		movie: this.state.dataShowtime.movieId,
+// 		screen: this.state.dataShowtime.screenId,
+// 		date: this.state.dataShowtime.startDate,
+// 		time: this.state.dataShowtime.startTime,
+// 	});
+// };
 class BookingModal extends Component {
 	constructor(props) {
 		super(props);
@@ -17,11 +39,6 @@ class BookingModal extends Component {
 
 	async componentDidMount() {}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-		}
-	}
-
 	handleOnChangeInput = (event, id) => {
 		let copyState = { ...this.state };
 		copyState[id] = event.target.value;
@@ -32,9 +49,6 @@ class BookingModal extends Component {
 	};
 
 	handleSaveBooking = async () => {
-		// let isValid = this.checkValidateInput();
-		// if (isValid === false) return;
-
 		await this.props.createNewBooking({
 			fullName: this.state.fullName,
 			email: this.state.email,
@@ -45,8 +59,8 @@ class BookingModal extends Component {
 			cinemaId: this.props.dataShowtime.cinemaId,
 			screenId: this.props.dataScreen.name,
 			time: this.props.dataShowtime.startTime,
-			date: new Date(this.props.dataShowtime.startDate),
-			bookingDate: new Date(),
+			date: this.props.dataShowtime.startDate,
+			bookingDate: moment().format("DD/MM/YYYY"),
 		});
 		this.setState({
 			fullName: "",
@@ -80,9 +94,16 @@ class BookingModal extends Component {
 			totalPrice: this.state.totalTickets * this.props.dataScreen.priceSeats,
 		});
 	};
+
 	render() {
-		let { isOpenModal, closeBookingModal, dataShowtime, dataScreen, image } =
-			this.props;
+		let {
+			isOpenModal,
+			closeBookingModal,
+			dataShowtime,
+			dataScreen,
+			image,
+			totalBooking,
+		} = this.props;
 		return (
 			<Modal
 				isOpen={isOpenModal}
@@ -165,7 +186,7 @@ class BookingModal extends Component {
 												Số chỗ ngồi còn lại:
 											</span>{" "}
 											<span className="sum">
-												{dataScreen.totalSeats}
+												{dataScreen.totalSeats - totalBooking}
 											</span>
 										</div>
 									</div>
@@ -217,6 +238,7 @@ class BookingModal extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		totalBooking: state.booking.totalBooking,
 	};
 };
 

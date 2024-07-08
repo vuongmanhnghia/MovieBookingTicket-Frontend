@@ -125,11 +125,12 @@ class ShowtimeData extends Component {
 
 	handleClickBooking = async (item) => {
 		await this.props.fetchSeatsByShowtime(item);
-		this.setState({
+		await this.setState({
 			isOpenModal: true,
 			dataShowtime: item,
 			dataScreen: this.props.screenData,
 		});
+		await this.getTotalBooking();
 	};
 
 	closeBookingModal = () => {
@@ -142,8 +143,25 @@ class ShowtimeData extends Component {
 		this.handleChangeCinema(this.props.allTradeMarks[0]);
 	};
 
+	getTotalBooking = async () => {
+		await this.props.fetchBookingByCinemaMovieScreenDateTime({
+			cinema: this.state.dataShowtime.cinemaId,
+			movie: this.state.dataShowtime.movieId,
+			screen: this.state.dataShowtime.screenId,
+			date: this.state.dataShowtime.startDate,
+			time: this.state.dataShowtime.startTime,
+		});
+	};
+
 	render() {
-		let { allMovies, image, title, allTradeMarks, showtimeData } = this.props;
+		let {
+			allMovies,
+			image,
+			title,
+			allTradeMarks,
+			showtimeData,
+			totalBooking,
+		} = this.props;
 		let { isOpenModal, dataShowtime, dataScreen, imageTradeMark, loading } =
 			this.state;
 		return (
@@ -383,6 +401,7 @@ class ShowtimeData extends Component {
 					dataScreen={dataScreen}
 					dataShowtime={dataShowtime}
 					image={image}
+					totalBooking={totalBooking}
 				/>
 			</>
 		);
@@ -395,6 +414,7 @@ const mapStateToProps = (state) => {
 		allMovies: state.movie.allMovies,
 		detailMovie: state.movie.detailMovie,
 		screenData: state.showtime.seatsByShowtime,
+		totalBooking: state.booking.totalBooking,
 	};
 };
 
@@ -404,6 +424,9 @@ const mapDispatchToProps = (dispatch) => {
 		fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
 		fetchSeatsByShowtime: (data) =>
 			dispatch(actions.fetchSeatsByShowtime(data)),
+		fetchBookingByCinemaMovieScreenDateTime: (data) => {
+			dispatch(actions.fetchBookingByCinemaMovieScreenDateTime(data));
+		},
 	};
 };
 

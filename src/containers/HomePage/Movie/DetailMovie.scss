@@ -1,12 +1,45 @@
 .movie-detail-content {
-	background: black;
+	background-position: center center !important;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
 	z-index: -1;
 	padding: 56px 150px;
 	width: 100%;
 	height: auto;
 	display: flex;
 
+	&::after {
+		content: "";
+		z-index: 1;
+		position: absolute;
+		width: 100%;
+		height: 480px;
+		top: 0;
+		left: 0;
+		background-image: -webkit-linear-gradient(
+			left,
+			rgba(0, 0, 0, 1) 150px,
+			rgba(0, 0, 0, 0.6) 100%
+		);
+		background-image: -moz-linear-gradient(
+			left,
+			rgba(0, 0, 0, 1) 150px,
+			rgba(0, 0, 0, 0.6) 100%
+		);
+		background-image: -o-linear-gradient(
+			left,
+			rgba(0, 0, 0, 1) 150px,
+			rgba(0, 0, 0, 0.6) 100%
+		);
+		background-image: linear-gradient(
+			to right,
+			rgba(0, 0, 0, 1) 150px,
+			rgba(0, 0, 0, 0.6) 100%
+		);
+	}
+
 	.box-movie-detail {
+		z-index: 2;
 		display: flex;
 
 		.box-movie-detail-image {

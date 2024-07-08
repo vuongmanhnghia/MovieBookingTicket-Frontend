@@ -23,6 +23,7 @@ class DetailMovie extends Component {
 			genre: "",
 			director: "",
 			image: "",
+			background: "",
 			trailer: "",
 			showtimeData: [],
 			newDescription: "",
@@ -62,6 +63,7 @@ class DetailMovie extends Component {
 				genre: this.state.detailMovie.genre,
 				director: this.state.detailMovie.director,
 				image: this.state.detailMovie.image,
+				background: this.state.detailMovie.background,
 				trailer: this.state.detailMovie.trailer,
 				date: new Date(this.state.releaseDate),
 				newDescription: String(this.state.detailMovie.description),
@@ -94,6 +96,7 @@ class DetailMovie extends Component {
 					genre: this.state.detailMovie.genre,
 					director: this.state.detailMovie.director,
 					image: this.state.detailMovie.image,
+					background: this.state.detailMovie.background,
 					trailer: this.state.detailMovie.trailer,
 					date: new Date(this.state.releaseDate),
 					newDescription: String(this.state.detailMovie.description),
@@ -158,19 +161,22 @@ class DetailMovie extends Component {
 	};
 
 	render() {
-		let { image, title, showtimeData, imageTradeMark } = this.state;
+		let { image, title, showtimeData, imageTradeMark, background } =
+			this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<div className="movie-detail-container">
-					<div className="movie-detail-content">
+					<div
+						className="movie-detail-content"
+						style={{ background: `url(${background})` }}>
 						<div className="box-movie-detail">
 							<div className="box-movie-detail-image">
 								<div
 									className="movie-detail-image"
 									style={{
-										backgroundImage: `url(${this.state.image})`,
+										backgroundImage: `url(${image})`,
 									}}
 								/>
 								<div className="open-trailer-movie">
