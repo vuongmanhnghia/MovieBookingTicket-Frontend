@@ -9,6 +9,9 @@ class HomeNavigation extends Component {
 		super(props);
 		this.state = {
 			allTradeMarks: [],
+			modalSearch: false,
+
+			inputSearch: "",
 		};
 	}
 	handleViewShowtime = () => {
@@ -50,10 +53,47 @@ class HomeNavigation extends Component {
 		activeNagigation.classList.add("active");
 	};
 
+	handleSearch = () => {
+		this.setState({
+			modalSearch: !this.state.modalSearch,
+		});
+		let searchInput = document.querySelector(".dropdown-box");
+		let modalSearchInput = document.querySelector(".modal-search");
+		if (!this.state.modalSearch) {
+			searchInput.style.opacity = "1";
+			searchInput.style.visibility = "visible";
+
+			modalSearchInput.style.opacity = "1";
+			modalSearchInput.style.visibility = "visible";
+		}
+		if (this.state.modalSearch) {
+			searchInput.style.opacity = "0";
+			searchInput.style.visibility = "hiddien";
+
+			modalSearchInput.style.opacity = "0";
+			modalSearchInput.style.visibility = "hiddien";
+
+			setTimeout(() => {
+				this.setState({
+					inputSearch: "",
+				});
+			}, 300);
+		}
+	};
+
+	handleOnChangeInputSearch = async (e) => {
+		await this.setState({
+			inputSearch: e.target.value,
+		});
+	};
+
 	render() {
 		let { allTradeMarks } = this.state;
 		return (
 			<div className="home-nav-container">
+				<div
+					className="modal-search"
+					onClick={() => this.handleSearch()}></div>
 				<div className="home-nav-content">
 					<div className="nav-left-container">
 						<a href="https://github.com/vuongmanhnghia" target="blank">
@@ -121,6 +161,45 @@ class HomeNavigation extends Component {
 										this.props.history.push(`/review-movie`)
 									}>
 									<span>Review phim</span>
+								</div>
+							</div>
+							<div className="nav-text dropdown-search-content">
+								<div
+									className="dropdown-icon nav-text-item"
+									onClick={() => this.handleSearch()}>
+									<i className="fa fa-search" aria-hidden="true"></i>
+								</div>
+								<div className="dropdown-box active-dropdown-box">
+									<div className="dropdown-search">
+										<i
+											className="fa fa-search"
+											aria-hidden="true"></i>
+										<input
+											value={this.state.inputSearch}
+											onChange={(e) =>
+												this.setState(() =>
+													this.handleOnChangeInputSearch(e)
+												)
+											}
+											className="search-input"
+											type="text"
+											placeholder="Tìm kiếm phim..."></input>
+									</div>
+									<ul className="dropdown_list">
+										{allTradeMarks &&
+											allTradeMarks.length > 0 &&
+											allTradeMarks.map((item) => {
+												return (
+													<div
+														className="dropdown_item"
+														onClick={() =>
+															this.handleViewDeatilCinema(item)
+														}>
+														<span>{item}</span>
+													</div>
+												);
+											})}
+									</ul>
 								</div>
 							</div>
 						</div>
