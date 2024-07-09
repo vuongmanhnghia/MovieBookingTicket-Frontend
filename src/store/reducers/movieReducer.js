@@ -6,6 +6,7 @@ const initialState = {
 	detailMovie: {},
 	moviesPage: [],
 	reviewMoviesPage: [],
+	allMoviesSearch: [],
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -66,6 +67,18 @@ const movieReducer = (state = initialState, action) => {
 
 		case actionTypes.FETCH_REVIEW_MOVIES_PAGE_FAILED:
 			state.reviewMoviesPage = [];
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_ALL_MOVIES_SEARCH_SUCCESS:
+			state.allMoviesSearch = action.allMoviesSearch;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_ALL_MOVIES_SEARCH_FAILED:
+			state.allMoviesSearch = [];
 			return {
 				...state,
 			};
