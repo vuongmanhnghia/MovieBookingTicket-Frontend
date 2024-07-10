@@ -145,8 +145,7 @@ class BookingModal extends Component {
 	};
 
 	render() {
-		let { isOpenModal, dataShowtime, dataScreen, image, totalBooking } =
-			this.props;
+		let { isOpenModal, dataShowtime, dataScreen, image } = this.props;
 		let totalPrice = "" + this.state.totalPrice;
 		return (
 			<Modal
@@ -349,37 +348,42 @@ class BookingModal extends Component {
 											}
 										})}
 								</div>
+								<div className="seat-note">
+									<div className="seat-note-item">
+										<div className="seat-note-logo bookinged"></div>
+										<div className="seat-note-text">Ghế đã đặt</div>
+									</div>
+									<div className="seat-note-item">
+										<div className="seat-note-logo selected"></div>
+										<div className="seat-note-text">Ghế bạn chọn</div>
+									</div>
+									<div className="seat-note-item">
+										<div className="seat-note-logo vip"></div>
+										<div className="seat-note-text">Ghế VIP</div>
+									</div>
+									<div className="seat-note-item">
+										<div className="seat-note-logo normal"></div>
+										<div className="seat-note-text">Ghế thường</div>
+									</div>
+								</div>
 							</div>
 							<div className="modal-body-container">
-								<div
-									className="modal-body-image"
-									style={{ background: `url(${image})` }}></div>
 								<div className="modal-body-content">
 									<div className="modal-body-header">
 										{dataShowtime && dataShowtime.movieId}
 									</div>
-									<div className="modal-body-cinema">
-										{`${dataShowtime && dataShowtime.tradeMarkId} - ${
-											dataShowtime && dataShowtime.cinemaId
-										}`}
-									</div>
-									<div className="modal-body-showtime">
-										{`${
+									<div className="modal-body-info">
+										{` ${
 											dataShowtime && dataShowtime.startTime
 										} - ${new Date(
 											dataShowtime.startDate
 										).getDate()}/${new Date(
 											dataShowtime.startDate
-										).getMonth()} - Phòng chiếu ${dataScreen.name}`}
+										).getMonth()} - Phòng chiếu ${dataScreen.name}, ${
+											dataShowtime && dataShowtime.tradeMarkId
+										} - ${dataShowtime && dataShowtime.cinemaId}`}
 									</div>
-									<div className="booking row">
-										<div className="price-seats col-6">
-											<span className="text">Giá vé: </span>{" "}
-											<span className="sum">
-												{`${dataScreen.priceSeats} VNĐ`}
-											</span>
-										</div>
-									</div>
+									<div className="modal-body-showtime"></div>
 								</div>
 							</div>
 						</div>

@@ -38,7 +38,6 @@
 			}
 
 			.booking-modal-body {
-				// padding: 10px 20px;
 				.information {
 					padding: 20px;
 
@@ -50,51 +49,24 @@
 				}
 
 				.modal-body-container {
-					display: flex;
-					justify-content: space-around;
-					padding: 20px;
-
-					.modal-body-image {
-						width: 200px;
-						height: 288px;
-						background-repeat: no-repeat !important;
-						background-size: cover !important;
-						background-position: center !important;
-						border-radius: 4px;
-						border: 2px solid #ccc;
-					}
+					// display: flex;
+					// justify-content: space-around;
+					padding: 10px 20px;
 
 					.modal-body-content {
-						padding: 20px 50px;
-
 						.modal-body-header {
-							display: flex;
-							justify-content: center;
 							width: 100%;
 							font-size: 18px;
 							font-weight: bold;
-							border-bottom: 1px solid #ccc;
-							padding-bottom: 10px;
 						}
 
-						.modal-body-cinema {
-							margin-top: 10px;
+						.modal-body-info {
+							// margin-top: 10px;
 							width: 100%;
-							display: flex;
-							justify-content: center;
 							font-size: 14px;
 							font-weight: bold;
 							color: #d82d8b;
-						}
-
-						.modal-body-showtime {
-							width: 100%;
-							display: flex;
-							justify-content: center;
-							font-size: 14px;
-							color: #b7232b;
-							font-style: italic;
-							margin-bottom: 30px;
+							padding-bottom: 20px;
 						}
 
 						.modal-body-seat {
@@ -109,10 +81,6 @@
 							.sum {
 								font-weight: bold;
 								color: #d82d8b;
-							}
-
-							.total-seats,
-							.remaining-seats {
 							}
 						}
 
@@ -184,6 +152,58 @@
 						align-items: center;
 						flex-wrap: wrap;
 						user-select: none;
+					}
+
+					.seat-note {
+						margin-top: 50px;
+						display: grid;
+						row-gap: 1rem;
+						column-gap: 3rem;
+						grid-template-columns: repeat(2, minmax(0, 1fr));
+						width: fit-content;
+						margin-left: auto;
+						margin-right: auto;
+						user-select: none;
+
+						.seat-note-item {
+							display: flex;
+							align-items: center;
+							gap: 10px;
+
+							.seat-note-logo {
+								width: 20px;
+								height: 20px;
+								border-radius: 4px;
+								display: flex;
+								flex-wrap: nowrap;
+							}
+
+							.bookinged {
+								background-color: #7f7f7f;
+							}
+
+							.selected {
+								background-color: #d82d8b;
+								border: 2px solid white;
+							}
+
+							.vip {
+								background-color: #f5222d;
+
+								&:hover {
+									background-color: #f5222d;
+								}
+							}
+
+							.normal {
+								background-color: #722ed1;
+							}
+
+							.seat-note-text {
+								font-size: 14px;
+								color: white;
+							}
+						}
 					}
 
 					.seat-box {
