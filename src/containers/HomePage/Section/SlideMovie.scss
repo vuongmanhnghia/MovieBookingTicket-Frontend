@@ -25,6 +25,7 @@
 
 		.movie-section-slide-container {
 			.movie-section-slide-content {
+				user-select: none;
 				.slick-slide {
 					display: flex;
 					justify-content: center;
