@@ -171,14 +171,8 @@ class ShowtimeData extends Component {
 	};
 
 	render() {
-		let {
-			allMovies,
-			image,
-			title,
-			allTradeMarks,
-			showtimeData,
-			totalBooking,
-		} = this.props;
+		let { allMovies, title, allTradeMarks, showtimeData, totalBooking } =
+			this.props;
 		let {
 			isOpenModal,
 			dataShowtime,
@@ -433,7 +427,6 @@ class ShowtimeData extends Component {
 					closeBookingModal={this.closeBookingModal}
 					dataScreen={dataScreen}
 					dataShowtime={dataShowtime}
-					image={image}
 					totalBooking={totalBooking}
 				/>
 			</>

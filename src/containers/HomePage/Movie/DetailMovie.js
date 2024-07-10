@@ -269,7 +269,6 @@ class DetailMovie extends Component {
 					handleGetTradeMarkSelected={this.handleGetTradeMarkSelected}
 					handleGetDateSelected={this.handleGetDateSelected}
 					showtimeData={showtimeData}
-					image={image}
 					title={title}
 					handleNewTabMovie={this.handleNewTabMovie}
 				/>

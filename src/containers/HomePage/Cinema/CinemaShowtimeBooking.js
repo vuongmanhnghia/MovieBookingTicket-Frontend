@@ -181,7 +181,6 @@ class CinemaShowtimeBooking extends Component {
 					closeBookingModal={this.closeBookingModal}
 					dataScreen={dataScreen}
 					dataShowtime={dataShowtime}
-					image={this.state.image}
 					totalBooking={totalBooking}
 				/>
 			</div>
