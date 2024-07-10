@@ -58,26 +58,28 @@ class BookingModal extends Component {
 		if (this.state.seatsSelected.length === 0) {
 			toast.error("Vui lòng chọn ghế ngồi");
 		} else {
-			// create booking
-			await this.props.createNewBooking({
-				fullName: this.state.fullName,
-				email: this.state.email,
-				phoneNumber: this.state.phoneNumber,
-				totalTickets: this.state.seatsSelected.length,
-				totalPrice: this.state.totalPrice,
-				movieId: this.props.dataShowtime.movieId,
-				cinemaId: this.props.dataShowtime.cinemaId,
-				screenId: this.props.dataScreen.name,
-				time: this.props.dataShowtime.startTime,
-				date: this.props.dataShowtime.startDate,
-				bookingDate: moment().format("DD/MM/YYYY"),
-			});
 			let result = [];
 			let seatsSelected = this.state.seatsSelected.sort();
 			let numberSeatsSelected = this.state.numberSeatsSelected.sort(
 				this.sortSeats
 			);
 			let { dataShowtime } = this.props;
+			// create booking
+			await this.props.createNewBooking({
+				fullName: this.state.fullName,
+				email: this.state.email,
+				phoneNumber: this.state.phoneNumber,
+				totalTickets: this.state.seatsSelected.length,
+				totalPrice: ("" + this.state.totalPrice).slice(0, -3) + ".000",
+				movieId: dataShowtime.movieId,
+				cinemaId: dataShowtime.cinemaId,
+				screenId: this.props.dataScreen.name,
+				time: dataShowtime.startTime,
+				date: dataShowtime.startDate,
+				bookingDate: moment().format("DD/MM/YYYY"),
+				seatsSelected: seatsSelected,
+			});
+
 			await seatsSelected.map((item, index) => {
 				let object = {};
 				object.seat = item;
