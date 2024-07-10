@@ -28,6 +28,7 @@ class HomeNavigation extends Component {
 		});
 
 		document.querySelector(".dropdown-icon").addEventListener("click", () => {
+			document.querySelector(".dropdown-icon").classList.add("active");
 			document.querySelector(".search-input").focus();
 		});
 
@@ -77,6 +78,7 @@ class HomeNavigation extends Component {
 			searchInput.style.visibility = "hiddien";
 			modalSearchInput.style.opacity = "0";
 			modalSearchInput.style.visibility = "hiddien";
+			document.querySelector(".dropdown-icon").classList.remove("active");
 			setTimeout(() => {
 				modalSearchInput.style.display = "none";
 				this.setState({
@@ -97,7 +99,7 @@ class HomeNavigation extends Component {
 
 		modalSearchInput.style.opacity = "0";
 		modalSearchInput.style.visibility = "hiddien";
-
+		document.querySelector(".dropdown-icon").classList.remove("active");
 		setTimeout(() => {
 			modalSearchInput.style.display = "none";
 			this.setState({

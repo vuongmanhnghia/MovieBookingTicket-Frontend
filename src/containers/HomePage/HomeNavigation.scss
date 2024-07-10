@@ -244,6 +244,14 @@
 						}
 					}
 
+					.active {
+						color: #e2559c;
+
+						&:hover {
+							color: #e2559c;
+						}
+					}
+
 					.dropdown-box {
 						visibility: hidden;
 						opacity: 0;
