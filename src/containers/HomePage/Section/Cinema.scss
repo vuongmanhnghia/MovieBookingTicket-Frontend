@@ -15,6 +15,7 @@
 			font-weight: 700;
 			line-height: 36px;
 			text-align: center;
+			user-select: none;
 		}
 
 		.cinema-description {
@@ -24,6 +25,7 @@
 			line-height: 28px;
 			margin: 8px 160px 0px;
 			text-align: center;
+			user-select: none;
 		}
 
 		.cinema-content {
@@ -47,6 +49,7 @@
 				margin-bottom: 50px;
 				transition: all 0.3s;
 				cursor: pointer;
+				user-select: none;
 
 				&:hover {
 					box-shadow: 0px 0px 10px 0px #d4d4d4;
@@ -110,7 +113,7 @@
 
 			display: flex;
 			justify-content: center;
-			.btn-primary.medium {
+			.btn-primary {
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -124,6 +127,7 @@
 				background-color: #d82d8b;
 				transition: all 0.3s;
 				cursor: pointer;
+				user-select: none;
 
 				&:hover {
 					background-color: #b32071;

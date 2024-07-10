@@ -16,6 +16,7 @@
 			line-height: 36px;
 			text-align: center;
 			padding: 54px 0;
+			user-select: none;
 		}
 
 		.list-movies {
@@ -117,6 +118,7 @@
 			.pagination {
 				margin: 0;
 				gap: 10px;
+				user-select: none;
 
 				.page-item {
 					width: 32px;

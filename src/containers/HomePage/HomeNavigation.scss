@@ -105,6 +105,7 @@
 						color: #606060;
 						cursor: pointer;
 						transition: all 0.3s;
+						user-select: none;
 
 						&:hover {
 							color: black;
@@ -174,6 +175,7 @@
 							padding: 15px !important;
 							cursor: pointer;
 							transition: 0.2s linear;
+							user-select: none;
 
 							&:hover {
 								color: white;
@@ -299,6 +301,7 @@
 								cursor: pointer;
 								transition: 0.1s linear;
 								border-top: 1px solid #ccc;
+								user-select: none;
 
 								&:first-child {
 									border-top: none;
