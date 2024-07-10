@@ -75,15 +75,13 @@ class DetailMovie extends Component {
 		if (prevProps.match.params.name !== this.props.match.params.name) {
 			let name = this.props.match.params.name;
 			let response = await getDetailMovieService(name);
-			await this.props.fetchAllTradeMarks();
 			if (response && response.errCode === 0) {
 				this.setState({
 					nameMovie: name,
 					detailMovie: response.data,
-					allTradeMarks: this.props.allTradeMarks,
-					tradeMarkSelected: this.props.allTradeMarks[0].tradeMark,
 				});
 			}
+			this.handleDataShowtime();
 			this.setState({
 				title: this.state.detailMovie.title,
 				description: this.state.detailMovie.description,
@@ -191,10 +189,10 @@ class DetailMovie extends Component {
 	};
 
 	render() {
-		let { image, title, showtimeData, imageTradeMark, background } =
-			this.state;
+		let { image, title, showtimeData, background } = this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
+		console.log("title", title);
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<div className="movie-detail-container">

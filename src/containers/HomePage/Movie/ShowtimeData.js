@@ -88,6 +88,15 @@ class ShowtimeData extends Component {
 		}, 500);
 	}
 
+	async componentDidUpdate(prevProps) {
+		if (prevProps.allMovies !== this.props.allMovies) {
+			this.setState({
+				showtimeData: this.props.showtimeData,
+				allTradeMarks: this.props.allTradeMarks,
+			});
+		}
+	}
+
 	handleChangeDate = async (date) => {
 		this.setState({
 			loadingShowtime: true,
@@ -275,18 +284,16 @@ class ShowtimeData extends Component {
 										}
 									})}
 							</div>
-							<div className="showtimeData-showtime">
-								{loadingShowtime && (
-									<LoadingSkeleton
-										style={{
-											width: "683.693px",
-											height: "960px",
-											borderRadius: "6px",
-											margin: "auto",
-										}}
-									/>
-								)}
-								{!loadingShowtime && (
+							{loadingShowtime && (
+								<LoadingSkeleton
+									style={{
+										width: "100%",
+										height: "1000px",
+									}}
+								/>
+							)}
+							{!loadingShowtime && (
+								<div className="showtimeData-showtime">
 									<div className="scrollbar">
 										<div className="scrollbar-inner">
 											{showtimeData &&
@@ -337,8 +344,8 @@ class ShowtimeData extends Component {
 												})}
 										</div>
 									</div>
-								)}
-							</div>
+								</div>
+							)}
 						</div>
 					</div>
 					<div className="more-movie-container col-4">
