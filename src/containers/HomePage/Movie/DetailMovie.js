@@ -192,7 +192,6 @@ class DetailMovie extends Component {
 		let { image, title, showtimeData, background } = this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
-		console.log("title", title);
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<div className="movie-detail-container">

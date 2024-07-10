@@ -4,7 +4,8 @@ import "./BookingModal.scss";
 import { Modal } from "reactstrap";
 import * as actions from "../../../store/actions";
 import moment from "moment";
-import { set } from "lodash";
+import { toast } from "react-toastify";
+import { create } from "lodash";
 
 class BookingModal extends Component {
 	constructor(props) {
@@ -17,12 +18,13 @@ class BookingModal extends Component {
 			totalPrice: 0,
 
 			seatsSelected: [],
+			numberSeatsSelected: [],
+			arrBookingSeats: [],
 		};
 	}
 
 	async componentDidUpdate(prevProps, prevState) {
 		if (prevProps.dataScreen !== this.props.dataScreen) {
-			console.log("dataScreen", this.props.dataScreen);
 			setTimeout(() => {
 				document.querySelectorAll(".seat-box").forEach((item) => {
 					item.addEventListener("click", (e) => {
@@ -34,6 +36,12 @@ class BookingModal extends Component {
 					});
 				});
 			}, 300);
+		}
+		if (prevProps.createBookingStatus !== this.props.createBookingStatus) {
+			if (this.props.createBookingStatus === 0) {
+				await this.props.createNewBookingSeat(this.state.arrBookingSeats);
+				this.props.resetBooking();
+			}
 		}
 	}
 
@@ -47,29 +55,56 @@ class BookingModal extends Component {
 	};
 
 	handleSaveBooking = async () => {
-		await this.props.createNewBooking({
-			fullName: this.state.fullName,
-			email: this.state.email,
-			phoneNumber: this.state.phoneNumber,
-			totalTickets: this.state.totalTickets,
-			totalPrice: this.state.totalPrice,
-			movieId: this.props.dataShowtime.movieId,
-			cinemaId: this.props.dataShowtime.cinemaId,
-			screenId: this.props.dataScreen.name,
-			time: this.props.dataShowtime.startTime,
-			date: this.props.dataShowtime.startDate,
-			bookingDate: moment().format("DD/MM/YYYY"),
-		});
-		this.setState({
-			fullName: "",
-			email: "",
-			phoneNumber: "",
-			totalTickets: 0,
-			totalPrice: 0,
-			seatsSelected: [],
-		});
-		this.props.closeBookingModal();
+		if (this.state.seatsSelected.length === 0) {
+			toast.error("Vui lòng chọn ghế ngồi");
+		} else {
+			// create booking
+			await this.props.createNewBooking({
+				fullName: this.state.fullName,
+				email: this.state.email,
+				phoneNumber: this.state.phoneNumber,
+				totalTickets: this.state.seatsSelected.length,
+				totalPrice: this.state.totalPrice,
+				movieId: this.props.dataShowtime.movieId,
+				cinemaId: this.props.dataShowtime.cinemaId,
+				screenId: this.props.dataScreen.name,
+				time: this.props.dataShowtime.startTime,
+				date: this.props.dataShowtime.startDate,
+				bookingDate: moment().format("DD/MM/YYYY"),
+			});
+			let result = [];
+			let seatsSelected = this.state.seatsSelected.sort();
+			let numberSeatsSelected = this.state.numberSeatsSelected.sort(
+				this.sortSeats
+			);
+			let { dataShowtime } = this.props;
+			await seatsSelected.map((item, index) => {
+				let object = {};
+				object.seat = item;
+				object.numberSeat = numberSeatsSelected[index];
+				object.cinema = dataShowtime.cinemaId;
+				object.screen = dataShowtime.screenId;
+				object.time = dataShowtime.startTime;
+				object.date = dataShowtime.startDate;
+				object.bookingDate = moment().format("DD/MM/YYYY");
+				result.push(object);
+			});
+			await this.setState({
+				arrBookingSeats: result,
+				fullName: "",
+				email: "",
+				phoneNumber: "",
+				totalTickets: 0,
+				totalPrice: 0,
+				seatsSelected: [],
+			});
+
+			this.props.closeBookingModal();
+		}
 	};
+
+	sortSeats = (a, b) => a - b;
+
 	checkValidateInput = () => {
 		let isValid = true;
 		let arrCheck = ["fullName", "email", "phoneNumber", "totalTickets"];
@@ -83,17 +118,6 @@ class BookingModal extends Component {
 		return isValid;
 	};
 
-	handleOnChangeInputTicket = async (event, id) => {
-		let copyState = { ...this.state };
-		copyState[id] = event.target.value;
-		await this.setState({
-			...copyState,
-		});
-		this.setState({
-			totalPrice: this.state.totalTickets * this.props.dataScreen.priceSeats,
-		});
-	};
-
 	closeModal = () => {
 		this.setState({
 			seatsSelected: [],
@@ -102,14 +126,16 @@ class BookingModal extends Component {
 		this.props.closeBookingModal();
 	};
 
-	handleSelectSeat = (seat) => {
+	handleSelectSeat = (seat, numberSeat) => {
 		if (this.state.seatsSelected.includes(seat)) {
 			let index = this.state.seatsSelected.indexOf(seat);
+			let indexNumber = this.state.numberSeatsSelected.indexOf(numberSeat);
 			this.state.seatsSelected.splice(index, 1);
+			this.state.numberSeatsSelected.splice(indexNumber, 1);
 		} else {
 			this.state.seatsSelected.push(seat);
+			this.state.numberSeatsSelected.push(numberSeat);
 		}
-		console.log(this.props.dataScreen.priceSeats);
 		this.setState({
 			totalPrice:
 				this.state.seatsSelected.length * this.props.dataScreen.priceSeats,
@@ -179,7 +205,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"D" + ((index + 1) % 30),
+																	index
+																)
 															}
 															className="seat-box vip"
 															key={index + 1}>
@@ -190,7 +219,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"E" + ((index + 1) % 40),
+																	index
+																)
 															}
 															className="seat-box vip"
 															key={index + 1}>
@@ -201,7 +233,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"F" + ((index + 1) % 50),
+																	index
+																)
 															}
 															className="seat-box vip"
 															key={index + 1}>
@@ -212,7 +247,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"G" + ((index + 1) % 60),
+																	index
+																)
 															}
 															className="seat-box vip"
 															key={index + 1}>
@@ -223,7 +261,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"H" + ((index + 1) % 70),
+																	index
+																)
 															}
 															className="seat-box vip"
 															key={index + 1}>
@@ -236,7 +277,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"A" + (index + 1),
+																	index
+																)
 															}
 															className="seat-box nomal"
 															key={index + 1}>
@@ -247,7 +291,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"B" + ((index + 1) % 10),
+																	index
+																)
 															}
 															className="seat-box nomal"
 															key={index + 1}>
@@ -258,7 +305,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"C" + ((index + 1) % 20),
+																	index
+																)
 															}
 															className="seat-box nomal"
 															key={index + 1}>
@@ -269,7 +319,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"I" + ((index + 1) % 80),
+																	index
+																)
 															}
 															className="seat-box nomal"
 															key={index + 1}>
@@ -280,7 +333,10 @@ class BookingModal extends Component {
 													return (
 														<div
 															onClick={() =>
-																this.handleSelectSeat(index)
+																this.handleSelectSeat(
+																	"J" + ((index + 1) % 90),
+																	index
+																)
 															}
 															className="seat-box nomal"
 															key={index + 1}>
@@ -314,42 +370,12 @@ class BookingModal extends Component {
 											dataShowtime.startDate
 										).getMonth()} - Phòng chiếu ${dataScreen.name}`}
 									</div>
-									<div className="modal-body-seat ">
-										<div className="total-seats  ">
-											<span className="text">Tổng số chỗ ngồi:</span>{" "}
-											<span className="sum">
-												{dataScreen.totalSeats}
-											</span>
-										</div>
-										<div className="remaining-seats">
-											<span className="text">
-												Số chỗ ngồi còn lại:
-											</span>{" "}
-											<span className="sum">
-												{dataScreen.totalSeats - totalBooking}
-											</span>
-										</div>
-									</div>
 									<div className="booking row">
 										<div className="price-seats col-6">
 											<span className="text">Giá vé: </span>{" "}
 											<span className="sum">
 												{`${dataScreen.priceSeats} VNĐ`}
 											</span>
-										</div>
-										<div className="total-tickets col-6">
-											<span className="text">Số vé:</span>{" "}
-											<input
-												className="form-control"
-												type="number"
-												max={10}
-												value={this.state.totalTickets}
-												onChange={(event) => {
-													this.handleOnChangeInputTicket(
-														event,
-														"totalTickets"
-													);
-												}}></input>
 										</div>
 									</div>
 								</div>
@@ -382,6 +408,7 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		totalBooking: state.booking.totalBooking,
+		createBookingStatus: state.booking.createBookingStatus,
 	};
 };
 
@@ -389,6 +416,12 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		createNewBooking: (data) => {
 			dispatch(actions.createNewBooking(data));
+		},
+		createNewBookingSeat: (data) => {
+			dispatch(actions.createNewBookingSeat(data));
+		},
+		resetBooking: () => {
+			dispatch(actions.resetBooking());
 		},
 	};
 };
