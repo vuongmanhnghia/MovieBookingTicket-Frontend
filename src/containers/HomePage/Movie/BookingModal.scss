@@ -38,9 +38,9 @@
 			}
 
 			.booking-modal-body {
-				padding: 10px 20px;
+				// padding: 10px 20px;
 				.information {
-					padding: 10px 0;
+					padding: 20px;
 
 					.no-spinner::-webkit-outer-spin-button,
 					.no-spinner::-webkit-inner-spin-button {
@@ -52,6 +52,7 @@
 				.modal-body-container {
 					display: flex;
 					justify-content: space-around;
+					padding: 20px;
 
 					.modal-body-image {
 						width: 200px;
@@ -149,6 +150,82 @@
 									margin: 0;
 								}
 							}
+						}
+					}
+				}
+
+				.booking-seats {
+					background: #262626;
+					padding: 50px 120px;
+					margin: 10px 0;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+
+					.screen {
+						width: 350px;
+						height: 5px;
+						background-color: white;
+						border-radius: 12px;
+						margin-bottom: 10px;
+					}
+
+					.name-screen {
+						font-size: 16px;
+						font-weight: 600;
+						color: white;
+						margin-bottom: 50px;
+						user-select: none;
+					}
+
+					.all-seats {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						flex-wrap: wrap;
+						user-select: none;
+					}
+
+					.seat-box {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 40px;
+						height: 40px;
+						margin: 5px;
+						border-radius: 8px;
+						cursor: pointer;
+						transition: 0.1s linear;
+					}
+
+					.vip {
+						background-color: #f5222d;
+						color: white;
+						transition: 0.1s linear;
+
+						&:hover {
+							background-color: #b7232b;
+						}
+					}
+
+					.nomal {
+						background-color: #722ed1;
+						color: white;
+						transition: 0.1s linear;
+
+						&:hover {
+							background-color: #5b2b9e;
+						}
+					}
+
+					.selected {
+						background-color: #d82d8b;
+						color: white;
+						border: 3px solid white;
+						transition: 0.1s linear;
+
+						&:hover {
+							background-color: #d82d8b;
 						}
 					}
 				}

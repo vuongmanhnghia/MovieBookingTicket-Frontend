@@ -6,25 +6,6 @@ import * as actions from "../../../store/actions";
 import moment from "moment";
 import { set } from "lodash";
 
-// handleClickBooking = async (item) => {
-// 	await this.props.fetchSeatsByShowtime(item);
-// 	await this.setState({
-// 		isOpenModal: true,
-// 		dataShowtime: item,
-// 		dataScreen: this.props.screenData,
-// 	});
-// 	await this.getTotalBooking();
-// };
-
-// getTotalBooking = async () => {
-// 	await this.props.fetchBookingByCinemaMovieScreenDateTime({
-// 		cinema: this.state.dataShowtime.cinemaId,
-// 		movie: this.state.dataShowtime.movieId,
-// 		screen: this.state.dataShowtime.screenId,
-// 		date: this.state.dataShowtime.startDate,
-// 		time: this.state.dataShowtime.startTime,
-// 	});
-// };
 class BookingModal extends Component {
 	constructor(props) {
 		super(props);
@@ -34,10 +15,27 @@ class BookingModal extends Component {
 			phoneNumber: "",
 			totalTickets: 0,
 			totalPrice: 0,
+
+			seatsSelected: [],
 		};
 	}
 
-	async componentDidMount() {}
+	async componentDidUpdate(prevProps, prevState) {
+		if (prevProps.dataScreen !== this.props.dataScreen) {
+			console.log("dataScreen", this.props.dataScreen);
+			setTimeout(() => {
+				document.querySelectorAll(".seat-box").forEach((item) => {
+					item.addEventListener("click", (e) => {
+						if (e.target.classList.contains("selected")) {
+							e.target.classList.remove("selected");
+						} else {
+							e.target.classList.add("selected");
+						}
+					});
+				});
+			}, 300);
+		}
+	}
 
 	handleOnChangeInput = (event, id) => {
 		let copyState = { ...this.state };
@@ -68,6 +66,7 @@ class BookingModal extends Component {
 			phoneNumber: "",
 			totalTickets: 0,
 			totalPrice: 0,
+			seatsSelected: [],
 		});
 		this.props.closeBookingModal();
 	};
@@ -95,15 +94,32 @@ class BookingModal extends Component {
 		});
 	};
 
+	closeModal = () => {
+		this.setState({
+			seatsSelected: [],
+			totalPrice: 0,
+		});
+		this.props.closeBookingModal();
+	};
+
+	handleSelectSeat = (seat) => {
+		if (this.state.seatsSelected.includes(seat)) {
+			let index = this.state.seatsSelected.indexOf(seat);
+			this.state.seatsSelected.splice(index, 1);
+		} else {
+			this.state.seatsSelected.push(seat);
+		}
+		console.log(this.props.dataScreen.priceSeats);
+		this.setState({
+			totalPrice:
+				this.state.seatsSelected.length * this.props.dataScreen.priceSeats,
+		});
+	};
+
 	render() {
-		let {
-			isOpenModal,
-			closeBookingModal,
-			dataShowtime,
-			dataScreen,
-			image,
-			totalBooking,
-		} = this.props;
+		let { isOpenModal, dataShowtime, dataScreen, image, totalBooking } =
+			this.props;
+		let totalPrice = "" + this.state.totalPrice;
 		return (
 			<Modal
 				isOpen={isOpenModal}
@@ -115,7 +131,7 @@ class BookingModal extends Component {
 						<div className="booking-modal-header">
 							<i
 								class="fas fa-chevron-left"
-								onClick={closeBookingModal}></i>
+								onClick={() => this.closeModal()}></i>
 							<div className="booking-modal-title">Mua vé xem phim</div>
 						</div>
 						<div className="booking-modal-body">
@@ -151,7 +167,131 @@ class BookingModal extends Component {
 										}}></input>
 								</div>
 							</div>
-
+							<div className="booking-seats">
+								<div className="screen"></div>
+								<div className="name-screen">MÀN HÌNH</div>
+								<div className="all-seats">
+									{new Array(dataScreen.totalSeats)
+										.fill(0)
+										.map((item, index) => {
+											if (index >= 30 && index < 80) {
+												if (index < 40) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box vip"
+															key={index + 1}>
+															D{(index + 1) % 30}
+														</div>
+													);
+												} else if (index < 50) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box vip"
+															key={index + 1}>
+															E{(index + 1) % 40}
+														</div>
+													);
+												} else if (index < 60) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box vip"
+															key={index + 1}>
+															F{(index + 1) % 50}
+														</div>
+													);
+												} else if (index < 70) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box vip"
+															key={index + 1}>
+															G{(index + 1) % 60}
+														</div>
+													);
+												} else if (index < 80) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box vip"
+															key={index + 1}>
+															H{(index + 1) % 70}
+														</div>
+													);
+												}
+											} else {
+												if (index < 10) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box nomal"
+															key={index + 1}>
+															A{index + 1}
+														</div>
+													);
+												} else if (index < 20) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box nomal"
+															key={index + 1}>
+															B{(index + 1) % 10}
+														</div>
+													);
+												} else if (index < 30) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box nomal"
+															key={index + 1}>
+															C{(index + 1) % 20}
+														</div>
+													);
+												} else if (index < 90) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box nomal"
+															key={index + 1}>
+															I{(index + 1) % 80}
+														</div>
+													);
+												} else if (index < 100) {
+													return (
+														<div
+															onClick={() =>
+																this.handleSelectSeat(index)
+															}
+															className="seat-box nomal"
+															key={index + 1}>
+															J{(index + 1) % 90}
+														</div>
+													);
+												}
+											}
+										})}
+								</div>
+							</div>
 							<div className="modal-body-container">
 								<div
 									className="modal-body-image"
@@ -218,9 +358,12 @@ class BookingModal extends Component {
 						<div className="booking-modal-footer">
 							<div className="total">
 								<span className="text">Tổng thanh toán</span>
-								<span className="sum">{`${
-									dataScreen.priceSeats * this.state.totalTickets
-								}đ`}</span>
+								<span className="sum">
+									{totalPrice.length > 3
+										? `${totalPrice.slice(0, -3)}.000`
+										: `${totalPrice.slice(-3, totalPrice.length)}`}
+									đ
+								</span>
 							</div>
 							<button
 								className="btn btn-secondary"
