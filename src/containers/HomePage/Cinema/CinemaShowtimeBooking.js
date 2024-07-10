@@ -4,13 +4,15 @@ import { withRouter } from "react-router-dom";
 import "./CinemaShowtimeBooking.scss";
 import * as actions from "../../../store/actions";
 import BookingModal from "../Movie/BookingModal";
-
+import LoadingSkeleton from "../LoadingSkeleton";
+import NotDefind from "../NotDefind";
 class CinemaShowtimeBooking extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			isOpenModal: false,
 			dataShowtime: {},
+			loading: true,
 		};
 	}
 
@@ -24,9 +26,22 @@ class CinemaShowtimeBooking extends Component {
 				item.classList.add("active");
 			});
 		});
+		this.closeLoading(500);
 	}
 
+	closeLoading = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, countdown);
+	};
+
 	handleChangeDate = async (date) => {
+		this.setState({
+			loading: true,
+		});
+		this.closeLoading(500);
 		await this.props.getDateSelected(date);
 	};
 
@@ -62,7 +77,7 @@ class CinemaShowtimeBooking extends Component {
 
 	render() {
 		let { dataView, tradeMark, totalBooking } = this.props;
-		let { isOpenModal, dataScreen, dataShowtime } = this.state;
+		let { isOpenModal, dataScreen, dataShowtime, loading } = this.state;
 		return (
 			<div className="cinema-showtime-container">
 				<div className="cinema-showtime-content">
@@ -95,54 +110,68 @@ class CinemaShowtimeBooking extends Component {
 								})}
 							</div>
 							<div className="list-showtime-content">
-								<div className="scrollbar">
-									<div className="scrollbar-inner">
-										{dataView &&
-											dataView.length > 0 &&
-											dataView.map((item) => {
-												return (
-													<div className="box-showtime">
-														<div
-															className="box-showtime-image"
-															style={{
-																background: `url(${item.movie.image})`,
-															}}></div>
-														<div className="box-showtime-info">
-															<div className="box-showtime-name">
-																{item.movie.title}
-															</div>
-															<div className="box-showtime-genre">
-																{item.movie.genre}
-															</div>
-															<div className="box-showtime-showtimes">
-																{item.showtime &&
-																	item.showtime.length > 0 &&
-																	item.showtime.map((it) => {
-																		it.cinemaId =
-																			tradeMark.name;
-																		it.tradeMarkId =
-																			tradeMark.tradeMark;
-																		it.image =
-																			item.movie.image;
-																		return (
-																			<div
-																				onClick={() =>
-																					this.handleViewBookingModal(
-																						it
-																					)
-																				}
-																				className="box-showtime-startTime">
-																				{it.startTime}
-																			</div>
-																		);
-																	})}
+								{loading && (
+									<LoadingSkeleton
+										style={{
+											width: "100%",
+											height: "100%",
+										}}
+									/>
+								)}
+								{!loading && dataView && dataView.length > 0 && (
+									<div className="scrollbar">
+										<div className="scrollbar-inner">
+											{dataView &&
+												dataView.length > 0 &&
+												dataView.map((item) => {
+													return (
+														<div className="box-showtime">
+															<div
+																className="box-showtime-image"
+																style={{
+																	background: `url(${item.movie.image})`,
+																}}></div>
+															<div className="box-showtime-info">
+																<div className="box-showtime-name">
+																	{item.movie.title}
+																</div>
+																<div className="box-showtime-genre">
+																	{item.movie.genre}
+																</div>
+																<div className="box-showtime-showtimes">
+																	{item.showtime &&
+																		item.showtime.length >
+																			0 &&
+																		item.showtime.map(
+																			(it) => {
+																				it.cinemaId =
+																					tradeMark.name;
+																				it.tradeMarkId =
+																					tradeMark.tradeMark;
+																				it.image =
+																					item.movie.image;
+																				return (
+																					<div
+																						onClick={() =>
+																							this.handleViewBookingModal(
+																								it
+																							)
+																						}
+																						className="box-showtime-startTime">
+																						{it.startTime}
+																					</div>
+																				);
+																			}
+																		)}
+																</div>
 															</div>
 														</div>
-													</div>
-												);
-											})}
+													);
+												})}
+										</div>
 									</div>
-								</div>
+								)}
+								{!loading && !dataView && <NotDefind />}
 							</div>
 						</div>
 					</div>

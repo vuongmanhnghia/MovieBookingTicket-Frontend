@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import "./HomeNavigation.scss";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
-import { set } from "lodash";
-import { handleViewDetailMovie } from "../../containers/HomePage/Movie/ShowtimeData";
-
+import NotDefindSearch from "./NotDefindSearch";
 class HomeNavigation extends Component {
 	constructor(props) {
 		super(props);
@@ -272,6 +270,10 @@ class HomeNavigation extends Component {
 													</div>
 												);
 											})}
+										{(!allMoviesSearch ||
+											allMoviesSearch.length <= 0) && (
+											<NotDefindSearch />
+										)}
 									</ul>
 								</div>
 							</div>

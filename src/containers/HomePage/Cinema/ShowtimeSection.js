@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./ShowtimeSection.scss";
-import { getDetailCinemaService } from "../../../services/cinemaService";
-// import { getShowtimeByCinemaService } from "../../../services/showtimeService";
 import { getShowtimeByCinemaAndDateService } from "../../../services/showtimeService";
 import BookingModal from "../Movie/BookingModal";
 import * as actions from "../../../store/actions";
 import LoadingSkeleton from "../LoadingSkeleton";
 import moment from "moment";
-import { set } from "lodash";
+import NotDefind from "../NotDefind";
 class ShowtimeSection extends Component {
 	constructor(props) {
 		super(props);
@@ -349,6 +347,7 @@ class ShowtimeSection extends Component {
 													</div>
 												</div>
 											)}
+										{!loaddingShowtime && !dataShow && <NotDefind />}
 									</div>
 								</div>
 							</div>
