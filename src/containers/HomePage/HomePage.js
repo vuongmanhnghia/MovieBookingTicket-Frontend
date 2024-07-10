@@ -33,6 +33,7 @@ class HomePage extends Component {
 			imageTradeMark: item,
 		});
 	};
+	handleGetQuantityCinema = (quantity) => {};
 
 	render() {
 		let settings = {
@@ -54,6 +55,7 @@ class HomePage extends Component {
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection
+					handleGetQuantityCinema={this.handleGetQuantityCinema}
 					tradeMark={tradeMark}
 					detailCinema={detailCinema}
 					imageTradeMark={imageTradeMark}

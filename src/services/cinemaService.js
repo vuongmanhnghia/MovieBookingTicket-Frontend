@@ -28,6 +28,10 @@ const getTradeMarkByCinemaService = (name) => {
 	return axios.get(`/api/get-tradeMark-by-cinema?name=${name}`);
 };
 
+const getDetailTradeMarkService = (name) => {
+	return axios.get(`/api/get-detail-trademark?name=${name}`);
+};
+
 export {
 	createNewCinemaService,
 	getDetailCinemaService,
@@ -36,4 +40,5 @@ export {
 	getAllCinemasByTradeMarkService,
 	getShowtimeByCinemaService,
 	getTradeMarkByCinemaService,
+	getDetailTradeMarkService,
 };

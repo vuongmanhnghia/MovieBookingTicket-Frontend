@@ -7,6 +7,7 @@ const initialState = {
 	showtimeData: [],
 	tradeMark: {},
 	detailCinema: {},
+	detailTradeMark: {},
 };
 
 const cinemaReducer = (state = initialState, action) => {
@@ -90,6 +91,18 @@ const cinemaReducer = (state = initialState, action) => {
 
 		case actionTypes.FETCH_DETAIL_CINEMA_FAILED:
 			state.detailCinema = {};
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_DETAIL_TRADEMARK_SUCCESS:
+			state.detailTradeMark = action.detailTradeMark;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_DETAIL_TRADEMARK_FAILED:
+			state.detailTradeMark = {};
 			return {
 				...state,
 			};

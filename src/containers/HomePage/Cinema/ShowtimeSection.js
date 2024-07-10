@@ -105,6 +105,7 @@ class ShowtimeSection extends Component {
 	};
 
 	async componentDidUpdate(prevProps, prevState) {
+		this.getQuantityCinema();
 		if (prevProps.detailCinema !== this.props.detailCinema) {
 			let activeCinema = document.querySelectorAll(".list-cinema-box");
 			activeCinema.forEach((item) => {
@@ -160,6 +161,11 @@ class ShowtimeSection extends Component {
 				loading: false,
 			});
 		}, countdown);
+	};
+
+	getQuantityCinema = () => {
+		let quantity = this.props.detailCinema.length;
+		this.props.handleGetQuantityCinema(quantity);
 	};
 
 	render() {

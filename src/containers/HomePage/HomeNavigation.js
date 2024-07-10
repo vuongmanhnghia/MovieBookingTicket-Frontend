@@ -51,7 +51,7 @@ class HomeNavigation extends Component {
 			.forEach((item) => item.classList.remove("active"));
 	};
 
-	handleViewDeatilCinema = async (item) => {
+	handleViewDetailCinema = async (item) => {
 		await this.props.history.push(`/detail-cinema/${item}`);
 		let activeNagigation = document.querySelector(".dropdown-select");
 		await document
@@ -187,7 +187,7 @@ class HomeNavigation extends Component {
 												<div
 													className="dropdown_item"
 													onClick={() =>
-														this.handleViewDeatilCinema(item)
+														this.handleViewDetailCinema(item)
 													}>
 													<span>{item}</span>
 												</div>

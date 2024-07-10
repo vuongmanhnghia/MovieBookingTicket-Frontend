@@ -28,6 +28,8 @@ class DetailShowtime extends Component {
 		});
 	};
 
+	handleGetQuantityCinema = (quantity) => {};
+
 	render() {
 		let { tradeMark, imageTradeMark } = this.state;
 		let { detailCinema } = this.props;
@@ -40,6 +42,7 @@ class DetailShowtime extends Component {
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
 				<ShowtimeSection
+					handleGetQuantityCinema={this.handleGetQuantityCinema}
 					tradeMark={tradeMark}
 					detailCinema={detailCinema}
 					imageTradeMark={imageTradeMark}

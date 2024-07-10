@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import NavigationSection from "./NavigationSection";
 import ShowtimeSection from "./ShowtimeSection";
-import { getDetailCinemaService } from "../../../services/cinemaService";
 import HeaderShowtime from "../Showtime/HeaderShowtime";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
+import * as actions from "../../../store/actions";
 
 class DetailCinema extends Component {
 	constructor(props) {
@@ -18,25 +18,35 @@ class DetailCinema extends Component {
 	async componentDidMount() {
 		if (this.props.match.params.id) {
 			let id = this.props.match.params.id;
-			let response = await getDetailCinemaService(id);
-			if (response && response.errCode === 0) {
-				this.setState({
-					detailCinema: response.data,
-				});
-			}
+			await this.props.fetchDetailCinema(id);
+			await this.props.fetchDetailTradeMark(id);
 			this.setState({
-				tradeMark: this.state.detailCinema[0].tradeMark,
+				imageTradeMark: this.props.detailTradeMark.image,
 			});
 		}
 	}
 
+	handleGetQuantityCinema = (quantity) => {
+		this.setState({
+			quantity: quantity,
+		});
+	};
+
 	render() {
-		let { tradeMark } = this.state;
+		let { detailCinema, detailTradeMark } = this.props;
+		let { imageTradeMark, quantity } = this.state;
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-				<NavigationSection id={this.props.match.params.id} />
-				<HeaderShowtime tradeMark={tradeMark} />
-				<ShowtimeSection id={this.props.match.params.id} />
+				<NavigationSection
+					detailTradeMark={detailTradeMark}
+					quantity={quantity}
+				/>
+				<HeaderShowtime tradeMark={detailTradeMark.tradeMark} />
+				<ShowtimeSection
+					handleGetQuantityCinema={this.handleGetQuantityCinema}
+					detailCinema={detailCinema}
+					imageTradeMark={imageTradeMark}
+				/>
 				<Footer />
 			</CustomScrollbars>
 		);
@@ -46,11 +56,17 @@ class DetailCinema extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		detailCinema: state.cinema.detailCinema,
+		detailTradeMark: state.cinema.detailTradeMark,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchDetailCinema: (id) => dispatch(actions.fetchDetailCinema(id)),
+		fetchDetailTradeMark: (name) =>
+			dispatch(actions.fetchDetailTradeMark(name)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailCinema);
