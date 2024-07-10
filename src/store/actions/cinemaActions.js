@@ -6,6 +6,7 @@ import {
 	getAllCinemasByTradeMarkService,
 	getShowtimeByCinemaService,
 	getTradeMarkByCinemaService,
+	getDetailCinemaService,
 } from "../../services/cinemaService";
 import { toast } from "react-toastify";
 
@@ -55,6 +56,29 @@ export const fetchAllCinemas = () => {
 			console.log("fetch all Cinemas errol: ", e);
 			dispatch({
 				type: actionTypes.FETCH_ALL_CINEMAS_FAILED,
+			});
+		}
+	};
+};
+
+export const fetchDetailCinema = (id) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getDetailCinemaService(id);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_DETAIL_CINEMA_SUCCESS,
+					detailCinema: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_DETAIL_CINEMA_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch detail Cinema errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_DETAIL_CINEMA_FAILED,
 			});
 		}
 	};

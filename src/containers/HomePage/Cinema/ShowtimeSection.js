@@ -14,7 +14,6 @@ class ShowtimeSection extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			detailCinema: [],
 			tradeMark: "",
 			background: "",
 			image: "",
@@ -36,18 +35,6 @@ class ShowtimeSection extends Component {
 
 	async componentDidMount() {
 		this.closeLoading(700);
-		if (this.props.id) {
-			let id = this.props.id;
-			let response = await getDetailCinemaService(id);
-			await this.setState({
-				detailCinema: response.data,
-			});
-			setTimeout(() => {
-				this.setState({
-					background: this.state.detailCinema[0].image,
-				});
-			}, 500);
-		}
 
 		let activeCinema = document.querySelectorAll(".list-cinema-box");
 		activeCinema.forEach((item) => {
@@ -118,36 +105,23 @@ class ShowtimeSection extends Component {
 	};
 
 	async componentDidUpdate(prevProps, prevState) {
-		let activeCinema = document.querySelectorAll(".list-cinema-box");
-		activeCinema.forEach((item) => {
-			item.addEventListener("click", () => {
-				document
-					.querySelectorAll(".list-cinema-box")
-					.forEach((item) => item.classList.remove("active"));
-				item.classList.add("active");
-			});
-		});
-		if (prevProps.id !== this.props.id) {
-			this.setState({
-				dataShow: [],
+		if (prevProps.detailCinema !== this.props.detailCinema) {
+			let activeCinema = document.querySelectorAll(".list-cinema-box");
+			activeCinema.forEach((item) => {
+				item.addEventListener("click", () => {
+					document
+						.querySelectorAll(".list-cinema-box")
+						.forEach((item) => item.classList.remove("active"));
+					item.classList.add("active");
+				});
 			});
 			document.querySelector(".cinema-box-content").style = "opacity: 0";
 			document
 				.querySelectorAll(".list-cinema-box")
 				.forEach((item) => item.classList.remove("active"));
-			if (this.props.id) {
-				let id = this.props.id;
-				let response = await getDetailCinemaService(id);
-				if (response && response.errCode === 0) {
-					await this.setState({
-						detailCinema: response.data,
-					});
-				}
-				await this.setState({
-					background: this.state.detailCinema[0].image,
-					tradeMark: this.state.detailCinema[0].tradeMark,
-				});
-			}
+			this.setState({
+				dataShow: [],
+			});
 		}
 	}
 
@@ -190,9 +164,6 @@ class ShowtimeSection extends Component {
 
 	render() {
 		let {
-			tradeMark,
-			detailCinema,
-			background,
 			nameCinemaShowtime,
 			location,
 			dataShow,
@@ -202,7 +173,8 @@ class ShowtimeSection extends Component {
 			loading,
 			loaddingShowtime,
 		} = this.state;
-		let { totalBooking } = this.props;
+		let { totalBooking, detailCinema, tradeMark, imageTradeMark } =
+			this.props;
 		return (
 			<>
 				<div className="cinema-detail-showtime-container">
@@ -235,7 +207,7 @@ class ShowtimeSection extends Component {
 															<div
 																className="list-cinema-box-logo"
 																style={{
-																	background: `url(${item.image})`,
+																	background: `url(${imageTradeMark})`,
 																}}></div>
 														)}
 														{loading && (
@@ -266,7 +238,7 @@ class ShowtimeSection extends Component {
 										<div
 											className="showtime-cinema-box-logo"
 											style={{
-												background: `url(${background})`,
+												background: `url(${imageTradeMark})`,
 											}}></div>
 										<div className="showtime-cinema-box-info">
 											<div className="showtime-cinema-box-name">

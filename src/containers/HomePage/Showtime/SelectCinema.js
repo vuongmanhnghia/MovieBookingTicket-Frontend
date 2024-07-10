@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../../store/actions";
 import "./SelectCinema.scss";
 import LoadingSkeleton from "../LoadingSkeleton";
-import { set } from "lodash";
 
 class SelectCinema extends Component {
 	constructor(props) {
@@ -25,7 +24,8 @@ class SelectCinema extends Component {
 				selectTradeMark: this.props.allTradeMarks[0].tradeMark,
 			});
 		}
-		this.getSelectedCinema();
+		this.getTradeMark(this.state.selectTradeMark);
+		this.getImageTradeMark(this.props.allTradeMarks[0].image);
 
 		setTimeout(() => {
 			let activeCinema = document.querySelectorAll("div.select-cinema-item");
@@ -47,20 +47,20 @@ class SelectCinema extends Component {
 					activeTradeMark[index].classList.add("active-tradeMark");
 				});
 			});
-		}, 2000);
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-		}
+		}, 500);
 	}
 
 	getSelectedCinema = (item) => {
-		if (item) {
-			this.props.handleShowSelectCinema(item.tradeMark);
-		} else {
-			this.props.handleShowSelectCinema(this.state.selectTradeMark);
-		}
+		this.getTradeMark(item.tradeMark);
+		this.getImageTradeMark(item.image);
+	};
+
+	getTradeMark = (tradeMark) => {
+		this.props.handleShowSelectCinema(tradeMark);
+	};
+
+	getImageTradeMark = (image) => {
+		this.props.handleGetImageTradeMark(image);
 	};
 
 	closeLoading = (countdown) => {

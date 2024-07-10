@@ -19,8 +19,8 @@ class TrailerMovie extends Component {
 		}
 	}
 
-	handleViewDetailMovie = async (id) => {
-		await this.props.history.push(`/detail-movie/${id}`);
+	handleViewDetailMovie = async (title) => {
+		await this.props.history.push(`/detail-movie/${title}`);
 	};
 
 	render() {
@@ -59,7 +59,7 @@ class TrailerMovie extends Component {
 									<div
 										className="trailer-movie-booking btn"
 										onClick={() =>
-											this.handleViewDetailMovie(dataMovie.id)
+											this.handleViewDetailMovie(dataMovie.title)
 										}>
 										Đặt vé
 									</div>

@@ -8,31 +8,42 @@ import HeaderShowtime from "./HeaderShowtime";
 import BannerShowtime from "./BannerShowtime";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
+import * as actions from "../../../store/actions";
 class DetailShowtime extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 
-	async componentDidMount() {}
-	async componentDidUpdate() {}
-
 	handleShowSelectCinema = async (item) => {
 		await this.setState({
 			tradeMark: item,
 		});
+		await this.props.fetchDetailCinema(item);
+	};
+
+	handleGetImageTradeMark = (item) => {
+		this.setState({
+			imageTradeMark: item,
+		});
 	};
 
 	render() {
-		let { tradeMark } = this.state;
+		let { tradeMark, imageTradeMark } = this.state;
+		let { detailCinema } = this.props;
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<BannerShowtime />
 				<SelectCinema
 					handleShowSelectCinema={this.handleShowSelectCinema}
+					handleGetImageTradeMark={this.handleGetImageTradeMark}
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
-				<ShowtimeSection id={tradeMark} />
+				<ShowtimeSection
+					tradeMark={tradeMark}
+					detailCinema={detailCinema}
+					imageTradeMark={imageTradeMark}
+				/>
 				<Footer />
 			</CustomScrollbars>
 		);
@@ -42,12 +53,13 @@ class DetailShowtime extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		detailCinema: state.cinema.detailCinema,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		// fetchAllCinemas: () => dispatch(actions.fetchAllCinemas()),
+		fetchDetailCinema: (id) => dispatch(actions.fetchDetailCinema(id)),
 	};
 };
 

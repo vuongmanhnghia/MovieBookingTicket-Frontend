@@ -12,6 +12,7 @@ import ShowtimeSection from "./Cinema/ShowtimeSection";
 import { withRouter } from "react-router-dom";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import Footer from "./Section/Footer";
+import * as actions from "../../store/actions";
 
 class HomePage extends Component {
 	constructor(props) {
@@ -24,6 +25,13 @@ class HomePage extends Component {
 		await this.setState({
 			tradeMark: item,
 		});
+		await this.props.fetchDetailCinema(item);
+	};
+
+	handleGetImageTradeMark = (item) => {
+		this.setState({
+			imageTradeMark: item,
+		});
 	};
 
 	render() {
@@ -34,16 +42,22 @@ class HomePage extends Component {
 			slidesToShow: 5,
 			slidesToScroll: 5,
 		};
-		let { tradeMark } = this.state;
+		let { tradeMark, imageTradeMark } = this.state;
+		let { detailCinema } = this.props;
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<HomeBanner />
 				<SlideMovie settings={settings} />
 				<SelectCinema
 					handleShowSelectCinema={this.handleShowSelectCinema}
+					handleGetImageTradeMark={this.handleGetImageTradeMark}
 				/>
 				<HeaderShowtime tradeMark={tradeMark} />
-				<ShowtimeSection id={tradeMark} />
+				<ShowtimeSection
+					tradeMark={tradeMark}
+					detailCinema={detailCinema}
+					imageTradeMark={imageTradeMark}
+				/>
 				<Cinema />
 				<Footer />
 			</CustomScrollbars>
@@ -54,11 +68,14 @@ class HomePage extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
+		detailCinema: state.cinema.detailCinema,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchDetailCinema: (id) => dispatch(actions.fetchDetailCinema(id)),
+	};
 };
 
 export default withRouter(
