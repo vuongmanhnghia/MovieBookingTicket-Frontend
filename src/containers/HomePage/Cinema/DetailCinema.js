@@ -26,6 +26,17 @@ class DetailCinema extends Component {
 		}
 	}
 
+	async componentDidUpdate(prevProps) {
+		if (prevProps.match.params.id !== this.props.match.params.id) {
+			let id = this.props.match.params.id;
+			await this.props.fetchDetailCinema(id);
+			await this.props.fetchDetailTradeMark(id);
+			this.setState({
+				imageTradeMark: this.props.detailTradeMark.image,
+			});
+		}
+	}
+
 	handleGetQuantityCinema = (quantity) => {
 		this.setState({
 			quantity: quantity,

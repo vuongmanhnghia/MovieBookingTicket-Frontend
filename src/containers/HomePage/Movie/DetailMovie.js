@@ -71,6 +71,36 @@ class DetailMovie extends Component {
 		}
 	}
 
+	async componentDidUpdate(prevProps) {
+		if (prevProps.match.params.name !== this.props.match.params.name) {
+			let name = this.props.match.params.name;
+			let response = await getDetailMovieService(name);
+			await this.props.fetchAllTradeMarks();
+			if (response && response.errCode === 0) {
+				this.setState({
+					nameMovie: name,
+					detailMovie: response.data,
+					allTradeMarks: this.props.allTradeMarks,
+					tradeMarkSelected: this.props.allTradeMarks[0].tradeMark,
+				});
+			}
+			this.setState({
+				title: this.state.detailMovie.title,
+				description: this.state.detailMovie.description,
+				rating: this.state.detailMovie.rating,
+				duration: this.state.detailMovie.duration,
+				releaseDate: this.state.detailMovie.releaseDate,
+				genre: this.state.detailMovie.genre,
+				director: this.state.detailMovie.director,
+				image: this.state.detailMovie.image,
+				background: this.state.detailMovie.background,
+				trailer: this.state.detailMovie.trailer,
+				date: new Date(this.state.releaseDate),
+				newDescription: String(this.state.detailMovie.description),
+			});
+		}
+	}
+
 	handleNewTabMovie = async (item) => {
 		this.hadleGetNameMovie(item.title);
 		await this.props.history.push(`/detail-movie/${item.title}`);

@@ -22,6 +22,7 @@ class ShowtimeData extends Component {
 			imageTradeMark: "",
 
 			loading: true,
+			loadingShowtime: true,
 		};
 	}
 
@@ -33,8 +34,17 @@ class ShowtimeData extends Component {
 		}, countdown);
 	};
 
+	closeLoadingShowtime = (countdown) => {
+		setTimeout(() => {
+			this.setState({
+				loadingShowtime: false,
+			});
+		}, countdown);
+	};
+
 	async componentDidMount() {
-		this.closeLoading(1000);
+		this.closeLoading(500);
+		this.closeLoadingShowtime(1000);
 		await this.props.fetchAllMovies();
 		setTimeout(() => {
 			this.viewShowtimeFirstTime();
@@ -78,15 +88,13 @@ class ShowtimeData extends Component {
 		}, 500);
 	}
 
-	componentDidUpdate(prevProps) {}
-
 	handleChangeDate = async (date) => {
 		this.setState({
-			loading: true,
+			loadingShowtime: true,
 		});
 		setTimeout(() => {
 			this.setState({
-				loading: false,
+				loadingShowtime: false,
 			});
 		}, 200);
 		await this.props.handleGetDateSelected(
@@ -96,12 +104,12 @@ class ShowtimeData extends Component {
 
 	handleChangeCinema = async (item) => {
 		this.setState({
-			loading: true,
+			loadingShowtime: true,
 			imageTradeMark: item.image,
 		});
 		setTimeout(() => {
 			this.setState({
-				loading: false,
+				loadingShowtime: false,
 			});
 		}, 200);
 		await this.props.handleGetTradeMarkSelected(item.tradeMark);
@@ -109,11 +117,11 @@ class ShowtimeData extends Component {
 
 	handleViewDetailMovie = async (item) => {
 		this.setState({
-			loading: true,
+			loadingShowtime: true,
 		});
 		setTimeout(() => {
 			this.setState({
-				loading: false,
+				loadingShowtime: false,
 			});
 		}, 500);
 
@@ -162,8 +170,14 @@ class ShowtimeData extends Component {
 			showtimeData,
 			totalBooking,
 		} = this.props;
-		let { isOpenModal, dataShowtime, dataScreen, imageTradeMark, loading } =
-			this.state;
+		let {
+			isOpenModal,
+			dataShowtime,
+			dataScreen,
+			imageTradeMark,
+			loading,
+			loadingShowtime,
+		} = this.state;
 		return (
 			<>
 				<div className="movie-detail-showtimeData-container row">
@@ -201,7 +215,17 @@ class ShowtimeData extends Component {
 								})}
 							</div>
 							<div className="showtimeData-cinema">
-								{allTradeMarks &&
+								{loading && (
+									<LoadingSkeleton
+										style={{
+											width: "100%",
+											height: "100%",
+											borderRadius: "6px",
+										}}
+									/>
+								)}
+								{!loading &&
+									allTradeMarks &&
 									allTradeMarks.length > 0 &&
 									allTradeMarks.map((item, index) => {
 										if (index === 0) {
@@ -252,15 +276,17 @@ class ShowtimeData extends Component {
 									})}
 							</div>
 							<div className="showtimeData-showtime">
-								{loading && (
+								{loadingShowtime && (
 									<LoadingSkeleton
 										style={{
-											width: "100%",
-											height: "100%",
+											width: "683.693px",
+											height: "960px",
+											borderRadius: "6px",
+											margin: "auto",
 										}}
 									/>
 								)}
-								{!loading && (
+								{!loadingShowtime && (
 									<div className="scrollbar">
 										<div className="scrollbar-inner">
 											{showtimeData &&
