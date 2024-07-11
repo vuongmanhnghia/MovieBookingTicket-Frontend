@@ -12,8 +12,13 @@ const createNewBookingSeatService = (data) => {
 	return axios.post("/api/create-new-booking-seat", data);
 };
 
+const getBookingSeatsService = (data) => {
+	return axios.post("/api/get-booking-seats", data);
+};
+
 export {
 	createNewBookingService,
 	getBookingByCinemaMovieScreenDateTimeService,
 	createNewBookingSeatService,
+	getBookingSeatsService,
 };

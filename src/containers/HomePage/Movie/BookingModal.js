@@ -181,7 +181,7 @@ class BookingModal extends Component {
 	};
 
 	render() {
-		let { isOpenModal, dataShowtime, dataScreen } = this.props;
+		let { isOpenModal, dataShowtime, dataScreen, bookingSeats } = this.props;
 		let totalPrice = "" + this.state.totalPrice;
 		let { isOpenInfoModal, dataBooking, fullName, email, phoneNumber } =
 			this.state;
@@ -191,7 +191,7 @@ class BookingModal extends Component {
 				className="booking-modal-container"
 				size="lg"
 				centered>
-				{dataShowtime && dataScreen && (
+				{dataShowtime && dataScreen && bookingSeats && (
 					<div className="booking-modal-content">
 						<div className="booking-modal-header">
 							<i
@@ -207,149 +207,167 @@ class BookingModal extends Component {
 									{new Array(dataScreen.totalSeats)
 										.fill(0)
 										.map((item, index) => {
-											if (index >= 30 && index < 80) {
-												if (index < 40) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"D" + ((index + 1) % 30),
+											if (bookingSeats.numberSeat.includes(index)) {
+												return (
+													<div
+														className="seat-box-bookinged"
+														key={index + 1}>
+														{
+															bookingSeats.seat[
+																bookingSeats.numberSeat.indexOf(
 																	index
 																)
-															}
-															className="seat-box vip"
-															key={index + 1}>
-															D{(index + 1) % 30}
-														</div>
-													);
-												} else if (index < 50) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"E" + ((index + 1) % 40),
-																	index
-																)
-															}
-															className="seat-box vip"
-															key={index + 1}>
-															E{(index + 1) % 40}
-														</div>
-													);
-												} else if (index < 60) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"F" + ((index + 1) % 50),
-																	index
-																)
-															}
-															className="seat-box vip"
-															key={index + 1}>
-															F{(index + 1) % 50}
-														</div>
-													);
-												} else if (index < 70) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"G" + ((index + 1) % 60),
-																	index
-																)
-															}
-															className="seat-box vip"
-															key={index + 1}>
-															G{(index + 1) % 60}
-														</div>
-													);
-												} else if (index < 80) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"H" + ((index + 1) % 70),
-																	index
-																)
-															}
-															className="seat-box vip"
-															key={index + 1}>
-															H{(index + 1) % 70}
-														</div>
-													);
-												}
+															]
+														}
+													</div>
+												);
 											} else {
-												if (index < 10) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"A" + (index + 1),
-																	index
-																)
-															}
-															className="seat-box nomal"
-															key={index + 1}>
-															A{index + 1}
-														</div>
-													);
-												} else if (index < 20) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"B" + ((index + 1) % 10),
-																	index
-																)
-															}
-															className="seat-box nomal"
-															key={index + 1}>
-															B{(index + 1) % 10}
-														</div>
-													);
-												} else if (index < 30) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"C" + ((index + 1) % 20),
-																	index
-																)
-															}
-															className="seat-box nomal"
-															key={index + 1}>
-															C{(index + 1) % 20}
-														</div>
-													);
-												} else if (index < 90) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"I" + ((index + 1) % 80),
-																	index
-																)
-															}
-															className="seat-box nomal"
-															key={index + 1}>
-															I{(index + 1) % 80}
-														</div>
-													);
-												} else if (index < 100) {
-													return (
-														<div
-															onClick={() =>
-																this.handleSelectSeat(
-																	"J" + ((index + 1) % 90),
-																	index
-																)
-															}
-															className="seat-box nomal"
-															key={index + 1}>
-															J{(index + 1) % 90}
-														</div>
-													);
+												if (index >= 30 && index < 80) {
+													// Kiểm tra index có thuộc booking seat không
+
+													if (index < 40) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"D" + ((index + 1) % 30),
+																		index
+																	)
+																}
+																className="seat-box vip"
+																key={index + 1}>
+																D{(index + 1) % 30}
+															</div>
+														);
+													} else if (index < 50) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"E" + ((index + 1) % 40),
+																		index
+																	)
+																}
+																className="seat-box vip"
+																key={index + 1}>
+																E{(index + 1) % 40}
+															</div>
+														);
+													} else if (index < 60) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"F" + ((index + 1) % 50),
+																		index
+																	)
+																}
+																className="seat-box vip"
+																key={index + 1}>
+																F{(index + 1) % 50}
+															</div>
+														);
+													} else if (index < 70) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"G" + ((index + 1) % 60),
+																		index
+																	)
+																}
+																className="seat-box vip"
+																key={index + 1}>
+																G{(index + 1) % 60}
+															</div>
+														);
+													} else if (index < 80) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"H" + ((index + 1) % 70),
+																		index
+																	)
+																}
+																className="seat-box vip"
+																key={index + 1}>
+																H{(index + 1) % 70}
+															</div>
+														);
+													}
+												} else {
+													if (index < 10) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"A" + (index + 1),
+																		index
+																	)
+																}
+																className="seat-box nomal"
+																key={index + 1}>
+																A{index + 1}
+															</div>
+														);
+													} else if (index < 20) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"B" + ((index + 1) % 10),
+																		index
+																	)
+																}
+																className="seat-box nomal"
+																key={index + 1}>
+																B{(index + 1) % 10}
+															</div>
+														);
+													} else if (index < 30) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"C" + ((index + 1) % 20),
+																		index
+																	)
+																}
+																className="seat-box nomal"
+																key={index + 1}>
+																C{(index + 1) % 20}
+															</div>
+														);
+													} else if (index < 90) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"I" + ((index + 1) % 80),
+																		index
+																	)
+																}
+																className="seat-box nomal"
+																key={index + 1}>
+																I{(index + 1) % 80}
+															</div>
+														);
+													} else if (index < 100) {
+														return (
+															<div
+																onClick={() =>
+																	this.handleSelectSeat(
+																		"J" + ((index + 1) % 90),
+																		index
+																	)
+																}
+																className="seat-box nomal"
+																key={index + 1}>
+																J{(index + 1) % 90}
+															</div>
+														);
+													}
 												}
 											}
 										})}

@@ -176,7 +176,7 @@
 							}
 
 							.bookinged {
-								background-color: #7f7f7f;
+								background-color: #404040;
 							}
 
 							.selected {
@@ -244,6 +244,18 @@
 						&:hover {
 							background-color: #d82d8b;
 						}
+					}
+
+					.seat-box-bookinged {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 40px;
+						height: 40px;
+						margin: 5px;
+						border-radius: 8px;
+						background-color: #404040;
+						color: white;
 					}
 				}
 			}

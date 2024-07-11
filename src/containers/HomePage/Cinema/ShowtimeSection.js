@@ -138,6 +138,15 @@ class ShowtimeSection extends Component {
 			dataShowtime: item,
 			dataScreen: this.props.screenData,
 		});
+		// fetch booking seats
+		let dataGetBookingSeats = await {
+			cinema: item.cinemaId,
+			screen: item.screenId,
+			date: item.startDate,
+			time: item.startTime,
+		};
+
+		await this.props.fetchBookingSeats(dataGetBookingSeats);
 		await this.getTotalBooking();
 	};
 
@@ -181,8 +190,13 @@ class ShowtimeSection extends Component {
 			loading,
 			loaddingShowtime,
 		} = this.state;
-		let { totalBooking, detailCinema, tradeMark, imageTradeMark } =
-			this.props;
+		let {
+			totalBooking,
+			detailCinema,
+			tradeMark,
+			imageTradeMark,
+			bookingSeats,
+		} = this.props;
 		return (
 			<>
 				<div className="cinema-detail-showtime-container">
@@ -360,6 +374,7 @@ class ShowtimeSection extends Component {
 					dataScreen={dataScreen}
 					dataShowtime={dataShowtime}
 					totalBooking={totalBooking}
+					bookingSeats={bookingSeats}
 				/>
 			</>
 		);
@@ -371,6 +386,7 @@ const mapStateToProps = (state) => {
 		isLoggedIn: state.user.isLoggedIn,
 		screenData: state.showtime.seatsByShowtime,
 		totalBooking: state.booking.totalBooking,
+		bookingSeats: state.booking.bookingSeats,
 	};
 };
 
@@ -380,6 +396,9 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.fetchSeatsByShowtime(data)),
 		fetchBookingByCinemaMovieScreenDateTime: (data) => {
 			dispatch(actions.fetchBookingByCinemaMovieScreenDateTime(data));
+		},
+		fetchBookingSeats: (data) => {
+			dispatch(actions.fetchBookingSeats(data));
 		},
 	};
 };

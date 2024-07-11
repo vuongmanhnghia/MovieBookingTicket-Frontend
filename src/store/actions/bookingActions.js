@@ -4,6 +4,7 @@ import {
 	getBookingByCinemaMovieScreenDateTimeService,
 	createNewBookingService,
 	createNewBookingSeatService,
+	getBookingSeatsService,
 } from "../../services/bookingService";
 import { toast } from "react-toastify";
 
@@ -91,5 +92,28 @@ export const resetBooking = () => {
 		dispatch({
 			type: actionTypes.RESET_BOOKING,
 		});
+	};
+};
+
+export const fetchBookingSeats = (data) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getBookingSeatsService(data);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_BOOKING_SEATS_SUCCESS,
+					bookingSeats: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_BOOKING_SEATS_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch all Booking errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_BOOKING_SEATS_FAILED,
+			});
+		}
 	};
 };

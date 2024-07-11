@@ -54,6 +54,7 @@ class DetailCinema extends Component {
 				/>
 				<HeaderShowtime tradeMark={detailTradeMark.tradeMark} />
 				<ShowtimeSection
+					tradeMark={detailTradeMark.tradeMark}
 					handleGetQuantityCinema={this.handleGetQuantityCinema}
 					detailCinema={detailCinema}
 					imageTradeMark={imageTradeMark}

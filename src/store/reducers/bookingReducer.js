@@ -3,6 +3,10 @@ import actionTypes from "../actions/actionTypes";
 const initialState = {
 	totalBooking: 0,
 	createBookingStatus: "",
+	bookingSeats: {
+		seat: [],
+		numberSeat: [],
+	},
 };
 
 const bookingReducer = (state = initialState, action) => {
@@ -32,6 +36,17 @@ const bookingReducer = (state = initialState, action) => {
 			};
 
 		case actionTypes.FETCH_BOOKING_BY_CINEMA_MOVIE_SCREEN_DATETIME_FAILED:
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_BOOKING_SEATS_SUCCESS:
+			state.bookingSeats = action.bookingSeats;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_BOOKING_SEATS_FAILED:
 			return {
 				...state,
 			};
