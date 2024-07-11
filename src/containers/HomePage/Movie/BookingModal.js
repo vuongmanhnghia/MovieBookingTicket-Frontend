@@ -5,7 +5,7 @@ import { Modal } from "reactstrap";
 import * as actions from "../../../store/actions";
 import moment from "moment";
 import { toast } from "react-toastify";
-import { create } from "lodash";
+import InfoBookingModal from "./InfoBookingModal";
 
 class BookingModal extends Component {
 	constructor(props) {
@@ -20,6 +20,9 @@ class BookingModal extends Component {
 			seatsSelected: [],
 			numberSeatsSelected: [],
 			arrBookingSeats: [],
+
+			isOpenInfoModal: false,
+			dataBooking: {},
 		};
 	}
 
@@ -45,64 +48,12 @@ class BookingModal extends Component {
 		}
 	}
 
-	handleOnChangeInput = (event, id) => {
+	handleOnChangeInput = async (event, id) => {
 		let copyState = { ...this.state };
 		copyState[id] = event.target.value;
-
-		this.setState({
+		await this.setState({
 			...copyState,
 		});
-	};
-
-	handleSaveBooking = async () => {
-		if (this.state.seatsSelected.length === 0) {
-			toast.error("Vui lòng chọn ghế ngồi");
-		} else {
-			let result = [];
-			let seatsSelected = this.state.seatsSelected.sort();
-			let numberSeatsSelected = this.state.numberSeatsSelected.sort(
-				this.sortSeats
-			);
-			let { dataShowtime } = this.props;
-			// create booking
-			await this.props.createNewBooking({
-				fullName: this.state.fullName,
-				email: this.state.email,
-				phoneNumber: this.state.phoneNumber,
-				totalTickets: this.state.seatsSelected.length,
-				totalPrice: ("" + this.state.totalPrice).slice(0, -3) + ".000",
-				movieId: dataShowtime.movieId,
-				cinemaId: dataShowtime.cinemaId,
-				screenId: this.props.dataScreen.name,
-				time: dataShowtime.startTime,
-				date: dataShowtime.startDate,
-				bookingDate: moment().format("DD/MM/YYYY"),
-				seatsSelected: seatsSelected,
-			});
-
-			await seatsSelected.map((item, index) => {
-				let object = {};
-				object.seat = item;
-				object.numberSeat = numberSeatsSelected[index];
-				object.cinema = dataShowtime.cinemaId;
-				object.screen = dataShowtime.screenId;
-				object.time = dataShowtime.startTime;
-				object.date = dataShowtime.startDate;
-				object.bookingDate = moment().format("DD/MM/YYYY");
-				result.push(object);
-			});
-			await this.setState({
-				arrBookingSeats: result,
-				fullName: "",
-				email: "",
-				phoneNumber: "",
-				totalTickets: 0,
-				totalPrice: 0,
-				seatsSelected: [],
-			});
-
-			this.props.closeBookingModal();
-		}
 	};
 
 	sortSeats = (a, b) => a - b;
@@ -144,13 +95,100 @@ class BookingModal extends Component {
 		});
 	};
 
+	handleOnClickBooking = async () => {
+		if (this.state.seatsSelected.length === 0) {
+			toast.error("Vui lòng chọn ghế ngồi");
+		} else {
+			// set data booking
+			let { dataShowtime } = this.props;
+			let seatsSelected = this.state.seatsSelected.sort();
+			let numberSeatsSelected = this.state.numberSeatsSelected.sort(
+				this.sortSeats
+			);
+			await this.setState({
+				dataBooking: {
+					// fullName: this.state.fullName,
+					// email: this.state.email,
+					// phoneNumber: this.state.phoneNumber,
+					totalTickets: this.state.seatsSelected.length,
+					totalPrice: ("" + this.state.totalPrice).slice(0, -3) + ".000",
+					movieId: dataShowtime.movieId,
+					cinemaId: dataShowtime.cinemaId,
+					screenId: this.props.dataScreen.name,
+					time: dataShowtime.startTime,
+					date: dataShowtime.startDate,
+					bookingDate: moment().format("DD/MM/YYYY"),
+					seatsSelected: seatsSelected,
+				},
+			});
+
+			// set data booking seat
+			let dataBookingSeat = await seatsSelected.map((item, index) => {
+				let object = {};
+				object.seat = item;
+				object.numberSeat = numberSeatsSelected[index];
+				object.cinema = dataShowtime.cinemaId;
+				object.screen = dataShowtime.screenId;
+				object.time = dataShowtime.startTime;
+				object.date = dataShowtime.startDate;
+				object.bookingDate = moment().format("DD/MM/YYYY");
+				return object;
+			});
+			await this.setState({
+				arrBookingSeats: dataBookingSeat,
+			});
+
+			// open info modal
+			this.setState({
+				isOpenInfoModal: true,
+			});
+		}
+	};
+
+	Booking = async () => {
+		await this.props.createNewBooking(this.state.dataBooking);
+		this.props.closeBookingModal();
+		this.setState({
+			fullName: "",
+			email: "",
+			phoneNumber: "",
+			totalTickets: 0,
+			totalPrice: 0,
+			seatsSelected: [],
+			dataBooking: {},
+		});
+	};
+
+	handleBooking = async () => {
+		this.setState({
+			isOpenInfoModal: false,
+		});
+		await this.setState({
+			dataBooking: {
+				...this.state.dataBooking,
+				fullName: this.state.fullName,
+				email: this.state.email,
+				phoneNumber: this.state.phoneNumber,
+			},
+		});
+		await this.Booking();
+	};
+
+	closeInfoModal = () => {
+		this.setState({
+			isOpenInfoModal: false,
+		});
+	};
+
 	render() {
-		let { isOpenModal, dataShowtime, dataScreen, image } = this.props;
+		let { isOpenModal, dataShowtime, dataScreen } = this.props;
 		let totalPrice = "" + this.state.totalPrice;
+		let { isOpenInfoModal, dataBooking, fullName, email, phoneNumber } =
+			this.state;
 		return (
 			<Modal
 				isOpen={isOpenModal}
-				className={"booking-modal-container"}
+				className="booking-modal-container"
 				size="lg"
 				centered>
 				{dataShowtime && dataScreen && (
@@ -162,38 +200,6 @@ class BookingModal extends Component {
 							<div className="booking-modal-title">Mua vé xem phim</div>
 						</div>
 						<div className="booking-modal-body">
-							<div className="information row">
-								<div className="col-4 form-group">
-									<label>Họ tên</label>
-									<input
-										className="form-control"
-										type="text"
-										value={this.state.fullName}
-										onChange={(event) => {
-											this.handleOnChangeInput(event, "fullName");
-										}}></input>
-								</div>
-								<div className="col-5 form-group">
-									<label>Email</label>
-									<input
-										className="form-control"
-										type="email"
-										value={this.state.email}
-										onChange={(event) => {
-											this.handleOnChangeInput(event, "email");
-										}}></input>
-								</div>
-								<div className="col-3 form-group">
-									<label>Số điện thoại</label>
-									<input
-										className="form-control no-spinner"
-										type="number"
-										value={this.state.phoneNumber}
-										onChange={(event) => {
-											this.handleOnChangeInput(event, "phoneNumber");
-										}}></input>
-								</div>
-							</div>
 							<div className="booking-seats">
 								<div className="screen"></div>
 								<div className="name-screen">MÀN HÌNH</div>
@@ -399,12 +405,23 @@ class BookingModal extends Component {
 							</div>
 							<button
 								className="btn btn-secondary"
-								onClick={() => this.handleSaveBooking()}>
+								onClick={() => this.handleOnClickBooking()}>
 								Đặt vé
 							</button>
 						</div>
 					</div>
 				)}
+				<InfoBookingModal
+					handleOnChangeInput={this.handleOnChangeInput}
+					fullName={fullName}
+					email={email}
+					phoneNumber={phoneNumber}
+					dataBooking={dataBooking}
+					getInfoBooking={this.getInfoBooking}
+					isOpenInfoModal={isOpenInfoModal}
+					handleBooking={this.handleBooking}
+					closeInfoModal={this.closeInfoModal}
+				/>
 			</Modal>
 		);
 	}

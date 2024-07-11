@@ -1,138 +1,140 @@
-.modal-content {
-	width: 768px !important;
-	display: block !important;
-	transition: all 0.5s;
+.trailer-movie-container {
+	.modal-content {
+		width: 768px !important;
+		display: block !important;
+		transition: all 0.5s;
 
-	.trailer-movie-content {
-		position: relative;
-		width: 100%;
-
-		.trailer-movie-video {
-			height: auto;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+		.trailer-movie-content {
+			position: relative;
 			width: 100%;
-			background-color: #161616;
-			user-select: none;
-		}
 
-		.movie-info {
-			background: #161616;
-			width: 100%x !important;
-			display: flex;
-			justify-content: space-between;
-			padding: 20px;
-
-			.movie-image {
-				width: 100px;
-				height: 150px;
-				background-repeat: no-repeat !important;
-				background-size: cover !important;
-				background-position: center !important;
-				border-radius: 4px;
-				border: 2px solid #ccc;
-			}
-
-			.movie-content {
-				width: 700px;
-				padding-left: 30px;
+			.trailer-movie-video {
+				height: auto;
 				display: flex;
-				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				background-color: #161616;
+				user-select: none;
+			}
 
-				.trailer-movie-title-genre {
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
+			.movie-info {
+				background: #161616;
+				width: 100%x !important;
+				display: flex;
+				justify-content: space-between;
+				padding: 20px;
 
-					.trailer-movie-title {
-						color: #fff;
-						font-size: 20px;
-						font-weight: 700;
-						line-height: 28px;
-					}
-
-					.line-mid {
-						font-size: 20px;
-						font-weight: 700;
-						color: white;
-						padding: 0 10px;
-					}
-
-					.trailer-movie-genre {
-						color: #ffffffb3;
-						display: inline-block;
-						font-size: 14px;
-						font-weight: 700;
-						line-height: 20px;
-					}
+				.movie-image {
+					width: 100px;
+					height: 150px;
+					background-repeat: no-repeat !important;
+					background-size: cover !important;
+					background-position: center !important;
+					border-radius: 4px;
+					border: 2px solid #ccc;
 				}
 
-				.trailer-movie-description {
-					color: #ffffffb3;
-					display: -webkit-box;
-					font-size: 14px;
-					line-height: 20px;
-					margin: 8px 0px 0px;
-				}
-
-				.movie-actions {
-					padding-top: 10px;
+				.movie-content {
+					width: 700px;
+					padding-left: 30px;
 					display: flex;
-					gap: 10px;
-					.trailer-movie-booking {
+					flex-wrap: wrap;
+
+					.trailer-movie-title-genre {
 						display: flex;
-						justify-content: center;
+						justify-content: space-between;
 						align-items: center;
-						width: 80px;
-						height: 32px;
-						background: #d82d8b;
-						color: white;
-						font-size: 14px;
-						font-weight: 700;
-						border-radius: 8px;
-						transition: all 0.3s ease-in-out;
 
-						&:hover {
-							background: #a6226b;
+						.trailer-movie-title {
+							color: #fff;
+							font-size: 20px;
+							font-weight: 700;
+							line-height: 28px;
+						}
+
+						.line-mid {
+							font-size: 20px;
+							font-weight: 700;
+							color: white;
+							padding: 0 10px;
+						}
+
+						.trailer-movie-genre {
+							color: #ffffffb3;
+							display: inline-block;
+							font-size: 14px;
+							font-weight: 700;
+							line-height: 20px;
 						}
 					}
 
-					.movie-close {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						width: 80px;
-						height: 32px;
-						background: #5d5d5d;
-						color: white;
+					.trailer-movie-description {
+						color: #ffffffb3;
+						display: -webkit-box;
 						font-size: 14px;
-						font-weight: 700;
-						border-radius: 8px;
-						transition: all 0.3s ease-in-out;
+						line-height: 20px;
+						margin: 8px 0px 0px;
+					}
 
-						&:hover {
-							background: #3c3c3c;
+					.movie-actions {
+						padding-top: 10px;
+						display: flex;
+						gap: 10px;
+						.trailer-movie-booking {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							width: 80px;
+							height: 32px;
+							background: #d82d8b;
+							color: white;
+							font-size: 14px;
+							font-weight: 700;
+							border-radius: 8px;
+							transition: all 0.3s ease-in-out;
+
+							&:hover {
+								background: #a6226b;
+							}
+						}
+
+						.movie-close {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							width: 80px;
+							height: 32px;
+							background: #5d5d5d;
+							color: white;
+							font-size: 14px;
+							font-weight: 700;
+							border-radius: 8px;
+							transition: all 0.3s ease-in-out;
+
+							&:hover {
+								background: #3c3c3c;
+							}
 						}
 					}
 				}
 			}
-		}
 
-		.close-trailer {
-			position: absolute;
-			top: -17px;
-			right: -17px;
-			color: white;
+			.close-trailer {
+				position: absolute;
+				top: -17px;
+				right: -17px;
+				color: white;
 
-			.fa-times-circle {
-				color: rgb(223, 223, 223);
-				font-size: 35px;
-				cursor: pointer;
-				transition: all 0.3s ease-in-out;
+				.fa-times-circle {
+					color: rgb(223, 223, 223);
+					font-size: 35px;
+					cursor: pointer;
+					transition: all 0.3s ease-in-out;
 
-				&:hover {
-					color: white;
+					&:hover {
+						color: white;
+					}
 				}
 			}
 		}
