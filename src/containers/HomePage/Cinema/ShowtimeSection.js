@@ -107,6 +107,7 @@ class ShowtimeSection extends Component {
 		if (prevProps.detailCinema !== this.props.detailCinema) {
 			this.setState({
 				loading: true,
+				dataShow: [],
 			});
 			this.closeLoading(700);
 			let activeCinema = document.querySelectorAll(".list-cinema-box");

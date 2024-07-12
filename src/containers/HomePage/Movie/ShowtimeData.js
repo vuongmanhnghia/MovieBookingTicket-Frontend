@@ -244,11 +244,11 @@ class ShowtimeData extends Component {
 															background: `url(${item.image})`,
 														}}></div>
 													<div className="tradeMark-cinema active-tradeMark">
-														{item.tradeMark < 7
+														{item.tradeMark < 5
 															? item.tradeMark
 															: `${item.tradeMark.slice(
 																	0,
-																	7
+																	5
 															  )}...`}
 													</div>
 												</div>
@@ -266,11 +266,11 @@ class ShowtimeData extends Component {
 															background: `url(${item.image})`,
 														}}></div>
 													<div className="tradeMark-cinema">
-														{item.tradeMark < 7
+														{item.tradeMark < 5
 															? item.tradeMark
 															: `${item.tradeMark.slice(
 																	0,
-																	7
+																	5
 															  )}...`}
 													</div>
 												</div>
@@ -358,17 +358,11 @@ class ShowtimeData extends Component {
 												<div
 													className="more-box-movie-image"
 													style={{
-														backgroundImage: `url(${
-															allMovies[
-																allMovies.length - index - 1
-															].image
-														})`,
+														backgroundImage: `url(${allMovies[index].image})`,
 													}}
 													onClick={() =>
 														this.handleViewDetailMovie(
-															allMovies[
-																allMovies.length - index - 1
-															]
+															allMovies[index]
 														)
 													}>
 													<div className="order-movie">
@@ -380,39 +374,27 @@ class ShowtimeData extends Component {
 														className="more-box-movie-title"
 														onClick={() =>
 															this.handleViewDetailMovie(
-																allMovies[
-																	allMovies.length - index - 1
-																]
+																allMovies[index]
 															)
 														}>
-														{allMovies[
-															allMovies.length - index - 1
-														].title.length < 40
-															? allMovies[
-																	allMovies.length - index - 1
-															  ].title
-															: `${allMovies[
-																	allMovies.length - index - 1
-															  ].title.slice(0, 37)}...`}
+														{allMovies[index].title.length < 40
+															? allMovies[index].title
+															: `${allMovies[index].title.slice(
+																	0,
+																	37
+															  )}...`}
 													</div>
 													<div className="more-box-movie-genre">
-														{allMovies[
-															allMovies.length - index - 1
-														].genre.length < 25
-															? allMovies[
-																	allMovies.length - index - 1
-															  ].genre
-															: `${allMovies[
-																	allMovies.length - index - 1
-															  ].genre.slice(0, 28)}...`}
+														{allMovies[index].genre.length < 25
+															? allMovies[index].genre
+															: `${allMovies[index].genre.slice(
+																	0,
+																	28
+															  )}...`}
 													</div>
 													<div className="more-box-movie-rating">
 														<i class="fas fa-star"></i>
-														{
-															allMovies[
-																allMovies.length - index - 1
-															].rating
-														}
+														{allMovies[index].rating}
 													</div>
 												</div>
 											</div>

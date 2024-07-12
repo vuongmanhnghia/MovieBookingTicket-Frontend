@@ -66,8 +66,7 @@
 		.cinema-search-all-cinemas {
 			width: 100%;
 			height: auto;
-			min-height: 350px;
-			border-right: 1px solid #e5e5e5;
+			min-height: 500px;
 			padding: 0 !important;
 			transition: all 0.3s;
 
@@ -80,6 +79,10 @@
 				cursor: pointer;
 				transition: all 0.3s;
 				user-select: none;
+
+				&:first-child {
+					border-top: none;
+				}
 
 				&:hover {
 					background-color: #f0f0f0;

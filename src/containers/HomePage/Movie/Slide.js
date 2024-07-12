@@ -138,7 +138,7 @@ class Slide extends Component {
 																	? item.title
 																	: `${item.title.slice(
 																			0,
-																			20
+																			17
 																	  )}...`}
 															</>
 														)}
@@ -159,7 +159,7 @@ class Slide extends Component {
 																	? item.genre
 																	: `${item.genre.slice(
 																			0,
-																			28
+																			23
 																	  )}...`}
 															</>
 														)}

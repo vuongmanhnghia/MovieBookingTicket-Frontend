@@ -5,16 +5,13 @@
 	padding: 65px 150px;
 
 	.review-section-list {
+		width: 100%;
+		height: 417px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-start;
 		align-items: self-start;
 		flex-wrap: wrap;
-		gap: 28px;
-		// display: grid;
-		// gap: 24px 20px;
-		// grid-template-columns: 349.332px 349.332px 349.347px;
-		// grid-template-rows: 200px 200px;
-		// line-height: 24px;
+		gap: 27px;
 
 		.box-review-movie {
 			width: 347px;

@@ -86,6 +86,7 @@ class CinemaManage extends Component {
 
 		this.setState({
 			location: "",
+			name: "",
 		});
 	};
 	checkValidateInput = () => {

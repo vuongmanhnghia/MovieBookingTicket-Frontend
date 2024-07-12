@@ -139,7 +139,7 @@ class SlideMovie extends Component {
 																	? item.title
 																	: `${item.title.slice(
 																			0,
-																			20
+																			17
 																	  )}...`}
 															</>
 														)}
@@ -160,7 +160,7 @@ class SlideMovie extends Component {
 																	? item.genre
 																	: `${item.genre.slice(
 																			0,
-																			28
+																			23
 																	  )}...`}
 															</>
 														)}

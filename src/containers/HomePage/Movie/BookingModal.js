@@ -107,9 +107,6 @@ class BookingModal extends Component {
 			);
 			await this.setState({
 				dataBooking: {
-					// fullName: this.state.fullName,
-					// email: this.state.email,
-					// phoneNumber: this.state.phoneNumber,
 					totalTickets: this.state.seatsSelected.length,
 					totalPrice: ("" + this.state.totalPrice).slice(0, -3) + ".000",
 					movieId: dataShowtime.movieId,
@@ -397,13 +394,9 @@ class BookingModal extends Component {
 										{dataShowtime && dataShowtime.movieId}
 									</div>
 									<div className="modal-body-info">
-										{` ${
-											dataShowtime && dataShowtime.startTime
-										} - ${new Date(
+										{` ${dataShowtime && dataShowtime.startTime} - ${
 											dataShowtime.startDate
-										).getDate()}/${new Date(
-											dataShowtime.startDate
-										).getMonth()} - Phòng chiếu ${dataScreen.name}, ${
+										} - Phòng chiếu ${dataScreen.name}, ${
 											dataShowtime && dataShowtime.tradeMarkId
 										} - ${dataShowtime && dataShowtime.cinemaId}`}
 									</div>

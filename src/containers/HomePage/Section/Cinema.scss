@@ -4,6 +4,10 @@
 	align-items: center;
 
 	.cinema-section-content {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
 		background: #fafafa;
 		padding: 56px 150px;
 		width: 100%;
@@ -30,15 +34,18 @@
 
 		.cinema-content {
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
+			align-items: center;
 			align-items: self-start;
 			flex-wrap: wrap;
+			gap: 24px;
 
 			.box-cinema {
-				width: 500px;
-				height: 130px;
+				width: 536px;
+				height: 151px;
+				padding-left: 30px;
 				align-items: center;
-				justify-content: center;
+				justify-content: flex-start;
 				background-color: #fff;
 				border-color: #d4d4d4;
 				border-radius: 8px;
@@ -46,7 +53,7 @@
 				border-width: 0.727273px;
 				box-shadow: #0000 0px 0px 0px 0px;
 				display: flex;
-				margin-bottom: 50px;
+				// margin-bottom: 50px;
 				transition: all 0.3s;
 				cursor: pointer;
 				user-select: none;
@@ -64,10 +71,11 @@
 
 				.box-cinema-content {
 					display: flex;
-					justify-content: center;
+					justify-content: flex-start;
 					align-items: center;
 					padding: 20px;
 					width: 300px;
+					box-sizing: content-box;
 
 					.dash {
 						border-color: #d4d4d4;
@@ -78,7 +86,7 @@
 					}
 
 					.box-cinema-content-title {
-						// width: 100%;
+						display: block;
 						color: #eb2f96;
 						font-size: 20px;
 						font-weight: 700;
@@ -98,6 +106,7 @@
 						align-items: center;
 						color: #17171780;
 						display: flex;
+						flex-wrap: nowrap;
 						font-size: 14px;
 
 						.fa-map-marker-alt {

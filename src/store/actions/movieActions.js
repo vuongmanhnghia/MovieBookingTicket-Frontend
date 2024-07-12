@@ -10,10 +10,10 @@ import {
 } from "../../services/movieService";
 import { toast } from "react-toastify";
 
-export const fetchTopMovies = () => {
+export const fetchTopMovies = (limit) => {
 	return async (dispatch, getState) => {
 		try {
-			let res = await getTopMoviesService("");
+			let res = await getTopMoviesService(limit);
 			if (res && res.errCode === 0) {
 				dispatch({
 					type: actionTypes.FETCH_TOP_MOVIES_SUCCESS,

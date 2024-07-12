@@ -132,7 +132,7 @@ class CinemaSearch extends Component {
 											<div className="tradeMark-cinema">
 												{item.tradeMark < 7
 													? item.tradeMark
-													: `${item.tradeMark.slice(0, 7)}...`}
+													: `${item.tradeMark.slice(0, 6)}...`}
 											</div>
 										</div>
 									);
