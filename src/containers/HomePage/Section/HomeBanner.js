@@ -32,14 +32,12 @@ class HomeBanner extends Component {
 								</li>
 							</ul>
 						</div>
-						<div className="btn-booking-content">
-							<div
-								className="btn-booking"
-								onClick={() =>
-									this.props.history.push(`/detail-showtime`)
-								}>
-								Đặt vé ngay
-							</div>
+						<div
+							className="btn-booking-content"
+							onClick={() =>
+								this.props.history.push(`/detail-showtime`)
+							}>
+							<div className="btn-booking">Đặt vé ngay</div>
 						</div>
 					</div>
 					<div className="home-header-banner"></div>

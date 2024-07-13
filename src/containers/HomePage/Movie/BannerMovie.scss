@@ -48,8 +48,12 @@
 				background: #c62d89;
 				align-items: center;
 				border-radius: 6px;
+				cursor: pointer;
+				transition: 0.1s linear;
+
 				&:hover {
 					background: #a8286f;
+					transform: scale(1.05);
 				}
 
 				.btn-booking {

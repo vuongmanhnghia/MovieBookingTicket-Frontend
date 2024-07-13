@@ -3,6 +3,7 @@ import actionTypes from "../actions/actionTypes";
 const initialState = {
 	allShowtimes: [],
 	seatsByShowtime: [],
+	showtimesByCDM: [],
 };
 
 const showtimeReducer = (state = initialState, action) => {
@@ -27,6 +28,18 @@ const showtimeReducer = (state = initialState, action) => {
 
 		case actionTypes.FETCH_SEATS_BY_SHOWTIME_FAILED:
 			state.seatsByShowtime = [];
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_SHOWTIME_BY_CINEMA_AND_DATE_AND_MOVIE_SUCCESS:
+			state.showtimesByCDM = action.showtimesByCDM;
+			return {
+				...state,
+			};
+
+		case actionTypes.FETCH_SHOWTIME_BY_CINEMA_AND_DATE_AND_MOVIE_FAILED:
+			state.showtimesByCDM = [];
 			return {
 				...state,
 			};

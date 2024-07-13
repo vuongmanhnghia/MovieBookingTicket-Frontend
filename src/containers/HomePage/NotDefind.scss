@@ -1,26 +1,30 @@
-.not-defind-content {
+.not-defind-container {
 	width: 100%;
-	height: 440px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	height: 100%;
+	.not-defind-content {
+		width: 100%;
+		height: 440px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 
-	.not-defind-image {
-		width: 120px;
-		height: 120px;
-		background: url("https://homepage.momocdn.net/next-js/_next/static/public/cinema/not-found.svg");
-		background-repeat: no-repeat !important;
-		background-size: cover !important;
-	}
+		.not-defind-image {
+			width: 120px;
+			height: 120px;
+			background: url("https://homepage.momocdn.net/next-js/_next/static/public/cinema/not-found.svg");
+			background-repeat: no-repeat !important;
+			background-size: cover !important;
+		}
 
-	.not-defind-title {
-		font-size: 18px;
-		font-weight: 700;
-	}
+		.not-defind-title {
+			font-size: 18px;
+			font-weight: 700;
+		}
 
-	.not-defind-more {
-		font-size: 14px;
-		color: #5e5e5e;
+		.not-defind-more {
+			font-size: 14px;
+			color: #5e5e5e;
+		}
 	}
 }

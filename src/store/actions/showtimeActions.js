@@ -2,6 +2,7 @@ import actionTypes from "./actionTypes";
 import {
 	createNewShowtimeService,
 	getSeatsByShowtimeService,
+	getShowtimeByCinemaAndDateAndMovieService,
 } from "../../services/showtimeService";
 import { toast } from "react-toastify";
 
@@ -51,6 +52,37 @@ export const fetchSeatsByShowtime = (data) => {
 			console.log("fetch all showtimes errol: ", e);
 			dispatch({
 				type: actionTypes.FETCH_SEATS_BY_SHOWTIME_FAILED,
+			});
+		}
+	};
+};
+
+export const fetchShowtimeByCinemaAndDateAndMovieService = (
+	tradeMark,
+	date,
+	nameMovie
+) => {
+	return async (dispatch, getState) => {
+		try {
+			let response = await getShowtimeByCinemaAndDateAndMovieService(
+				tradeMark,
+				date,
+				nameMovie
+			);
+			if (response && response.errCode === 0) {
+				dispatch({
+					type: actionTypes.FETCH_SHOWTIME_BY_CINEMA_AND_DATE_AND_MOVIE_SUCCESS,
+					showtimesByCDM: response.data,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.FETCH_SHOWTIME_BY_CINEMA_AND_DATE_AND_MOVIE_FAILED,
+				});
+			}
+		} catch (e) {
+			console.log("fetch all showtimes errol: ", e);
+			dispatch({
+				type: actionTypes.FETCH_SHOWTIME_BY_CINEMA_AND_DATE_AND_MOVIE_FAILED,
 			});
 		}
 	};

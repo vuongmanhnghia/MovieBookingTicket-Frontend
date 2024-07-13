@@ -9,7 +9,7 @@ import CustomScrollbars from "../../../components/CustomScrollbars";
 import Footer from "../Section/Footer";
 import * as actions from "../../../store/actions";
 import moment from "moment";
-import { getShowtimeByCinemaAndDateAndMovieService } from "../../../services/showtimeService";
+import LoadingSkeleton from "../LoadingSkeleton";
 class DetailMovie extends Component {
 	constructor(props) {
 		super(props);
@@ -35,9 +35,15 @@ class DetailMovie extends Component {
 			dateSelected: moment().format("DD/MM/YYYY"),
 
 			allTradeMarks: [],
+			loading: true,
 		};
 	}
 	async componentDidMount() {
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, 500);
 		if (
 			this.props.match &&
 			this.props.match.params &&
@@ -172,92 +178,98 @@ class DetailMovie extends Component {
 	};
 
 	handleDataShowtime = async () => {
-		let data = await getShowtimeByCinemaAndDateAndMovieService(
+		await this.props.fetchShowtimeByCinemaAndDateAndMovieService(
 			this.state.tradeMarkSelected,
 			this.state.dateSelected,
 			this.state.nameMovie
 		);
-		if (data && data.errCode === 0) {
-			this.setState({
-				showtimeData: data.data,
-			});
-		} else {
-			this.setState({
-				showtimeData: [],
-			});
-		}
+		this.setState({
+			showtimeData: this.props.showtimesByCDM,
+		});
 	};
 
 	render() {
-		let { image, title, showtimeData, background } = this.state;
+		let { image, title, showtimeData, background, loading } = this.state;
 		let releaseDate = this.state.detailMovie.releaseDate;
 		let date = new Date(releaseDate);
 		return (
 			<CustomScrollbars style={{ height: "100vh", width: "100%" }}>
 				<div className="movie-detail-container">
-					<div
-						className="movie-detail-content"
-						style={{ background: `url(${background})` }}>
-						<div className="box-movie-detail">
-							<div className="box-movie-detail-image">
-								<div
-									className="movie-detail-image"
-									style={{
-										backgroundImage: `url(${image})`,
-									}}
-								/>
-								<div className="open-trailer-movie">
-									<i
-										class="far fa-play-circle"
-										onClick={() =>
-											this.handleViewTraileMovie(
-												this.state.detailMovie
-											)
-										}></i>
-								</div>
-							</div>
-							<div className="box-movie-detail-content">
-								<div className="movie-detail-title">
-									{this.state.title}
-								</div>
-								<div className="box-releaseYear-duration">
-									<div className="releaseYear">
-										{date.getFullYear()}
-									</div>{" "}
-									&ndash;
-									<div className="duration">{`${this.state.duration} phút`}</div>
-								</div>
-								<div className="movie-detail-rating">
-									<i class="fas fa-star"></i>
-									{this.state.rating}
-								</div>
-								<div className="movie-detail-director">
-									{this.state.director}
-								</div>
-								<div className="description-title">Nội dung</div>
-								<p className="movie-detail-description">
-									{this.state.newDescription.length > 200
-										? `${this.state.newDescription.substring(
-												0,
-												200
-										  )}...`
-										: this.state.newDescription}
-								</p>
-								<div className="releaseDate-genre">
-									<div className="box-releaseDate">
-										<div className="box-releaseDate-title">
-											Ngày khởi chiếu
-										</div>
-										<div className="releaseDate">{`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</div>
+					{loading && (
+						<LoadingSkeleton
+							className="movie-detail-content"
+							style={{
+								background: "#111",
+								height: "480px",
+								width: "100%",
+							}}
+						/>
+					)}
+					{!loading && (
+						<div
+							className="movie-detail-content"
+							style={{ background: `url(${background})` }}>
+							<div className="box-movie-detail">
+								<div className="box-movie-detail-image">
+									<div
+										className="movie-detail-image"
+										style={{
+											backgroundImage: `url(${image})`,
+										}}
+									/>
+									<div className="open-trailer-movie">
+										<i
+											class="far fa-play-circle"
+											onClick={() =>
+												this.handleViewTraileMovie(
+													this.state.detailMovie
+												)
+											}></i>
 									</div>
-									<div className="box-genre">
-										<div className="box-genre-title">Thể loại</div>
-										<div className="genre">{this.state.genre}</div>
+								</div>
+								<div className="box-movie-detail-content">
+									<div className="movie-detail-title">
+										{this.state.title}
+									</div>
+									<div className="box-releaseYear-duration">
+										<div className="releaseYear">
+											{date.getFullYear()}
+										</div>{" "}
+										&ndash;
+										<div className="duration">{`${this.state.duration} phút`}</div>
+									</div>
+									<div className="movie-detail-rating">
+										<i class="fas fa-star"></i>
+										{this.state.rating}
+									</div>
+									<div className="movie-detail-director">
+										{this.state.director}
+									</div>
+									<div className="description-title">Nội dung</div>
+									<p className="movie-detail-description">
+										{this.state.newDescription.length > 200
+											? `${this.state.newDescription.substring(
+													0,
+													200
+											  )}...`
+											: this.state.newDescription}
+									</p>
+									<div className="releaseDate-genre">
+										<div className="box-releaseDate">
+											<div className="box-releaseDate-title">
+												Ngày khởi chiếu
+											</div>
+											<div className="releaseDate">{`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</div>
+										</div>
+										<div className="box-genre">
+											<div className="box-genre-title">Thể loại</div>
+											<div className="genre">{this.state.genre}</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					)}
 				</div>
 				<TrailerMovie
 					isOpenModal={this.state.isOpenModal}
@@ -282,12 +294,25 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		allTradeMarks: state.cinema.allTradeMarks,
+		showtimesByCDM: state.showtime.showtimesByCDM,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchAllTradeMarks: () => dispatch(actions.fetchAllTradeMarks()),
+		fetchShowtimeByCinemaAndDateAndMovieService: (
+			tradeMark,
+			date,
+			nameMovie
+		) =>
+			dispatch(
+				actions.fetchShowtimeByCinemaAndDateAndMovieService(
+					tradeMark,
+					date,
+					nameMovie
+				)
+			),
 	};
 };
 
