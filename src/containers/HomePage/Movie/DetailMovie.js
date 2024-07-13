@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./DetailMovie.scss";
-import { getDetailMovieService } from "../../../services/movieService";
 import ShowtimeData from "./ShowtimeData";
 import { withRouter } from "react-router-dom";
 import TrailerMovie from "./TrailerMovie";
@@ -50,16 +49,14 @@ class DetailMovie extends Component {
 			this.props.match.params.name
 		) {
 			let name = this.props.match.params.name;
-			let response = await getDetailMovieService(name);
+			await this.props.fetchDetailMovie(name);
 			await this.props.fetchAllTradeMarks();
-			if (response && response.errCode === 0) {
-				this.setState({
-					nameMovie: name,
-					detailMovie: response.data,
-					allTradeMarks: this.props.allTradeMarks,
-					tradeMarkSelected: this.props.allTradeMarks[0].tradeMark,
-				});
-			}
+			this.setState({
+				nameMovie: name,
+				detailMovie: this.props.detailMovie,
+				allTradeMarks: this.props.allTradeMarks,
+				tradeMarkSelected: this.props.allTradeMarks[0].tradeMark,
+			});
 			this.setState({
 				title: this.state.detailMovie.title,
 				description: this.state.detailMovie.description,
@@ -80,13 +77,12 @@ class DetailMovie extends Component {
 	async componentDidUpdate(prevProps) {
 		if (prevProps.match.params.name !== this.props.match.params.name) {
 			let name = this.props.match.params.name;
-			let response = await getDetailMovieService(name);
-			if (response && response.errCode === 0) {
-				this.setState({
-					nameMovie: name,
-					detailMovie: response.data,
-				});
-			}
+			await this.props.fetchDetailMovie(name);
+			this.setState({
+				nameMovie: name,
+				detailMovie: this.props.detailMovie,
+			});
+
 			this.handleDataShowtime();
 			this.setState({
 				title: this.state.detailMovie.title,
@@ -115,12 +111,10 @@ class DetailMovie extends Component {
 				this.props.match.params.name
 			) {
 				let name = this.props.match.params.name;
-				let response = await getDetailMovieService(name);
-				if (response && response.errCode === 0) {
-					await this.setState({
-						detailMovie: response.data,
-					});
-				}
+				await this.props.fetchDetailMovie(name);
+				await this.setState({
+					detailMovie: this.props.detailMovie,
+				});
 				await this.setState({
 					title: this.state.detailMovie.title,
 					description: this.state.detailMovie.description,
@@ -295,6 +289,7 @@ const mapStateToProps = (state) => {
 		isLoggedIn: state.user.isLoggedIn,
 		allTradeMarks: state.cinema.allTradeMarks,
 		showtimesByCDM: state.showtime.showtimesByCDM,
+		detailMovie: state.movie.detailMovie,
 	};
 };
 
@@ -313,6 +308,7 @@ const mapDispatchToProps = (dispatch) => {
 					nameMovie
 				)
 			),
+		fetchDetailMovie: (id) => dispatch(actions.fetchDetailMovie(id)),
 	};
 };
 
