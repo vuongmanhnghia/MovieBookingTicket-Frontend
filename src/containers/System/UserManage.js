@@ -124,7 +124,7 @@ class UserManage extends Component {
 					/>
 				)}
 				<div className="title">Manage users</div>
-				<div className="mx-1">
+				<div className="user-content mx-1">
 					<button
 						className="btn btn-primary px-3"
 						onClick={() => this.handleAddNewUser()}>

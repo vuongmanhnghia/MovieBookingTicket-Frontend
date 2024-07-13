@@ -135,13 +135,17 @@ class MovieManage extends Component {
 	};
 
 	handleSelectedTradeMark = (selectedTradeMark) => {
-		this.setState({ selectedTradeMark });
+		this.setState({
+			selectedTradeMark,
+			selectedCinema: "",
+			selectedScreen: "",
+		});
 		let tradeMarkId = selectedTradeMark.label;
 		this.props.fetchAllCinemasByTradeMark(tradeMarkId);
 	};
 
 	handleSelectedCinema = (selectedCinema) => {
-		this.setState({ selectedCinema });
+		this.setState({ selectedCinema, selectedScreen: "" });
 		let cinemaId = selectedCinema.label;
 		this.props.fetchAllScreens(cinemaId);
 	};
@@ -206,6 +210,13 @@ class MovieManage extends Component {
 				});
 				await this.props.createNewShowtime({
 					arrShowtimes: result,
+				});
+				arrayTimes = arrayTimes.map((item) => {
+					item.isSelected = false;
+					return item;
+				});
+				document.querySelectorAll(".btn-time").forEach((item) => {
+					item.classList.remove("active");
 				});
 			} else {
 				toast.error("Vui lòng chọn thời gian");

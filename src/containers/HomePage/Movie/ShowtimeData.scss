@@ -113,13 +113,14 @@
 			display: flex;
 			flex-direction: column;
 			width: 100%;
-			height: 1000px;
+			height: 1113px;
 			border: 1px solid #ccc;
 			border-top: none;
 			border-bottom: none;
 			transition: all 0.3s;
 
 			.scrollbar {
+				height: 100%;
 				overflow: auto;
 				visibility: hidden;
 
@@ -136,6 +137,7 @@
 					border-radius: 10px !important;
 				}
 				.scrollbar-inner {
+					height: 100%;
 					visibility: visible;
 
 					.box-showtime-cinema {

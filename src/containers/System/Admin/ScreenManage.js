@@ -5,7 +5,6 @@ import * as actions from "../../../store/actions";
 import "./ShowtimeManage.scss";
 import { FormattedMessage } from "react-intl";
 import Select from "react-select";
-import DatePicker from "../../../components/Input/DatePicker";
 import { toast } from "react-toastify";
 
 class ScreenManage extends Component {
@@ -75,6 +74,10 @@ class ScreenManage extends Component {
 	}
 
 	handleSelectedTradeMark = (selectedTradeMark) => {
+		this.setState({
+			selectedCinema: "",
+		});
+
 		this.setState({ selectedTradeMark });
 		let tradeMarkId = selectedTradeMark.label;
 		this.props.fetchAllCinemasByTradeMark(tradeMarkId);

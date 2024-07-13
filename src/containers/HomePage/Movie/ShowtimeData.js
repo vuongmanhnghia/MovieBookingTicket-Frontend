@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 import BookingModal from "./BookingModal";
 import moment from "moment";
 import LoadingSkeleton from "../../../containers/HomePage/LoadingSkeleton";
-import { set } from "lodash";
+import NotDefind from "../NotDefind";
 
 // Import css files
 
@@ -336,6 +336,7 @@ class ShowtimeData extends Component {
 														</div>
 													);
 												})}
+											{showtimeData.length === 0 && <NotDefind />}
 										</div>
 									</div>
 								</div>

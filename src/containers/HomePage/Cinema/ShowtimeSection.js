@@ -133,7 +133,12 @@ class ShowtimeSection extends Component {
 		this.setState({
 			image: item.image,
 		});
-		await this.props.fetchSeatsByShowtime(item);
+		let data = await {
+			tradeMarkId: item.tradeMarkId,
+			cinemaId: item.cinemaId,
+			screenId: item.screenId,
+		};
+		await this.props.fetchSeatsByShowtime(data);
 		this.setState({
 			isOpenModal: true,
 			dataShowtime: item,

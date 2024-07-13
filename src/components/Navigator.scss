@@ -17,6 +17,7 @@
 			line-height: 40px;
 			padding: 0 15px;
 			border-right: 1px solid $border;
+			transition: all 0.3s;
 			&:first-child {
 				border-left: 1px solid $border;
 			}
