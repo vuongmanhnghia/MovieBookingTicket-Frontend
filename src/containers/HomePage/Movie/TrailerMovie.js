@@ -73,7 +73,7 @@ class TrailerMovie extends Component {
 						</div>
 						<div className="close-trailer">
 							<i
-								class="fa fa-times-circle"
+								className="fa fa-times-circle"
 								aria-hidden="true"
 								onClick={closeBookingModal}></i>
 						</div>

@@ -251,7 +251,7 @@ class ShowtimeSection extends Component {
 																<div className="list-cinema-box-name">
 																	{item.name}
 																</div>
-																<i class="fas fa-chevron-right"></i>
+																<i className="fas fa-chevron-right"></i>
 															</>
 														)}
 													</div>
@@ -273,7 +273,7 @@ class ShowtimeSection extends Component {
 												Lịch chiếu phim {nameCinemaShowtime}
 											</div>
 											<div className="showtime-cinema-box-location">
-												<i class="fas fa-map-marker-alt"></i>
+												<i className="fas fa-map-marker-alt"></i>
 												{location}
 											</div>
 										</div>

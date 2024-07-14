@@ -32,7 +32,7 @@ class InfoBookingModal extends Component {
 				centered>
 				<div className="info-modal-content row">
 					<i
-						class="fa fa-times"
+						className="fa fa-times"
 						aria-hidden="true"
 						onClick={() => this.closeInfoModal()}></i>
 					<div className="info-modal-booking col-7">

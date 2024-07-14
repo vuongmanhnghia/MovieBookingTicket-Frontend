@@ -115,14 +115,18 @@ class ReviewSection extends Component {
 						<div className="review-movies-footer">
 							<ReactPaginate
 								nextLabel={
-									<i class="fa fa-angle-right" aria-hidden="true"></i>
+									<i
+										className="fa fa-angle-right"
+										aria-hidden="true"></i>
 								}
 								onPageChange={this.handlePageClick}
 								pageRangeDisplayed={3}
 								marginPagesDisplayed={1}
 								pageCount={totalPage}
 								previousLabel={
-									<i class="fa fa-angle-left" aria-hidden="true"></i>
+									<i
+										className="fa fa-angle-left"
+										aria-hidden="true"></i>
 								}
 								pageClassName="page-item"
 								pageLinkClassName="page-link"

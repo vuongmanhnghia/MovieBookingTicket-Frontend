@@ -213,7 +213,7 @@ class DetailMovie extends Component {
 									/>
 									<div className="open-trailer-movie">
 										<i
-											class="far fa-play-circle"
+											className="far fa-play-circle"
 											onClick={() =>
 												this.handleViewTraileMovie(
 													this.state.detailMovie
@@ -233,7 +233,7 @@ class DetailMovie extends Component {
 										<div className="duration">{`${this.state.duration} phút`}</div>
 									</div>
 									<div className="movie-detail-rating">
-										<i class="fas fa-star"></i>
+										<i className="fas fa-star"></i>
 										{this.state.rating}
 									</div>
 									<div className="movie-detail-director">

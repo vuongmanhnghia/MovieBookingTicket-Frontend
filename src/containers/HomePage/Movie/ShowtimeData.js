@@ -147,6 +147,14 @@ class ShowtimeData extends Component {
 			dataShowtime: item,
 			dataScreen: this.props.screenData,
 		});
+		let dataGetBookingSeats = await {
+			cinema: item.cinemaId,
+			screen: item.screenId,
+			date: item.startDate,
+			time: item.startTime,
+		};
+
+		await this.props.fetchBookingSeats(dataGetBookingSeats);
 		await this.getTotalBooking();
 	};
 
@@ -171,8 +179,14 @@ class ShowtimeData extends Component {
 	};
 
 	render() {
-		let { allMovies, title, allTradeMarks, showtimeData, totalBooking } =
-			this.props;
+		let {
+			allMovies,
+			title,
+			allTradeMarks,
+			showtimeData,
+			totalBooking,
+			bookingSeats,
+		} = this.props;
 		let {
 			isOpenModal,
 			dataShowtime,
@@ -394,7 +408,7 @@ class ShowtimeData extends Component {
 															  )}...`}
 													</div>
 													<div className="more-box-movie-rating">
-														<i class="fas fa-star"></i>
+														<i className="fas fa-star"></i>
 														{allMovies[index].rating}
 													</div>
 												</div>
@@ -411,6 +425,7 @@ class ShowtimeData extends Component {
 					dataScreen={dataScreen}
 					dataShowtime={dataShowtime}
 					totalBooking={totalBooking}
+					bookingSeats={bookingSeats}
 				/>
 			</>
 		);
@@ -424,6 +439,7 @@ const mapStateToProps = (state) => {
 		detailMovie: state.movie.detailMovie,
 		screenData: state.showtime.seatsByShowtime,
 		totalBooking: state.booking.totalBooking,
+		bookingSeats: state.booking.bookingSeats,
 	};
 };
 
@@ -435,6 +451,9 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.fetchSeatsByShowtime(data)),
 		fetchBookingByCinemaMovieScreenDateTime: (data) => {
 			dispatch(actions.fetchBookingByCinemaMovieScreenDateTime(data));
+		},
+		fetchBookingSeats: (data) => {
+			dispatch(actions.fetchBookingSeats(data));
 		},
 	};
 };

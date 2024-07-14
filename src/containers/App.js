@@ -19,7 +19,6 @@ import DetailShowtime from "./HomePage/Showtime/DetailShowtime";
 import MovieComponent from "./HomePage/Movie/MovieComponent.js";
 import ReviewMovie from "./HomePage/Review/ReviewMovie.js";
 import HomeNavigation from "./HomePage/HomeNavigation.js";
-import Footer from "./HomePage/Section/Footer.js";
 import CinemaComponent from "./HomePage/Cinema/CinemaComponent.js";
 import CinemaShowtime from "./HomePage/Cinema/CinemaShowtime.js";
 
@@ -58,8 +57,6 @@ class App extends Component {
 									component={userIsAuthenticated(System)}
 								/>
 							</Switch>
-							{/* <CustomScrollbars
-								style={{ height: "100vh", width: "100%" }}> */}
 							<HomeNavigation />
 							<Switch>
 								<Route path={path.HOME} exact component={Home} />
@@ -94,8 +91,6 @@ class App extends Component {
 									component={CinemaShowtime}
 								/>
 							</Switch>
-							{/* <Footer /> */}
-							{/* </CustomScrollbars> */}
 						</div>
 
 						<ToastContainer

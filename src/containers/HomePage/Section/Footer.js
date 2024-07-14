@@ -39,10 +39,10 @@ class Footer extends Component {
 						<a
 							href="https://www.facebook.com/vuongmanhnghia365/"
 							target="blank">
-							<i class="fab fa-facebook"></i>
+							<i className="fab fa-facebook"></i>
 						</a>
 						<a href="https://github.com/vuongmanhnghia" target="blank">
-							<i class="fab fa-github-square"></i>
+							<i className="fab fa-github-square"></i>
 						</a>
 					</div>
 				</div>

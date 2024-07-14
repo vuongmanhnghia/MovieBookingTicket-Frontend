@@ -105,7 +105,7 @@ class Slide extends Component {
 																	backgroundImage: `url(${item.image})`,
 																}}></div>
 															<i
-																class="far fa-play-circle"
+																className="far fa-play-circle"
 																onClick={() =>
 																	this.handleViewTraileMovie(
 																		item

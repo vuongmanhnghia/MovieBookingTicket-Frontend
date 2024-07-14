@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { CommonUtils } from "../../../utils";
 import DatePicker from "../../../components/Input/DatePicker";
-import moment from "moment";
 
 class MovieManage extends Component {
 	constructor(props) {

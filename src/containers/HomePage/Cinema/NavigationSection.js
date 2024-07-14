@@ -51,11 +51,11 @@ class NavigationSection extends Component {
 									{slogan}
 								</div> */}
 									<div className="cinema-detail-header-rating">
-										<i class="fas fa-star"></i>
+										<i className="fas fa-star"></i>
 										{rating}
 									</div>
 									<div className="cinema-detail-header-location">
-										<i class="fas fa-map-marker-alt"></i>
+										<i className="fas fa-map-marker-alt"></i>
 										{quantity} cửa hàng trong hệ thống
 									</div>
 								</div>

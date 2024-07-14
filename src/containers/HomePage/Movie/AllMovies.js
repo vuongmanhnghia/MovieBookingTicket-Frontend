@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./AllMovies.scss";
@@ -6,7 +6,6 @@ import * as actions from "../../../store/actions";
 import ReactPaginate from "react-paginate";
 import TrailerMovie from "./TrailerMovie";
 import LoadingSkeleton from "../LoadingSkeleton";
-import { set } from "lodash";
 
 class AllMovies extends Component {
 	constructor(props) {
@@ -106,7 +105,7 @@ class AllMovies extends Component {
 																)
 															}></div>
 														<i
-															class="far fa-play-circle"
+															className="far fa-play-circle"
 															onClick={() =>
 																this.handleViewTraileMovie(
 																	movie
@@ -168,7 +167,7 @@ class AllMovies extends Component {
 											{!loading && (
 												<div className="box-movie-rating">
 													<i
-														class="fa fa-star"
+														className="fa fa-star"
 														aria-hidden="true"></i>
 													{movie.rating}
 												</div>
@@ -182,7 +181,7 @@ class AllMovies extends Component {
 								<ReactPaginate
 									nextLabel={
 										<i
-											class="fa fa-angle-right"
+											className="fa fa-angle-right"
 											aria-hidden="true"></i>
 									}
 									onPageChange={this.handlePageClick}
@@ -191,7 +190,7 @@ class AllMovies extends Component {
 									pageCount={totalPage}
 									previousLabel={
 										<i
-											class="fa fa-angle-left"
+											className="fa fa-angle-left"
 											aria-hidden="true"></i>
 									}
 									pageClassName="page-item"

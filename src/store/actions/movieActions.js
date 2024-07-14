@@ -84,7 +84,6 @@ export const fetchDetailMovie = (id) => {
 	return async (dispatch, getState) => {
 		try {
 			let response = await getDetailMovieService(id);
-			console.log("fetch detail movie: ", response);
 			if (response && response.errCode === 0) {
 				dispatch({
 					type: actionTypes.FETCH_DETAIL_MOVIE_SUCCESS,

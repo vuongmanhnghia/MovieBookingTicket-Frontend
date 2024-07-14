@@ -35,11 +35,11 @@ class CinemaShowtimeBanner extends Component {
 							<div className="cinema-showtime-header-title">{name}</div>
 
 							<div className="cinema-showtime-header-location">
-								<i class="fas fa-map-marker-alt"></i>
+								<i className="fas fa-map-marker-alt"></i>
 								{location}
 							</div>
 							<div className="cinema-showtime-header-rating">
-								<i class="fas fa-star"></i>
+								<i className="fas fa-star"></i>
 								{rating}
 							</div>
 						</div>
