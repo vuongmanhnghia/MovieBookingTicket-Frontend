@@ -44,7 +44,7 @@ class CinemaSearch extends Component {
 					activeTradeMark[index].classList.add("active-tradeMark");
 				});
 			});
-		}, 5000);
+		}, 500);
 
 		this.handleChangeCinema(this.state.allTradeMarks[0]);
 	}
